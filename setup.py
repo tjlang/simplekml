@@ -18,6 +18,6 @@ setup(
             'Operating System :: OS Independent',
             'Topic :: Scientific/Engineering :: GIS',
             'Topic :: Software Development :: Libraries :: Python Modules'
-          ],
+          ]
 
 )

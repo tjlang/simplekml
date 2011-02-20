@@ -19,6 +19,7 @@ Contact me at kyle.lan@gmail.com
 """
 
 from xml.dom.minidom import parseString
+
 from featgeom import *
 from abstractview import *
 
