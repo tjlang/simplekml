@@ -83,6 +83,7 @@ class Kml(object):
 
 
 def main():
+    # See samples/tests.kml
     kml = Kml()
     doc = kml.newdocument(name="Doc Test")
     doc = doc.newdocument()
@@ -136,21 +137,36 @@ def main():
     pol.linestyle.width = 5
     pol.style.polystyle.color = 'ffff00ff'
 
-    kml.save("tests.kml")
+    kml.save("samples/tests.kml")
 
-
+    # See samples/usage.kml
     kml = Kml()
-
     kml.newpoint(name="Kirstenbosch", coords=[(18.432314,-33.988862)])
-
     lin = kml.newlinestring(name="Pathway", description="A pathway in Kirstenbosch",
                             coords=[(18.43312,-33.98924), (18.43224,-33.98914), (18.43144,-33.98911), (18.43095,-33.98904)])
-    
     pol = kml.newpolygon(name="Atrium Garden",
                          outerboundaryis=[(18.43348,-33.98985), (18.43387,-33.99004262216968), (18.43410,-33.98972), (18.43371,-33.98952), (18.43348,-33.98985)],
                          innerboundaryis=[(18.43360,-33.98982), (18.43386,-33.98995), (18.43401,-33.98974), (18.43376,-33.98962), (18.43360,-33.98982)])
+    kml.save("samples/usage.kml")
 
-    kml.save("c://botanicalgarden.kml")
+    # See samples/styling.kml
+    kml = Kml()
+    pnt = kml.newpoint(name="Kirstenbosch", coords=[(18.432314,-33.988862)])
+    pnt.labelstyle.color = 'ff0000ff'
+    pnt.labelstyle.scale = 2  # Text twice as big
+    pnt.iconstyle.color = 'ffff0000'  # Blue
+    pnt.iconstyle.scale = 3  # Icon thrice as big
+    pnt.iconstyle.icon.href = 'http://maps.google.com/mapfiles/kml/shapes/info-i.png'  # Culry 'information i
+    lin = kml.newlinestring(name="Pathway", description="A pathway in Kirstenbosch",
+                            coords=[(18.43312,-33.98924), (18.43224,-33.98914), (18.43144,-33.98911), (18.43095,-33.98904)])
+    lin.linestyle.color = 'ff0000ff'  # Red
+    lin.linestyle.width = 10  # 10 pixels
+    pol = kml.newpolygon(name="Atrium Garden",
+                         outerboundaryis=[(18.43348,-33.98985), (18.43387,-33.99004262216968), (18.43410,-33.98972), (18.43371,-33.98952), (18.43348,-33.98985)],
+                         innerboundaryis=[(18.43360,-33.98982), (18.43386,-33.98995), (18.43401,-33.98974), (18.43376,-33.98962), (18.43360,-33.98982)])
+    pol.polystyle.color = '990000ff'  # Red
+    pol.polystyle.outline = 0
+    kml.save("samples/styling.kml")
 
 
 if __name__ == "__main__":

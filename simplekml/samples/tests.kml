@@ -1,0 +1,469 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2">
+    <Document id="feat_0">
+        <visibility>
+            1
+        </visibility>
+        <open>
+            0
+        </open>
+        <Style id="stylesel_0">
+            <LabelStyle>
+                <color>
+                    ff0000ff
+                </color>
+                <colorMode>
+                    normal
+                </colorMode>
+                <scale>
+                    2
+                </scale>
+                <ColorMode>
+                    random
+                </ColorMode>
+            </LabelStyle>
+            <IconStyle>
+                <color>
+                    ffff00ff
+                </color>
+                <colorMode>
+                    normal
+                </colorMode>
+                <scale>
+                    1
+                </scale>
+                <heading>
+                    45
+                </heading>
+                <Icon>
+                    <href>
+                        http://maps.google.com/mapfiles/kml/shapes/arrow.png
+                    </href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="stylesel_1">
+            <LabelStyle>
+                <color>
+                    ff00ffff
+                </color>
+                <colorMode>
+                    normal
+                </colorMode>
+                <scale>
+                    1
+                </scale>
+            </LabelStyle>
+        </Style>
+        <Document id="feat_1">
+            <name>
+                Doc Test
+            </name>
+            <visibility>
+                1
+            </visibility>
+            <open>
+                0
+            </open>
+            <Document id="feat_2">
+                <name>
+                    Doc2 Test
+                </name>
+                <visibility>
+                    1
+                </visibility>
+                <open>
+                    0
+                </open>
+                <description>
+                    Doc2 Description
+                </description>
+                <Folder id="feat_5">
+                    <name>
+                        Point Tests
+                    </name>
+                    <visibility>
+                        1
+                    </visibility>
+                    <open>
+                        0
+                    </open>
+                    <description>
+                        Description of Point Folder
+                    </description>
+                    <Style id="stylesel_0">
+                        <LabelStyle>
+                            <color>
+                                ff0000ff
+                            </color>
+                            <colorMode>
+                                normal
+                            </colorMode>
+                            <scale>
+                                2
+                            </scale>
+                            <ColorMode>
+                                random
+                            </ColorMode>
+                        </LabelStyle>
+                        <IconStyle>
+                            <color>
+                                ffff00ff
+                            </color>
+                            <colorMode>
+                                normal
+                            </colorMode>
+                            <scale>
+                                1
+                            </scale>
+                            <heading>
+                                45
+                            </heading>
+                            <Icon>
+                                <href>
+                                    http://maps.google.com/mapfiles/kml/shapes/arrow.png
+                                </href>
+                            </Icon>
+                        </IconStyle>
+                    </Style>
+                    <Placemark id="feat_6">
+                        <name>
+                            p1
+                        </name>
+                        <visibility>
+                            1
+                        </visibility>
+                        <Point id="geom_0">
+                            <extrude>
+                                0
+                            </extrude>
+                            <coordinates>
+                                10.0,10.0,0.0
+                            </coordinates>
+                        </Point>
+                        <open>
+                            0
+                        </open>
+                        <description>
+                            d1
+                        </description>
+                    </Placemark>
+                    <Placemark id="feat_7">
+                        <name>
+                            p2
+                        </name>
+                        <visibility>
+                            1
+                        </visibility>
+                        <styleUrl>
+                            #stylesel_0
+                        </styleUrl>
+                        <Point id="geom_1">
+                            <extrude>
+                                0
+                            </extrude>
+                            <coordinates>
+                                15.0,15.0,0.0
+                            </coordinates>
+                        </Point>
+                        <open>
+                            0
+                        </open>
+                        <description>
+                            d2
+                        </description>
+                    </Placemark>
+                </Folder>
+                <Folder id="feat_10">
+                    <name>
+                        LineString Tests
+                    </name>
+                    <visibility>
+                        1
+                    </visibility>
+                    <open>
+                        0
+                    </open>
+                    <description>
+                        Description of LineString Folder
+                    </description>
+                    <Style id="stylesel_2">
+                        <LineStyle>
+                            <color>
+                                ff00ffff
+                            </color>
+                            <colorMode>
+                                normal
+                            </colorMode>
+                            <width>
+                                10
+                            </width>
+                        </LineStyle>
+                    </Style>
+                    <Placemark id="feat_11">
+                        <name>
+                            l1
+                        </name>
+                        <visibility>
+                            1
+                        </visibility>
+                        <LineString id="geom_4">
+                            <extrude>
+                                0
+                            </extrude>
+                            <altitudeMode>
+                                clampToGround
+                            </altitudeMode>
+                            <tessellate>
+                                0
+                            </tessellate>
+                            <coordinates>
+                                10.0,10.0,0.0,15.0,15.0,0.0
+                            </coordinates>
+                        </LineString>
+                        <open>
+                            0
+                        </open>
+                        <description>
+                            d1
+                        </description>
+                    </Placemark>
+                    <Placemark id="feat_12">
+                        <name>
+                            l2
+                        </name>
+                        <visibility>
+                            1
+                        </visibility>
+                        <styleUrl>
+                            #stylesel_2
+                        </styleUrl>
+                        <LineString id="geom_5">
+                            <extrude>
+                                0
+                            </extrude>
+                            <altitudeMode>
+                                clampToGround
+                            </altitudeMode>
+                            <tessellate>
+                                0
+                            </tessellate>
+                            <coordinates>
+                                10.0,15.0,0.0,15.0,20.0,0.0
+                            </coordinates>
+                            <altitudemode>
+                                clampToGround
+                            </altitudemode>
+                        </LineString>
+                        <open>
+                            0
+                        </open>
+                        <description>
+                            d2
+                        </description>
+                    </Placemark>
+                </Folder>
+                <Folder id="feat_13">
+                    <name>
+                        Polygon Tests
+                    </name>
+                    <visibility>
+                        1
+                    </visibility>
+                    <open>
+                        0
+                    </open>
+                    <description>
+                        Description of Polgon Folder
+                    </description>
+                    <Style id="stylesel_3">
+                        <PolyStyle>
+                            <color>
+                                ffff00ff
+                            </color>
+                            <colorMode>
+                                normal
+                            </colorMode>
+                            <outline>
+                                1
+                            </outline>
+                            <fill>
+                                1
+                            </fill>
+                        </PolyStyle>
+                        <LineStyle>
+                            <color>
+                                ff0000ff
+                            </color>
+                            <colorMode>
+                                normal
+                            </colorMode>
+                            <width>
+                                5
+                            </width>
+                        </LineStyle>
+                    </Style>
+                    <Placemark id="feat_14">
+                        <name>
+                            p1
+                        </name>
+                        <visibility>
+                            1
+                        </visibility>
+                        <Polygon id="geom_6">
+                            <extrude>
+                                0
+                            </extrude>
+                            <altitudeMode>
+                                clampToGround
+                            </altitudeMode>
+                            <tessellate>
+                                0
+                            </tessellate>
+                            <innerBoundaryIs>
+                                <LinearRing>
+                                    <coordinates>
+                                        0.0, 0.0, 0.0
+                                    </coordinates>
+                                </LinearRing>
+                            </innerBoundaryIs>
+                            <outerBoundaryIs>
+                                <LinearRing>
+                                    <coordinates>
+                                        12.0,15.0,0.0,11.0,14.0,0.0,13.0,14.0,0.0,12.0,15.0,0.0
+                                    </coordinates>
+                                </LinearRing>
+                            </outerBoundaryIs>
+                        </Polygon>
+                        <open>
+                            0
+                        </open>
+                        <description>
+                            d1
+                        </description>
+                    </Placemark>
+                    <Placemark id="feat_17">
+                        <name>
+                            p2
+                        </name>
+                        <visibility>
+                            1
+                        </visibility>
+                        <styleUrl>
+                            #stylesel_3
+                        </styleUrl>
+                        <Polygon id="geom_9">
+                            <extrude>
+                                0
+                            </extrude>
+                            <altitudeMode>
+                                clampToGround
+                            </altitudeMode>
+                            <tessellate>
+                                0
+                            </tessellate>
+                            <innerBoundaryIs>
+                                <LinearRing>
+                                    <coordinates>
+                                        12.7,14.9,0.0,12.7,15.4,0.0,12.4,15.0,0.0,12.7,14.9,0.0
+                                    </coordinates>
+                                </LinearRing>
+                            </innerBoundaryIs>
+                            <outerBoundaryIs>
+                                <LinearRing>
+                                    <coordinates>
+                                        13.0,14.0,0.0,13.0,16.0,0.0,12.0,15.0,0.0,13.0,14.0,0.0
+                                    </coordinates>
+                                </LinearRing>
+                            </outerBoundaryIs>
+                        </Polygon>
+                        <open>
+                            0
+                        </open>
+                        <description>
+                            d2
+                        </description>
+                    </Placemark>
+                </Folder>
+            </Document>
+        </Document>
+        <Folder id="feat_3">
+            <name>
+                Folder Test
+            </name>
+            <visibility>
+                1
+            </visibility>
+            <open>
+                0
+            </open>
+            <description>
+                Description of Test Folder
+            </description>
+            <Folder id="feat_4">
+                <name>
+                    Folder Nested Tests
+                </name>
+                <visibility>
+                    1
+                </visibility>
+                <open>
+                    0
+                </open>
+                <description>
+                    Description of Nested Folder
+                </description>
+            </Folder>
+        </Folder>
+        <Placemark id="feat_8">
+            <name>
+                p3
+            </name>
+            <visibility>
+                1
+            </visibility>
+            <styleUrl>
+                #stylesel_0
+            </styleUrl>
+            <Point id="geom_2">
+                <extrude>
+                    0
+                </extrude>
+                <coordinates>
+                    12.0,12.0,0.0
+                </coordinates>
+            </Point>
+            <open>
+                0
+            </open>
+            <description>
+                Same style as p2
+            </description>
+        </Placemark>
+        <Placemark id="feat_9">
+            <name>
+                p4
+            </name>
+            <visibility>
+                1
+            </visibility>
+            <styleUrl>
+                #stylesel_1
+            </styleUrl>
+            <Point id="geom_3">
+                <extrude>
+                    0
+                </extrude>
+                <coordinates>
+                    13.0,13.0,0.0
+                </coordinates>
+            </Point>
+            <open>
+                0
+            </open>
+            <description>
+                Style from class
+            </description>
+        </Placemark>
+    </Document>
+</kml>
