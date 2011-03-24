@@ -132,7 +132,7 @@ def main():
     pol.name = 'p2'
     pol.description = 'd2'
     pol.outerboundaryis = [(13.0,14.0), (13.0,16.0), (12.0,15.0),(13.0,14.0)]
-    pol.innerboundaryis = [(12.7,14.9), (12.7,15.4), (12.4,15.0),(12.7,14.9)]
+    pol.innerboundaryis = [[(12.7,14.9), (12.7,15.4), (12.4,15.0),(12.7,14.9)]]
     pol.style.linestyle.color = 'ff0000ff'
     pol.linestyle.width = 5
     pol.style.polystyle.color = 'ffff00ff'
@@ -146,7 +146,7 @@ def main():
                             coords=[(18.43312,-33.98924), (18.43224,-33.98914), (18.43144,-33.98911), (18.43095,-33.98904)])
     pol = kml.newpolygon(name="Atrium Garden",
                          outerboundaryis=[(18.43348,-33.98985), (18.43387,-33.99004262216968), (18.43410,-33.98972), (18.43371,-33.98952), (18.43348,-33.98985)],
-                         innerboundaryis=[(18.43360,-33.98982), (18.43386,-33.98995), (18.43401,-33.98974), (18.43376,-33.98962), (18.43360,-33.98982)])
+                         innerboundaryis=[[(18.43360,-33.98982), (18.43386,-33.98995), (18.43401,-33.98974), (18.43376,-33.98962), (18.43360,-33.98982)]])
     kml.save("samples/usage.kml")
 
     # See samples/styling.kml

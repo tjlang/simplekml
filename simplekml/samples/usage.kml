@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2">
-    <Document id="feat_22">
+    <Document id="feat_21">
         <visibility>
             1
         </visibility>
         <open>
             0
         </open>
-        <Placemark id="feat_23">
+        <Placemark id="feat_22">
             <name>
                 Kirstenbosch
             </name>
             <visibility>
                 1
             </visibility>
-            <Point id="geom_14">
+            <Point id="geom_13">
                 <extrude>
                     0
                 </extrude>
@@ -26,14 +26,14 @@
                 0
             </open>
         </Placemark>
-        <Placemark id="feat_24">
+        <Placemark id="feat_23">
             <name>
                 Pathway
             </name>
             <visibility>
                 1
             </visibility>
-            <LineString id="geom_15">
+            <LineString id="geom_14">
                 <extrude>
                     0
                 </extrude>
@@ -54,14 +54,14 @@
                 A pathway in Kirstenbosch
             </description>
         </Placemark>
-        <Placemark id="feat_25">
+        <Placemark id="feat_24">
             <name>
                 Atrium Garden
             </name>
             <visibility>
                 1
             </visibility>
-            <Polygon id="geom_16">
+            <Polygon id="geom_15">
                 <extrude>
                     0
                 </extrude>

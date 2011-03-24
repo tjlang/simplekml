@@ -359,15 +359,24 @@ class Polygon(Geometry):
         self.tessellate = tessellate
         self.altitudeMode = altitudemode
         self.outerBoundaryIs = LinearRing(outerboundaryis)
-        self.innerBoundaryIs = LinearRing(innerboundaryis)
-
+        self.innerboundaryis = innerboundaryis
+        
     @property
     def innerboundaryis(self):
-        return self.innerBoundaryIs
+        return self._innerboundaryis
 
     @innerboundaryis.setter
-    def innerboundaryis(self, coords):
-        self.innerBoundaryIs = LinearRing(coords)
+    def innerboundaryis(self, rings):
+        self._innerboundaryis = []
+        if len(rings) == 0:
+            self.innerBoundaryIs = None
+            return
+        if type(rings[0]) == type(()):
+            rings = [rings]
+        self.innerBoundaryIs = ''
+        for ring in rings:
+            self.innerBoundaryIs += LinearRing(ring).__str__()
+            self._innerboundaryis.append(LinearRing(ring))
 
     @property
     def outerboundaryis(self):
@@ -381,4 +390,5 @@ class Polygon(Geometry):
         str = '<Polygon id="{0}">'.format(self._id)
         str += super(Polygon, self).__str__()
         str += "</Polygon>"
+        print str
         return str

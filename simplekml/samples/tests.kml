@@ -320,13 +320,6 @@
                             <tessellate>
                                 0
                             </tessellate>
-                            <innerBoundaryIs>
-                                <LinearRing>
-                                    <coordinates>
-                                        0.0, 0.0, 0.0
-                                    </coordinates>
-                                </LinearRing>
-                            </innerBoundaryIs>
                             <outerBoundaryIs>
                                 <LinearRing>
                                     <coordinates>
@@ -342,7 +335,7 @@
                             d1
                         </description>
                     </Placemark>
-                    <Placemark id="feat_17">
+                    <Placemark id="feat_16">
                         <name>
                             p2
                         </name>
@@ -352,7 +345,7 @@
                         <styleUrl>
                             #stylesel_3
                         </styleUrl>
-                        <Polygon id="geom_9">
+                        <Polygon id="geom_8">
                             <extrude>
                                 0
                             </extrude>
