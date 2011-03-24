@@ -370,13 +370,13 @@ class Polygon(Geometry):
         self._innerboundaryis = []
         if len(rings) == 0:
             self.innerBoundaryIs = None
-            return
-        if type(rings[0]) == type(()):
-            rings = [rings]
-        self.innerBoundaryIs = ''
-        for ring in rings:
-            self.innerBoundaryIs += LinearRing(ring).__str__()
-            self._innerboundaryis.append(LinearRing(ring))
+        else:
+            if type(rings[0]) == type(()):
+                rings = [rings]
+            self.innerBoundaryIs = ''
+            for ring in rings:
+                self.innerBoundaryIs += LinearRing(ring).__str__()
+                self._innerboundaryis.append(LinearRing(ring))
 
     @property
     def outerboundaryis(self):
