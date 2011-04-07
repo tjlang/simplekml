@@ -37,7 +37,7 @@
                 </heading>
                 <Icon>
                     <href>
-                        http://maps.google.com/mapfiles/kml/shapes/arrow.png
+                        D:\Users\Kyle\Pictures\Watercolours\mixing greens.jpeg
                     </href>
                 </Icon>
             </IconStyle>
@@ -121,7 +121,7 @@
                             </heading>
                             <Icon>
                                 <href>
-                                    http://maps.google.com/mapfiles/kml/shapes/arrow.png
+                                    D:\Users\Kyle\Pictures\Watercolours\mixing greens.jpeg
                                 </href>
                             </Icon>
                         </IconStyle>
@@ -347,7 +347,7 @@
                                 0
                             </extrude>
                             <altitudeMode>
-                                dvf
+                                clampToGround
                             </altitudeMode>
                             <tessellate>
                                 0

@@ -39,20 +39,28 @@ class Kml(object):
         self._feature = doc
 
     def _genkml(self):
-       kml_tag = 'xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom"'
-       xmlstr = "<kml {0}>{1}</kml>".format(kml_tag, self._feature.__str__())
-       s = parseString(xmlstr)
-       return s.toprettyxml(indent="    ", newl="\n", encoding="UTF-8")
+        """Returns the generated kml as a string."""
+        kml_tag = 'xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom"'
+        xmlstr = "<kml {0}>{1}</kml>".format(kml_tag, self._feature.__str__())
+        s = parseString(xmlstr)
+        return s.toprettyxml(indent="    ", newl="\n", encoding="UTF-8")
 
     def save(self, path):
+        """Save the kml to the given file."""
+        Kmlable.setkmz(False)
         out = self._genkml()
         with open(path, 'w') as f:
             f.write(str(out))
 
     def savekmz(self, path):
+        """Save the kml as a kmz to the given file."""
+        Kmlable.setkmz()
         out = self._genkml()
-        with zipfile.ZipFile(path, 'w', zipfile.ZIP_DEFLATED) as kmz: #TODO Add support for Icon images
+        with zipfile.ZipFile(path, 'w', zipfile.ZIP_DEFLATED) as kmz:
             kmz.writestr("doc.kml", out)
+            for image in Kmlable.getimages():
+                kmz.write(image, os.path.join('files', os.path.split(image)[1]))
+        Kmlable.clearimages()
 
     def newdocument(self, **kwargs):
         """Creates a new Document and attaches it to the feature."""
@@ -116,6 +124,7 @@ def main():
     pnt.style.iconstyle.color = 'ffff00ff'
     pnt.iconstyle.heading = 45
     pnt.iconstyle.icon.href = 'http://maps.google.com/mapfiles/kml/shapes/arrow.png'
+    pnt.iconstyle.icon.href = "D:\\Users\\Kyle\\Pictures\\Watercolours\\mixing greens.jpeg"
 
     pnt2 = kml.newpoint(name="p3", description="Same style as p2", coords=[(12.0,12.0)])
     pnt2.style = pnt.style
@@ -151,7 +160,7 @@ def main():
     # See samples/usage.kml
     kml = Kml()
     kml.newpoint(name="Kirstenbosch", coords=[(18.432314,-33.988862)])
-    lin = kml.newlinestring(name="Pathway", description="A pathway in Kirstenbosch",
+    lin = kml.newlinestring(name="Pathway", description="A pathway in <b>Kirstenbosch</b>",
                             coords=[(18.43312,-33.98924), (18.43224,-33.98914), (18.43144,-33.98911), (18.43095,-33.98904)])
     pol = kml.newpolygon(name="Atrium Garden",
                          outerboundaryis=[(18.43348,-33.98985), (18.43387,-33.99004262216968), (18.43410,-33.98972), (18.43371,-33.98952), (18.43348,-33.98985)],
