@@ -339,6 +339,14 @@ class LineString(PointGeometry):
         self.tessellate = tessellate
         self.altitudeMode = altitudemode
 
+    @property
+    def altitudemode(self):
+        return self.altitudeMode
+
+    @altitudemode.setter
+    def altitudemode(self, mode):
+        self.altitudeMode = mode
+
     def __str__(self):
         str = '<LineString id="{0}">'.format(self._id)
         str += super(LineString, self).__str__()
@@ -360,7 +368,15 @@ class Polygon(Geometry):
         self.altitudeMode = altitudemode
         self.outerBoundaryIs = LinearRing(outerboundaryis)
         self.innerboundaryis = innerboundaryis
-        
+
+    @property
+    def altitudemode(self):
+        return self.altitudeMode
+
+    @altitudemode.setter
+    def altitudemode(self, mode):
+        self.altitudeMode = mode
+
     @property
     def innerboundaryis(self):
         return self._innerboundaryis

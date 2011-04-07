@@ -251,9 +251,6 @@
                             <coordinates>
                                 10.0,15.0,0.0,15.0,20.0,0.0
                             </coordinates>
-                            <altitudemode>
-                                clampToGround
-                            </altitudemode>
                         </LineString>
                         <open>
                             0
@@ -350,7 +347,7 @@
                                 0
                             </extrude>
                             <altitudeMode>
-                                clampToGround
+                                dvf
                             </altitudeMode>
                             <tessellate>
                                 0
