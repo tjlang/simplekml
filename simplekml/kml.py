@@ -56,10 +56,11 @@ class Kml(object):
         """Save the kml as a kmz to the given file."""
         Kmlable.setkmz()
         out = self._genkml()
-        with zipfile.ZipFile(path, 'w', zipfile.ZIP_DEFLATED) as kmz:
-            kmz.writestr("doc.kml", out)
-            for image in Kmlable.getimages():
-                kmz.write(image, os.path.join('files', os.path.split(image)[1]))
+        kmz = zipfile.ZipFile(path, 'w', zipfile.ZIP_DEFLATED)
+        kmz.writestr("doc.kml", out)
+        for image in Kmlable.getimages():
+            kmz.write(image, os.path.join('files', os.path.split(image)[1]))
+        kmz.close()
         Kmlable.clearimages()
 
     def newdocument(self, **kwargs):
@@ -124,7 +125,6 @@ def main():
     pnt.style.iconstyle.color = 'ffff00ff'
     pnt.iconstyle.heading = 45
     pnt.iconstyle.icon.href = 'http://maps.google.com/mapfiles/kml/shapes/arrow.png'
-    pnt.iconstyle.icon.href = "D:\\Users\\Kyle\\Pictures\\Watercolours\\mixing greens.jpeg"
 
     pnt2 = kml.newpoint(name="p3", description="Same style as p2", coords=[(12.0,12.0)])
     pnt2.style = pnt.style
