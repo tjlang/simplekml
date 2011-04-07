@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2">
-    <Document id="feat_28">
+    <Document id="feat_30">
         <visibility>
             1
         </visibility>
@@ -68,7 +68,7 @@
                 </fill>
             </PolyStyle>
         </Style>
-        <Placemark id="feat_29">
+        <Placemark id="feat_31">
             <name>
                 Kirstenbosch
             </name>
@@ -78,7 +78,7 @@
             <styleUrl>
                 #stylesel_4
             </styleUrl>
-            <Point id="geom_19">
+            <Point id="geom_21">
                 <extrude>
                     0
                 </extrude>
@@ -90,7 +90,7 @@
                 0
             </open>
         </Placemark>
-        <Placemark id="feat_30">
+        <Placemark id="feat_32">
             <name>
                 Pathway
             </name>
@@ -100,7 +100,7 @@
             <styleUrl>
                 #stylesel_5
             </styleUrl>
-            <LineString id="geom_20">
+            <LineString id="geom_22">
                 <extrude>
                     0
                 </extrude>
@@ -121,7 +121,7 @@
                 A pathway in Kirstenbosch
             </description>
         </Placemark>
-        <Placemark id="feat_31">
+        <Placemark id="feat_33">
             <name>
                 Atrium Garden
             </name>
@@ -131,7 +131,7 @@
             <styleUrl>
                 #stylesel_6
             </styleUrl>
-            <Polygon id="geom_21">
+            <Polygon id="geom_23">
                 <extrude>
                     0
                 </extrude>

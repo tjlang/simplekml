@@ -19,6 +19,7 @@ Contact me at kyle.lan@gmail.com
 """
 
 from xml.dom.minidom import parseString
+import zipfile
 
 from featgeom import *
 from abstractview import *
@@ -37,13 +38,21 @@ class Kml(object):
     def document(self, doc):
         self._feature = doc
 
+    def _genkml(self):
+       kml_tag = 'xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom"'
+       xmlstr = "<kml {0}>{1}</kml>".format(kml_tag, self._feature.__str__())
+       s = parseString(xmlstr)
+       return s.toprettyxml(indent="    ", newl="\n", encoding="UTF-8")
+
     def save(self, path):
-        kml_tag = 'xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom"'
-        xmlstr = "<kml {0}>{1}</kml>".format(kml_tag, self._feature.__str__())
-        s = parseString(xmlstr)
-        out = s.toprettyxml(indent="    ", newl="\n", encoding="UTF-8")
+        out = self._genkml()
         with open(path, 'w') as f:
             f.write(str(out))
+
+    def savekmz(self, path):
+        out = self._genkml()
+        with zipfile.ZipFile(path, 'w', zipfile.ZIP_DEFLATED) as kmz: #TODO Add support for Icon images
+            kmz.writestr("doc.kml", out)
 
     def newdocument(self, **kwargs):
         """Creates a new Document and attaches it to the feature."""
@@ -132,7 +141,7 @@ def main():
     pol.name = 'p2'
     pol.description = 'd2'
     pol.outerboundaryis = [(13.0,14.0), (13.0,16.0), (12.0,15.0),(13.0,14.0)]
-    pol.innerboundaryis = [[(12.7,14.9), (12.7,15.4), (12.4,15.0),(12.7,14.9)]]
+    pol.innerboundaryis = [[(12.7,14.9), (12.7,15.4), (12.4,15.0),(12.7,14.9)], [(14.7,12.9), (12.7,15.4), (12.4,15.0),(12.7,14.9)]]
     pol.style.linestyle.color = 'ff0000ff'
     pol.linestyle.width = 5
     pol.style.polystyle.color = 'ffff00ff'
@@ -167,6 +176,7 @@ def main():
     pol.polystyle.color = '990000ff'  # Red
     pol.polystyle.outline = 0
     kml.save("samples/styling.kml")
+    kml.savekmz("samples/styling.kmz")
 
 
 if __name__ == "__main__":

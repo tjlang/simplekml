@@ -361,6 +361,11 @@
                                         12.7,14.9,0.0,12.7,15.4,0.0,12.4,15.0,0.0,12.7,14.9,0.0
                                     </coordinates>
                                 </LinearRing>
+                                <LinearRing>
+                                    <coordinates>
+                                        14.7,12.9,0.0,12.7,15.4,0.0,12.4,15.0,0.0,12.7,14.9,0.0
+                                    </coordinates>
+                                </LinearRing>
                             </innerBoundaryIs>
                             <outerBoundaryIs>
                                 <LinearRing>

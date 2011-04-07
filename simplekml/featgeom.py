@@ -390,5 +390,4 @@ class Polygon(Geometry):
         str = '<Polygon id="{0}">'.format(self._id)
         str += super(Polygon, self).__str__()
         str += "</Polygon>"
-        print str
         return str
