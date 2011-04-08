@@ -143,6 +143,15 @@
                 </tessellate>
                 <innerBoundaryIs>
                     <LinearRing>
+                        <extrude>
+                            0
+                        </extrude>
+                        <altitudeMode>
+                            clampToGround
+                        </altitudeMode>
+                        <tessellate>
+                            0
+                        </tessellate>
                         <coordinates>
                             18.4336,-33.98982,0.0,18.43386,-33.98995,0.0,18.43401,-33.98974,0.0,18.43376,-33.98962,0.0,18.4336,-33.98982,0.0
                         </coordinates>
@@ -150,6 +159,15 @@
                 </innerBoundaryIs>
                 <outerBoundaryIs>
                     <LinearRing>
+                        <extrude>
+                            0
+                        </extrude>
+                        <altitudeMode>
+                            clampToGround
+                        </altitudeMode>
+                        <tessellate>
+                            0
+                        </tessellate>
                         <coordinates>
                             18.43348,-33.98985,0.0,18.43387,-33.9900426222,0.0,18.4341,-33.98972,0.0,18.43371,-33.98952,0.0,18.43348,-33.98985,0.0
                         </coordinates>

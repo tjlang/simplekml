@@ -37,7 +37,7 @@
                 </heading>
                 <Icon>
                     <href>
-                        D:\Users\Kyle\Pictures\Watercolours\mixing greens.jpeg
+                        http://maps.google.com/mapfiles/kml/shapes/arrow.png
                     </href>
                 </Icon>
             </IconStyle>
@@ -121,7 +121,7 @@
                             </heading>
                             <Icon>
                                 <href>
-                                    D:\Users\Kyle\Pictures\Watercolours\mixing greens.jpeg
+                                    http://maps.google.com/mapfiles/kml/shapes/arrow.png
                                 </href>
                             </Icon>
                         </IconStyle>
@@ -319,6 +319,15 @@
                             </tessellate>
                             <outerBoundaryIs>
                                 <LinearRing>
+                                    <extrude>
+                                        0
+                                    </extrude>
+                                    <altitudeMode>
+                                        clampToGround
+                                    </altitudeMode>
+                                    <tessellate>
+                                        0
+                                    </tessellate>
                                     <coordinates>
                                         12.0,15.0,0.0,11.0,14.0,0.0,13.0,14.0,0.0,12.0,15.0,0.0
                                     </coordinates>
@@ -354,11 +363,29 @@
                             </tessellate>
                             <innerBoundaryIs>
                                 <LinearRing>
+                                    <extrude>
+                                        0
+                                    </extrude>
+                                    <altitudeMode>
+                                        clampToGround
+                                    </altitudeMode>
+                                    <tessellate>
+                                        0
+                                    </tessellate>
                                     <coordinates>
                                         12.7,14.9,0.0,12.7,15.4,0.0,12.4,15.0,0.0,12.7,14.9,0.0
                                     </coordinates>
                                 </LinearRing>
                                 <LinearRing>
+                                    <extrude>
+                                        0
+                                    </extrude>
+                                    <altitudeMode>
+                                        clampToGround
+                                    </altitudeMode>
+                                    <tessellate>
+                                        0
+                                    </tessellate>
                                     <coordinates>
                                         14.7,12.9,0.0,12.7,15.4,0.0,12.4,15.0,0.0,12.7,14.9,0.0
                                     </coordinates>
@@ -366,6 +393,15 @@
                             </innerBoundaryIs>
                             <outerBoundaryIs>
                                 <LinearRing>
+                                    <extrude>
+                                        0
+                                    </extrude>
+                                    <altitudeMode>
+                                        clampToGround
+                                    </altitudeMode>
+                                    <tessellate>
+                                        0
+                                    </tessellate>
                                     <coordinates>
                                         13.0,14.0,0.0,13.0,16.0,0.0,12.0,15.0,0.0,13.0,14.0,0.0
                                     </coordinates>

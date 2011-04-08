@@ -277,7 +277,7 @@ class Geometry(Kmlable):
 
 
 class PointGeometry(Geometry):
-    """Base class for any geometry requireing coordinates (not Polygon)."""
+    """Base class for any geometry requiring coordinates (not Polygon)."""
     def __init__(self,
                  coords=[], **kwargs):
         super(PointGeometry, self).__init__(**kwargs)
@@ -302,14 +302,28 @@ class PointGeometry(Geometry):
 
 class LinearRing(PointGeometry):
     """A closed line string, typically the outer boundary of a Polygon."""
-    def __init__(self, coords=[], **kwargs):
+    def __init__(self, coords=[],
+                 extrude=0,
+                 tessellate=0,
+                 altitudemode=AltitudeMode.clamptoground, **kwargs):
         super(LinearRing, self).__init__(coords, **kwargs)
+        self.extrude = extrude
+        self.tessellate = tessellate
+        self.altitudeMode = altitudemode
 
     def __str__(self):
         str = '<LinearRing>'
         str += super(LinearRing, self).__str__()
         str += "</LinearRing>"
         return str
+
+    @property
+    def altitudemode(self):
+        return self.altitudeMode
+
+    @altitudemode.setter
+    def altitudemode(self, mode):
+        self.altitudeMode = mode
 
 
 class Point(PointGeometry):
@@ -318,8 +332,13 @@ class Point(PointGeometry):
         super(Point, self).__init__(**kwargs)
         self.extrude = extrude
 
-#    def addcoordinate(self, coord):
-#        self.coordinates = Coordinates([coord])
+    @property
+    def altitudemode(self):
+        return self.altitudeMode
+
+    @altitudemode.setter
+    def altitudemode(self, mode):
+        self.altitudeMode = mode
 
     def __str__(self):
         str = '<Point id="{0}">'.format(self._id)
