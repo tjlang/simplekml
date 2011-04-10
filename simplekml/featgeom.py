@@ -328,9 +328,10 @@ class LinearRing(PointGeometry):
 
 class Point(PointGeometry):
     """A geographic location defined by lon, lat, and altitude."""
-    def __init__(self, extrude=0, **kwargs):
+    def __init__(self, extrude=0, altitudemode=AltitudeMode.clamptoground, **kwargs):
         super(Point, self).__init__(**kwargs)
         self.extrude = extrude
+        self.altitudeMode = altitudemode
 
     @property
     def altitudemode(self):
