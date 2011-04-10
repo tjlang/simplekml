@@ -184,6 +184,12 @@ def main():
                          innerboundaryis=[(18.43360,-33.98982), (18.43386,-33.98995), (18.43401,-33.98974), (18.43376,-33.98962), (18.43360,-33.98982)])
     pol.polystyle.color = '990000ff'  # Red
     pol.polystyle.outline = 0
+
+    pnt = kml.newpoint(name="BallonStyle", coords=[(18, -34)])
+    pnt.balloonstyle.text = "This is the sea and this text is blue with a red background."
+    pnt.balloonstyle.bgcolor = 'ff0000ff'
+    pnt.balloonstyle.textcolor = 'ffff0000'
+
     kml.save("samples/styling.kml")
     kml.savekmz("samples/styling.kmz")
 

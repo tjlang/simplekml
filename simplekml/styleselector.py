@@ -96,15 +96,15 @@ class Style(StyleSelector):
     def polystyle(self, polystyle):
         self.PolyStyle = polystyle
         
-#    @property
-#    def balloonstyle(self):
-#        if self.IconStyle is None:
-#             self.BalloonStyle = BalloonStyle()
-#         return self.BalloonStyle
-#        
-#    @balloonstyle.setter
-#    def balloonstyle(self, balloonstyle):
-#        self.BalloonStyle = balloonstyle
+    @property
+    def balloonstyle(self):
+        if self.BalloonStyle is None:
+            self.BalloonStyle = BalloonStyle()
+        return self.BalloonStyle
+
+    @balloonstyle.setter
+    def balloonstyle(self, balloonstyle):
+        self.BalloonStyle = balloonstyle
 #        
 #    @property
 #    def liststyle(self):

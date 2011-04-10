@@ -34,7 +34,7 @@ class Kmlable(object):
                     if var.endswith("_"):
                         str += "{0}".format(val)  # Use the variable's __str__ as is
                     else:
-                        if var in ['name', 'description']:
+                        if var in ['name', 'description', 'text']:
                             val = Kmlable.chrconvert(val)
                         elif var == 'href' and os.path.exists(val) and Kmlable.kmz == True:
                             Kmlable.addimage(val)

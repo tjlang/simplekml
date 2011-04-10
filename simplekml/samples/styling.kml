@@ -68,6 +68,22 @@
                 </fill>
             </PolyStyle>
         </Style>
+        <Style id="stylesel_7">
+            <BalloonStyle>
+                <bgColor>
+                    ff0000ff
+                </bgColor>
+                <textColor>
+                    ffff0000
+                </textColor>
+                <displayMode>
+                    default
+                </displayMode>
+                <text>
+                    This is the see and this text is blue with a red background.
+                </text>
+            </BalloonStyle>
+        </Style>
         <Placemark id="feat_31">
             <name>
                 Kirstenbosch
@@ -174,6 +190,28 @@
                     </LinearRing>
                 </outerBoundaryIs>
             </Polygon>
+            <open>
+                0
+            </open>
+        </Placemark>
+        <Placemark id="feat_37">
+            <name>
+                BallonStyle
+            </name>
+            <visibility>
+                1
+            </visibility>
+            <styleUrl>
+                #stylesel_7
+            </styleUrl>
+            <Point id="geom_27">
+                <extrude>
+                    0
+                </extrude>
+                <coordinates>
+                    18,-34,0.0
+                </coordinates>
+            </Point>
             <open>
                 0
             </open>

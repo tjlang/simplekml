@@ -78,3 +78,40 @@ class LabelStyle(ColorStyle):
     def __init__(self, scale=1, **kwargs):
         super(LabelStyle, self).__init__(**kwargs)
         self.scale = scale
+
+        
+class BalloonStyle(Kmlable):
+   """Specifies the content and layout of the description balloon."""
+   def __init__(self, 
+                bgcolor=None,
+                textcolor=None,
+                text=None,
+                displaymode=DisplayMode.default):
+       self.bgColor = bgcolor
+       self.textColor = textcolor
+       self.text = text
+       self.displayMode = displaymode
+
+   @property
+   def bgcolor(self):
+       return self.bgColor
+
+   @bgcolor.setter
+   def bgcolor(self, bgcolor):
+       self.bgColor = bgcolor
+
+   @property
+   def textcolor(self):
+       return self.textColor
+
+   @textcolor.setter
+   def textcolor(self, textcolor):
+       self.textColor = textcolor
+
+   @property
+   def displaymode(self):
+       return self.textColor
+
+   @displaymode.setter
+   def displaymode(self, displaymode):
+       self.displayMode = displaymode

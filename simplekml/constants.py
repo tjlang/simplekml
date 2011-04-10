@@ -29,3 +29,9 @@ class ColorMode(object):
     """Constants for ColorMode constants."""
     normal = "normal"
     random = "random"
+
+class DisplayMode(object):
+    """Constants for DisplayMode constants."""
+    default = "default"
+    hide = "hide"
+

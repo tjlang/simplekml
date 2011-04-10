@@ -255,13 +255,13 @@ class Geometry(Kmlable):
     def polystyle(self, polystyle):
         self.style.polystyle = polystyle
 
-#    @property
-#    def balloonstyle(self):
-#        return self.style.balloonstyle
-#
-#    @balloonstyle.setter
-#    def balloonstyle(self, balloonstyle):
-#        self.style.balloonstyle = balloonstyle
+    @property
+    def balloonstyle(self):
+        return self.style.balloonstyle
+
+    @balloonstyle.setter
+    def balloonstyle(self, balloonstyle):
+        self.style.balloonstyle = balloonstyle
 #
 #    @property
 #    def liststyle(self):
