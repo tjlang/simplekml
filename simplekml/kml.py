@@ -178,7 +178,7 @@ def main():
     pnt.iconstyle.icon.href = 'http://maps.google.com/mapfiles/kml/shapes/info-i.png'  # Culry 'information i
     lin = kml.newlinestring(name="Pathway", description="A pathway in Kirstenbosch",
                             coords=[(18.43312,-33.98924), (18.43224,-33.98914), (18.43144,-33.98911), (18.43095,-33.98904)])
-    lin.linestyle.color = 'ff0000ff'  # Red
+    lin.linestyle.color = Color.red  # Red
     lin.linestyle.width = 10  # 10 pixels
     pol = kml.newpolygon(name="Atrium Garden",
                          outerboundaryis=[(18.43348,-33.98985), (18.43387,-33.99004262216968), (18.43410,-33.98972), (18.43371,-33.98952), (18.43348,-33.98985)],
@@ -188,8 +188,8 @@ def main():
 
     pnt = kml.newpoint(name="BallonStyle", coords=[(18, -34)])
     pnt.balloonstyle.text = "This is the sea and this text is blue with a red background."
-    pnt.balloonstyle.bgcolor = 'ff0000ff'
-    pnt.balloonstyle.textcolor = 'ffff0000'
+    pnt.balloonstyle.bgcolor = Color.hexa("ff0000")
+    pnt.balloonstyle.textcolor = Color.rgb(0, 0, 255)
 
 
 

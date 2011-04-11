@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2">
     <Document id="feat_0">
-        <Style id="stylesel_1">
+        <Style id="stylesel_0">
             <LabelStyle>
                 <color>
                     ff0000ff
@@ -36,7 +36,7 @@
                 </Icon>
             </IconStyle>
         </Style>
-        <Style id="stylesel_2">
+        <Style id="stylesel_1">
             <LabelStyle>
                 <color>
                     ff00ffff
@@ -66,22 +66,12 @@
                 0
             </open>
             <Document id="feat_2">
-                <Style id="stylesel_0">
-                    <ListStyle>
-                        <listItemType>
-                            radioFolder
-                        </listItemType>
-                    </ListStyle>
-                </Style>
                 <name>
                     Doc2 Test
                 </name>
                 <visibility>
                     1
                 </visibility>
-                <styleUrl>
-                    #stylesel_0
-                </styleUrl>
                 <open>
                     0
                 </open>
@@ -89,7 +79,7 @@
                     Doc2 Description
                 </description>
                 <Folder id="feat_5">
-                    <Style id="stylesel_1">
+                    <Style id="stylesel_0">
                         <LabelStyle>
                             <color>
                                 ff0000ff
@@ -169,7 +159,7 @@
                             1
                         </visibility>
                         <styleUrl>
-                            #stylesel_1
+                            #stylesel_0
                         </styleUrl>
                         <Point id="geom_1">
                             <extrude>
@@ -191,7 +181,7 @@
                     </Placemark>
                 </Folder>
                 <Folder id="feat_10">
-                    <Style id="stylesel_3">
+                    <Style id="stylesel_2">
                         <LineStyle>
                             <color>
                                 ff00ffff
@@ -252,7 +242,7 @@
                             1
                         </visibility>
                         <styleUrl>
-                            #stylesel_3
+                            #stylesel_2
                         </styleUrl>
                         <LineString id="geom_5">
                             <extrude>
@@ -277,7 +267,7 @@
                     </Placemark>
                 </Folder>
                 <Folder id="feat_13">
-                    <Style id="stylesel_4">
+                    <Style id="stylesel_3">
                         <PolyStyle>
                             <color>
                                 ffff00ff
@@ -365,7 +355,7 @@
                             1
                         </visibility>
                         <styleUrl>
-                            #stylesel_4
+                            #stylesel_3
                         </styleUrl>
                         <Polygon id="geom_8">
                             <extrude>
@@ -470,7 +460,7 @@
                 1
             </visibility>
             <styleUrl>
-                #stylesel_1
+                #stylesel_0
             </styleUrl>
             <Point id="geom_2">
                 <extrude>
@@ -498,7 +488,7 @@
                 1
             </visibility>
             <styleUrl>
-                #stylesel_2
+                #stylesel_1
             </styleUrl>
             <Point id="geom_3">
                 <extrude>

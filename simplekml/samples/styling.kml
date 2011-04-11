@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2">
     <Document id="feat_30">
-        <Style id="stylesel_5">
+        <Style id="stylesel_4">
             <LabelStyle>
                 <color>
                     ff0000ff
@@ -33,7 +33,7 @@
                 </Icon>
             </IconStyle>
         </Style>
-        <Style id="stylesel_6">
+        <Style id="stylesel_5">
             <LineStyle>
                 <color>
                     ff0000ff
@@ -46,7 +46,7 @@
                 </width>
             </LineStyle>
         </Style>
-        <Style id="stylesel_7">
+        <Style id="stylesel_6">
             <PolyStyle>
                 <color>
                     990000ff
@@ -62,10 +62,10 @@
                 </fill>
             </PolyStyle>
         </Style>
-        <Style id="stylesel_8">
+        <Style id="stylesel_7">
             <BalloonStyle>
                 <bgColor>
-                    ff0000ff
+                    0000ff
                 </bgColor>
                 <textColor>
                     ffff0000
@@ -92,7 +92,7 @@
                 1
             </visibility>
             <styleUrl>
-                #stylesel_5
+                #stylesel_4
             </styleUrl>
             <Point id="geom_21">
                 <extrude>
@@ -117,7 +117,7 @@
                 1
             </visibility>
             <styleUrl>
-                #stylesel_6
+                #stylesel_5
             </styleUrl>
             <LineString id="geom_22">
                 <extrude>
@@ -148,7 +148,7 @@
                 1
             </visibility>
             <styleUrl>
-                #stylesel_7
+                #stylesel_6
             </styleUrl>
             <Polygon id="geom_23">
                 <extrude>
@@ -205,7 +205,7 @@
                 1
             </visibility>
             <styleUrl>
-                #stylesel_8
+                #stylesel_7
             </styleUrl>
             <Point id="geom_27">
                 <extrude>
