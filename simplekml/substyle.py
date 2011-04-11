@@ -20,7 +20,7 @@ Contact me at kyle.lan@gmail.com
 
 from base import *
 from constants import *
-from icon import Icon
+from icon import Icon, ItemIcon
 
 class ColorStyle(Kmlable):
     """A base class for geometry styles."""
@@ -115,3 +115,40 @@ class BalloonStyle(Kmlable):
    @displaymode.setter
    def displaymode(self, displaymode):
        self.displayMode = displaymode
+
+
+class ListStyle(Kmlable):
+   """Specifies the display of the elements style in the navigation bar."""
+   def __init__(self,
+                listitemtype=ListItemType.check,
+                bgcolor=None,
+                itemicon=None):
+       self.listItemType = listitemtype
+       self.bgColor = bgcolor
+       self.ItemIcon = itemicon
+
+   @property
+   def itemicon(self):
+       if self.ItemIcon is None:
+            self.ItemIcon = ItemIcon()
+       return self.itemicon
+
+   @itemicon.setter
+   def itemicon(self, itemicon):
+       self.ItemIcon = itemicon
+
+   @property
+   def listitemtype(self):
+       return self.listItemType
+
+   @listitemtype.setter
+   def listitemtype(self, listitemtype):
+       self.listItemType = listitemtype
+
+   @property
+   def bgcolor(self):
+       return self.bgColor
+
+   @bgcolor.setter
+   def bgcolor(self, bgcolor):
+       self.bgColor = bgcolor

@@ -105,14 +105,14 @@ class Style(StyleSelector):
     @balloonstyle.setter
     def balloonstyle(self, balloonstyle):
         self.BalloonStyle = balloonstyle
-#        
-#    @property
-#    def liststyle(self):
-#        if self.IconStyle is None:
-#             self.ListStyle = ListStyle()
-#         return self.ListStyle
-#        
-#    @liststyle.setter
-#    def liststyle(self, liststyle):
-#        self.ListStyle = liststyle
-        
+
+    @property
+    def liststyle(self):
+        if self.ListStyle is None:
+            self.ListStyle = ListStyle()
+        return self.ListStyle
+
+    @liststyle.setter
+    def liststyle(self, liststyle):
+        self.ListStyle = liststyle
+

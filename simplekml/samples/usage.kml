@@ -18,6 +18,9 @@
                 <extrude>
                     0
                 </extrude>
+                <altitudeMode>
+                    clampToGround
+                </altitudeMode>
                 <coordinates>
                     18.432314,-33.988862,0.0
                 </coordinates>

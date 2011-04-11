@@ -39,10 +39,36 @@ class Feature(Kmlable):
         self.AbstractView = abstractview
         self.styleUrl = None
         self._id = "feat_{0}".format(Feature.id)
+        self._style = None
         Feature.id += 1
         self._features = []
         self._schemas = []
         self._folders = []
+
+    @property
+    def style(self):
+        if self._style is None:
+            self._style = Style()
+            self.setStyle(self._style)
+            self.addschema(self._style)
+        return self._style
+
+    @style.setter
+    def style(self, style):
+        self.setStyle(style)
+        self.addschema(style)
+        self._style = style
+
+    @property
+    def liststyle(self):
+        return self.style.liststyle
+
+    @liststyle.setter
+    def liststyle(self, liststyle):
+        self.style.liststyle = liststyle
+
+    def setStyle(self, style):
+        self.styleUrl = "#{0}".format(style.getId())
 
     @property
     def styleurl(self):
@@ -76,9 +102,9 @@ class Feature(Kmlable):
 
     def __str__(self):
         str = '<{0} id="{1}">'.format(self.__class__.__name__, self._id)
-        str += super(Feature, self).__str__()
         for schema in self._schemas:
             str += schema.__str__()
+        str += super(Feature, self).__str__()
         for folder in self._folders:
             str += folder.__str__()
         for feat in self._features:
@@ -152,9 +178,6 @@ class Placemark(Feature):
     @geometry.setter
     def geometry(self, geom):
         self.Geometry_ = geom
-
-    def setStyle(self, style):
-        self.styleUrl = "#{0}".format(style.getId())
 
 
 class Geometry(Kmlable):
@@ -262,14 +285,14 @@ class Geometry(Kmlable):
     @balloonstyle.setter
     def balloonstyle(self, balloonstyle):
         self.style.balloonstyle = balloonstyle
-#
-#    @property
-#    def liststyle(self):
-#        return self.style.liststyle
-#
-#    @liststyle.setter
-#    def liststyle(self, liststyle):
-#        self.style.liststyle = liststyle
+
+    @property
+    def liststyle(self):
+        return self.style.liststyle
+
+    @liststyle.setter
+    def liststyle(self, liststyle):
+        self.style.liststyle = liststyle
     
     @property
     def placemark(self):

@@ -35,3 +35,11 @@ class DisplayMode(object):
     default = "default"
     hide = "hide"
 
+
+class ListItemType(object):
+    """Constants for ListItemType constants."""
+    check = "check"
+    radiofolder = "radioFolder"
+    checkoffonly = "checkOffOnly"
+    checkhidechildren = "checkHideChildren  "
+

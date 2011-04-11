@@ -105,6 +105,7 @@ def main():
     kml = Kml()
     doc = kml.newdocument(name="Doc Test")
     doc = doc.newdocument()
+
     doc.name = "Doc2 Test"
     doc.description = "Doc2 Description"
 
@@ -189,6 +190,8 @@ def main():
     pnt.balloonstyle.text = "This is the sea and this text is blue with a red background."
     pnt.balloonstyle.bgcolor = 'ff0000ff'
     pnt.balloonstyle.textcolor = 'ffff0000'
+
+
 
     kml.save("samples/styling.kml")
     kml.savekmz("samples/styling.kmz")

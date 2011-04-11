@@ -24,3 +24,10 @@ class Icon(Kmlable):
     """Defines an image associated with an Icon style or overlay."""
     def __init__(self, href=" "):
         self.href = href
+
+
+class ItemIcon(Kmlable):
+    """Defines an image associated with an Icon style or overlay."""
+    def __init__(self, state=None, href=None):
+        self.href = href
+        self.state = state

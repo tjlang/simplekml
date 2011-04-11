@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2">
     <Document id="feat_0">
-        <visibility>
-            1
-        </visibility>
-        <open>
-            0
-        </open>
-        <Style id="stylesel_0">
+        <Style id="stylesel_1">
             <LabelStyle>
                 <color>
                     ff0000ff
@@ -42,7 +36,7 @@
                 </Icon>
             </IconStyle>
         </Style>
-        <Style id="stylesel_1">
+        <Style id="stylesel_2">
             <LabelStyle>
                 <color>
                     ff00ffff
@@ -55,6 +49,12 @@
                 </scale>
             </LabelStyle>
         </Style>
+        <visibility>
+            1
+        </visibility>
+        <open>
+            0
+        </open>
         <Document id="feat_1">
             <name>
                 Doc Test
@@ -66,12 +66,22 @@
                 0
             </open>
             <Document id="feat_2">
+                <Style id="stylesel_0">
+                    <ListStyle>
+                        <listItemType>
+                            radioFolder
+                        </listItemType>
+                    </ListStyle>
+                </Style>
                 <name>
                     Doc2 Test
                 </name>
                 <visibility>
                     1
                 </visibility>
+                <styleUrl>
+                    #stylesel_0
+                </styleUrl>
                 <open>
                     0
                 </open>
@@ -79,19 +89,7 @@
                     Doc2 Description
                 </description>
                 <Folder id="feat_5">
-                    <name>
-                        Point Tests
-                    </name>
-                    <visibility>
-                        1
-                    </visibility>
-                    <open>
-                        0
-                    </open>
-                    <description>
-                        Description of Point Folder
-                    </description>
-                    <Style id="stylesel_0">
+                    <Style id="stylesel_1">
                         <LabelStyle>
                             <color>
                                 ff0000ff
@@ -126,6 +124,18 @@
                             </Icon>
                         </IconStyle>
                     </Style>
+                    <name>
+                        Point Tests
+                    </name>
+                    <visibility>
+                        1
+                    </visibility>
+                    <open>
+                        0
+                    </open>
+                    <description>
+                        Description of Point Folder
+                    </description>
                     <Placemark id="feat_6">
                         <name>
                             p1
@@ -137,6 +147,9 @@
                             <extrude>
                                 0
                             </extrude>
+                            <altitudeMode>
+                                clampToGround
+                            </altitudeMode>
                             <coordinates>
                                 10.0,10.0,0.0
                             </coordinates>
@@ -156,12 +169,15 @@
                             1
                         </visibility>
                         <styleUrl>
-                            #stylesel_0
+                            #stylesel_1
                         </styleUrl>
                         <Point id="geom_1">
                             <extrude>
                                 0
                             </extrude>
+                            <altitudeMode>
+                                clampToGround
+                            </altitudeMode>
                             <coordinates>
                                 15.0,15.0,0.0
                             </coordinates>
@@ -175,19 +191,7 @@
                     </Placemark>
                 </Folder>
                 <Folder id="feat_10">
-                    <name>
-                        LineString Tests
-                    </name>
-                    <visibility>
-                        1
-                    </visibility>
-                    <open>
-                        0
-                    </open>
-                    <description>
-                        Description of LineString Folder
-                    </description>
-                    <Style id="stylesel_2">
+                    <Style id="stylesel_3">
                         <LineStyle>
                             <color>
                                 ff00ffff
@@ -200,6 +204,18 @@
                             </width>
                         </LineStyle>
                     </Style>
+                    <name>
+                        LineString Tests
+                    </name>
+                    <visibility>
+                        1
+                    </visibility>
+                    <open>
+                        0
+                    </open>
+                    <description>
+                        Description of LineString Folder
+                    </description>
                     <Placemark id="feat_11">
                         <name>
                             l1
@@ -236,7 +252,7 @@
                             1
                         </visibility>
                         <styleUrl>
-                            #stylesel_2
+                            #stylesel_3
                         </styleUrl>
                         <LineString id="geom_5">
                             <extrude>
@@ -261,19 +277,7 @@
                     </Placemark>
                 </Folder>
                 <Folder id="feat_13">
-                    <name>
-                        Polygon Tests
-                    </name>
-                    <visibility>
-                        1
-                    </visibility>
-                    <open>
-                        0
-                    </open>
-                    <description>
-                        Description of Polgon Folder
-                    </description>
-                    <Style id="stylesel_3">
+                    <Style id="stylesel_4">
                         <PolyStyle>
                             <color>
                                 ffff00ff
@@ -300,6 +304,18 @@
                             </width>
                         </LineStyle>
                     </Style>
+                    <name>
+                        Polygon Tests
+                    </name>
+                    <visibility>
+                        1
+                    </visibility>
+                    <open>
+                        0
+                    </open>
+                    <description>
+                        Description of Polgon Folder
+                    </description>
                     <Placemark id="feat_14">
                         <name>
                             p1
@@ -349,7 +365,7 @@
                             1
                         </visibility>
                         <styleUrl>
-                            #stylesel_3
+                            #stylesel_4
                         </styleUrl>
                         <Polygon id="geom_8">
                             <extrude>
@@ -454,12 +470,15 @@
                 1
             </visibility>
             <styleUrl>
-                #stylesel_0
+                #stylesel_1
             </styleUrl>
             <Point id="geom_2">
                 <extrude>
                     0
                 </extrude>
+                <altitudeMode>
+                    clampToGround
+                </altitudeMode>
                 <coordinates>
                     12.0,12.0,0.0
                 </coordinates>
@@ -479,12 +498,15 @@
                 1
             </visibility>
             <styleUrl>
-                #stylesel_1
+                #stylesel_2
             </styleUrl>
             <Point id="geom_3">
                 <extrude>
                     0
                 </extrude>
+                <altitudeMode>
+                    clampToGround
+                </altitudeMode>
                 <coordinates>
                     13.0,13.0,0.0
                 </coordinates>
