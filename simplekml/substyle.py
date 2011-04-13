@@ -110,7 +110,7 @@ class BalloonStyle(Kmlable):
 
    @property
    def displaymode(self):
-       return self.textColor
+       return self.displayMode
 
    @displaymode.setter
    def displaymode(self, displaymode):
