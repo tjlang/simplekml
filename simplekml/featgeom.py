@@ -40,9 +40,11 @@ class Feature(Kmlable):
         self.styleUrl = None
         self._id = "feat_{0}".format(Feature.id)
         self._style = None
+        self._stylemap = None
         Feature.id += 1
         self._features = []
         self._schemas = []
+        self._schemasmaps = []
         self._folders = []
 
     @property
@@ -60,12 +62,22 @@ class Feature(Kmlable):
         self._style = style
 
     @property
-    def liststyle(self):
-        return self.style.liststyle
+    def stylemap(self):
+        if self._stylemap is None:
+            self._stylemap = StyleMap()
+            self.setStyle(self._stylemap)
+            self.addschemamap(self._stylemap)
+        return self._style
 
-    @liststyle.setter
-    def liststyle(self, liststyle):
-        self.style.liststyle = liststyle
+    @stylemap.setter
+    def stylemap(self, stylemap):
+        self.setStyle(stylemap)
+        self.addschemamap(stylemap)
+        self._stylemap = stylemap
+
+    def addschemamap(self, schema):
+        """Attaches the given schema (style) to this feature."""
+        self._schemasmaps.append(schema)
 
     def setStyle(self, style):
         self.styleUrl = "#{0}".format(style.getId())
@@ -101,9 +113,14 @@ class Feature(Kmlable):
         self._schemas.append(schema)
 
     def __str__(self):
+        for schemamap in self._schemasmaps:
+            self.addschema(schemamap.normalstyle)
+            self.addschema(schemamap.highlightstyle)
         str = '<{0} id="{1}">'.format(self.__class__.__name__, self._id)
         for schema in self._schemas:
             str += schema.__str__()
+        for schemamap in self._schemasmaps:
+            str += schemamap.__str__()
         str += super(Feature, self).__str__()
         for folder in self._folders:
             str += folder.__str__()
@@ -132,6 +149,14 @@ class Feature(Kmlable):
         poly._parent = self
         self.addfeature(poly)
         return poly
+
+    @property
+    def liststyle(self):
+        return self.style.liststyle
+
+    @liststyle.setter
+    def liststyle(self, liststyle):
+        self.style.liststyle = liststyle
 
 
 class Container(Feature):
@@ -197,6 +222,7 @@ class Geometry(Kmlable):
         self._placemark.geometry = self
         self._parent = None
         self._style = None
+        self._stylemap = None
 
     @property
     def name(self):
@@ -245,6 +271,22 @@ class Geometry(Kmlable):
         if self._parent is not None:
             self._parent.addschema(style)
         self._style = style
+
+    @property
+    def stylemap(self):
+        if self._stylemap is None:
+            self._stylemap = StyleMap()
+            self._placemark.setStyle(self._stylemap)
+            if self._parent is not None:
+                self._parent.addschemamap(self._stylemap)
+        return self._stylemap
+
+    @stylemap.setter
+    def stylemap(self, stylemap):
+        self._placemark.setStyle(stylemap)
+        if self._parent is not None:
+            self._parent.addschemamap(stylemap)
+        self._stylemap = stylemap
 
     @property
     def iconstyle(self):

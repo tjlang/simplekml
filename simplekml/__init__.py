@@ -21,4 +21,4 @@ Contact me at kyle.lan@gmail.com
 from kml import Kml
 from styleselector import Style
 from abstractview import Camera, LookAt
-from constants import AltitudeMode, ColorMode
+from constants import *

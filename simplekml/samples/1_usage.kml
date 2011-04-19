@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2">
+    <Document id="feat_0">
+        <visibility>
+            1
+        </visibility>
+        <open>
+            0
+        </open>
+        <Placemark id="feat_1">
+            <name>
+                Kirstenbosch
+            </name>
+            <visibility>
+                1
+            </visibility>
+            <Point id="geom_0">
+                <extrude>
+                    0
+                </extrude>
+                <altitudeMode>
+                    clampToGround
+                </altitudeMode>
+                <coordinates>
+                    18.432314,-33.988862,0.0
+                </coordinates>
+            </Point>
+            <open>
+                0
+            </open>
+        </Placemark>
+        <Placemark id="feat_2">
+            <name>
+                Pathway
+            </name>
+            <visibility>
+                1
+            </visibility>
+            <LineString id="geom_1">
+                <extrude>
+                    0
+                </extrude>
+                <altitudeMode>
+                    clampToGround
+                </altitudeMode>
+                <tessellate>
+                    0
+                </tessellate>
+                <coordinates>
+                    18.43312,-33.98924,0.0,18.43224,-33.98914,0.0,18.43144,-33.98911,0.0,18.43095,-33.98904,0.0
+                </coordinates>
+            </LineString>
+            <open>
+                0
+            </open>
+            <description>
+                A pathway in &lt;b&gt;Kirstenbosch&lt;/b&gt;
+            </description>
+        </Placemark>
+        <Placemark id="feat_3">
+            <name>
+                Atrium Garden
+            </name>
+            <visibility>
+                1
+            </visibility>
+            <Polygon id="geom_2">
+                <extrude>
+                    0
+                </extrude>
+                <altitudeMode>
+                    clampToGround
+                </altitudeMode>
+                <innerBoundaryIs>
+                    <LinearRing>
+                        <extrude>
+                            0
+                        </extrude>
+                        <altitudeMode>
+                            clampToGround
+                        </altitudeMode>
+                        <tessellate>
+                            0
+                        </tessellate>
+                        <coordinates>
+                            18.4336,-33.98982,0.0,18.43386,-33.98995,0.0,18.43401,-33.98974,0.0,18.43376,-33.98962,0.0,18.4336,-33.98982,0.0
+                        </coordinates>
+                    </LinearRing>
+                </innerBoundaryIs>
+                <tessellate>
+                    0
+                </tessellate>
+                <outerBoundaryIs>
+                    <LinearRing>
+                        <extrude>
+                            0
+                        </extrude>
+                        <altitudeMode>
+                            clampToGround
+                        </altitudeMode>
+                        <tessellate>
+                            0
+                        </tessellate>
+                        <coordinates>
+                            18.43348,-33.98985,0.0,18.43387,-33.9900426222,0.0,18.4341,-33.98972,0.0,18.43371,-33.98952,0.0,18.43348,-33.98985,0.0
+                        </coordinates>
+                    </LinearRing>
+                </outerBoundaryIs>
+            </Polygon>
+            <open>
+                0
+            </open>
+        </Placemark>
+    </Document>
+</kml>

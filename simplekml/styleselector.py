@@ -116,3 +116,50 @@ class Style(StyleSelector):
     def liststyle(self, liststyle):
         self.ListStyle = liststyle
 
+
+class StyleMap(StyleSelector):
+    """Styles affect how Geometry is presented."""
+    def __init__(self,
+                 normalstyle=None,
+                 highlightstyle=None):
+        super(StyleMap, self).__init__()
+        self._pairnormal = None
+        self._pairhighlight = None
+        self.normalstyle = normalstyle
+        self.highlightstyle = highlightstyle
+
+    def __str__(self):
+        str = '<StyleMap id="{0}">'.format(self._id)
+        str += super(StyleMap, self).__str__()
+        if self._pairnormal is not None:
+            str += "<Pair>"
+            str += "<key>normal</key>"
+            str += "<styleUrl>#{0}</styleUrl>".format(self._pairnormal._id)
+            str += "</Pair>"
+        if self._pairhighlight is not None:
+            str += "<Pair>"
+            str += "<key>highlight</key>"
+            str += "<styleUrl>#{0}</styleUrl>".format(self._pairhighlight._id)
+            str += "</Pair>"
+        str += "</StyleMap>"
+        return str
+
+    @property
+    def normalstyle(self):
+        if self._pairnormal is None:
+            self._pairnormal = Style()
+        return self._pairnormal
+
+    @normalstyle.setter
+    def normalstyle(self, normal):
+        self._pairnormal = normal
+
+    @property
+    def highlightstyle(self):
+        if self._pairhighlight is None:
+            self._pairhighlight = Style()
+        return self._pairhighlight
+
+    @highlightstyle.setter
+    def highlightstyle(self, highlighturl):
+        self._pairhighlight = highlighturl

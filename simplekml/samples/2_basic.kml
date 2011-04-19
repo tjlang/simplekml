@@ -1,0 +1,498 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2">
+    <Document id="feat_0">
+        <visibility>
+            1
+        </visibility>
+        <open>
+            0
+        </open>
+        <Document id="feat_1">
+            <name>
+                A Document
+            </name>
+            <visibility>
+                1
+            </visibility>
+            <open>
+                0
+            </open>
+            <Document id="feat_2">
+                <name>
+                    A Nested Document
+                </name>
+                <visibility>
+                    1
+                </visibility>
+                <open>
+                    0
+                </open>
+                <description>
+                    This is the nested document's description.
+                </description>
+            </Document>
+        </Document>
+        <Folder id="feat_3">
+            <name>
+                A Folder
+            </name>
+            <visibility>
+                1
+            </visibility>
+            <open>
+                0
+            </open>
+            <description>
+                Description of a folder
+            </description>
+            <Folder id="feat_4">
+                <name>
+                    A Nested Folder
+                </name>
+                <visibility>
+                    1
+                </visibility>
+                <open>
+                    0
+                </open>
+                <description>
+                    Description of a nested folder
+                </description>
+            </Folder>
+        </Folder>
+        <Folder id="feat_5">
+            <Style id="stylesel_0">
+                <LabelStyle>
+                    <color>
+                        ff0000ff
+                    </color>
+                    <colorMode>
+                        normal
+                    </colorMode>
+                    <scale>
+                        2
+                    </scale>
+                    <ColorMode>
+                        random
+                    </ColorMode>
+                </LabelStyle>
+                <IconStyle>
+                    <color>
+                        ffff00ff
+                    </color>
+                    <colorMode>
+                        normal
+                    </colorMode>
+                    <scale>
+                        1
+                    </scale>
+                    <heading>
+                        45
+                    </heading>
+                    <Icon>
+                        <href>
+                            http://maps.google.com/mapfiles/kml/shapes/arrow.png
+                        </href>
+                    </Icon>
+                </IconStyle>
+            </Style>
+            <Style id="stylesel_0">
+                <LabelStyle>
+                    <color>
+                        ff0000ff
+                    </color>
+                    <colorMode>
+                        normal
+                    </colorMode>
+                    <scale>
+                        2
+                    </scale>
+                    <ColorMode>
+                        random
+                    </ColorMode>
+                </LabelStyle>
+                <IconStyle>
+                    <color>
+                        ffff00ff
+                    </color>
+                    <colorMode>
+                        normal
+                    </colorMode>
+                    <scale>
+                        1
+                    </scale>
+                    <heading>
+                        45
+                    </heading>
+                    <Icon>
+                        <href>
+                            http://maps.google.com/mapfiles/kml/shapes/arrow.png
+                        </href>
+                    </Icon>
+                </IconStyle>
+            </Style>
+            <Style id="stylesel_1">
+                <LabelStyle>
+                    <color>
+                        ff00ffff
+                    </color>
+                    <colorMode>
+                        normal
+                    </colorMode>
+                    <scale>
+                        1
+                    </scale>
+                </LabelStyle>
+            </Style>
+            <name>
+                Point Tests
+            </name>
+            <visibility>
+                1
+            </visibility>
+            <open>
+                0
+            </open>
+            <description>
+                Description of Point Folder
+            </description>
+            <Placemark id="feat_6">
+                <name>
+                    Cape Town Stadium
+                </name>
+                <visibility>
+                    1
+                </visibility>
+                <Point id="geom_0">
+                    <extrude>
+                        0
+                    </extrude>
+                    <altitudeMode>
+                        clampToGround
+                    </altitudeMode>
+                    <coordinates>
+                        18.411102,-33.903486,0.0
+                    </coordinates>
+                </Point>
+                <open>
+                    0
+                </open>
+                <description>
+                    The Cape Town statdium built for the 2010 world cup soccer.
+                </description>
+            </Placemark>
+            <Placemark id="feat_7">
+                <name>
+                    V&amp;A Waterfront
+                </name>
+                <visibility>
+                    1
+                </visibility>
+                <styleUrl>
+                    #stylesel_0
+                </styleUrl>
+                <Point id="geom_1">
+                    <extrude>
+                        0
+                    </extrude>
+                    <altitudeMode>
+                        clampToGround
+                    </altitudeMode>
+                    <coordinates>
+                        18.418699,-33.90708,0.0
+                    </coordinates>
+                </Point>
+                <open>
+                    0
+                </open>
+                <description>
+                    The V&amp;A Waterfront in Cape Town
+                </description>
+            </Placemark>
+            <Placemark id="feat_8">
+                <name>
+                    Ferris Wheel
+                </name>
+                <visibility>
+                    1
+                </visibility>
+                <styleUrl>
+                    #stylesel_0
+                </styleUrl>
+                <Point id="geom_2">
+                    <extrude>
+                        0
+                    </extrude>
+                    <altitudeMode>
+                        clampToGround
+                    </altitudeMode>
+                    <coordinates>
+                        18.422892,-33.912937,0.0
+                    </coordinates>
+                </Point>
+                <open>
+                    0
+                </open>
+                <description>
+                    Same style as V&amp;A
+                </description>
+            </Placemark>
+            <Placemark id="feat_9">
+                <name>
+                    Signal Hill
+                </name>
+                <visibility>
+                    1
+                </visibility>
+                <styleUrl>
+                    #stylesel_1
+                </styleUrl>
+                <Point id="geom_3">
+                    <extrude>
+                        0
+                    </extrude>
+                    <altitudeMode>
+                        clampToGround
+                    </altitudeMode>
+                    <coordinates>
+                        18.399813,-33.92025,0.0
+                    </coordinates>
+                </Point>
+                <open>
+                    0
+                </open>
+                <description>
+                    Style from a class
+                </description>
+            </Placemark>
+        </Folder>
+        <Folder id="feat_10">
+            <Style id="stylesel_2">
+                <LineStyle>
+                    <color>
+                        ff00ffff
+                    </color>
+                    <colorMode>
+                        normal
+                    </colorMode>
+                    <width>
+                        10
+                    </width>
+                </LineStyle>
+            </Style>
+            <name>
+                LineString Tests
+            </name>
+            <visibility>
+                1
+            </visibility>
+            <open>
+                0
+            </open>
+            <description>
+                Description of LineString Folder
+            </description>
+            <Placemark id="feat_11">
+                <name>
+                    Habour Wall
+                </name>
+                <visibility>
+                    1
+                </visibility>
+                <LineString id="geom_4">
+                    <extrude>
+                        0
+                    </extrude>
+                    <altitudeMode>
+                        clampToGround
+                    </altitudeMode>
+                    <tessellate>
+                        0
+                    </tessellate>
+                    <coordinates>
+                        18.4344241201,-33.8976911413,0,18.4257753782,-33.9001151957,0
+                    </coordinates>
+                </LineString>
+                <open>
+                    0
+                </open>
+                <description>
+                    The harbour wall.
+                </description>
+            </Placemark>
+            <Placemark id="feat_12">
+                <name>
+                    Rotating Bridge
+                </name>
+                <visibility>
+                    1
+                </visibility>
+                <styleUrl>
+                    #stylesel_2
+                </styleUrl>
+                <LineString id="geom_5">
+                    <extrude>
+                        0
+                    </extrude>
+                    <altitudeMode>
+                        clampToGround
+                    </altitudeMode>
+                    <tessellate>
+                        0
+                    </tessellate>
+                    <coordinates>
+                        18.4218044865,-33.9061596291,0,18.4220157223,-33.906446288,0
+                    </coordinates>
+                </LineString>
+                <open>
+                    0
+                </open>
+                <description>
+                    The bridge rotates!
+                </description>
+            </Placemark>
+        </Folder>
+        <Folder id="feat_13">
+            <Style id="stylesel_3">
+                <PolyStyle>
+                    <color>
+                        ffff00ff
+                    </color>
+                    <colorMode>
+                        normal
+                    </colorMode>
+                    <outline>
+                        1
+                    </outline>
+                    <fill>
+                        1
+                    </fill>
+                </PolyStyle>
+                <LineStyle>
+                    <color>
+                        ff0000ff
+                    </color>
+                    <colorMode>
+                        normal
+                    </colorMode>
+                    <width>
+                        5
+                    </width>
+                </LineStyle>
+            </Style>
+            <name>
+                Polygon Tests
+            </name>
+            <visibility>
+                1
+            </visibility>
+            <open>
+                0
+            </open>
+            <description>
+                Description of Polgon Folder
+            </description>
+            <Placemark id="feat_14">
+                <name>
+                    Two Oceans Aquarium
+                </name>
+                <visibility>
+                    1
+                </visibility>
+                <Polygon id="geom_6">
+                    <extrude>
+                        0
+                    </extrude>
+                    <altitudeMode>
+                        clampToGround
+                    </altitudeMode>
+                    <tessellate>
+                        0
+                    </tessellate>
+                    <outerBoundaryIs>
+                        <LinearRing>
+                            <extrude>
+                                0
+                            </extrude>
+                            <altitudeMode>
+                                clampToGround
+                            </altitudeMode>
+                            <tessellate>
+                                0
+                            </tessellate>
+                            <coordinates>
+                                18.4175465934,-33.9083517226,0,18.4181239016,-33.9080972302,0,18.4179403811,-33.9078222853,0,18.4177006865,-33.9079343654,0,18.4174740182,-33.9077180893,0,18.4171932854,-33.9079095417,0,18.4173415632,-33.9080782974,0,18.4171706094,-33.9081946647,0,18.417319506,-33.9083516631,0,18.4174525684,-33.9082668015,0,18.4175465934,-33.9083517226,0
+                            </coordinates>
+                        </LinearRing>
+                    </outerBoundaryIs>
+                </Polygon>
+                <open>
+                    0
+                </open>
+                <description>
+                    A aquarium with fish.
+                </description>
+            </Placemark>
+            <Placemark id="feat_16">
+                <name>
+                    Protea Hotel
+                </name>
+                <visibility>
+                    1
+                </visibility>
+                <styleUrl>
+                    #stylesel_3
+                </styleUrl>
+                <Polygon id="geom_8">
+                    <extrude>
+                        0
+                    </extrude>
+                    <altitudeMode>
+                        clampToGround
+                    </altitudeMode>
+                    <innerBoundaryIs>
+                        <LinearRing>
+                            <extrude>
+                                0
+                            </extrude>
+                            <altitudeMode>
+                                clampToGround
+                            </altitudeMode>
+                            <tessellate>
+                                0
+                            </tessellate>
+                            <coordinates>
+                                18.4154466438,-33.9079775784,0,18.4156687724,-33.9078264617,0,18.4155701281,-33.9077242906,0,18.4153486707,-33.9078706793,0,18.4154466438,-33.9079775784,0
+                            </coordinates>
+                        </LinearRing>
+                    </innerBoundaryIs>
+                    <tessellate>
+                        0
+                    </tessellate>
+                    <outerBoundaryIs>
+                        <LinearRing>
+                            <extrude>
+                                0
+                            </extrude>
+                            <altitudeMode>
+                                clampToGround
+                            </altitudeMode>
+                            <tessellate>
+                                0
+                            </tessellate>
+                            <coordinates>
+                                18.4154335422,-33.9081504278,0,18.4158847532,-33.9078521537,0,18.4155906723,-33.9075504151,0,18.4151403782,-33.9078496688,0,18.4154335422,-33.9081504278,0
+                            </coordinates>
+                        </LinearRing>
+                    </outerBoundaryIs>
+                </Polygon>
+                <open>
+                    0
+                </open>
+                <description>
+                    A hotel.
+                </description>
+            </Placemark>
+        </Folder>
+    </Document>
+</kml>
