@@ -43,6 +43,15 @@ class ListItemType(object):
     checkoffonly = "checkOffOnly"
     checkhidechildren = "checkHideChildren"
 
+class State(object):
+    """Constants for state values."""
+    open = 'open'
+    closed = 'closed'
+    error = 'error'
+    fetching0 = 'fetching0'
+    fetching1 = 'fetching1'
+    fetching2 = 'fetching2'
+
 class Color(object):
     """Color constants (HTML and CSS) and converters."""
     aliceblue = 'fffff8f0'
@@ -210,4 +219,9 @@ class Color(object):
     def hexa(cls, hstr):
         """Convert hex (with alpha) to GE hex value."""
         return hstr[::-1]
+
+    @classmethod
+    def changealpha(cls, alpha, gehex):
+        """Changes the alpha value of the given Google Earth hex value."""
+        return alpha + gehex[2:]
         

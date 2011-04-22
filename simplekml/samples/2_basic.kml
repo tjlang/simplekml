@@ -450,6 +450,9 @@
                     <altitudeMode>
                         clampToGround
                     </altitudeMode>
+                    <tessellate>
+                        0
+                    </tessellate>
                     <innerBoundaryIs>
                         <LinearRing>
                             <extrude>
@@ -466,9 +469,6 @@
                             </coordinates>
                         </LinearRing>
                     </innerBoundaryIs>
-                    <tessellate>
-                        0
-                    </tessellate>
                     <outerBoundaryIs>
                         <LinearRing>
                             <extrude>
@@ -491,6 +491,47 @@
                 </open>
                 <description>
                     A hotel.
+                </description>
+            </Placemark>
+            <Placemark id="feat_21">
+                <name>
+                    Two Oceans Aquarium2
+                </name>
+                <visibility>
+                    1
+                </visibility>
+                <Polygon id="geom_13">
+                    <extrude>
+                        0
+                    </extrude>
+                    <altitudeMode>
+                        clampToGround
+                    </altitudeMode>
+                    <tessellate>
+                        0
+                    </tessellate>
+                    <outerBoundaryIs>
+                        <LinearRing>
+                            <extrude>
+                                0
+                            </extrude>
+                            <altitudeMode>
+                                clampToGround
+                            </altitudeMode>
+                            <tessellate>
+                                0
+                            </tessellate>
+                            <coordinates>
+                                18.4175465934,-33.9083517226,0,18.4181239016,-33.9080972302,0,18.4179403811,-33.9078222853,0,18.4177006865,-33.9079343654,0,18.4174740182,-33.9077180893,0,18.4171932854,-33.9079095417,0,18.4173415632,-33.9080782974,0,18.4171706094,-33.9081946647,0,18.417319506,-33.9083516631,0,18.4174525684,-33.9082668015,0,18.4175465934,-33.9083517226,0
+                            </coordinates>
+                        </LinearRing>
+                    </outerBoundaryIs>
+                </Polygon>
+                <open>
+                    0
+                </open>
+                <description>
+                    A aquarium with fish.
                 </description>
             </Placemark>
         </Folder>

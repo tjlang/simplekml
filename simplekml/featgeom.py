@@ -40,11 +40,9 @@ class Feature(Kmlable):
         self.styleUrl = None
         self._id = "feat_{0}".format(Feature.id)
         self._style = None
-        self._stylemap = None
         Feature.id += 1
         self._features = []
         self._schemas = []
-        self._schemasmaps = []
         self._folders = []
 
     @property
@@ -62,22 +60,12 @@ class Feature(Kmlable):
         self._style = style
 
     @property
-    def stylemap(self):
-        if self._stylemap is None:
-            self._stylemap = StyleMap()
-            self.setStyle(self._stylemap)
-            self.addschemamap(self._stylemap)
-        return self._style
+    def liststyle(self):
+        return self.style.liststyle
 
-    @stylemap.setter
-    def stylemap(self, stylemap):
-        self.setStyle(stylemap)
-        self.addschemamap(stylemap)
-        self._stylemap = stylemap
-
-    def addschemamap(self, schema):
-        """Attaches the given schema (style) to this feature."""
-        self._schemasmaps.append(schema)
+    @liststyle.setter
+    def liststyle(self, liststyle):
+        self.style.liststyle = liststyle
 
     def setStyle(self, style):
         self.styleUrl = "#{0}".format(style.getId())
@@ -113,14 +101,9 @@ class Feature(Kmlable):
         self._schemas.append(schema)
 
     def __str__(self):
-        for schemamap in self._schemasmaps:
-            self.addschema(schemamap.normalstyle)
-            self.addschema(schemamap.highlightstyle)
         str = '<{0} id="{1}">'.format(self.__class__.__name__, self._id)
         for schema in self._schemas:
             str += schema.__str__()
-        for schemamap in self._schemasmaps:
-            str += schemamap.__str__()
         str += super(Feature, self).__str__()
         for folder in self._folders:
             str += folder.__str__()
@@ -150,13 +133,12 @@ class Feature(Kmlable):
         self.addfeature(poly)
         return poly
 
-    @property
-    def liststyle(self):
-        return self.style.liststyle
-
-    @liststyle.setter
-    def liststyle(self, liststyle):
-        self.style.liststyle = liststyle
+    def newmultigeometry(self, **kwargs):
+        """Creates a new MultiGeometry container and attaches it to the feature."""
+        multi = MultiGeometry(**kwargs)
+        multi._parent = self
+        self.addfeature(multi)
+        return multi
 
 
 class Container(Feature):
@@ -222,7 +204,6 @@ class Geometry(Kmlable):
         self._placemark.geometry = self
         self._parent = None
         self._style = None
-        self._stylemap = None
 
     @property
     def name(self):
@@ -271,22 +252,6 @@ class Geometry(Kmlable):
         if self._parent is not None:
             self._parent.addschema(style)
         self._style = style
-
-    @property
-    def stylemap(self):
-        if self._stylemap is None:
-            self._stylemap = StyleMap()
-            self._placemark.setStyle(self._stylemap)
-            if self._parent is not None:
-                self._parent.addschemamap(self._stylemap)
-        return self._stylemap
-
-    @stylemap.setter
-    def stylemap(self, stylemap):
-        self._placemark.setStyle(stylemap)
-        if self._parent is not None:
-            self._parent.addschemamap(stylemap)
-        self._stylemap = stylemap
 
     @property
     def iconstyle(self):
@@ -344,16 +309,10 @@ class Geometry(Kmlable):
 class PointGeometry(Geometry):
     """Base class for any geometry requiring coordinates (not Polygon)."""
     def __init__(self,
-                 coords=[], **kwargs):
+                 coords=(), **kwargs):
         super(PointGeometry, self).__init__(**kwargs)
         self.coordinates = Coordinates()
-        self.coordinates.addcoordinates(coords)
-
-#    def addCoordinate(self, coord):
-#        self.coordinates.addcoordinates([coord])
-#
-#    def addCoordinates(self, coords):
-#        self.coordinates.addcoordinates([coords])
+        self.coordinates.addcoordinates(list(coords))
 
     @property
     def coords(self):
@@ -367,11 +326,11 @@ class PointGeometry(Geometry):
 
 class LinearRing(PointGeometry):
     """A closed line string, typically the outer boundary of a Polygon."""
-    def __init__(self, coords=[],
+    def __init__(self, coords=(),
                  extrude=0,
                  tessellate=0,
                  altitudemode=AltitudeMode.clamptoground, **kwargs):
-        super(LinearRing, self).__init__(coords, **kwargs)
+        super(LinearRing, self).__init__(list(coords), **kwargs)
         self.extrude = extrude
         self.tessellate = tessellate
         self.altitudeMode = altitudemode
@@ -445,14 +404,14 @@ class Polygon(Geometry):
                  extrude=0,
                  tessellate=0,
                  altitudemode=AltitudeMode.clamptoground,
-                 outerboundaryis=[],
-                 innerboundaryis=[], **kwargs):
+                 outerboundaryis=(),
+                 innerboundaryis=(), **kwargs):
         super(Polygon, self).__init__(**kwargs)
         self.extrude = extrude
         self.tessellate = tessellate
         self.altitudeMode = altitudemode
-        self.outerBoundaryIs = LinearRing(outerboundaryis)
-        self.innerboundaryis = innerboundaryis
+        self.outerBoundaryIs = LinearRing(list(outerboundaryis))
+        self.innerboundaryis = list(innerboundaryis)
 
     @property
     def altitudemode(self):
@@ -491,4 +450,45 @@ class Polygon(Geometry):
         str = '<Polygon id="{0}">'.format(self._id)
         str += super(Polygon, self).__str__()
         str += "</Polygon>"
+        return str
+
+
+class MultiGeometry(Geometry):
+    """A Polygon is defined by an outer boundary and/or an inner boundary."""
+    def __init__(self,
+                 geometries=(), **kwargs):
+        super(MultiGeometry, self).__init__(**kwargs)
+        self._geometries = list(geometries)
+
+    def newpoint(self, **kwargs):
+        """Creates a new Point and attaches it to the MultiGeometry."""
+        pnt = Point(**kwargs)
+        pnt._parent = self._placemark
+        self.addfeature(pnt)
+        return pnt
+
+    def newlinestring(self, **kwargs):
+        """Creates a new Linestring and attaches it to the MultiGeometry."""
+        ls = LineString(**kwargs)
+        ls._parent = self._placemark
+        self.addfeature(ls)
+        return ls
+
+    def newpolygon(self, **kwargs):
+        """Creates a new Polygon and attaches it to the MultiGeometry."""
+        poly = Polygon(**kwargs)
+        poly._parent = self._placemark
+        self.addfeature(poly)
+        return poly
+    
+    def addfeature(self, feat):
+        """Attaches a feature to this MultiGeometry."""
+        self._geometries.append(feat)
+
+    def __str__(self):
+        str = '<MultiGeometry id="{0}">'.format(self._id)
+        str += super(MultiGeometry, self).__str__()
+        for geom in self._geometries:
+            str += geom.__str__()
+        str += "</MultiGeometry>"
         return str

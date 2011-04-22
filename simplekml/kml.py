@@ -97,3 +97,37 @@ class Kml(object):
         poly._parent = self
         self._feature.addfeature(poly)
         return poly
+
+    def newmultigeometry(self, **kwargs):
+        """Creates a new Polygon and attaches it to the feature."""
+        multi = MultiGeometry(**kwargs)
+        multi._parent = self
+        self._feature.addfeature(multi)
+        return multi
+
+def main():
+    kml = Kml()
+    multi = kml.newmultigeometry(name='s')
+    multi.linestyle.color = Color.red
+    multi.labelstyle.scale = 0.0
+    multi.polystyle.color = Color.lightcoral
+
+    # A simple Point
+    pnt = kml.newpoint(name="Kirstenbosch", coords=[(18.432314,-33.988862)])
+
+
+    # A simple Linestring showing off HTML markup
+    lin = multi.newlinestring(name="Pathway", description="A pathway in <b>Kirstenbosch</b>",
+                            coords=[(18.43312,-33.98924), (18.43224,-33.98914), (18.43144,-33.98911), (18.43095,-33.98904)])
+
+    # A simple Polygon with a hole in it.
+    pol = multi.newpolygon(name="Atrium Garden",
+                         outerboundaryis=[(18.43348,-33.98985), (18.43387,-33.99004262216968), (18.43410,-33.98972), (18.43371,-33.98952), (18.43348,-33.98985)],
+                         innerboundaryis=[[(18.43360,-33.98982), (18.43386,-33.98995), (18.43401,-33.98974), (18.43376,-33.98962), (18.43360,-33.98982)]])
+
+    # Saving
+    kml.save("c:\\test.kml")
+
+
+if __name__ == "__main__":
+    main()
