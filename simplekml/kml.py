@@ -23,10 +23,49 @@ import zipfile
 
 from featgeom import *
 from abstractview import *
+from overlay import *
 
 
-class Kml(object):
-    """The main class that represents a KML file."""
+class Kml(object):  # --Document--
+    """The main class that represents a KML file.
+    The base feature is a document, all arguments and properties are the same as that of a [Document].
+
+    Arguments:
+    name                -- string (default None)
+    visibility          -- int (default 1)
+    open                -- int (default 0)
+    atomauthor          -- string (default None)
+    atomlink            -- string (default None)
+    address             -- string (default None)
+    xaladdressdetails   -- string in xal format (default None)
+    phonenumber         -- string (default None)
+    snippet             -- string (default None)
+    description         -- string (default None)
+    camera              -- [Camera] (default None)
+    lookat              -- [LookAt] (default None)
+    timestamp           -- [TimeStamp] (default None)
+    timespan            -- [TimeStamp] (default None)
+    region              -- [Region] (default None)
+
+    Properties:
+    Same as arguments, with the following additional properties:
+    style               -- [Style] (default None)
+    liststyle           -- [ListStyle] (default None)
+    document            -- [Document] (default [Document])
+
+    Public Methods:
+    newpoint()          -- Creates a new [Point] and attaches it to the feature
+    newlinestring()     -- Creates a new [LineString] and attaches it to the feature
+    newpolygon()        -- Creates a new [Polygon] and attaches it to the feature
+    newmultigeometry()  -- Creates a new [MultiGeometry] and attaches it to the feature
+    newgroundoverlay()  -- Creates a new [GroundOverlay] and attaches it to the feature
+    newscreenoverlay()  -- Creates a new [ScreenOverlay] and attaches it to the feature
+    newphotooverlay()   -- Creates a new [PhotoOverlay] and attaches it to the feature
+    save(path)          -- Saves to a KML file with the given path
+    savekmz(path)       -- Saves to a KMZ file with the given path
+
+    """
+
     def __init__(self, **kwargs):
         self._feature = Document(**kwargs)
 
@@ -40,7 +79,7 @@ class Kml(object):
 
     def _genkml(self):
         """Returns the generated kml as a string."""
-        kml_tag = 'xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom"'
+        kml_tag = 'xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:xal="urn:oasis:names:tc:ciq:xsdschema:xAL:2.0"'
         xmlstr = "<kml {0}>{1}</kml>".format(kml_tag, self._feature.__str__())
         s = parseString(xmlstr)
         return s.toprettyxml(indent="    ", newl="\n", encoding="UTF-8")
@@ -105,29 +144,23 @@ class Kml(object):
         self._feature.addfeature(multi)
         return multi
 
-def main():
-    kml = Kml()
-    multi = kml.newmultigeometry(name='s')
-    multi.linestyle.color = Color.red
-    multi.labelstyle.scale = 0.0
-    multi.polystyle.color = Color.lightcoral
+    def newgroundoverlay(self, **kwargs):
+        """Creates a new GroundOverlay and attaches it to the feature."""
+        groundover = GroundOverlay(**kwargs)
+        groundover._parent = self
+        self._feature.addfeature(groundover)
+        return groundover
 
-    # A simple Point
-    pnt = kml.newpoint(name="Kirstenbosch", coords=[(18.432314,-33.988862)])
+    def newscreenoverlay(self, **kwargs):
+        """Creates a new ScreenOverlay and attaches it to the feature."""
+        screenover = ScreenOverlay(**kwargs)
+        screenover._parent = self
+        self._feature.addfeature(screenover)
+        return screenover
 
-
-    # A simple Linestring showing off HTML markup
-    lin = multi.newlinestring(name="Pathway", description="A pathway in <b>Kirstenbosch</b>",
-                            coords=[(18.43312,-33.98924), (18.43224,-33.98914), (18.43144,-33.98911), (18.43095,-33.98904)])
-
-    # A simple Polygon with a hole in it.
-    pol = multi.newpolygon(name="Atrium Garden",
-                         outerboundaryis=[(18.43348,-33.98985), (18.43387,-33.99004262216968), (18.43410,-33.98972), (18.43371,-33.98952), (18.43348,-33.98985)],
-                         innerboundaryis=[[(18.43360,-33.98982), (18.43386,-33.98995), (18.43401,-33.98974), (18.43376,-33.98962), (18.43360,-33.98982)]])
-
-    # Saving
-    kml.save("c:\\test.kml")
-
-
-if __name__ == "__main__":
-    main()
+    def newphotooverlay(self, **kwargs):
+        """Creates a new PhotoOverlay and attaches it to the feature."""
+        photoover = PhotoOverlay(**kwargs)
+        photoover._parent = self
+        self._feature.addfeature(photoover)
+        return photoover

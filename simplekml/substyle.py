@@ -37,28 +37,97 @@ class ColorStyle(Kmlable):
         self.ColorMode = colormode
 
 
-class LineStyle(ColorStyle):
-    """Specifies the drawing style for all line geometry."""
-    def __init__(self, width=1, **kwargs):
+class LineStyle(ColorStyle): # --Document--
+    """Specifies the drawing style for all line geometry.
+
+    Arguments:
+    color               -- string of KML hex value (default None)
+    colormode           -- string from [ColorMode] constants (default "normal")
+    width               -- float (default None)
+    gxoutercolor        -- string from [ColorMode] constants (default "normal")
+    gxouterwidth        -- float (default None)
+    gxphysicalwidth     -- float (default None)
+
+    Properties:
+    Same as arguments.
+
+    """
+    def __init__(self,
+                 width=None,
+                 gxoutercolor=None,
+                 gxouterwidth=None,
+                 gxphysicalwidth=None,
+                 **kwargs):
         super(LineStyle, self).__init__(**kwargs)
         self.width = width
+        self.gxouterColor = gxoutercolor
+        self.gxouterWidth = gxouterwidth
+        self.gxphysicalWidth = gxphysicalwidth
+
+    @property
+    def gxoutercolor(self):
+        return self.gxouterColor
+
+    @gxoutercolor.setter
+    def gxoutercolor(self, gxoutercolor):
+        self.gxouterColor = gxoutercolor
+
+    @property
+    def gxouterwidth(self):
+        return self.gxouterWidth
+
+    @gxouterwidth.setter
+    def gxouterwidth(self, gxouterwidth):
+        self.gxouterWidth = gxouterwidth
+
+    @property
+    def gxphysicalwidth(self):
+        return self.gxphysicalWidth
+
+    @gxphysicalwidth.setter
+    def gxphysicalwidth(self, gxphysicalwidth):
+        self.gxphysicalWidth = gxphysicalwidth
 
 
-class PolyStyle(ColorStyle):
-    """Specifies the drawing style for all polygons."""
+class PolyStyle(ColorStyle): # --Document--
+    """Specifies the drawing style for all polygons.
+
+    Arguments:
+    color               -- string of KML hex value (default None)
+    colormode           -- string from [ColorMode] constants (default "normal")
+    fill                -- int 1 or 0 (default 1)
+    outline             -- int 1 or 0 (default 1)
+
+    Properties:
+    Same as arguments.
+
+    """
     def __init__(self, fill=1, outline=1, **kwargs):
         super(PolyStyle, self).__init__(**kwargs)
         self.fill = fill
         self.outline = outline
 
+class IconStyle(ColorStyle): # --Document--
+    """Specifies how icons for point Placemarks are drawn.
 
-class IconStyle(ColorStyle):
-    """Specifies how icons for point Placemarks are drawn."""
-    def __init__(self, scale=1, heading=0, icon=Icon(), **kwargs):
+    Arguments:
+    color               -- string of KML hex value (default None)
+    colormode           -- string from [ColorMode] constants (default "normal")
+    scale               -- float (default 1)
+    heading             -- float (default 0)
+    icon                -- [Icon] (default [Icon])
+    hotspot             -- [HotSpot] (default None)
+
+    Properties:
+    Same as arguments.
+
+    """
+    def __init__(self, scale=1, heading=0, icon=Icon(), hotspot=None, **kwargs):
         super(IconStyle, self).__init__(**kwargs)
         self.scale = scale
         self.heading = heading
         self.Icon = icon
+        self.hotspot_ = hotspot
 
     @property
     def icon(self):
@@ -68,20 +137,47 @@ class IconStyle(ColorStyle):
     def icon(self, icon):
         self.Icon = icon
 
-#    def seticonhref(self, href):
-#        """Convenience method for setting an Icon's href."""
-#        self.Icon.href = href
+    @property
+    def hotspot(self):
+        if self.hotspot_ is None:
+            self.hotspot_ = HotSpot()
+        return self.hotspot_
+
+    @hotspot.setter
+    def hotspot(self, hotspot):
+        self.hotspot_ = hotspot
 
 
-class LabelStyle(ColorStyle):
-    """Specifies how the name of a Feature is drawn."""
+class LabelStyle(ColorStyle): # --Document--
+    """Specifies how the name of a Feature is drawn.
+
+    Arguments:
+    color               -- string of KML hex value (default None)
+    colormode           -- string from [ColorMode] constants (default "normal")
+    scale               -- float (default 1)
+
+    Properties:
+    Same as arguments.
+
+    """
     def __init__(self, scale=1, **kwargs):
         super(LabelStyle, self).__init__(**kwargs)
         self.scale = scale
 
         
-class BalloonStyle(Kmlable):
-   """Specifies the content and layout of the description balloon."""
+class BalloonStyle(Kmlable): # --Document--
+   """Specifies the content and layout of the description balloon.
+
+    Arguments:
+    bgcolor             -- string of KML hex value (default None)
+    textcolor           -- string of KML hex value (default None)
+    text                -- string (default None)
+    displaymode         -- string from [DisplayMode] constants (default "default")
+
+    Properties:
+    Same as arguments.
+
+    """
    def __init__(self, 
                 bgcolor=None,
                 textcolor=None,
@@ -117,8 +213,18 @@ class BalloonStyle(Kmlable):
        self.displayMode = displaymode
 
 
-class ListStyle(Kmlable):
-   """Specifies the display of the elements style in the navigation bar."""
+class ListStyle(Kmlable): # --Document--
+   """Specifies the display of the elements style in the navigation bar.
+
+    Arguments:
+    listitemtype        -- string from [ListItemType] constants (default "check")
+    bgcolor             -- string of KML hex value (default None)
+    itemicon            -- [ItemIcon] (default None)
+
+    Properties:
+    Same as arguments.
+
+    """
    def __init__(self,
                 listitemtype=ListItemType.check,
                 bgcolor=None,

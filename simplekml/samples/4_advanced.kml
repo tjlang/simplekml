@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2">
-    <Document id="feat_0">
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:xal="urn:oasis:names:tc:ciq:xsdschema:xAL:2.0">
+    <Document id="feat_1">
         <Style id="stylesel_9">
             <LabelStyle>
                 <colorMode>
@@ -11,12 +11,12 @@
                 </scale>
             </LabelStyle>
             <IconStyle>
-                <colorMode>
-                    normal
-                </colorMode>
                 <scale>
                     1
                 </scale>
+                <colorMode>
+                    normal
+                </colorMode>
                 <heading>
                     0
                 </heading>
@@ -62,9 +62,6 @@
                 <colorMode>
                     normal
                 </colorMode>
-                <width>
-                    1
-                </width>
             </LineStyle>
         </Style>
         <Style id="stylesel_12">
@@ -89,24 +86,15 @@
                 <colorMode>
                     normal
                 </colorMode>
-                <width>
-                    1
-                </width>
             </LineStyle>
         </Style>
-        <visibility>
-            1
-        </visibility>
         <open>
             0
         </open>
-        <Placemark id="feat_1">
-            <name>
-                MultiPoint
-            </name>
-            <visibility>
-                1
-            </visibility>
+        <visibility>
+            1
+        </visibility>
+        <Placemark id="feat_3">
             <styleUrl>
                 #stylesel_9
             </styleUrl>
@@ -115,9 +103,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         16,-35,0.0
                     </coordinates>
@@ -126,9 +111,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         16,-33,0.0
                     </coordinates>
@@ -137,9 +119,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         16,-31,0.0
                     </coordinates>
@@ -148,9 +127,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         16,-29,0.0
                     </coordinates>
@@ -159,9 +135,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         16,-27,0.0
                     </coordinates>
@@ -170,9 +143,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         16,-25,0.0
                     </coordinates>
@@ -181,9 +151,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         16,-23,0.0
                     </coordinates>
@@ -192,9 +159,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         16,-21,0.0
                     </coordinates>
@@ -203,9 +167,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         18,-35,0.0
                     </coordinates>
@@ -214,9 +175,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         18,-33,0.0
                     </coordinates>
@@ -225,9 +183,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         18,-31,0.0
                     </coordinates>
@@ -236,9 +191,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         18,-29,0.0
                     </coordinates>
@@ -247,9 +199,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         18,-27,0.0
                     </coordinates>
@@ -258,9 +207,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         18,-25,0.0
                     </coordinates>
@@ -269,9 +215,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         18,-23,0.0
                     </coordinates>
@@ -280,9 +223,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         18,-21,0.0
                     </coordinates>
@@ -291,9 +231,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         20,-35,0.0
                     </coordinates>
@@ -302,9 +239,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         20,-33,0.0
                     </coordinates>
@@ -313,9 +247,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         20,-31,0.0
                     </coordinates>
@@ -324,9 +255,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         20,-29,0.0
                     </coordinates>
@@ -335,9 +263,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         20,-27,0.0
                     </coordinates>
@@ -346,9 +271,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         20,-25,0.0
                     </coordinates>
@@ -357,9 +279,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         20,-23,0.0
                     </coordinates>
@@ -368,9 +287,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         20,-21,0.0
                     </coordinates>
@@ -379,9 +295,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         22,-35,0.0
                     </coordinates>
@@ -390,9 +303,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         22,-33,0.0
                     </coordinates>
@@ -401,9 +311,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         22,-31,0.0
                     </coordinates>
@@ -412,9 +319,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         22,-29,0.0
                     </coordinates>
@@ -423,9 +327,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         22,-27,0.0
                     </coordinates>
@@ -434,9 +335,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         22,-25,0.0
                     </coordinates>
@@ -445,9 +343,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         22,-23,0.0
                     </coordinates>
@@ -456,9 +351,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         22,-21,0.0
                     </coordinates>
@@ -467,9 +359,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         24,-35,0.0
                     </coordinates>
@@ -478,9 +367,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         24,-33,0.0
                     </coordinates>
@@ -489,9 +375,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         24,-31,0.0
                     </coordinates>
@@ -500,9 +383,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         24,-29,0.0
                     </coordinates>
@@ -511,9 +391,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         24,-27,0.0
                     </coordinates>
@@ -522,9 +399,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         24,-25,0.0
                     </coordinates>
@@ -533,9 +407,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         24,-23,0.0
                     </coordinates>
@@ -544,9 +415,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         24,-21,0.0
                     </coordinates>
@@ -555,9 +423,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         26,-35,0.0
                     </coordinates>
@@ -566,9 +431,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         26,-33,0.0
                     </coordinates>
@@ -577,9 +439,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         26,-31,0.0
                     </coordinates>
@@ -588,9 +447,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         26,-29,0.0
                     </coordinates>
@@ -599,9 +455,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         26,-27,0.0
                     </coordinates>
@@ -610,9 +463,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         26,-25,0.0
                     </coordinates>
@@ -621,9 +471,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         26,-23,0.0
                     </coordinates>
@@ -632,9 +479,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         26,-21,0.0
                     </coordinates>
@@ -643,9 +487,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         28,-35,0.0
                     </coordinates>
@@ -654,9 +495,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         28,-33,0.0
                     </coordinates>
@@ -665,9 +503,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         28,-31,0.0
                     </coordinates>
@@ -676,9 +511,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         28,-29,0.0
                     </coordinates>
@@ -687,9 +519,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         28,-27,0.0
                     </coordinates>
@@ -698,9 +527,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         28,-25,0.0
                     </coordinates>
@@ -709,9 +535,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         28,-23,0.0
                     </coordinates>
@@ -720,9 +543,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         28,-21,0.0
                     </coordinates>
@@ -731,9 +551,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         30,-35,0.0
                     </coordinates>
@@ -742,9 +559,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         30,-33,0.0
                     </coordinates>
@@ -753,9 +567,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         30,-31,0.0
                     </coordinates>
@@ -764,9 +575,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         30,-29,0.0
                     </coordinates>
@@ -775,9 +583,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         30,-27,0.0
                     </coordinates>
@@ -786,9 +591,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         30,-25,0.0
                     </coordinates>
@@ -797,9 +599,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         30,-23,0.0
                     </coordinates>
@@ -808,9 +607,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         30,-21,0.0
                     </coordinates>
@@ -819,9 +615,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         32,-35,0.0
                     </coordinates>
@@ -830,9 +623,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         32,-33,0.0
                     </coordinates>
@@ -841,9 +631,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         32,-31,0.0
                     </coordinates>
@@ -852,9 +639,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         32,-29,0.0
                     </coordinates>
@@ -863,9 +647,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         32,-27,0.0
                     </coordinates>
@@ -874,9 +655,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         32,-25,0.0
                     </coordinates>
@@ -885,9 +663,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         32,-23,0.0
                     </coordinates>
@@ -896,9 +671,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         32,-21,0.0
                     </coordinates>
@@ -907,9 +679,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         34,-35,0.0
                     </coordinates>
@@ -918,9 +687,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         34,-33,0.0
                     </coordinates>
@@ -929,9 +695,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         34,-31,0.0
                     </coordinates>
@@ -940,9 +703,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         34,-29,0.0
                     </coordinates>
@@ -951,9 +711,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         34,-27,0.0
                     </coordinates>
@@ -962,9 +719,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         34,-25,0.0
                     </coordinates>
@@ -973,9 +727,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         34,-23,0.0
                     </coordinates>
@@ -984,9 +735,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         34,-21,0.0
                     </coordinates>
@@ -995,14 +743,14 @@
             <open>
                 0
             </open>
-        </Placemark>
-        <Placemark id="feat_2">
-            <name>
-                MultiLine
-            </name>
             <visibility>
                 1
             </visibility>
+            <name>
+                MultiPoint
+            </name>
+        </Placemark>
+        <Placemark id="feat_5">
             <styleUrl>
                 #stylesel_10
             </styleUrl>
@@ -1011,9 +759,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <tessellate>
                         0
                     </tessellate>
@@ -1025,9 +770,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <tessellate>
                         0
                     </tessellate>
@@ -1039,9 +781,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <tessellate>
                         0
                     </tessellate>
@@ -1053,9 +792,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <tessellate>
                         0
                     </tessellate>
@@ -1067,9 +803,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <tessellate>
                         0
                     </tessellate>
@@ -1081,9 +814,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <tessellate>
                         0
                     </tessellate>
@@ -1095,9 +825,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <tessellate>
                         0
                     </tessellate>
@@ -1109,9 +836,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <tessellate>
                         0
                     </tessellate>
@@ -1123,9 +847,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <tessellate>
                         0
                     </tessellate>
@@ -1137,9 +858,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <tessellate>
                         0
                     </tessellate>
@@ -1151,14 +869,14 @@
             <open>
                 0
             </open>
-        </Placemark>
-        <Placemark id="feat_3">
-            <name>
-                MultiPolyOdd
-            </name>
             <visibility>
                 1
             </visibility>
+            <name>
+                MultiLine
+            </name>
+        </Placemark>
+        <Placemark id="feat_7">
             <styleUrl>
                 #stylesel_12
             </styleUrl>
@@ -1167,9 +885,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <tessellate>
                         0
                     </tessellate>
@@ -1178,9 +893,6 @@
                             <extrude>
                                 0
                             </extrude>
-                            <altitudeMode>
-                                clampToGround
-                            </altitudeMode>
                             <tessellate>
                                 0
                             </tessellate>
@@ -1194,9 +906,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <tessellate>
                         0
                     </tessellate>
@@ -1205,9 +914,6 @@
                             <extrude>
                                 0
                             </extrude>
-                            <altitudeMode>
-                                clampToGround
-                            </altitudeMode>
                             <tessellate>
                                 0
                             </tessellate>
@@ -1221,9 +927,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <tessellate>
                         0
                     </tessellate>
@@ -1232,9 +935,6 @@
                             <extrude>
                                 0
                             </extrude>
-                            <altitudeMode>
-                                clampToGround
-                            </altitudeMode>
                             <tessellate>
                                 0
                             </tessellate>
@@ -1248,9 +948,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <tessellate>
                         0
                     </tessellate>
@@ -1259,9 +956,6 @@
                             <extrude>
                                 0
                             </extrude>
-                            <altitudeMode>
-                                clampToGround
-                            </altitudeMode>
                             <tessellate>
                                 0
                             </tessellate>
@@ -1275,9 +969,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <tessellate>
                         0
                     </tessellate>
@@ -1286,9 +977,6 @@
                             <extrude>
                                 0
                             </extrude>
-                            <altitudeMode>
-                                clampToGround
-                            </altitudeMode>
                             <tessellate>
                                 0
                             </tessellate>
@@ -1302,14 +990,14 @@
             <open>
                 0
             </open>
-        </Placemark>
-        <Placemark id="feat_4">
-            <name>
-                MultiPolyEven
-            </name>
             <visibility>
                 1
             </visibility>
+            <name>
+                MultiPolyOdd
+            </name>
+        </Placemark>
+        <Placemark id="feat_9">
             <styleUrl>
                 #stylesel_11
             </styleUrl>
@@ -1318,9 +1006,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <tessellate>
                         0
                     </tessellate>
@@ -1329,9 +1014,6 @@
                             <extrude>
                                 0
                             </extrude>
-                            <altitudeMode>
-                                clampToGround
-                            </altitudeMode>
                             <tessellate>
                                 0
                             </tessellate>
@@ -1345,9 +1027,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <tessellate>
                         0
                     </tessellate>
@@ -1356,9 +1035,6 @@
                             <extrude>
                                 0
                             </extrude>
-                            <altitudeMode>
-                                clampToGround
-                            </altitudeMode>
                             <tessellate>
                                 0
                             </tessellate>
@@ -1372,9 +1048,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <tessellate>
                         0
                     </tessellate>
@@ -1383,9 +1056,6 @@
                             <extrude>
                                 0
                             </extrude>
-                            <altitudeMode>
-                                clampToGround
-                            </altitudeMode>
                             <tessellate>
                                 0
                             </tessellate>
@@ -1399,9 +1069,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <tessellate>
                         0
                     </tessellate>
@@ -1410,9 +1077,6 @@
                             <extrude>
                                 0
                             </extrude>
-                            <altitudeMode>
-                                clampToGround
-                            </altitudeMode>
                             <tessellate>
                                 0
                             </tessellate>
@@ -1426,16 +1090,22 @@
             <open>
                 0
             </open>
+            <visibility>
+                1
+            </visibility>
+            <name>
+                MultiPolyEven
+            </name>
         </Placemark>
-        <Folder id="feat_5">
+        <Folder id="feat_11">
             <Style id="stylesel_0">
                 <IconStyle>
-                    <colorMode>
-                        normal
-                    </colorMode>
                     <scale>
                         1
                     </scale>
+                    <colorMode>
+                        normal
+                    </colorMode>
                     <heading>
                         0
                     </heading>
@@ -1444,12 +1114,12 @@
             </Style>
             <Style id="stylesel_1">
                 <IconStyle>
-                    <colorMode>
-                        normal
-                    </colorMode>
                     <scale>
                         1
                     </scale>
+                    <colorMode>
+                        normal
+                    </colorMode>
                     <heading>
                         0
                     </heading>
@@ -1458,12 +1128,12 @@
             </Style>
             <Style id="stylesel_2">
                 <IconStyle>
-                    <colorMode>
-                        normal
-                    </colorMode>
                     <scale>
                         1
                     </scale>
+                    <colorMode>
+                        normal
+                    </colorMode>
                     <heading>
                         0
                     </heading>
@@ -1472,12 +1142,12 @@
             </Style>
             <Style id="stylesel_3">
                 <IconStyle>
-                    <colorMode>
-                        normal
-                    </colorMode>
                     <scale>
                         1
                     </scale>
+                    <colorMode>
+                        normal
+                    </colorMode>
                     <heading>
                         0
                     </heading>
@@ -1486,12 +1156,12 @@
             </Style>
             <Style id="stylesel_4">
                 <IconStyle>
-                    <colorMode>
-                        normal
-                    </colorMode>
                     <scale>
                         1
                     </scale>
+                    <colorMode>
+                        normal
+                    </colorMode>
                     <heading>
                         0
                     </heading>
@@ -1500,12 +1170,12 @@
             </Style>
             <Style id="stylesel_5">
                 <IconStyle>
-                    <colorMode>
-                        normal
-                    </colorMode>
                     <scale>
                         1
                     </scale>
+                    <colorMode>
+                        normal
+                    </colorMode>
                     <heading>
                         0
                     </heading>
@@ -1514,12 +1184,12 @@
             </Style>
             <Style id="stylesel_6">
                 <IconStyle>
-                    <colorMode>
-                        normal
-                    </colorMode>
                     <scale>
                         1
                     </scale>
+                    <colorMode>
+                        normal
+                    </colorMode>
                     <heading>
                         0
                     </heading>
@@ -1528,12 +1198,12 @@
             </Style>
             <Style id="stylesel_7">
                 <IconStyle>
-                    <colorMode>
-                        normal
-                    </colorMode>
                     <scale>
                         1
                     </scale>
+                    <colorMode>
+                        normal
+                    </colorMode>
                     <heading>
                         0
                     </heading>
@@ -1542,34 +1212,28 @@
             </Style>
             <Style id="stylesel_8">
                 <IconStyle>
-                    <colorMode>
-                        normal
-                    </colorMode>
                     <scale>
                         1
                     </scale>
+                    <colorMode>
+                        normal
+                    </colorMode>
                     <heading>
                         0
                     </heading>
                     <Icon/>
                 </IconStyle>
             </Style>
-            <name>
-                Lo. Regions
-            </name>
-            <visibility>
-                1
-            </visibility>
             <open>
                 0
             </open>
-            <Placemark id="feat_6">
-                <name>
-                    17
-                </name>
-                <visibility>
-                    1
-                </visibility>
+            <visibility>
+                1
+            </visibility>
+            <name>
+                Lo. Regions
+            </name>
+            <Placemark id="feat_13">
                 <styleUrl>
                     #stylesel_0
                 </styleUrl>
@@ -1577,9 +1241,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         17,-29,0.0
                     </coordinates>
@@ -1587,14 +1248,14 @@
                 <open>
                     0
                 </open>
-            </Placemark>
-            <Placemark id="feat_16">
-                <name>
-                    19
-                </name>
                 <visibility>
                     1
                 </visibility>
+                <name>
+                    17
+                </name>
+            </Placemark>
+            <Placemark id="feat_33">
                 <styleUrl>
                     #stylesel_1
                 </styleUrl>
@@ -1602,9 +1263,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         19,-29,0.0
                     </coordinates>
@@ -1612,14 +1270,14 @@
                 <open>
                     0
                 </open>
-            </Placemark>
-            <Placemark id="feat_28">
-                <name>
-                    21
-                </name>
                 <visibility>
                     1
                 </visibility>
+                <name>
+                    19
+                </name>
+            </Placemark>
+            <Placemark id="feat_57">
                 <styleUrl>
                     #stylesel_2
                 </styleUrl>
@@ -1627,9 +1285,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         21,-29,0.0
                     </coordinates>
@@ -1637,14 +1292,14 @@
                 <open>
                     0
                 </open>
-            </Placemark>
-            <Placemark id="feat_40">
-                <name>
-                    23
-                </name>
                 <visibility>
                     1
                 </visibility>
+                <name>
+                    21
+                </name>
+            </Placemark>
+            <Placemark id="feat_81">
                 <styleUrl>
                     #stylesel_3
                 </styleUrl>
@@ -1652,9 +1307,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         23,-29,0.0
                     </coordinates>
@@ -1662,14 +1314,14 @@
                 <open>
                     0
                 </open>
-            </Placemark>
-            <Placemark id="feat_52">
-                <name>
-                    25
-                </name>
                 <visibility>
                     1
                 </visibility>
+                <name>
+                    23
+                </name>
+            </Placemark>
+            <Placemark id="feat_105">
                 <styleUrl>
                     #stylesel_4
                 </styleUrl>
@@ -1677,9 +1329,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         25,-29,0.0
                     </coordinates>
@@ -1687,14 +1336,14 @@
                 <open>
                     0
                 </open>
-            </Placemark>
-            <Placemark id="feat_64">
-                <name>
-                    27
-                </name>
                 <visibility>
                     1
                 </visibility>
+                <name>
+                    25
+                </name>
+            </Placemark>
+            <Placemark id="feat_129">
                 <styleUrl>
                     #stylesel_5
                 </styleUrl>
@@ -1702,9 +1351,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         27,-29,0.0
                     </coordinates>
@@ -1712,14 +1358,14 @@
                 <open>
                     0
                 </open>
-            </Placemark>
-            <Placemark id="feat_76">
-                <name>
-                    29
-                </name>
                 <visibility>
                     1
                 </visibility>
+                <name>
+                    27
+                </name>
+            </Placemark>
+            <Placemark id="feat_153">
                 <styleUrl>
                     #stylesel_6
                 </styleUrl>
@@ -1727,9 +1373,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         29,-29,0.0
                     </coordinates>
@@ -1737,14 +1380,14 @@
                 <open>
                     0
                 </open>
-            </Placemark>
-            <Placemark id="feat_88">
-                <name>
-                    31
-                </name>
                 <visibility>
                     1
                 </visibility>
+                <name>
+                    29
+                </name>
+            </Placemark>
+            <Placemark id="feat_177">
                 <styleUrl>
                     #stylesel_7
                 </styleUrl>
@@ -1752,9 +1395,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         31,-29,0.0
                     </coordinates>
@@ -1762,14 +1402,14 @@
                 <open>
                     0
                 </open>
-            </Placemark>
-            <Placemark id="feat_100">
-                <name>
-                    33
-                </name>
                 <visibility>
                     1
                 </visibility>
+                <name>
+                    31
+                </name>
+            </Placemark>
+            <Placemark id="feat_201">
                 <styleUrl>
                     #stylesel_8
                 </styleUrl>
@@ -1777,9 +1417,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         33,-29,0.0
                     </coordinates>
@@ -1787,6 +1424,12 @@
                 <open>
                     0
                 </open>
+                <visibility>
+                    1
+                </visibility>
+                <name>
+                    33
+                </name>
             </Placemark>
         </Folder>
     </Document>

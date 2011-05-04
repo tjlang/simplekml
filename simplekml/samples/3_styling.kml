@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2">
-    <Document id="feat_0">
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:xal="urn:oasis:names:tc:ciq:xsdschema:xAL:2.0">
+    <Document id="feat_1">
         <Style id="stylesel_0">
             <LabelStyle>
                 <color>
@@ -14,15 +14,15 @@
                 </scale>
             </LabelStyle>
             <IconStyle>
+                <scale>
+                    3
+                </scale>
                 <color>
                     ffff0000
                 </color>
                 <colorMode>
                     normal
                 </colorMode>
-                <scale>
-                    3
-                </scale>
                 <heading>
                     0
                 </heading>
@@ -122,19 +122,13 @@
                 </styleUrl>
             </Pair>
         </StyleMap>
-        <visibility>
-            1
-        </visibility>
         <open>
             0
         </open>
-        <Placemark id="feat_1">
-            <name>
-                Kirstenbosch Normal
-            </name>
-            <visibility>
-                1
-            </visibility>
+        <visibility>
+            1
+        </visibility>
+        <Placemark id="feat_3">
             <styleUrl>
                 #stylesel_0
             </styleUrl>
@@ -142,9 +136,6 @@
                 <extrude>
                     0
                 </extrude>
-                <altitudeMode>
-                    clampToGround
-                </altitudeMode>
                 <coordinates>
                     18.431486,-33.988,0.0
                 </coordinates>
@@ -155,14 +146,14 @@
             <description>
                 A style map.
             </description>
-        </Placemark>
-        <Placemark id="feat_2">
-            <name>
-                Kirstenbosch StyleMap
-            </name>
             <visibility>
                 1
             </visibility>
+            <name>
+                Kirstenbosch Normal
+            </name>
+        </Placemark>
+        <Placemark id="feat_5">
             <styleUrl>
                 #stylesel_1
             </styleUrl>
@@ -170,9 +161,6 @@
                 <extrude>
                     0
                 </extrude>
-                <altitudeMode>
-                    clampToGround
-                </altitudeMode>
                 <coordinates>
                     18.432314,-33.988862,0.0
                 </coordinates>
@@ -180,14 +168,14 @@
             <open>
                 0
             </open>
-        </Placemark>
-        <Placemark id="feat_3">
-            <name>
-                Pathway
-            </name>
             <visibility>
                 1
             </visibility>
+            <name>
+                Kirstenbosch StyleMap
+            </name>
+        </Placemark>
+        <Placemark id="feat_7">
             <styleUrl>
                 #stylesel_4
             </styleUrl>
@@ -195,9 +183,6 @@
                 <extrude>
                     0
                 </extrude>
-                <altitudeMode>
-                    clampToGround
-                </altitudeMode>
                 <tessellate>
                     0
                 </tessellate>
@@ -211,14 +196,14 @@
             <description>
                 A pathway in Kirstenbosch
             </description>
-        </Placemark>
-        <Placemark id="feat_4">
-            <name>
-                Atrium Garden
-            </name>
             <visibility>
                 1
             </visibility>
+            <name>
+                Pathway
+            </name>
+        </Placemark>
+        <Placemark id="feat_9">
             <styleUrl>
                 #stylesel_5
             </styleUrl>
@@ -226,17 +211,11 @@
                 <extrude>
                     0
                 </extrude>
-                <altitudeMode>
-                    clampToGround
-                </altitudeMode>
                 <innerBoundaryIs>
                     <LinearRing>
                         <extrude>
                             0
                         </extrude>
-                        <altitudeMode>
-                            clampToGround
-                        </altitudeMode>
                         <tessellate>
                             0
                         </tessellate>
@@ -253,9 +232,6 @@
                         <extrude>
                             0
                         </extrude>
-                        <altitudeMode>
-                            clampToGround
-                        </altitudeMode>
                         <tessellate>
                             0
                         </tessellate>
@@ -268,14 +244,14 @@
             <open>
                 0
             </open>
-        </Placemark>
-        <Placemark id="feat_8">
-            <name>
-                BallonStyle
-            </name>
             <visibility>
                 1
             </visibility>
+            <name>
+                Atrium Garden
+            </name>
+        </Placemark>
+        <Placemark id="feat_17">
             <styleUrl>
                 #stylesel_6
             </styleUrl>
@@ -283,9 +259,6 @@
                 <extrude>
                     0
                 </extrude>
-                <altitudeMode>
-                    clampToGround
-                </altitudeMode>
                 <coordinates>
                     18.429191,-33.987286,0.0
                 </coordinates>
@@ -293,6 +266,12 @@
             <open>
                 0
             </open>
+            <visibility>
+                1
+            </visibility>
+            <name>
+                BallonStyle
+            </name>
         </Placemark>
     </Document>
 </kml>

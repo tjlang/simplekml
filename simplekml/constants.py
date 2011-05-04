@@ -18,33 +18,84 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Contact me at kyle.lan@gmail.com
 """
 
-class AltitudeMode(object):
-    """Constants for AltitudeMode constants."""
+class AltitudeMode(object): # --Document--
+    """Constants for AltitudeMode constants.
+
+    Constants:
+    clamptoground       -- string "clampToGround"
+    relativetoground    -- string "relativeToGround"
+    absolute            -- string "absolute"
+
+    """
     clamptoground = "clampToGround"
     relativetoground = "relativeToGround"
     absolute = "absolute"
 
 
-class ColorMode(object):
-    """Constants for ColorMode constants."""
+class GxAltitudeMode(object): # --Document--
+    """Constants for gx:AltitudeMode constants.
+
+    Constants:
+    clampToSeaFloor     -- string "clampToSeaFloor"
+    relativeToSeaFloor  -- string "relativeToSeaFloor"
+
+    """
+    clampToSeaFloor  = "clampToSeaFloor "
+    relativeToSeaFloor  = "relativeToSeaFloor "
+
+
+class ColorMode(object): # --Document--
+    """Constants for ColorMode constants.
+
+    Constants:
+    normal              -- string "normal"
+    random              -- string "random"
+
+    """
     normal = "normal"
     random = "random"
 
-class DisplayMode(object):
-    """Constants for DisplayMode constants."""
+
+class DisplayMode(object): # --Document--
+    """Constants for DisplayMode constants.
+
+    Constants:
+    default             -- string "default"
+    hide                -- string "hide"
+
+    """
     default = "default"
     hide = "hide"
 
 
-class ListItemType(object):
-    """Constants for ListItemType constants."""
+class ListItemType(object): # --Document--
+    """Constants for ListItemType constants.
+
+    Constants:
+    check               -- string "check"
+    radiofolder         -- string "radioFolder"
+    checkoffonly        -- string "checkOffOnly"
+    checkhidechildren   -- string "checkHideChildren"
+
+    """
     check = "check"
     radiofolder = "radioFolder"
     checkoffonly = "checkOffOnly"
     checkhidechildren = "checkHideChildren"
 
-class State(object):
-    """Constants for state values."""
+
+class State(object): # --Document--
+    """Constants for State constants.
+
+    Constants:
+    open                -- string "open"
+    closed              -- string "closed"
+    error               -- string "error"
+    fetching0           -- string "fetching0"
+    fetching1           -- string "fetching1"
+    fetching2           -- string "fetching2"
+
+    """
     open = 'open'
     closed = 'closed'
     error = 'error'
@@ -52,8 +103,113 @@ class State(object):
     fetching1 = 'fetching1'
     fetching2 = 'fetching2'
 
-class Color(object):
-    """Color constants (HTML and CSS) and converters."""
+
+class Units(object): # --Document--
+    """Constants for Units constants.
+
+    Constants:
+    pixel               -- string "pixel"
+    fraction            -- string "fraction"
+    insetpixels         -- string "insetPixels"
+
+    """
+    pixel = 'pixel'
+    fraction = 'fraction'
+    insetpixels = 'insetPixels'
+
+
+class Shape(object): # --Document--
+    """Constants for Shape constants.
+
+    Constants:
+    rectangle           -- string "rectangle"
+    circle              -- string "circle"
+    sphere              -- string "sphere"
+
+    """
+    rectangle = 'rectangle'
+    circle = 'circle'
+    sphere = 'sphere'
+
+
+class GridOrigin(object): # --Document--
+    """Constants for GridOrigin constants.
+
+    Constants:
+    lowerleft           -- string "lowerLeft"
+    upperleft           -- string "upperLeft"
+
+    """
+    lowerleft = 'lowerLeft'
+    upperleft = 'upperLeft'
+
+
+class RefreshMode(object): # --Document--
+    """Constants for RefreshMode constants.
+
+    Constants:
+    onchange            -- string "onChange"
+    oninterval          -- string "onInterval"
+    onexpire            -- string "onExpire"
+
+    """
+    onchange = 'onChange'
+    oninterval = 'onInterval '
+    onexpire = 'onExpire'
+
+
+class ViewRefreshMode(object): # --Document--
+    """Constants for ViewRefreshMode constants.
+
+    Constants:
+    never               -- string "never"
+    onstop              -- string "onStop"
+    onrequest           -- string "onRequest"
+    onregion            -- string "onRegion"
+
+    """
+    never  = 'never '
+    onstop  = 'onStop '
+    onrequest  = 'onRequest '
+    onregion  = 'onRegion '
+
+
+class Color(object): # --Document--
+    """Color constants (HTML and CSS) and converters.
+
+    Constants:
+    See HTML and CSS standard colors for full list. All constants are lowercase.
+
+    Class Methods:
+    rgb(r, g, b, a) -- Convert rgba to GE hex value.
+    hex(hstr)       -- Convert hex (without alpha) to GE hex value.
+    hexa(hstr)      -- Changes the alpha value of the given Google Earth hex value.
+    changealpha(alpha, gehex) -- Changes the alpha value of the given Google Earth hex value.
+
+    """
+
+    @classmethod
+    def rgb(cls, r, g, b, a=255):
+        """Convert rgba to GE hex value."""
+        return '%0.2x%0.2x%0.2x%0.2x' % (a, b, g, r)
+
+
+    @classmethod
+    def hex(cls, hstr):
+        """Convert hex (without alpha) to GE hex value."""
+        return "ff{0}".format(hstr[::-1])
+
+
+    @classmethod
+    def hexa(cls, hstr):
+        """Convert hex (with alpha) to GE hex value."""
+        return hstr[::-1]
+
+    @classmethod
+    def changealpha(cls, alpha, gehex):
+        """Changes the alpha value of the given Google Earth hex value."""
+        return alpha + gehex[2:]
+
     aliceblue = 'fffff8f0'
     antiquewhite = 'ffd7ebfa'
     aqua = 'ffffff00'
@@ -202,26 +358,4 @@ class Color(object):
     yellow = 'ff00ffff'
     yellowgreen = 'ff32cd9a'
 
-
-    @classmethod
-    def rgb(cls, r, g, b, a=255):
-        """Convert rgba to GE hex value."""
-        return '%0.2x%0.2x%0.2x%0.2x' % (a, b, g, r)
-
-
-    @classmethod
-    def hex(cls, hstr):
-        """Convert hex (without alpha) to GE hex value."""
-        return "ff{0}".format(hstr[::-1])
-
-    
-    @classmethod
-    def hexa(cls, hstr):
-        """Convert hex (with alpha) to GE hex value."""
-        return hstr[::-1]
-
-    @classmethod
-    def changealpha(cls, alpha, gehex):
-        """Changes the alpha value of the given Google Earth hex value."""
-        return alpha + gehex[2:]
         

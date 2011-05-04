@@ -37,7 +37,7 @@ class Coordinates(Kmlable):
 
     def __str__(self):
         str = ""
-        if len(self._coords) == 0:
+        if not len(self._coords):
             return "0.0, 0.0, 0.0"
         for cd in self._coords:
             str += "{0},{1},{2},".format(cd[0], cd[1], cd[2])

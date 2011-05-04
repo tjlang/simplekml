@@ -1,26 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2">
-    <Document id="feat_0">
-        <visibility>
-            1
-        </visibility>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:xal="urn:oasis:names:tc:ciq:xsdschema:xAL:2.0">
+    <Document id="feat_1">
         <open>
             0
         </open>
-        <Placemark id="feat_1">
-            <name>
-                Kirstenbosch
-            </name>
-            <visibility>
-                1
-            </visibility>
+        <visibility>
+            1
+        </visibility>
+        <Placemark id="feat_3">
             <Point id="geom_0">
                 <extrude>
                     0
                 </extrude>
-                <altitudeMode>
-                    clampToGround
-                </altitudeMode>
                 <coordinates>
                     18.432314,-33.988862,0.0
                 </coordinates>
@@ -28,21 +19,18 @@
             <open>
                 0
             </open>
-        </Placemark>
-        <Placemark id="feat_2">
-            <name>
-                Pathway
-            </name>
             <visibility>
                 1
             </visibility>
+            <name>
+                Kirstenbosch
+            </name>
+        </Placemark>
+        <Placemark id="feat_5">
             <LineString id="geom_1">
                 <extrude>
                     0
                 </extrude>
-                <altitudeMode>
-                    clampToGround
-                </altitudeMode>
                 <tessellate>
                     0
                 </tessellate>
@@ -56,29 +44,23 @@
             <description>
                 A pathway in &lt;b&gt;Kirstenbosch&lt;/b&gt;
             </description>
-        </Placemark>
-        <Placemark id="feat_3">
-            <name>
-                Atrium Garden
-            </name>
             <visibility>
                 1
             </visibility>
+            <name>
+                Pathway
+            </name>
+        </Placemark>
+        <Placemark id="feat_7">
             <Polygon id="geom_2">
                 <extrude>
                     0
                 </extrude>
-                <altitudeMode>
-                    clampToGround
-                </altitudeMode>
                 <innerBoundaryIs>
                     <LinearRing>
                         <extrude>
                             0
                         </extrude>
-                        <altitudeMode>
-                            clampToGround
-                        </altitudeMode>
                         <tessellate>
                             0
                         </tessellate>
@@ -95,9 +77,6 @@
                         <extrude>
                             0
                         </extrude>
-                        <altitudeMode>
-                            clampToGround
-                        </altitudeMode>
                         <tessellate>
                             0
                         </tessellate>
@@ -110,6 +89,12 @@
             <open>
                 0
             </open>
+            <visibility>
+                1
+            </visibility>
+            <name>
+                Atrium Garden
+            </name>
         </Placemark>
     </Document>
 </kml>

@@ -32,8 +32,21 @@ class StyleSelector(Kmlable):
         return self._id
 
 
-class Style(StyleSelector):
-    """Styles affect how Geometry is presented."""
+class Style(StyleSelector): # --Document--
+    """Styles affect how Geometry is presented.
+
+    Arguments:
+    iconstyle           -- [IconStyle] (default None)
+    labelstyle          -- [LabelStyle] (default None)
+    linestyle           -- [LineStyle] (default None)
+    polystyle           -- [PolyStyle] (default None)
+    balloonstyle        -- [BalloonStyle] (default None)
+    liststyle           -- [ListStyle] (default None)
+
+    Properties:
+    Same as arguments.
+
+    """
     def __init__(self,
                  iconstyle=None,
                  labelstyle=None,
@@ -71,7 +84,6 @@ class Style(StyleSelector):
             self.LabelStyle = LabelStyle()
         return self.LabelStyle
 
-        
     @labelstyle.setter
     def labelstyle(self, labelstyle):
         self.LabelStyle = labelstyle
@@ -117,8 +129,17 @@ class Style(StyleSelector):
         self.ListStyle = liststyle
 
 
-class StyleMap(StyleSelector):
-    """Styles affect how Geometry is presented."""
+class StyleMap(StyleSelector): # --Document--
+    """Styles affect how Geometry is presented.
+
+    Arguments:
+    normalstyle         -- [Style] (default None)
+    highlightstyle      -- [Style] (default None)
+
+    Properties:
+    Same as arguments.
+
+    """
     def __init__(self,
                  normalstyle=None,
                  highlightstyle=None):

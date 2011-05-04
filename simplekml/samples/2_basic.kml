@@ -1,66 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2">
-    <Document id="feat_0">
-        <visibility>
-            1
-        </visibility>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:xal="urn:oasis:names:tc:ciq:xsdschema:xAL:2.0">
+    <Document id="feat_1">
         <open>
             0
         </open>
-        <Document id="feat_1">
-            <name>
-                A Document
-            </name>
-            <visibility>
-                1
-            </visibility>
+        <visibility>
+            1
+        </visibility>
+        <Document id="feat_3">
             <open>
                 0
             </open>
-            <Document id="feat_2">
-                <name>
-                    A Nested Document
-                </name>
-                <visibility>
-                    1
-                </visibility>
+            <visibility>
+                1
+            </visibility>
+            <name>
+                A Document
+            </name>
+            <Document id="feat_5">
                 <open>
                     0
                 </open>
                 <description>
                     This is the nested document's description.
                 </description>
+                <visibility>
+                    1
+                </visibility>
+                <name>
+                    A Nested Document
+                </name>
             </Document>
         </Document>
-        <Folder id="feat_3">
-            <name>
-                A Folder
-            </name>
-            <visibility>
-                1
-            </visibility>
+        <Folder id="feat_7">
             <open>
                 0
             </open>
             <description>
                 Description of a folder
             </description>
-            <Folder id="feat_4">
-                <name>
-                    A Nested Folder
-                </name>
-                <visibility>
-                    1
-                </visibility>
+            <visibility>
+                1
+            </visibility>
+            <name>
+                A Folder
+            </name>
+            <Folder id="feat_9">
                 <open>
                     0
                 </open>
                 <description>
                     Description of a nested folder
                 </description>
+                <visibility>
+                    1
+                </visibility>
+                <name>
+                    A Nested Folder
+                </name>
             </Folder>
         </Folder>
-        <Folder id="feat_5">
+        <Folder id="feat_11">
             <Style id="stylesel_0">
                 <LabelStyle>
                     <color>
@@ -77,15 +77,15 @@
                     </ColorMode>
                 </LabelStyle>
                 <IconStyle>
+                    <scale>
+                        1
+                    </scale>
                     <color>
                         ffff00ff
                     </color>
                     <colorMode>
                         normal
                     </colorMode>
-                    <scale>
-                        1
-                    </scale>
                     <heading>
                         45
                     </heading>
@@ -112,15 +112,15 @@
                     </ColorMode>
                 </LabelStyle>
                 <IconStyle>
+                    <scale>
+                        1
+                    </scale>
                     <color>
                         ffff00ff
                     </color>
                     <colorMode>
                         normal
                     </colorMode>
-                    <scale>
-                        1
-                    </scale>
                     <heading>
                         45
                     </heading>
@@ -144,32 +144,23 @@
                     </scale>
                 </LabelStyle>
             </Style>
-            <name>
-                Point Tests
-            </name>
-            <visibility>
-                1
-            </visibility>
             <open>
                 0
             </open>
             <description>
                 Description of Point Folder
             </description>
-            <Placemark id="feat_6">
-                <name>
-                    Cape Town Stadium
-                </name>
-                <visibility>
-                    1
-                </visibility>
+            <visibility>
+                1
+            </visibility>
+            <name>
+                Point Tests
+            </name>
+            <Placemark id="feat_13">
                 <Point id="geom_0">
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         18.411102,-33.903486,0.0
                     </coordinates>
@@ -180,14 +171,14 @@
                 <description>
                     The Cape Town statdium built for the 2010 world cup soccer.
                 </description>
-            </Placemark>
-            <Placemark id="feat_7">
-                <name>
-                    V&amp;A Waterfront
-                </name>
                 <visibility>
                     1
                 </visibility>
+                <name>
+                    Cape Town Stadium
+                </name>
+            </Placemark>
+            <Placemark id="feat_15">
                 <styleUrl>
                     #stylesel_0
                 </styleUrl>
@@ -195,9 +186,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         18.418699,-33.90708,0.0
                     </coordinates>
@@ -208,14 +196,14 @@
                 <description>
                     The V&amp;A Waterfront in Cape Town
                 </description>
-            </Placemark>
-            <Placemark id="feat_8">
-                <name>
-                    Ferris Wheel
-                </name>
                 <visibility>
                     1
                 </visibility>
+                <name>
+                    V&amp;A Waterfront
+                </name>
+            </Placemark>
+            <Placemark id="feat_17">
                 <styleUrl>
                     #stylesel_0
                 </styleUrl>
@@ -223,9 +211,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         18.422892,-33.912937,0.0
                     </coordinates>
@@ -236,14 +221,14 @@
                 <description>
                     Same style as V&amp;A
                 </description>
-            </Placemark>
-            <Placemark id="feat_9">
-                <name>
-                    Signal Hill
-                </name>
                 <visibility>
                     1
                 </visibility>
+                <name>
+                    Ferris Wheel
+                </name>
+            </Placemark>
+            <Placemark id="feat_19">
                 <styleUrl>
                     #stylesel_1
                 </styleUrl>
@@ -251,9 +236,6 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <coordinates>
                         18.399813,-33.92025,0.0
                     </coordinates>
@@ -264,9 +246,15 @@
                 <description>
                     Style from a class
                 </description>
+                <visibility>
+                    1
+                </visibility>
+                <name>
+                    Signal Hill
+                </name>
             </Placemark>
         </Folder>
-        <Folder id="feat_10">
+        <Folder id="feat_21">
             <Style id="stylesel_2">
                 <LineStyle>
                     <color>
@@ -280,32 +268,23 @@
                     </width>
                 </LineStyle>
             </Style>
-            <name>
-                LineString Tests
-            </name>
-            <visibility>
-                1
-            </visibility>
             <open>
                 0
             </open>
             <description>
                 Description of LineString Folder
             </description>
-            <Placemark id="feat_11">
-                <name>
-                    Habour Wall
-                </name>
-                <visibility>
-                    1
-                </visibility>
+            <visibility>
+                1
+            </visibility>
+            <name>
+                LineString Tests
+            </name>
+            <Placemark id="feat_23">
                 <LineString id="geom_4">
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <tessellate>
                         0
                     </tessellate>
@@ -319,14 +298,14 @@
                 <description>
                     The harbour wall.
                 </description>
-            </Placemark>
-            <Placemark id="feat_12">
-                <name>
-                    Rotating Bridge
-                </name>
                 <visibility>
                     1
                 </visibility>
+                <name>
+                    Habour Wall
+                </name>
+            </Placemark>
+            <Placemark id="feat_25">
                 <styleUrl>
                     #stylesel_2
                 </styleUrl>
@@ -350,9 +329,15 @@
                 <description>
                     The bridge rotates!
                 </description>
+                <visibility>
+                    1
+                </visibility>
+                <name>
+                    Rotating Bridge
+                </name>
             </Placemark>
         </Folder>
-        <Folder id="feat_13">
+        <Folder id="feat_27">
             <Style id="stylesel_3">
                 <PolyStyle>
                     <color>
@@ -380,32 +365,23 @@
                     </width>
                 </LineStyle>
             </Style>
-            <name>
-                Polygon Tests
-            </name>
-            <visibility>
-                1
-            </visibility>
             <open>
                 0
             </open>
             <description>
                 Description of Polgon Folder
             </description>
-            <Placemark id="feat_14">
-                <name>
-                    Two Oceans Aquarium
-                </name>
-                <visibility>
-                    1
-                </visibility>
+            <visibility>
+                1
+            </visibility>
+            <name>
+                Polygon Tests
+            </name>
+            <Placemark id="feat_29">
                 <Polygon id="geom_6">
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <tessellate>
                         0
                     </tessellate>
@@ -414,9 +390,6 @@
                             <extrude>
                                 0
                             </extrude>
-                            <altitudeMode>
-                                clampToGround
-                            </altitudeMode>
                             <tessellate>
                                 0
                             </tessellate>
@@ -432,14 +405,14 @@
                 <description>
                     A aquarium with fish.
                 </description>
-            </Placemark>
-            <Placemark id="feat_16">
-                <name>
-                    Protea Hotel
-                </name>
                 <visibility>
                     1
                 </visibility>
+                <name>
+                    Two Oceans Aquarium
+                </name>
+            </Placemark>
+            <Placemark id="feat_33">
                 <styleUrl>
                     #stylesel_3
                 </styleUrl>
@@ -447,20 +420,11 @@
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
-                    <tessellate>
-                        0
-                    </tessellate>
                     <innerBoundaryIs>
                         <LinearRing>
                             <extrude>
                                 0
                             </extrude>
-                            <altitudeMode>
-                                clampToGround
-                            </altitudeMode>
                             <tessellate>
                                 0
                             </tessellate>
@@ -469,14 +433,14 @@
                             </coordinates>
                         </LinearRing>
                     </innerBoundaryIs>
+                    <tessellate>
+                        0
+                    </tessellate>
                     <outerBoundaryIs>
                         <LinearRing>
                             <extrude>
                                 0
                             </extrude>
-                            <altitudeMode>
-                                clampToGround
-                            </altitudeMode>
                             <tessellate>
                                 0
                             </tessellate>
@@ -492,21 +456,18 @@
                 <description>
                     A hotel.
                 </description>
-            </Placemark>
-            <Placemark id="feat_21">
-                <name>
-                    Two Oceans Aquarium2
-                </name>
                 <visibility>
                     1
                 </visibility>
+                <name>
+                    Protea Hotel
+                </name>
+            </Placemark>
+            <Placemark id="feat_43">
                 <Polygon id="geom_13">
                     <extrude>
                         0
                     </extrude>
-                    <altitudeMode>
-                        clampToGround
-                    </altitudeMode>
                     <tessellate>
                         0
                     </tessellate>
@@ -515,9 +476,6 @@
                             <extrude>
                                 0
                             </extrude>
-                            <altitudeMode>
-                                clampToGround
-                            </altitudeMode>
                             <tessellate>
                                 0
                             </tessellate>
@@ -533,6 +491,12 @@
                 <description>
                     A aquarium with fish.
                 </description>
+                <visibility>
+                    1
+                </visibility>
+                <name>
+                    Two Oceans Aquarium2
+                </name>
             </Placemark>
         </Folder>
     </Document>
