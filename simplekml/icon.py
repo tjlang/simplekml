@@ -47,70 +47,79 @@ class Link(Kmlable): # --Document--
                  viewboundscale=None,
                  viewformat=None,
                  httpquery=None):
-        self.href = href
-        self.refreshMode = refreshmode
-        self.refreshInterval = refreshinterval
-        self.viewRefreshMode = viewrefreshmode
-        self.viewRefreshTime = viewrefreshtime
-        self.viewBoundScale = viewboundscale
-        self.viewFormat = viewformat
-        self.httpQuery = httpquery
+        super(Link, self).__init__()
+        self._kml["href"] = href
+        self._kml["refreshMode"] = refreshmode
+        self._kml["refreshInterval"] = refreshinterval
+        self._kml["viewRefreshMode"] = viewrefreshmode
+        self._kml["viewRefreshTime"] = viewrefreshtime
+        self._kml["viewBoundScale"] = viewboundscale
+        self._kml["viewFormat"] = viewformat
+        self._kml["httpQuery"] = httpquery
+        
+    @property
+    def href(self):
+        return self._kml['href']
+    
+    @href.setter
+    def href(self, href):
+        self._kml['href'] = href
 
     @property
     def refreshmode(self):
-        return self.refreshMode
+        return self._kml['refreshMode']
 
     @refreshmode.setter
     def refreshmode(self, refreshmode):
-        self.refreshMode = refreshmode
+        self._kml['refreshMode'] = refreshmode
 
     @property
     def refreshinterval(self):
-        return self.refreshInterval
+        return self._kml['refreshInterval']
 
     @refreshinterval.setter
     def refreshinterval(self, refreshinterval):
-        self.refreshInterval = refreshinterval
+        self._kml['refreshInterval'] = refreshinterval
 
     @property
     def viewrefreshmode(self):
-        return self.viewRefreshMode
+        return self._kml['viewRefreshMode']
 
     @viewrefreshmode.setter
     def viewrefreshmode(self, viewrefreshmode):
-        self.viewRefreshMode = viewrefreshmode
+        self._kml['viewRefreshMode'] = viewrefreshmode
 
     @property
     def viewrefreshtime(self):
-        return self.viewRefreshTime
+        return self._kml['viewRefreshTime']
 
     @viewrefreshtime.setter
     def viewrefreshtime(self, viewrefreshtime):
-        self.viewRefreshTime = viewrefreshtime
+        self._kml['viewRefreshTime'] = viewrefreshtime
 
     @property
     def viewboundscale(self):
-        return self.viewBoundScale
+        return self._kml['viewBoundScale']
 
     @viewboundscale.setter
     def viewboundscale(self, viewboundscale):
-        self.viewBoundScale = viewboundscale
+        self._kml['viewBoundScale'] = viewboundscale
 
     @property
     def viewformat(self):
-        return self.viewFormat
+        return self._kml['viewFormat']
 
     @viewformat.setter
     def viewformat(self, viewformat):
-        self.viewFormat = viewformat
+        self._kml['viewFormat'] = viewformat
 
     @property
     def httpquery(self):
-        return self.httpQuery
+        return self._kml['httpQuery']
 
     @httpquery.setter
     def httpquery(self, httpquery):
-        self.httpQuery = httpquery
+        self._kml['httpQuery'] = httpquery
 
 
 class Icon(Link): # --Document--
@@ -142,10 +151,42 @@ class Icon(Link): # --Document--
                  gxh=None,
                  **kwargs):
         super(Icon, self).__init__(**kwargs)
-        self.gxx = gxx
-        self.gxy = gxy
-        self.gxw = gxw
-        self.gxh = gxh
+        self._kml["gx:x"] = gxx
+        self._kml["gx:y"] = gxy
+        self._kml["gx:w"] = gxw
+        self._kml["gx:h"] = gxh
+        
+    @property
+    def gxx(self):
+        return self._kml['gx:x']
+
+    @gxx.setter
+    def gxx(self, gxx):
+        self._kml['gx:x'] = gxx
+
+    @property
+    def gxy(self):
+        return self._kml['gx:y']
+
+    @gxy.setter
+    def gxy(self, gxy):
+        self._kml['gx:y'] = gxy
+
+    @property
+    def gxw(self):
+        return self._kml['gx:w']
+
+    @gxw.setter
+    def gxw(self, gxw):
+        self._kml['gx:w'] = gxw
+
+    @property
+    def gxh(self):
+        return self._kml['gx:h']
+
+    @gxh.setter
+    def gxh(self, gxh):
+        self._kml['gx:h'] = gxh
 
 
 
@@ -162,5 +203,22 @@ class ItemIcon(Kmlable): # --Document--
     """
 
     def __init__(self, state=None, href=None):
-        self.href = href
-        self.state = state
+        super(ItemIcon, self).__init__()
+        self._kml["href"] = href
+        self._kml["state"] = state
+
+    @property
+    def href(self):
+        return self._kml['href']
+
+    @href.setter
+    def href(self, href):
+        self._kml['href'] = href
+
+    @property
+    def state(self):
+        return self._kml['state']
+
+    @state.setter
+    def state(self, state):
+        self._kml['state'] = state

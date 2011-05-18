@@ -61,6 +61,7 @@ class Kml(object):  # --Document--
     newgroundoverlay()  -- Creates a new [GroundOverlay] and attaches it to the feature
     newscreenoverlay()  -- Creates a new [ScreenOverlay] and attaches it to the feature
     newphotooverlay()   -- Creates a new [PhotoOverlay] and attaches it to the feature
+    kml()               -- Returns the generated kml as a string
     save(path)          -- Saves to a KML file with the given path
     savekmz(path)       -- Saves to a KMZ file with the given path
 
@@ -84,83 +85,91 @@ class Kml(object):  # --Document--
         s = parseString(xmlstr)
         return s.toprettyxml(indent="    ", newl="\n", encoding="UTF-8")
 
+    def kml(self):
+        """Returns a string containing the KML."""
+        Kmlable._setkmz(False)
+        return self._genkml()
+
     def save(self, path):
         """Save the kml to the given file."""
-        Kmlable.setkmz(False)
+        Kmlable._setkmz(False)
         out = self._genkml()
-        with open(path, 'w') as f:
+        f = open(path, 'w')
+        try:
             f.write(str(out))
+        finally:
+            f.close()
 
     def savekmz(self, path):
         """Save the kml as a kmz to the given file."""
-        Kmlable.setkmz()
+        Kmlable._setkmz()
         out = self._genkml()
         kmz = zipfile.ZipFile(path, 'w', zipfile.ZIP_DEFLATED)
         kmz.writestr("doc.kml", out)
-        for image in Kmlable.getimages():
+        for image in Kmlable._getimages():
             kmz.write(image, os.path.join('files', os.path.split(image)[1]))
         kmz.close()
-        Kmlable.clearimages()
+        Kmlable._clearimages()
 
     def newdocument(self, **kwargs):
         """Creates a new Document and attaches it to the feature."""
         doc = Document(**kwargs)
         doc._parent = self
-        self._feature.addfeature(doc)
+        self._feature._addfeature(doc)
         return doc
 
     def newfolder(self, **kwargs):
         """Creates a new Folder and attaches it to the feature."""
         fol = Folder(**kwargs)
         fol._parent = self
-        self._feature.addfeature(fol)
+        self._feature._addfeature(fol)
         return fol
 
     def newpoint(self, **kwargs):
         """Creates a new Point and attaches it to the feature."""
         pnt = Point(**kwargs)
         pnt._parent = self
-        self._feature.addfeature(pnt)
+        self._feature._addfeature(pnt)
         return pnt
 
     def newlinestring(self, **kwargs):
         """Creates a new Linestring and attaches it to the feature."""
         ls = LineString(**kwargs)
         ls._parent = self
-        self._feature.addfeature(ls)
+        self._feature._addfeature(ls)
         return ls
 
     def newpolygon(self, **kwargs):
         """Creates a new Polygon and attaches it to the feature."""
         poly = Polygon(**kwargs)
         poly._parent = self
-        self._feature.addfeature(poly)
+        self._feature._addfeature(poly)
         return poly
 
     def newmultigeometry(self, **kwargs):
         """Creates a new Polygon and attaches it to the feature."""
         multi = MultiGeometry(**kwargs)
         multi._parent = self
-        self._feature.addfeature(multi)
+        self._feature._addfeature(multi)
         return multi
 
     def newgroundoverlay(self, **kwargs):
         """Creates a new GroundOverlay and attaches it to the feature."""
         groundover = GroundOverlay(**kwargs)
         groundover._parent = self
-        self._feature.addfeature(groundover)
+        self._feature._addfeature(groundover)
         return groundover
 
     def newscreenoverlay(self, **kwargs):
         """Creates a new ScreenOverlay and attaches it to the feature."""
         screenover = ScreenOverlay(**kwargs)
         screenover._parent = self
-        self._feature.addfeature(screenover)
+        self._feature._addfeature(screenover)
         return screenover
 
     def newphotooverlay(self, **kwargs):
         """Creates a new PhotoOverlay and attaches it to the feature."""
         photoover = PhotoOverlay(**kwargs)
         photoover._parent = self
-        self._feature.addfeature(photoover)
+        self._feature._addfeature(photoover)
         return photoover

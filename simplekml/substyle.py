@@ -24,17 +24,27 @@ from icon import Icon, ItemIcon
 
 class ColorStyle(Kmlable):
     """A base class for geometry styles."""
+
     def __init__(self, color=None, colormode=ColorMode.normal):
-        self.color = color
-        self.colorMode = colormode
+        super(ColorStyle, self).__init__()
+        self._kml["color"] = color
+        self._kml["colorMode"] = colormode
+
+    @property
+    def color(self):
+        return self._kml['color']
+
+    @color.setter
+    def color(self, color):
+        self._kml['color'] = color
 
     @property
     def colormode(self):
-        return self.ColorMode
+        return self._kml["colorMode"]
 
     @colormode.setter
     def colormode(self, colormode):
-        self.ColorMode = colormode
+        self._kml["colorMode"] = colormode
 
 
 class LineStyle(ColorStyle): # --Document--
@@ -52,6 +62,7 @@ class LineStyle(ColorStyle): # --Document--
     Same as arguments.
 
     """
+
     def __init__(self,
                  width=None,
                  gxoutercolor=None,
@@ -59,34 +70,42 @@ class LineStyle(ColorStyle): # --Document--
                  gxphysicalwidth=None,
                  **kwargs):
         super(LineStyle, self).__init__(**kwargs)
-        self.width = width
-        self.gxouterColor = gxoutercolor
-        self.gxouterWidth = gxouterwidth
-        self.gxphysicalWidth = gxphysicalwidth
+        self._kml["width"] = width
+        self._kml["gx:outerColor"] = gxoutercolor
+        self._kml["gx:outerWidth"] = gxouterwidth
+        self._kml["gx:physicalWidth"] = gxphysicalwidth
+
+    @property
+    def width(self):
+        return self._kml['width']
+
+    @width.setter
+    def width(self, width):
+        self._kml['width'] = width
 
     @property
     def gxoutercolor(self):
-        return self.gxouterColor
+        return self._kml["gx:outerColor"]
 
     @gxoutercolor.setter
     def gxoutercolor(self, gxoutercolor):
-        self.gxouterColor = gxoutercolor
+        self._kml["gx:outerColor"] = gxoutercolor
 
     @property
     def gxouterwidth(self):
-        return self.gxouterWidth
+        return self._kml["gx:outerWidth"]
 
     @gxouterwidth.setter
     def gxouterwidth(self, gxouterwidth):
-        self.gxouterWidth = gxouterwidth
+        self._kml["gx:outerWidth"] = gxouterwidth
 
     @property
     def gxphysicalwidth(self):
-        return self.gxphysicalWidth
+        return self._kml["gx:physicalWidth"]
 
     @gxphysicalwidth.setter
     def gxphysicalwidth(self, gxphysicalwidth):
-        self.gxphysicalWidth = gxphysicalwidth
+        self._kml["gx:physicalWidth"] = gxphysicalwidth
 
 
 class PolyStyle(ColorStyle): # --Document--
@@ -102,10 +121,28 @@ class PolyStyle(ColorStyle): # --Document--
     Same as arguments.
 
     """
+
     def __init__(self, fill=1, outline=1, **kwargs):
         super(PolyStyle, self).__init__(**kwargs)
-        self.fill = fill
-        self.outline = outline
+        self._kml["fill"] = fill
+        self._kml["outline"] = outline
+
+    @property
+    def fill(self):
+        return self._kml['fill']
+
+    @fill.setter
+    def fill(self, fill):
+        self._kml['fill'] = fill
+
+    @property
+    def outline(self):
+        return self._kml['outline']
+
+    @outline.setter
+    def outline(self, outline):
+        self._kml['outline'] = outline
+
 
 class IconStyle(ColorStyle): # --Document--
     """Specifies how icons for point Placemarks are drawn.
@@ -122,30 +159,49 @@ class IconStyle(ColorStyle): # --Document--
     Same as arguments.
 
     """
-    def __init__(self, scale=1, heading=0, icon=Icon(), hotspot=None, **kwargs):
+
+    def __init__(self, scale=1, heading=0, icon=None, hotspot=None, **kwargs):
         super(IconStyle, self).__init__(**kwargs)
-        self.scale = scale
-        self.heading = heading
-        self.Icon = icon
-        self.hotspot_ = hotspot
+        if icon is None:
+            icon = Icon()
+        self._kml["scale"] = scale
+        self._kml["heading"] = heading
+        self._kml["Icon"] = icon
+        self._kml["hotspot_"] = hotspot
+
+    @property
+    def scale(self):
+        return self._kml['scale']
+
+    @scale.setter
+    def scale(self, scale):
+        self._kml['scale'] = scale
+
+    @property
+    def heading(self):
+        return self._kml['heading']
+
+    @heading.setter
+    def heading(self, heading):
+        self._kml['heading'] = heading
 
     @property
     def icon(self):
-        return self.Icon
+        return self._kml["Icon"]
 
     @icon.setter
     def icon(self, icon):
-        self.Icon = icon
+        self._kml["Icon"] = icon
 
     @property
     def hotspot(self):
-        if self.hotspot_ is None:
-            self.hotspot_ = HotSpot()
-        return self.hotspot_
+        if self._kml["hotspot_"] is None:
+            self._kml["hotspot_"] = HotSpot()
+        return self._kml["hotspot_"]
 
     @hotspot.setter
     def hotspot(self, hotspot):
-        self.hotspot_ = hotspot
+        self._kml["hotspot_"] = hotspot
 
 
 class LabelStyle(ColorStyle): # --Document--
@@ -160,13 +216,22 @@ class LabelStyle(ColorStyle): # --Document--
     Same as arguments.
 
     """
+
     def __init__(self, scale=1, **kwargs):
         super(LabelStyle, self).__init__(**kwargs)
-        self.scale = scale
+        self._kml["scale"] = scale
 
-        
+    @property
+    def scale(self):
+        return self._kml['scale']
+
+    @scale.setter
+    def scale(self, scale):
+        self._kml['scale'] = scale
+
+
 class BalloonStyle(Kmlable): # --Document--
-   """Specifies the content and layout of the description balloon.
+    """Specifies the content and layout of the description balloon.
 
     Arguments:
     bgcolor             -- string of KML hex value (default None)
@@ -178,43 +243,54 @@ class BalloonStyle(Kmlable): # --Document--
     Same as arguments.
 
     """
-   def __init__(self, 
-                bgcolor=None,
-                textcolor=None,
-                text=None,
-                displaymode=DisplayMode.default):
-       self.bgColor = bgcolor
-       self.textColor = textcolor
-       self.text = text
-       self.displayMode = displaymode
 
-   @property
-   def bgcolor(self):
-       return self.bgColor
+    def __init__(self,
+                 bgcolor=None,
+                 textcolor=None,
+                 text=None,
+                 displaymode=DisplayMode.default):
+        super(BalloonStyle, self).__init__()
+        self._kml["bgColor"] = bgcolor
+        self._kml["textColor"] = textcolor
+        self._kml["text"] = text
+        self._kml["displayMode"] = displaymode
 
-   @bgcolor.setter
-   def bgcolor(self, bgcolor):
-       self.bgColor = bgcolor
+    @property
+    def bgcolor(self):
+        return self._kml["bgColor"]
 
-   @property
-   def textcolor(self):
-       return self.textColor
+    @bgcolor.setter
+    def bgcolor(self, bgcolor):
+        self._kml["bgColor"] = bgcolor
 
-   @textcolor.setter
-   def textcolor(self, textcolor):
-       self.textColor = textcolor
+    @property
+    def textcolor(self):
+        return self._kml["textColor"]
 
-   @property
-   def displaymode(self):
-       return self.displayMode
+    @textcolor.setter
+    def textcolor(self, textcolor):
+        self._kml["textColor"] = textcolor
 
-   @displaymode.setter
-   def displaymode(self, displaymode):
-       self.displayMode = displaymode
+    @property
+    def text(self):
+        return self._kml['text']
+
+    @text.setter
+    def text(self, text):
+        self._kml['text'] = text
+
+    @property
+    def displaymode(self):
+        return self._kml["displayMode"]
+    
+    
+    @displaymode.setter
+    def displaymode(self, displaymode):
+        self._kml["displayMode"] = displaymode
 
 
 class ListStyle(Kmlable): # --Document--
-   """Specifies the display of the elements style in the navigation bar.
+    """Specifies the display of the elements style in the navigation bar.
 
     Arguments:
     listitemtype        -- string from [ListItemType] constants (default "check")
@@ -225,36 +301,37 @@ class ListStyle(Kmlable): # --Document--
     Same as arguments.
 
     """
-   def __init__(self,
-                listitemtype=ListItemType.check,
-                bgcolor=None,
-                itemicon=None):
-       self.listItemType = listitemtype
-       self.bgColor = bgcolor
-       self.ItemIcon = itemicon
 
-   @property
-   def itemicon(self):
-       if self.ItemIcon is None:
-            self.ItemIcon = ItemIcon()
-       return self.itemicon
+    def __init__(self,
+                 listitemtype=ListItemType.check,
+                 bgcolor=None,
+                 itemicon=None):
+        self._kml["listItemType"] = listitemtype
+        self._kml["bgColor"] = bgcolor
+        self._kml["ItemIcon"] = itemicon
 
-   @itemicon.setter
-   def itemicon(self, itemicon):
-       self.ItemIcon = itemicon
+    @property
+    def itemicon(self):
+        if self._kml["ItemIcon"] is None:
+            self._kml["ItemIcon"] = ItemIcon()
+        return self._kml["itemIcon"]
 
-   @property
-   def listitemtype(self):
-       return self.listItemType
+    @itemicon.setter
+    def itemicon(self, itemicon):
+        self._kml["ItemIcon"] = itemicon
 
-   @listitemtype.setter
-   def listitemtype(self, listitemtype):
-       self.listItemType = listitemtype
+    @property
+    def listitemtype(self):
+        return self._kml["listItemType"]
 
-   @property
-   def bgcolor(self):
-       return self.bgColor
+    @listitemtype.setter
+    def listitemtype(self, listitemtype):
+        self._kml["listItemType"] = listitemtype
 
-   @bgcolor.setter
-   def bgcolor(self, bgcolor):
-       self.bgColor = bgcolor
+    @property
+    def bgcolor(self):
+        return self._kml["bgColor"]
+
+    @bgcolor.setter
+    def bgcolor(self, bgcolor):
+        self._kml["bgColor"] = bgcolor

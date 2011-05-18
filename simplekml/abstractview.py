@@ -34,51 +34,92 @@ class AbstractView(Kmlable): #TODO: gxViewerOptions
                  gxaltitudemode=None,
                  gxtimespan=None,
                  gxtimestamp=None):
-        self.longitude = longitude
-        self.latitude = latitude
-        self.altitude = altitude
-        self.heading = heading
-        self.tilt = tilt
-        self.AltitudeMode = altitudemode
-        self.gxAltitudeMode = gxaltitudemode
-        self.gxTimeSpan = gxtimespan
-        self.gxTimeStamp = gxtimestamp
+        super(AbstractView, self).__init__()
+        self._kml["longitude"] = longitude
+        self._kml["latitude"] = latitude
+        self._kml["altitude"] = altitude
+        self._kml["heading"] = heading
+        self._kml["tilt"] = tilt
+        self._kml["altitudeMode"] = altitudemode
+        self._kml["gx] =AltitudeMode"] = gxaltitudemode
+        self._kml["gx] =TimeSpan"] = gxtimespan
+        self._kml["gx] =TimeStamp"] = gxtimestamp
 
     @property
-    def gxtimestamp(self):
-        if self.gxtimestamp is None:
-            self.gxtimestamp = GxTimeStamp()
-        return self.gxtimestamp
+    def longitude(self):
+        return self._kml['longitude']
 
-    @gxtimestamp.setter
-    def gxtimestamp(self, gxtimestamp):
-        self.gxtimestamp = gxtimestamp
+    @longitude.setter
+    def longitude(self, longitude):
+        self._kml['longitude'] = longitude
 
     @property
-    def gxtimespan(self):
-        if self.gxtimespan is None:
-            self.gxtimespan = GxTimeSpan()
-        return self.gxtimespan
+    def latitude(self):
+        return self._kml['latitude']
 
-    @gxtimespan.setter
-    def gxtimespan(self, gxtimespan):
-        self.gxtimespan = gxtimespan
+    @latitude.setter
+    def latitude(self, latitude):
+        self._kml['latitude'] = latitude
+
+    @property
+    def altitude(self):
+        return self._kml['altitude']
+
+    @altitude.setter
+    def altitude(self, altitude):
+        self._kml['altitude'] = altitude
+
+    @property
+    def heading(self):
+        return self._kml['heading']
+
+    @heading.setter
+    def heading(self, heading):
+        self._kml['heading'] = heading
+
+    @property
+    def tilt(self):
+        return self._kml['tilt']
+
+    @tilt.setter
+    def tilt(self, tilt):
+        self._kml['tilt'] = tilt
 
     @property
     def altitudemode(self):
-        return self.AltitudeMode
+        return self._kml['altitudeMode']
 
     @altitudemode.setter
-    def altitudemode(self, altmode):
-        self.AltitudeMode = altmode
+    def altitudemode(self, altitudemode):
+        self._kml['altitudeMode'] = altitudemode
 
     @property
     def gxaltitudemode(self):
-        return self.gxAltitudeMode
+        return self._kml['gx:altitudeMode']
 
     @gxaltitudemode.setter
     def gxaltitudemode(self, gxaltmode):
-        self.gxAltitudeMode = gxaltmode
+        self._kml['gx:altitudeMode'] = gxaltmode
+
+    @property
+    def gxtimestamp(self):
+        if self._kml['gx:TimeStamp'] is None:
+            self._kml['gx:TimeStamp'] = GxTimeStamp()
+        return self._kml['gx:TimeStamp']
+
+    @gxtimestamp.setter
+    def gxtimestamp(self, gxtimestamp):
+        self._kml['gx:TimeStamp'] = gxtimestamp
+
+    @property
+    def gxtimespan(self):
+        if self._kml['gx:TimeSpan'] is None:
+            self._kml['gx:TimeSpan'] = GxTimeSpan()
+        return self._kml['gx:TimeSpan']
+
+    @gxtimespan.setter
+    def gxtimespan(self, gxtimespan):
+        self._kml['gx:TimeSpan'] = gxtimespan
 
 
 class Camera(AbstractView): # --Document--
@@ -103,7 +144,15 @@ class Camera(AbstractView): # --Document--
 
     def __init__(self, roll=None, **kwargs):
         super(Camera, self).__init__(**kwargs)
-        self.roll = roll
+        self._kml['roll'] = roll
+
+    @property
+    def roll(self):
+        return self._kml['roll']
+
+    @roll.setter
+    def roll(self, roll):
+        self._kml['roll'] = roll
 
 
 class LookAt(AbstractView): # --Document--
@@ -128,6 +177,14 @@ class LookAt(AbstractView): # --Document--
 
     def __init__(self, range=None, **kwargs):
         super(LookAt, self).__init__(**kwargs)
-        self.range = range
+        self._kml['range'] = range
+
+    @property
+    def range(self):
+        return self._kml['range']
+
+    @range.setter
+    def range(self, range):
+        self._kml['range'] = range
 
 

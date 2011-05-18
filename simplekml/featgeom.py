@@ -30,7 +30,7 @@ from timeprimitive import *
 
 class Feature(Kmlable): # TODO:ExtendedData
     """Base class extended by all features."""
-    id = 0
+    _id = 0
     def __init__(self,
                  name=None,
                  visibility=1,
@@ -47,73 +47,207 @@ class Feature(Kmlable): # TODO:ExtendedData
                  timestamp=None,
                  timespan=None,
                  region=None):
-        Feature.id += 1
-        self.name = name
-        self.visibility = visibility
-        self.open = open
-        self._atomauthor = atomauthor
-        self._atomlink = atomlink
-        self.address = address
-        self._xaladdressdetails = xaladdressdetails
-        self.phoneNumber = phonenumber
-        self.description = description
-        self.Camera = None
-        self.camera = camera
-        self.LookAt = None
-        self.lookat = lookat
-        self.styleUrl = None
-        self.snippet_ = snippet
-        self.TimeStamp = timestamp
-        self.TimeSpan = timespan
-        self.Region = region
-        self._id = "feat_{0}".format(Feature.id)
+        Feature._id += 1
+        super(Feature, self).__init__()
+        self._kml['name'] = name
+        self._kml['visibility'] = visibility
+        self._kml['open'] = open
+        self._kml['atom:author'] = atomauthor
+        self._kml['atom:link'] = atomlink
+        self._kml['address'] = address
+        self._kml['xal:AddressDetails'] = xaladdressdetails
+        self._kml['phoneNumber'] = phonenumber
+        self._kml['description'] = description
+        self._kml['Camera'] = camera
+        self._kml['LookAt'] = lookat
+        self._kml['snippet_'] = snippet
+        self._kml['TimeStamp'] = timestamp
+        self._kml['TimeSpan'] = timespan
+        self._kml['Region'] = region
+#        self._kml['Style'] = None
+#        self._kml['StyleMap'] = None
+        self._kml['styleUrl'] = None
+        self._id = "feat_{0}".format(Feature._id)
         self._style = None
         self._stylemap = None
-        Feature.id += 1
         self._features = []
         self._schemas = []
         self._schemasmaps = []
         self._folders = []
 
     @property
+    def name(self):
+        return self._kml['name']
+
+    @name.setter
+    def name(self, name):
+        self._kml['name'] = name
+
+    @property
+    def visibility(self):
+        return self._kml['visibility']
+
+    @visibility.setter
+    def visibility(self, visibility):
+        self._kml['visibility'] = visibility
+
+    @property
+    def open(self):
+        return self._kml['open']
+
+    @open.setter
+    def open(self, open):
+        self._kml['open'] = open
+
+    @property
+    def atomauthor(self):
+        return self._kml['atom:author']
+
+    @atomauthor.setter
+    def atomauthor(self, atomauthor):
+        self._kml['atom:author'] = atomauthor
+
+    @property
+    def atomlink(self):
+        return self._kml['atom:link']
+
+    @atomlink.setter
+    def atomlink(self, atomlink):
+        self._kml['atom:link'] = atomlink
+
+    @property
+    def address(self):
+        return self._kml['address']
+
+    @address.setter
+    def address(self, address):
+        self._kml['address'] = address
+
+    @property
     def xaladdressdetails(self):
-        return self._xaladdressdetails
+        return self._kml['xal:AddressDetails']
 
     @xaladdressdetails.setter
     def xaladdressdetails(self, xaladdressdetails):
-        self._xaladdressdetails = xaladdressdetails
+        self._kml['xal:AddressDetails'] = xaladdressdetails
+
+    @property
+    def phonenumber(self):
+        return self._kml['phoneNumber']
+
+    @phonenumber.setter
+    def phonenumber(self, phonenumber):
+        self._kml['phoneNumber'] = phonenumber
+
+    @property
+    def description(self):
+        return self._kml['description']
+
+    @description.setter
+    def description(self, description):
+        self._kml['description'] = description
+
+    @property
+    def camera(self):
+        if self._kml['Camera'] is None:
+            self._kml['Camera'] = Camera()
+        return self.Camera
+
+    @camera.setter
+    def camera(self, camera):
+        self._kml['Camera'] = camera
+
+    @property
+    def lookat(self):
+        if self.LookAt is None:
+            self.LookAt = LookAt()
+            self.Camera = None
+        return self.LookAt
+
+    @lookat.setter
+    def lookat(self, lookat):
+        self.Camera = None
+        self.LookAt = lookat
+
+    @property
+    def snippet(self):
+        if self._kml['snippet_'] is None:
+            self._kml['snippet_'] = Snippet()
+        return self._kml['snippet_']
+
+    @snippet.setter
+    def snippet(self, snippet):
+        self._kml['snippet_'] = snippet
+
+    @property
+    def timestamp(self):
+        if self._kml['TimeStamp'] is None:
+            self._kml['TimeStamp'] = TimeStamp()
+        return self._kml['TimeStamp']
+
+    @timestamp.setter
+    def timestamp(self, timestamp):
+        self._kml['TimeStamp'] = timestamp
+
+    @property
+    def timespan(self):
+        if self._kml['TimeSpan'] is None:
+            self._kml['TimeSpan'] = TimeSpan()
+        return self._kml['TimeSpan']
+
+    @timespan.setter
+    def timespan(self, timespan):
+        self._kml['TimeSpan'] = timespan
+
+    @property
+    def region(self):
+        if self._kml['Region'] is None:
+            self._kml['Region'] = Region()
+        return self._kml['Region']
+
+    @region.setter
+    def region(self, region):
+        self._kml['Region'] = region
+
+    @property
+    def id(self):
+        return self._id
 
     @property
     def style(self):
         if self._style is None:
             self._style = Style()
-            self.setStyle(self._style)
-            self.addschema(self._style)
+            self._setStyle(self._style)
+            self._addschema(self._style)
         return self._style
 
     @style.setter
     def style(self, style):
-        self.setStyle(style)
-        self.addschema(style)
+        self._setStyle(style)
+        self._addschema(style)
         self._style = style
 
     @property
     def stylemap(self):
         if self._stylemap is None:
             self._stylemap = StyleMap()
-            self.setStyle(self._stylemap)
-            self.addschemamap(self._stylemap)
-        return self._style
+            self._setStyle(self._stylemap)
+            self._addschemamap(self._stylemap)
+        return self._stylemap
 
     @stylemap.setter
     def stylemap(self, stylemap):
-        self.setStyle(stylemap)
-        self.addschemamap(stylemap)
+        self._setStyle(stylemap)
+        self._addschemamap(stylemap)
         self._stylemap = stylemap
 
-    def addschemamap(self, schema):
-        """Attaches the given schema (style) to this feature."""
-        self._schemasmaps.append(schema)
+    @property
+    def styleurl(self):
+        return self._kml['styleUrl']
+
+    @styleurl.setter
+    def styleurl(self, styleurl):
+        self._kml['styleUrl'] = styleurl
 
     @property
     def iconstyle(self):
@@ -163,135 +297,37 @@ class Feature(Kmlable): # TODO:ExtendedData
     def liststyle(self, liststyle):
         self.style.liststyle = liststyle
 
-    def setStyle(self, style):
-        self.styleUrl = "#{0}".format(style.getId())
-
-    @property
-    def styleurl(self):
-        return self.styleUrl
-
-    @styleurl.setter
-    def styleurl(self, styleurl):
-        self.styleUrl = styleurl
-
-    @property
-    def phonenumber(self):
-        return self.phoneNumber
-
-    @phonenumber.setter
-    def phonenumber(self, phonenumber):
-        self.phoneNumber = phonenumber
-        
-    @property
-    def atomauthor(self):
-        return self._atomauthor
-
-    @atomauthor.setter
-    def atomauthor(self, atomauthor):
-        self._atomauthor = atomauthor
-        
-    @property
-    def atomlink(self):
-        return self._atomlink
-
-    @atomlink.setter
-    def atomlink(self, atomlink):
-        self._atomlink = atomlink
-
-    @property
-    def camera(self):
-        if self.Camera is None:
-            self.Camera = Camera()
-            self.LookAt = None
-        return self.Camera
-
-    @camera.setter
-    def camera(self, camera):
-        self.LookAt = None
-        self.Camera = camera
-
-    @property
-    def lookat(self):
-        if self.LookAt is None:
-            self.LookAt = LookAt()
-            self.Camera = None
-        return self.LookAt
-
-    @lookat.setter
-    def lookat(self, lookat):
-        self.Camera = None
-        self.LookAt = lookat
-
-    @property
-    def snippet(self):
-        if self.snippet_ is None:
-            self.snippet_ = Snippet()
-        return self.snippet_
-
-    @snippet.setter
-    def snippet(self, snippet):
-        self.snippet_ = snippet
-
-    @property
-    def timestamp(self):
-        if self.TimeStamp is None:
-            self.TimeStamp = TimeStamp()
-        return self.TimeStamp
-
-    @timestamp.setter
-    def timestamp(self, timestamp):
-        self.TimeStamp = timestamp
-
-    @property
-    def timespan(self):
-        if self.TimeSpan is None:
-            self.TimeSpan = TimeSpan()
-        return self.TimeSpan
-
-    @timespan.setter
-    def timespan(self, timespan):
-        self.TimeSpan = timespan
-
-    @property
-    def region(self):
-        if self.Region is None:
-            self.Region = Region()
-        return self.Region
-
-    @region.setter
-    def region(self, region):
-        self.Region = region
-
-    def addfeature(self, feature):
+    def _addfeature(self, feature):
         """Attaches the given feature to this feature."""
         if isinstance(feature, Geometry):
             self._features.append(feature._placemark)
             feature._parent = self
             if feature._style is not None:
-                self.addschema(feature._style)
+                self._addschema(feature._style)
         else:
             self._features.append(feature)
 
-    def addschema(self, schema):
+    def _addschema(self, schema):
         """Attaches the given schema (style) to this feature."""
         self._schemas.append(schema)
 
+    def _addschemamap(self, schema):
+        """Attaches the given schema (style) to this feature."""
+        self._schemasmaps.append(schema)
+
+    def _setStyle(self, style):
+        self._kml['styleUrl'] = "#{0}".format(style.id)
+
     def __str__(self):
         for schemamap in self._schemasmaps:
-            self.addschema(schemamap.normalstyle)
-            self.addschema(schemamap.highlightstyle)
+            self._addschema(schemamap.normalstyle)
+            self._addschema(schemamap.highlightstyle)
         str = '<{0} id="{1}">'.format(self.__class__.__name__, self._id)
         for schema in self._schemas:
             str += schema.__str__()
         for schemamap in self._schemasmaps:
             str += schemamap.__str__()
         str += super(Feature, self).__str__()
-        if self._atomauthor is not None:
-            str += '<atom:author>{0}</atom:author>'.format(self._atomauthor)
-        if self._atomlink is not None:
-            str += '<atom:link href="{0}"/>'.format(self._atomlink)
-        if self._xaladdressdetails is not None:
-            str += '<xal:AddressDetails>{0}</xal:AddressDetails>'.format(self._xaladdressdetails)
         for folder in self._folders:
             str += folder.__str__()
         for feat in self._features:
@@ -303,49 +339,49 @@ class Feature(Kmlable): # TODO:ExtendedData
         """Creates a new Point and attaches it to the feature."""
         pnt = Point(**kwargs)
         pnt._parent = self
-        self.addfeature(pnt)
+        self._addfeature(pnt)
         return pnt
 
     def newlinestring(self, **kwargs):
         """Creates a new Linestring and attaches it to the feature."""
         ls = LineString(**kwargs)
         ls._parent = self
-        self.addfeature(ls)
+        self._addfeature(ls)
         return ls
 
     def newpolygon(self, **kwargs):
         """Creates a new Polygon and attaches it to the feature."""
         poly = Polygon(**kwargs)
         poly._parent = self
-        self.addfeature(poly)
+        self._addfeature(poly)
         return poly
 
     def newmultigeometry(self, **kwargs):
         """Creates a new MultiGeometry container and attaches it to the feature."""
         multi = MultiGeometry(**kwargs)
         multi._parent = self
-        self.addfeature(multi)
+        self._addfeature(multi)
         return multi
 
     def newgroundoverlay(self, **kwargs):
         """Creates a new GroundOverlay and attaches it to the feature."""
         groundover = GroundOverlay(**kwargs)
         groundover._parent = self
-        self.addfeature(groundover)
+        self._addfeature(groundover)
         return groundover
 
     def newscreenoverlay(self, **kwargs):
         """Creates a new ScreenOverlay and attaches it to the feature."""
         screenover = ScreenOverlay(**kwargs)
         screenover._parent = self
-        self.addfeature(screenover)
+        self._addfeature(screenover)
         return screenover
 
     def newphotooverlay(self, **kwargs):
         """Creates a new PhotoOverlay and attaches it to the feature."""
         photoover = PhotoOverlay(**kwargs)
         photoover._parent = self
-        self.addfeature(photoover)
+        self._addfeature(photoover)
         return photoover
 
 
@@ -358,14 +394,14 @@ class Container(Feature):
         """Creates a new Folder and attaches it to the feature."""
         fol = Folder(**kwargs)
         fol._parent = self
-        self.addfeature(fol)
+        self._addfeature(fol)
         return fol
 
     def newdocument(self, **kwargs):
         """Creates a new Document and attaches it to the feature."""
         doc = Document(**kwargs)
         doc._parent = self
-        self.addfeature(doc)
+        self._addfeature(doc)
         return doc
 
 class Document(Container):  # --Document--
@@ -452,23 +488,24 @@ class Placemark(Feature):
     """A Placemark is a Feature with associated Geometry."""
     def __init__(self, geometry=None, **kwargs):
         super(Placemark, self).__init__(**kwargs)
-        self.Geometry_ = geometry
+        self._kml['Geometry_'] = geometry
 
     @property
     def geometry(self):
-        return self.Geometry_
+        return self._kml['Geometry_']
 
     @geometry.setter
     def geometry(self, geom):
-        self.Geometry_ = geom
+        self._kml['Geometry_'] = geom
 
 
 class Geometry(Kmlable):
     """Base class for all Geometries."""
-    id = 0
+    _id = 0
     def __init__(self, **kwargs): # same arguments as feature
-        self._id = "geom_{0}".format(Geometry.id)
-        Geometry.id += 1
+        super(Geometry, self).__init__()
+        self._id = "geom_{0}".format(Geometry._id)
+        Geometry._id += 1
         self._placemark = Placemark(**kwargs)
         self._placemark.geometry = self
         self._parent = None
@@ -543,24 +580,20 @@ class Geometry(Kmlable):
     def camera(self):
         if self._placemark.Camera is None:
             self._placemark.Camera = Camera()
-            self._placemark.LookAt = None
         return self._placemark.Camera
 
     @camera.setter
     def camera(self, camera):
-        self._placemark.LookAt = None
         self._placemark.Camera = camera
 
     @property
     def lookat(self):
         if self._placemark.LookAt is None:
             self._placemark.LookAt = LookAt()
-            self._placemark.Camera = None
         return self._placemark.LookAt
 
     @lookat.setter
     def lookat(self, lookat):
-        self._placemark.Camera = None
         self._placemark.LookAt = lookat
 
     @property
@@ -599,32 +632,32 @@ class Geometry(Kmlable):
     def style(self):
         if self._style is None:
             self._style = Style()
-            self._placemark.setStyle(self._style)
+            self._placemark._setStyle(self._style)
             if self._parent is not None:
-                self._parent.addschema(self._style)
+                self._parent._addschema(self._style)
         return self._style
 
     @style.setter
     def style(self, style):
-        self._placemark.setStyle(style)
+        self._placemark._setStyle(style)
         if self._parent is not None:
-            self._parent.addschema(style)
+            self._parent._addschema(style)
         self._style = style
 
     @property
     def stylemap(self):
         if self._stylemap is None:
             self._stylemap = StyleMap()
-            self._placemark.setStyle(self._stylemap)
+            self._placemark._setStyle(self._stylemap)
             if self._parent is not None:
-                self._parent.addschemamap(self._stylemap)
+                self._parent._addschemamap(self._stylemap)
         return self._stylemap
 
     @stylemap.setter
     def stylemap(self, stylemap):
-        self._placemark.setStyle(stylemap)
+        self._placemark._setStyle(stylemap)
         if self._parent is not None:
-            self._parent.addschemamap(stylemap)
+            self._parent._addschemamap(stylemap)
         self._stylemap = stylemap
 
     @property
@@ -685,17 +718,17 @@ class PointGeometry(Geometry):
     def __init__(self,
                  coords=(), **kwargs):
         super(PointGeometry, self).__init__(**kwargs)
-        self.coordinates = Coordinates()
-        self.coordinates.addcoordinates(list(coords))
+        self._kml['coordinates'] = Coordinates()
+        self._kml['coordinates'].addcoordinates(list(coords))
 
     @property
     def coords(self):
-        return self.coordinates
+        return self._kml['coordinates']
 
     @coords.setter
     def coords(self, coords):
-        self.coordinates = Coordinates()
-        self.coordinates.addcoordinates(coords)
+        self._kml['coordinates'] = Coordinates()
+        self._kml['coordinates'].addcoordinates(coords)
 
 
 class LinearRing(PointGeometry):  # --Document--
@@ -746,11 +779,11 @@ class LinearRing(PointGeometry):  # --Document--
                  gxaltitudeoffset=None,
                  **kwargs):
         super(LinearRing, self).__init__(list(coords), **kwargs)
-        self.extrude = extrude
-        self.tessellate = tessellate
-        self.altitudeMode = altitudemode
-        self.gxaltitudeMode = gxaltitudemode
-        self.gxaltitudeOffset = gxaltitudeoffset
+        self._kml['extrude'] = extrude
+        self._kml['tessellate'] = tessellate
+        self._kml['altitudeMode'] = altitudemode
+        self._kml['gx:altitudeMode'] = gxaltitudemode
+        self._kml['gx:altitudeOffset'] = gxaltitudeoffset
 
     def __str__(self):
         str = '<LinearRing>'
@@ -759,28 +792,44 @@ class LinearRing(PointGeometry):  # --Document--
         return str
 
     @property
+    def extrude(self):
+        return self._kml['extrude']
+
+    @extrude.setter
+    def extrude(self, extrude):
+        self._kml['extrude'] = extrude
+
+    @property
+    def tessellate(self):
+        return self._kml['tessellate']
+
+    @tessellate.setter
+    def tessellate(self, tessellate):
+        self._kml['tessellate'] = tessellate
+
+    @property
     def altitudemode(self):
-        return self.altitudeMode
+        return self._kml['altitudeMode']
 
     @altitudemode.setter
     def altitudemode(self, mode):
-        self.altitudeMode = mode
+        self._kml['altitudeMode'] = mode
 
     @property
     def gxaltitudemode(self):
-        return self.gxaltitudeMode
+        return self._kml['gx:altitudeMode']
 
     @gxaltitudemode.setter
     def gxaltitudemode(self, mode):
-        self.gxaltitudeMode = mode
+        self._kml['gx:altitudeMode'] = mode
 
     @property
     def gxaltitudeoffset(self):
-        return self.gxaltitudeOffset
+        return self._kml['gx:altitudeOffset']
 
     @gxaltitudeoffset.setter
     def gxaltitudeoffset(self, offset):
-        self.gxaltitudeOffset = offset
+        self._kml['gx:altitudeOffset'] = offset
 
 
 class Point(PointGeometry):  # --Document--
@@ -827,25 +876,33 @@ class Point(PointGeometry):  # --Document--
                  gxaltitudemode=None,
                  **kwargs):
         super(Point, self).__init__(**kwargs)
-        self.extrude = extrude
-        self.altitudeMode = altitudemode
-        self.gxaltitudeMode = gxaltitudemode
+        self._kml['extrude'] = extrude
+        self._kml['altitudeMode'] = altitudemode
+        self._kml['gx:altitudeMode'] = gxaltitudemode
+
+    @property
+    def extrude(self):
+        return self._kml['extrude']
+
+    @extrude.setter
+    def extrude(self, extrude):
+        self._kml['extrude'] = extrude
 
     @property
     def altitudemode(self):
-        return self.altitudeMode
+        return self._kml['altitudeMode']
 
     @altitudemode.setter
     def altitudemode(self, mode):
-        self.altitudeMode = mode
+        self._kml['altitudeMode'] = mode
 
     @property
     def gxaltitudemode(self):
-        return self.gxaltitudeMode
+        return self._kml['gx:altitudeMode']
 
     @gxaltitudemode.setter
     def gxaltitudemode(self, mode):
-        self.gxaltitudeMode = mode
+        self._kml['gx:altitudeMode'] = mode
 
     def __str__(self):
         str = '<Point id="{0}">'.format(self._id)
@@ -903,44 +960,60 @@ class LineString(PointGeometry):  # --Document--
                  gxdraworder=None,
                  **kwargs):
         super(LineString, self).__init__(**kwargs)
-        self.extrude = extrude
-        self.tessellate = tessellate
-        self.altitudeMode = altitudemode
-        self.gxaltitudeMode = gxaltitudemode
-        self.gxaltitudeOffset = gxaltitudeoffset
-        self.gxdrawOrder = gxdraworder
+        self._kml['extrude'] = extrude
+        self._kml['tessellate'] = tessellate
+        self._kml['altitudeMode'] = altitudemode
+        self._kml['gx:altitudeMode'] = gxaltitudemode
+        self._kml['gx:altitudeOffset'] = gxaltitudeoffset
+        self._kml['gx:drawOrder'] = gxdraworder
+
+    @property
+    def extrude(self):
+        return self._kml['extrude']
+
+    @extrude.setter
+    def extrude(self, extrude):
+        self._kml['extrude'] = extrude
+
+    @property
+    def tessellate(self):
+        return self._kml['tessellate']
+
+    @tessellate.setter
+    def tessellate(self, tessellate):
+        self._kml['tessellate'] = tessellate
 
     @property
     def altitudemode(self):
-        return self.altitudeMode
+        return self._kml['altitudeMode']
 
     @altitudemode.setter
     def altitudemode(self, mode):
-        self.altitudeMode = mode
+        self._kml['altitudeMode'] = mode
 
     @property
     def gxaltitudemode(self):
-        return self.gxaltitudeMode
+        return self._kml['gx:altitudeMode']
 
     @gxaltitudemode.setter
     def gxaltitudemode(self, mode):
-        self.gxaltitudeMode = mode
+        self._kml['gx:altitudeMode'] = mode
 
     @property
     def gxaltitudeoffset(self):
-        return self.gxaltitudeOffset
+        return self._kml['gx:altitudeOffset']
 
     @gxaltitudeoffset.setter
     def gxaltitudeoffset(self, offset):
-        self.gxaltitudeOffset = offset
+        self._kml['gx:altitudeOffset'] = offset
 
     @property
     def gxdraworder(self):
-        return self.gxdrawOrder
+        return self._kml['gx:drawOrder']
 
     @gxdraworder.setter
     def gxdraworder(self, gxdraworder):
-        self.gxdrawOrder = gxdraworder
+        self._kml['gx:drawOrder'] = gxdraworder
 
     def __str__(self):
         str = '<LineString id="{0}">'.format(self._id)
@@ -997,28 +1070,45 @@ class Polygon(Geometry):  # --Document--
                  outerboundaryis=(),
                  innerboundaryis=(), **kwargs):
         super(Polygon, self).__init__(**kwargs)
-        self.extrude = extrude
-        self.tessellate = tessellate
-        self.altitudeMode = altitudemode
-        self.gxaltitudeMode = gxaltitudemode
-        self.outerBoundaryIs = LinearRing(list(outerboundaryis))
+        self._kml['extrude'] = extrude
+        self._kml['tessellate'] = tessellate
+        self._kml['altitudeMode'] = altitudemode
+        self._kml['gx:altitudeMode'] = gxaltitudemode
+        self._kml['outerBoundaryIs'] = LinearRing(list(outerboundaryis))
+        self._kml['innerBoundaryIs'] = None
         self.innerboundaryis = list(innerboundaryis)
 
     @property
+    def extrude(self):
+        return self._kml['extrude']
+
+    @extrude.setter
+    def extrude(self, extrude):
+        self._kml['extrude'] = extrude
+
+    @property
+    def tessellate(self):
+        return self._kml['tessellate']
+
+    @tessellate.setter
+    def tessellate(self, tessellate):
+        self._kml['tessellate'] = tessellate
+
+    @property
     def altitudemode(self):
-        return self.altitudeMode
+        return self._kml['altitudeMode']
 
     @altitudemode.setter
     def altitudemode(self, mode):
-        self.altitudeMode = mode
+        self._kml['altitudeMode'] = mode
 
     @property
     def gxaltitudemode(self):
-        return self.gxaltitudeMode
+        return self._kml['gx:altitudeMode']
 
     @gxaltitudemode.setter
     def gxaltitudemode(self, mode):
-        self.gxaltitudeMode = mode
+        self._kml['gx:altitudeMode'] = mode
 
     @property
     def innerboundaryis(self):
@@ -1028,22 +1118,22 @@ class Polygon(Geometry):  # --Document--
     def innerboundaryis(self, rings):
         self._innerboundaryis = []
         if not len(rings):
-            self.innerBoundaryIs = None
+            self._kml['innerBoundaryIs'] = None
         else:
             if type(rings[0]) == type(()):
                 rings = [rings]
-            self.innerBoundaryIs = ''
+            self._kml['innerBoundaryIs'] = ''
             for ring in rings:
-                self.innerBoundaryIs += LinearRing(ring).__str__()
+                self._kml['innerBoundaryIs'] += LinearRing(ring).__str__()
                 self._innerboundaryis.append(LinearRing(ring))
 
     @property
     def outerboundaryis(self):
-        return self.outerBoundaryIs
+        return self._kml['outerBoundaryIs']
 
     @outerboundaryis.setter
     def outerboundaryis(self, coords):
-        self.outerBoundaryIs = LinearRing(coords)
+        self._kml['outerBoundaryIs'] = LinearRing(coords)
 
     def __str__(self):
         str = '<Polygon id="{0}">'.format(self._id)
@@ -1104,45 +1194,45 @@ class MultiGeometry(Geometry):  # --Document--
         """Creates a new Point and attaches it to the MultiGeometry."""
         pnt = Point(**kwargs)
         pnt._parent = self._placemark
-        self.addfeature(pnt)
+        self._addfeature(pnt)
         return pnt
 
     def newlinestring(self, **kwargs):
         """Creates a new Linestring and attaches it to the MultiGeometry."""
         ls = LineString(**kwargs)
         ls._parent = self._placemark
-        self.addfeature(ls)
+        self._addfeature(ls)
         return ls
 
     def newpolygon(self, **kwargs):
         """Creates a new Polygon and attaches it to the MultiGeometry."""
         poly = Polygon(**kwargs)
         poly._parent = self._placemark
-        self.addfeature(poly)
+        self._addfeature(poly)
         return poly
 
     def newgroundoverlay(self, **kwargs):
         """Creates a new GroundOverlay and attaches it to the feature."""
         groundover = GroundOverlay(**kwargs)
         groundover._parent = self._placemark
-        self.addfeature(groundover)
+        self._addfeature(groundover)
         return groundover
 
     def newscreenoverlay(self, **kwargs):
         """Creates a new ScreenOverlay and attaches it to the feature."""
         screenover = ScreenOverlay(**kwargs)
         screenover._parent = self._placemark
-        self.addfeature(screenover)
+        self._addfeature(screenover)
         return screenover
 
     def newphotooverlay(self, **kwargs):
         """Creates a new PhotoOverlay and attaches it to the feature."""
         photoover = PhotoOverlay(**kwargs)
         photoover._parent = self._placemark
-        self.addfeature(photoover)
+        self._addfeature(photoover)
         return photoover
     
-    def addfeature(self, feat):
+    def _addfeature(self, feat):
         """Attaches a feature to this MultiGeometry."""
         self._geometries.append(feat)
 
@@ -1162,27 +1252,35 @@ class Overlay(Feature):
                        icon=None,
                        **kwargs):
         super(Overlay, self).__init__(**kwargs)
-        self.color = color
-        self.drawOrder = draworder
-        self.Icon = icon
+        self._kml['color'] = color
+        self._kml['drawOrder'] = draworder
+        self._kml['Icon'] = icon
+
+    @property
+    def color(self):
+        return self._kml['color']
+
+    @color.setter
+    def color(self, color):
+        self._kml['color'] = color
 
     @property
     def draworder(self):
-        return self.drawOrder
+        return self._kml['drawOrder']
 
     @draworder.setter
     def draworder(self, draworder):
-        self.drawOrder = draworder
+        self._kml['drawOrder'] = draworder
 
     @property
     def icon(self):
-        if self.Icon is None:
-            self.Icon = Icon()
-        return self.Icon
+        if self._kml['Icon'] is None:
+            self._kml['Icon'] = Icon()
+        return self._kml['Icon']
 
     @icon.setter
     def icon(self, icon):
-        self.Icon = icon
+        self._kml['Icon'] = icon
 
 
 class GroundOverlay(Overlay):  # --Document--
@@ -1229,48 +1327,55 @@ class GroundOverlay(Overlay):  # --Document--
                        gxlatlonquad=None,
                        **kwargs):
         super(GroundOverlay, self).__init__(**kwargs)
-        self.altitude = altitude
-        self.altitudeMode = altitudemode
-        self.gxaltitudeMode = gxaltitudemode
-        self.LatLonBox = latlonbox
-        self.gxLatLonQuad = gxlatlonquad
+        self._kml['altitude'] = altitude
+        self._kml['altitudeMode'] = altitudemode
+        self._kml['gx:altitudeMode'] = gxaltitudemode
+        self._kml['LatLonBox'] = latlonbox
+        self._kml['gx:LatLonQuad'] = gxlatlonquad
+
+    @property
+    def altitude(self):
+        return self._kml['altitude']
+
+    @altitude.setter
+    def altitude(self, altitude):
+        self._kml['altitude'] = altitude
 
     @property
     def altitudemode(self):
-        return self.altitudeMode
+        return self._kml['altitudeMode']
 
     @altitudemode.setter
     def altitudemode(self, altitudemode):
-        self.altitudeMode = altitudemode
+        self._kml['altitudeMode'] = altitudemode
 
     @property
     def gxaltitudemode(self):
-        return self.gxaltitudeMode
+        return self._kml['gx:altitudeMode']
 
     @gxaltitudemode.setter
     def gxaltitudemode(self, gxaltitudemode):
-        self.gxaltitudeMode = gxaltitudemode
+        self._kml['gx:altitudeMode'] = gxaltitudemode
 
     @property
     def latlonbox(self):
-        if self.LatLonBox is None:
-            self.LatLonBox = LatLonBox()
-            self.gxLatLonBox = None
-        return self.LatLonBox
+        if self._kml['LatLonBox'] is None:
+            self._kml['LatLonBox'] = LatLonBox()
+        return self._kml['LatLonBox']
 
     @latlonbox.setter
     def latlonbox(self, latlonbox):
-        self.LatLonBox = latlonbox
+        self._kml['LatLonBox'] = latlonbox
 
     @property
     def gxlatlonquad(self):
-        if self.gxLatLonQuad is None:
-            self.gxLatLonQuad = GxLatLonQuad()
-        return self.gxLatLonQuad
+        if self._kml['gx:LatLonQuad'] is None:
+            self._kml['gx:LatLonQuad'] = GxLatLonQuad()
+        return self._kml['gx:LatLonQuad']
 
     @gxlatlonquad.setter
     def gxlatlonquad(self, gxlatlonquad):
-        self.GxLatLonQuad = gxlatlonquad
+        self._kml['gx:LatLonQuad'] = gxlatlonquad
 
 
 class ScreenOverlay(Overlay):   # --Document--
@@ -1317,51 +1422,59 @@ class ScreenOverlay(Overlay):   # --Document--
                        rotation=None,
                        **kwargs):
         super(ScreenOverlay, self).__init__(**kwargs)
-        self.rotation = rotation
-        self.overlayxy_ = overlayxy
-        self.screenxy_ = screenxy
-        self.rotationxy_ = rotationxy
-        self.size_ = size
+        self._kml['rotation'] =rotation
+        self._kml['overlayXY_'] = overlayxy
+        self._kml['screenXY_'] = screenxy
+        self._kml['rotationXY_'] = rotationxy
+        self._kml['size_'] = size
+
+    @property
+    def rotation(self):
+        return self._kml['rotation']
+
+    @rotation.setter
+    def rotation(self, rotation):
+        self._kml['rotation'] = rotation
 
     @property
     def overlayxy(self):
-        if self.overlayxy_ is None:
-            self.overlayxy_ = OverlayXY()
-        return self.overlayxy_
+        if self._kml['overlayXY_'] is None:
+            self._kml['overlayXY_'] = OverlayXY()
+        return self._kml['overlayXY_']
 
     @overlayxy.setter
     def overlayxy(self, overlayxy):
-        self.overlayxy_ = overlayxy
+        self._kml['overlayXY_'] = overlayxy
 
     @property
     def screenxy(self):
-        if self.screenxy_ is None:
-            self.screenxy_ = ScreenXY()
-        return self.screenxy_
+        if self._kml['screenXY_'] is None:
+            self._kml['screenXY_'] = ScreenXY()
+        return self._kml['screenXY_']
 
     @screenxy.setter
     def screenxy(self, screenxy):
-        self.screenxy_ = screenxy
+        self._kml['screenXY_'] = screenxy
 
     @property
     def rotationxy(self):
-        if self.rotationxy_ is None:
-            self.rotationxy_ = RotationXY()
-        return self.rotationxy_
+        if self._kml['rotationXY_'] is None:
+            self._kml['rotationXY_'] = RotationXY()
+        return self._kml['rotationXY_']
 
     @rotationxy.setter
     def rotationxy(self, rotationxy):
-        self.rotationxy_ = rotationxy
+        self._kml['rotationXY_'] = rotationxy
 
     @property
     def size(self):
-        if self.size_ is None:
-            self.size_ = Size()
-        return self.size_
+        if self._kml['size_'] is None:
+            self._kml['size_'] = Size()
+        return self._kml['size_']
 
     @size.setter
     def size(self, size):
-        self.size_ = size
+        self._kml['size_'] = size
 
 
 class PhotoOverlay(Overlay):  # --Document--
@@ -1395,6 +1508,7 @@ class PhotoOverlay(Overlay):  # --Document--
     Properties:
     Same as arguments, with the following additional properties:
     style               -- [Style] (default None)
+    iconstyle           -- [IconStyle] (default None)
     liststyle           -- [ListStyle] (default None)
     balloonstyle        -- [BalloonStyle] (default None)
     placemark           -- [Placemark (default [Placemark], read-only)
@@ -1408,39 +1522,55 @@ class PhotoOverlay(Overlay):  # --Document--
                        shape=None,
                        **kwargs):
         super(PhotoOverlay, self).__init__(**kwargs)
-        self.rotation = rotation
-        self.ViewVolume = viewvolume
-        self.ImagePyramid = imagepyramid
-        self.point_ = point
-        self.shape = shape
+        self._kml['rotation'] = rotation
+        self._kml['ViewVolume'] = viewvolume
+        self._kml['ImagePyramid'] = imagepyramid
+        self._kml['point_'] = point
+        self._kml['shape'] = shape
+
+    @property
+    def rotation(self):
+        return self._kml['rotation']
+
+    @rotation.setter
+    def rotation(self, rotation):
+        self._kml['rotation'] = rotation
 
     @property
     def viewvolume(self):
-        if self.ViewVolume is None:
-            self.ViewVolume = ViewVolume()
-        return self.ViewVolume
+        if self._kml['ViewVolume'] is None:
+            self._kml['ViewVolume'] = ViewVolume()
+        return self._kml['ViewVolume']
 
     @viewvolume.setter
     def viewvolume(self, viewvolume):
-        self.ViewVolume = viewvolume
+        self._kml['ViewVolume'] = viewvolume
 
     @property
     def imagepyramid(self):
-        if self.ImagePyramid is None:
-            self.ImagePyramid = ImagePyramid()
-        return self.ImagePyramid
+        if self._kml['ImagePyramid'] is None:
+            self._kml['ImagePyramid'] = ImagePyramid()
+        return self._kml['ImagePyramid']
 
     @imagepyramid.setter
     def imagepyramid(self, imagepyramid):
-        self.ImagePyramid = imagepyramid
+        self._kml['ImagePyramid'] = imagepyramid
 
     @property
     def point(self):
-        if self.point_ is None:
-            self.point_ = Point()
-        return self.point_
+        if self._kml['point_'] is None:
+            self._kml['point_'] = Point()
+        return self._kml['point_']
 
     @point.setter
     def point(self, point):
-        self.point_ = point
+        self._kml['point_'] = point
+
+    @property
+    def shape(self):
+        return self._kml['shape']
+
+    @shape.setter
+    def shape(self, shape):
+        self._kml['shape'] = shape
     

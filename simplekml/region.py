@@ -29,10 +29,43 @@ class Box(Kmlable):
                  south=None,
                  east=None,
                  west=None):
-        self.north = north
-        self.south = south
-        self.east = east
-        self.west = west
+        super(Box, self).__init__()
+        self._kml["north"] = north
+        self._kml["south"] = south
+        self._kml["east"] = east
+        self._kml["west"] = west
+        
+    @property
+    def north(self):
+        return self._kml['north']
+    
+    @north.setter
+    def north(self, north):
+        self._kml['north'] = north
+        
+    @property
+    def south(self):
+        return self._kml['south']
+    
+    @south.setter
+    def south(self, south):
+        self._kml['south'] = south
+        
+    @property
+    def east(self):
+        return self._kml['east']
+    
+    @east.setter
+    def east(self, east):
+        self._kml['east'] = east
+        
+    @property
+    def west(self):
+        return self._kml['west']
+    
+    @west.setter
+    def west(self, west):
+        self._kml['west'] = west
 
 
 class LatLonBox(Kmlable): # --Document--
@@ -51,7 +84,15 @@ class LatLonBox(Kmlable): # --Document--
     """
     def __init__(self, rotation=None, **kwargs):
         super(LatLonBox, self).__init__(**kwargs)
-        self.rotation = rotation
+        self._kml['rotation'] = rotation
+        
+    @property
+    def rotation(self):
+        return self._kml['rotation']
+    
+    @rotation.setter
+    def rotation(self, rotation):
+        self._kml['rotation'] = rotation
 
 
 class LatLonAltBox(Box): # --Document--
@@ -75,33 +116,33 @@ class LatLonAltBox(Box): # --Document--
                  altitudemode=AltitudeMode.clamptoground,
                  **kwargs):
         super(LatLonAltBox, self).__init__(**kwargs)
-        self.minAltitude = minaltitude
-        self.maxAltitude = maxaltitude
-        self.altitudeMode = altitudemode
+        self._kml["minAltitude"] = minaltitude
+        self._kml["maxAltitude"] = maxaltitude
+        self._kml["altitudeMode"] = altitudemode
 
     @property
     def minaltitude(self):
-        return self.minAltitude
+        return self._kml["minAltitude"]
 
     @minaltitude.setter
     def minaltitude(self, minAltitude):
-        self.minAltitude = minAltitude
+        self._kml["minAltitude"] = minAltitude
 
     @property
     def maxaltitude(self):
-        return self.maxAltitude
+        return self._kml["maxAltitude"]
 
     @maxaltitude.setter
     def maxaltitude(self, maxaltitude):
-        self.maxAltitude = maxaltitude
+        self._kml["maxAltitude"] = maxaltitude
 
     @property
     def altitudemode(self):
-        return self.altitudeMode
+        return self._kml["altitudeMode"]
 
     @altitudemode.setter
     def altitudemode(self, altitudemode):
-        self.altitudeMode = altitudemode
+        self._kml["altitudeMode"] = altitudemode
 
 
 class Lod(Kmlable): # --Document--
@@ -123,42 +164,43 @@ class Lod(Kmlable): # --Document--
                  maxlodpixels=-1,
                  minfadeextent=0,
                  maxfadeextent=0):
-        self.minLodPixels = minlodpixels
-        self.maxLodPixels = maxlodpixels
-        self.minFadeExtent = minfadeextent
-        self.maxFadeExtent = maxfadeextent
+        super(Lod, self).__init__()
+        self._kml["minLodPixels"] = minlodpixels
+        self._kml["maxLodPixels"] = maxlodpixels
+        self._kml["minFadeExtent"] = minfadeextent
+        self._kml["maxFadeExtent"] = maxfadeextent
 
     @property
     def minlodpixels(self):
-        return self.minLodPixels
+        return self._kml["minLodPixels"]
 
     @minlodpixels.setter
     def minlodpixels(self, minlodpixels):
-        self.minLodPixels = minlodpixels
+        self._kml["minLodPixels"] = minlodpixels
 
     @property
     def maxlodpixels(self):
-        return self.maxLodPixels
+        return self._kml["maxLodPixels"]
 
     @maxlodpixels.setter
     def maxlodpixels(self, maxlodpixels):
-        self.maxLodPixels = maxlodpixels
+        self._kml["maxLodPixels"] = maxlodpixels
 
     @property
     def minfadeextent(self):
-        return self.minFadeExtent
+        return self._kml["minFadeExtent"]
 
     @minfadeextent.setter
     def minfadeextent(self, minfadeextent):
-        self.minFadeExtent = minfadeextent
+        self._kml["minFadeExtent"] = minfadeextent
 
     @property
     def maxfadeextent(self):
-        return self.maxFadeExtent
+        return self._kml["maxFadeExtent"]
 
     @maxfadeextent.setter
     def maxfadeextent(self, maxfadeextent):
-        self.maxFadeExtent = maxfadeextent
+        self._kml["maxFadeExtent"] = maxfadeextent
 
 
 class GxLatLonQuad(Kmlable): # --Document--
@@ -172,19 +214,21 @@ class GxLatLonQuad(Kmlable): # --Document--
 
     """
     def __init__(self, coords=None):
+        super(GxLatLonQuad, self).__init__()
         self._coords = None
-        self.coordinates = coords
+        self._kml["coordinates"] = coords
 
     @property
     def coords(self):
-        return self.coordinates
+        return self._coords
 
     @coords.setter
     def coords(self, coords):
-        self.coordinates = ''
+        self._kml["coordinates"] = ''
+        self._coords = coords
         for coord in coords:
-            self.coordinates += "{0},{1} ".format(coord[0], coord[1])
-        self.coordinates = self.coordinates[:-1]
+            self._kml["coordinates"] += "{0},{1} ".format(coord[0], coord[1])
+        self._kml["coordinates"] = self._kml["coordinates"][:-1]
 
 
 class Region(Kmlable): # --Document--
@@ -199,21 +243,22 @@ class Region(Kmlable): # --Document--
 
     """
     def __init__(self, latlonaltbox=LatLonAltBox(), lod=Lod()):
-        self.LatLonAltBox = latlonaltbox
-        self.Lod = lod
+        super(Region, self).__init__()
+        self._kml["LatLonAltBox"] = latlonaltbox
+        self._kml["Lod"] = lod
 
     @property
     def latlonaltbox(self):
-        return self.LatLonAltBox
+        return self._kml["LatLonAltBox"]
 
     @latlonaltbox.setter
     def latlonaltbox(self, latlonaltbox):
-        self.LatLonAltBox = latlonaltbox
+        self._kml["LatLonAltBox"] = latlonaltbox
 
     @property
     def lod(self):
-        return self.Lod
+        return self._kml["Lod"]
 
     @lod.setter
     def lod(self, lod):
-        self.Lod = lod
+        self._kml["Lod"] = lod

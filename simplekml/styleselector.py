@@ -23,12 +23,14 @@ from substyle import *
 
 class StyleSelector(Kmlable):
     """Base style class, extended by Style."""
-    id = 0
+    _id = 0
     def __init__(self):
-        self._id = "stylesel_{0}".format(StyleSelector.id)
-        StyleSelector.id += 1
+        super(StyleSelector, self).__init__()
+        self._id = "stylesel_{0}".format(StyleSelector._id)
+        StyleSelector._id += 1
 
-    def getId(self):
+    @property
+    def id(self):
         return self._id
 
 
@@ -55,12 +57,12 @@ class Style(StyleSelector): # --Document--
                  balloonstyle=None,
                  liststyle=None):
         super(Style, self).__init__()
-        self.IconStyle = iconstyle
-        self.LabelStyle = labelstyle
-        self.LineStyle = linestyle
-        self.PolyStyle = polystyle
-        self.BalloonStyle = balloonstyle    #not implemented
-        self.ListStyle = liststyle   #not implemented
+        self._kml["IconStyle"] = iconstyle
+        self._kml["LabelStyle"] = labelstyle
+        self._kml["LineStyle"] = linestyle
+        self._kml["PolyStyle"] = polystyle
+        self._kml["BalloonStyle"] = balloonstyle
+        self._kml["ListStyle"] = liststyle
 
     def __str__(self):
         str = '<Style id="{0}">'.format(self._id)
@@ -70,63 +72,63 @@ class Style(StyleSelector): # --Document--
       
     @property
     def iconstyle(self):
-        if self.IconStyle is None:
-            self.IconStyle = IconStyle()
-        return self.IconStyle
+        if self._kml["IconStyle"] is None:
+            self._kml["IconStyle"] = IconStyle()
+        return self._kml["IconStyle"]
         
     @iconstyle.setter
     def iconstyle(self, iconstyle):
-        self.IconStyle = iconstyle
+        self._kml["IconStyle"] = iconstyle
         
     @property
     def labelstyle(self):
-        if self.LabelStyle is None:
-            self.LabelStyle = LabelStyle()
-        return self.LabelStyle
+        if self._kml["LabelStyle"] is None:
+            self._kml["LabelStyle"] = LabelStyle()
+        return self._kml["LabelStyle"]
 
     @labelstyle.setter
     def labelstyle(self, labelstyle):
-        self.LabelStyle = labelstyle
+        self._kml["LabelStyle"] = labelstyle
         
     @property
     def linestyle(self):
-        if self.LineStyle is None:
-            self.LineStyle = LineStyle()
-        return self.LineStyle
+        if self._kml["LineStyle"] is None:
+            self._kml["LineStyle"] = LineStyle()
+        return self._kml["LineStyle"]
         
     @linestyle.setter
     def linestyle(self, linestyle):
-        self.LineStyle = linestyle
+        self._kml["LineStyle"] = linestyle
 
     @property
     def polystyle(self):
-        if self.PolyStyle is None:
-            self.PolyStyle = PolyStyle()
-        return self.PolyStyle
+        if self._kml["PolyStyle"] is None:
+            self._kml["PolyStyle"] = PolyStyle()
+        return self._kml["PolyStyle"]
         
     @polystyle.setter
     def polystyle(self, polystyle):
-        self.PolyStyle = polystyle
+        self._kml["PolyStyle"] = polystyle
         
     @property
     def balloonstyle(self):
-        if self.BalloonStyle is None:
-            self.BalloonStyle = BalloonStyle()
-        return self.BalloonStyle
+        if self._kml["BalloonStyle"] is None:
+            self._kml["BalloonStyle"] = BalloonStyle()
+        return self._kml["BalloonStyle"]
 
     @balloonstyle.setter
     def balloonstyle(self, balloonstyle):
-        self.BalloonStyle = balloonstyle
+        self._kml["BalloonStyle"] = balloonstyle
 
     @property
     def liststyle(self):
-        if self.ListStyle is None:
-            self.ListStyle = ListStyle()
-        return self.ListStyle
+        if self._kml["ListStyle"] is None:
+            self._kml["ListStyle"] = ListStyle()
+        return self._kml["ListStyle"]
 
     @liststyle.setter
     def liststyle(self, liststyle):
-        self.ListStyle = liststyle
+        self._kml["ListStyle"] = liststyle
 
 
 class StyleMap(StyleSelector): # --Document--

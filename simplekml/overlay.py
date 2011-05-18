@@ -44,43 +44,52 @@ class ViewVolume(Kmlable): # --Document--
                  bottomfov=0,
                  topfov=0,
                  near=0):
-        self.leftFov = leftfov
-        self.rightFov = rightfov
-        self.bottomFov = bottomfov
-        self.topFov = topfov
-        self.near = near
+        super(ViewVolume, self).__init__()
+        self._kml["leftFov"] = leftfov
+        self._kml["rightFov"] = rightfov
+        self._kml["bottomFov"] = bottomfov
+        self._kml["topFov"] = topfov
+        self._kml["near"] = near
 
     @property
     def leftfov(self):
-        return self.leftFov
-
+        return self._kml['leftFov']
+    
     @leftfov.setter
     def leftfov(self, leftfov):
-        self.leftFov = leftfov
+        self._kml['leftFov'] = leftfov
 
     @property
     def rightfov(self):
-        return self.rightFov
-
+        return self._kml['rightFov']
+    
     @rightfov.setter
     def rightfov(self, rightfov):
-        self.rightFov = rightfov
+        self._kml['rightFov'] = rightfov
 
     @property
     def topfov(self):
-        return self.topFov
-
+        return self._kml['topFov']
+    
     @topfov.setter
-    def topfov(self, topfov):
-        self.topFov = topfov
+    def topfov(self, topFov):
+        self._kml['topFov'] = topFov
 
     @property
     def bottomfov(self):
-        return self.bottomFov
-
+        return self._kml['bottomFov']
+    
     @bottomfov.setter
-    def bottomfov(self, bottomfov):
-        self.bottomFov = bottomfov
+    def bottomfov(self, bottomFov):
+        self._kml['bottomFov'] = bottomFov
+        
+    @property
+    def near(self):
+        return self._kml['near']
+    
+    @near.setter
+    def near(self, near):
+        self._kml['near'] = near
 
 
 class ImagePyramid(Kmlable): # --Document--
@@ -102,40 +111,41 @@ class ImagePyramid(Kmlable): # --Document--
                  maxwidth=0,
                  maxheight=0,
                  gridorigin=GridOrigin.lowerleft):
-        self.titleSize = titlesize
-        self.maxWidth = maxwidth
-        self.maxHeight = maxheight
-        self.gridOrigin = gridorigin
+        super(ImagePyramid, self).__init__()
+        self._kml["titleSize"] = titlesize
+        self._kml["maxWidth"] = maxwidth
+        self._kml["maxHeight"] = maxheight
+        self._kml["gridOrigin"] = gridorigin
 
     @property
     def titlesize(self):
-        return self.titleSize
+        return self._kml["titleSize"]
 
     @titlesize.setter
     def titlesize(self, titlesize):
-        self.titleSize = titlesize
+        self._kml["titleSize"] = titlesize
 
     @property
     def maxwidth(self):
-        return self.maxWidth
+        return self._kml["maxWidth"]
 
     @maxwidth.setter
     def maxwidth(self, maxwidth):
-        self.maxWidth = maxwidth
+        self._kml["maxWidth"] = maxwidth
 
     @property
     def maxheight(self):
-        return self.maxHeight
+        return self._kml["maxHeight"]
 
     @maxheight.setter
     def maxheight(self, maxheight):
-        self.maxHeight = maxheight
+        self._kml["maxHeight"] = maxheight
 
     @property
     def gridorigin(self):
-        return self.gridOrigin
+        return self._kml["gridOrigin"]
 
     @gridorigin.setter
     def gridorigin(self, gridorigin):
-        self.gridOrigin = gridorigin
+        self._kml["gridOrigin"] = gridorigin
 

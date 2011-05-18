@@ -32,8 +32,25 @@ class TimeSpan(Kmlable): # --Document--
 
     """
     def __init__(self, begin=None, end=None):
-        self.begin = begin
-        self.end = end
+        super(TimeSpan, self).__init__()
+        self._kml["begin"] = begin
+        self._kml["end"] = end
+
+    @property
+    def begin(self):
+        return self._kml['begin']
+
+    @begin.setter
+    def begin(self, begin):
+        self._kml['begin'] = begin
+
+    @property
+    def end(self):
+        return self._kml['end']
+
+    @end.setter
+    def end(self, end):
+        self._kml['end'] = end
 
 
 class GxTimeSpan(TimeSpan): # --Document--
@@ -62,7 +79,16 @@ class TimeStamp(Kmlable): # --Document--
 
     """
     def __init__(self, when=None):
-        self.when = when
+        super(TimeStamp, self).__init__()
+        self._kml["when"] = when
+
+    @property
+    def when(self):
+        return self._kml['when']
+
+    @when.setter
+    def when(self, when):
+        self._kml['when'] = when
 
 
 class GxTimeStamp(TimeStamp): # --Document--

@@ -23,46 +23,46 @@ import cgi
 
 class Kmlable(object):
     """Enables a subclass to be converted into KML."""
-    images = []
-    kmz = False
+    _images = []
+    _kmz = False
+
+    def __init__(self):
+        self._kml = {}
 
     def __str__(self):
         str = ""
-        for var, val in vars(self).items():
-            if not var.startswith("_"):  # Exclude all variables with a leading underscore
-                if val is not None:  # Exclude all variables that are None
-                    if var.endswith("_"):
-                        str += "{0}".format(val)  # Use the variable's __str__ as is
-                    else:
-                        if var in ['name', 'description', 'text']: # Parse value for HTML and convert
-                            val = Kmlable.chrconvert(val)
-                        elif var == 'href' and os.path.exists(val) and Kmlable.kmz == True: # Check for local images
-                            Kmlable.addimage(val)
-                            val = os.path.join('files', os.path.split(val)[1])
-                        elif var.startswith('gx'): # Change all variables starting with gx to include the colon
-                            var = 'gx:{0}'.format(var[2:])
-                        str += "<{0}>{1}</{0}>".format(var, val)  # Enclose the variable's __str__ with the variables name
+        for var, val in self._kml.items():
+            if val is not None:  # Exclude all variables that are None
+                if var.endswith("_"):
+                    str += "{0}".format(val)  # Use the variable's __str__ as is
+                else:
+                    if var in ['name', 'description', 'text']: # Parse value for HTML and convert
+                        val = Kmlable._chrconvert(val)
+                    elif var == 'href' and os.path.exists(val) and Kmlable._kmz == True: # Check for local images
+                        Kmlable._addimage(val)
+                        val = os.path.join('files', os.path.split(val)[1])
+                    str += "<{0}>{1}</{0}>".format(var, val)  # Enclose the variable's __str__ with the variables name
         return str
 
     @classmethod
-    def chrconvert(cls, text):
+    def _chrconvert(cls, text):
         return cgi.escape(text)
 
     @classmethod
-    def addimage(cls, image):
-        Kmlable.images.append(image)
+    def _addimage(cls, image):
+        Kmlable._images.append(image)
 
     @classmethod
-    def getimages(cls):
-        return set(Kmlable.images)
+    def _getimages(cls):
+        return set(Kmlable._images)
 
     @classmethod
-    def clearimages(cls):
-        Kmlable.images = []
+    def _clearimages(cls):
+        Kmlable._images = []
 
     @classmethod
-    def setkmz(cls, kmz=True):
-        Kmlable.kmz = kmz
+    def _setkmz(cls, kmz=True):
+        Kmlable._kmz = kmz
 
 
 class Vector2(object):
@@ -130,7 +130,6 @@ class RotationXY(Vector2): # --Document--
     """
 
     def __init__(self, **kwargs):
-
         super(RotationXY, self).__init__(**kwargs)
 
 
@@ -184,15 +183,7 @@ class Snippet(object): # --Document--
 
     def __init__(self, content='', maxlines=2):
         self.content = content
-        self.maxLines = maxlines
-
-    @property
-    def maxlines(self):
-        return self.maxLines
-
-    @maxlines.setter
-    def maxlines(self, maxlines):
-        self.maxLines = maxlines
+        self.maxlines = maxlines
         
     def __str__(self):
-        return '<Snippet maxLines="{0}">{1}</Snippet>'.format(self.maxLines, self.content)
+        return '<Snippet maxLines="{0}">{1}</Snippet>'.format(self.maxlines, self.content)

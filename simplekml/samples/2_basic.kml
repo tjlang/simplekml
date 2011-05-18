@@ -1,66 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:xal="urn:oasis:names:tc:ciq:xsdschema:xAL:2.0">
     <Document id="feat_1">
-        <open>
-            0
-        </open>
         <visibility>
             1
         </visibility>
-        <Document id="feat_3">
-            <open>
-                0
-            </open>
-            <visibility>
-                1
-            </visibility>
+        <open>
+            0
+        </open>
+        <Document id="feat_2">
             <name>
                 A Document
             </name>
-            <Document id="feat_5">
+            <visibility>
+                1
+            </visibility>
+            <open>
+                0
+            </open>
+            <Document id="feat_3">
+                <name>
+                    A Nested Document
+                </name>
+                <visibility>
+                    1
+                </visibility>
                 <open>
                     0
                 </open>
                 <description>
                     This is the nested document's description.
                 </description>
-                <visibility>
-                    1
-                </visibility>
-                <name>
-                    A Nested Document
-                </name>
             </Document>
         </Document>
-        <Folder id="feat_7">
+        <Folder id="feat_4">
+            <name>
+                A Folder
+            </name>
+            <visibility>
+                1
+            </visibility>
             <open>
                 0
             </open>
             <description>
                 Description of a folder
             </description>
-            <visibility>
-                1
-            </visibility>
-            <name>
-                A Folder
-            </name>
-            <Folder id="feat_9">
+            <Folder id="feat_5">
+                <name>
+                    A Nested Folder
+                </name>
+                <visibility>
+                    1
+                </visibility>
                 <open>
                     0
                 </open>
                 <description>
                     Description of a nested folder
                 </description>
-                <visibility>
-                    1
-                </visibility>
-                <name>
-                    A Nested Folder
-                </name>
             </Folder>
         </Folder>
-        <Folder id="feat_11">
+        <Folder id="feat_6">
             <Style id="stylesel_0">
                 <LabelStyle>
                     <color>
@@ -72,9 +72,6 @@
                     <scale>
                         2
                     </scale>
-                    <ColorMode>
-                        random
-                    </ColorMode>
                 </LabelStyle>
                 <IconStyle>
                     <scale>
@@ -107,9 +104,6 @@
                     <scale>
                         2
                     </scale>
-                    <ColorMode>
-                        random
-                    </ColorMode>
                 </LabelStyle>
                 <IconStyle>
                     <scale>
@@ -144,19 +138,19 @@
                     </scale>
                 </LabelStyle>
             </Style>
+            <name>
+                Point Tests
+            </name>
+            <visibility>
+                1
+            </visibility>
             <open>
                 0
             </open>
             <description>
                 Description of Point Folder
             </description>
-            <visibility>
-                1
-            </visibility>
-            <name>
-                Point Tests
-            </name>
-            <Placemark id="feat_13">
+            <Placemark id="feat_7">
                 <Point id="geom_0">
                     <extrude>
                         0
@@ -165,23 +159,20 @@
                         18.411102,-33.903486,0.0
                     </coordinates>
                 </Point>
+                <name>
+                    Cape Town Stadium
+                </name>
+                <visibility>
+                    1
+                </visibility>
                 <open>
                     0
                 </open>
                 <description>
                     The Cape Town statdium built for the 2010 world cup soccer.
                 </description>
-                <visibility>
-                    1
-                </visibility>
-                <name>
-                    Cape Town Stadium
-                </name>
             </Placemark>
-            <Placemark id="feat_15">
-                <styleUrl>
-                    #stylesel_0
-                </styleUrl>
+            <Placemark id="feat_8">
                 <Point id="geom_1">
                     <extrude>
                         0
@@ -190,23 +181,23 @@
                         18.418699,-33.90708,0.0
                     </coordinates>
                 </Point>
+                <name>
+                    V&amp;A Waterfront
+                </name>
+                <styleUrl>
+                    #stylesel_0
+                </styleUrl>
+                <visibility>
+                    1
+                </visibility>
                 <open>
                     0
                 </open>
                 <description>
                     The V&amp;A Waterfront in Cape Town
                 </description>
-                <visibility>
-                    1
-                </visibility>
-                <name>
-                    V&amp;A Waterfront
-                </name>
             </Placemark>
-            <Placemark id="feat_17">
-                <styleUrl>
-                    #stylesel_0
-                </styleUrl>
+            <Placemark id="feat_9">
                 <Point id="geom_2">
                     <extrude>
                         0
@@ -215,23 +206,23 @@
                         18.422892,-33.912937,0.0
                     </coordinates>
                 </Point>
+                <name>
+                    Ferris Wheel
+                </name>
+                <styleUrl>
+                    #stylesel_0
+                </styleUrl>
+                <visibility>
+                    1
+                </visibility>
                 <open>
                     0
                 </open>
                 <description>
                     Same style as V&amp;A
                 </description>
-                <visibility>
-                    1
-                </visibility>
-                <name>
-                    Ferris Wheel
-                </name>
             </Placemark>
-            <Placemark id="feat_19">
-                <styleUrl>
-                    #stylesel_1
-                </styleUrl>
+            <Placemark id="feat_10">
                 <Point id="geom_3">
                     <extrude>
                         0
@@ -240,21 +231,24 @@
                         18.399813,-33.92025,0.0
                     </coordinates>
                 </Point>
+                <name>
+                    Signal Hill
+                </name>
+                <styleUrl>
+                    #stylesel_1
+                </styleUrl>
+                <visibility>
+                    1
+                </visibility>
                 <open>
                     0
                 </open>
                 <description>
                     Style from a class
                 </description>
-                <visibility>
-                    1
-                </visibility>
-                <name>
-                    Signal Hill
-                </name>
             </Placemark>
         </Folder>
-        <Folder id="feat_21">
+        <Folder id="feat_11">
             <Style id="stylesel_2">
                 <LineStyle>
                     <color>
@@ -268,76 +262,76 @@
                     </width>
                 </LineStyle>
             </Style>
+            <name>
+                LineString Tests
+            </name>
+            <visibility>
+                1
+            </visibility>
             <open>
                 0
             </open>
             <description>
                 Description of LineString Folder
             </description>
-            <visibility>
-                1
-            </visibility>
-            <name>
-                LineString Tests
-            </name>
-            <Placemark id="feat_23">
+            <Placemark id="feat_12">
                 <LineString id="geom_4">
-                    <extrude>
-                        0
-                    </extrude>
                     <tessellate>
                         0
                     </tessellate>
+                    <extrude>
+                        0
+                    </extrude>
                     <coordinates>
                         18.4344241201,-33.8976911413,0,18.4257753782,-33.9001151957,0
                     </coordinates>
                 </LineString>
+                <name>
+                    Habour Wall
+                </name>
+                <visibility>
+                    1
+                </visibility>
                 <open>
                     0
                 </open>
                 <description>
                     The harbour wall.
                 </description>
-                <visibility>
-                    1
-                </visibility>
-                <name>
-                    Habour Wall
-                </name>
             </Placemark>
-            <Placemark id="feat_25">
-                <styleUrl>
-                    #stylesel_2
-                </styleUrl>
+            <Placemark id="feat_13">
                 <LineString id="geom_5">
+                    <tessellate>
+                        0
+                    </tessellate>
                     <extrude>
                         0
                     </extrude>
                     <altitudeMode>
                         clampToGround
                     </altitudeMode>
-                    <tessellate>
-                        0
-                    </tessellate>
                     <coordinates>
                         18.4218044865,-33.9061596291,0,18.4220157223,-33.906446288,0
                     </coordinates>
                 </LineString>
+                <name>
+                    Rotating Bridge
+                </name>
+                <styleUrl>
+                    #stylesel_2
+                </styleUrl>
+                <visibility>
+                    1
+                </visibility>
                 <open>
                     0
                 </open>
                 <description>
                     The bridge rotates!
                 </description>
-                <visibility>
-                    1
-                </visibility>
-                <name>
-                    Rotating Bridge
-                </name>
             </Placemark>
         </Folder>
-        <Folder id="feat_27">
+        <Folder id="feat_14">
             <Style id="stylesel_3">
                 <PolyStyle>
                     <color>
@@ -365,138 +359,138 @@
                     </width>
                 </LineStyle>
             </Style>
+            <name>
+                Polygon Tests
+            </name>
+            <visibility>
+                1
+            </visibility>
             <open>
                 0
             </open>
             <description>
                 Description of Polgon Folder
             </description>
-            <visibility>
-                1
-            </visibility>
-            <name>
-                Polygon Tests
-            </name>
-            <Placemark id="feat_29">
+            <Placemark id="feat_15">
                 <Polygon id="geom_6">
-                    <extrude>
-                        0
-                    </extrude>
                     <tessellate>
                         0
                     </tessellate>
+                    <extrude>
+                        0
+                    </extrude>
                     <outerBoundaryIs>
                         <LinearRing>
-                            <extrude>
-                                0
-                            </extrude>
                             <tessellate>
                                 0
                             </tessellate>
+                            <extrude>
+                                0
+                            </extrude>
                             <coordinates>
                                 18.4175465934,-33.9083517226,0,18.4181239016,-33.9080972302,0,18.4179403811,-33.9078222853,0,18.4177006865,-33.9079343654,0,18.4174740182,-33.9077180893,0,18.4171932854,-33.9079095417,0,18.4173415632,-33.9080782974,0,18.4171706094,-33.9081946647,0,18.417319506,-33.9083516631,0,18.4174525684,-33.9082668015,0,18.4175465934,-33.9083517226,0
                             </coordinates>
                         </LinearRing>
                     </outerBoundaryIs>
                 </Polygon>
+                <name>
+                    Two Oceans Aquarium
+                </name>
+                <visibility>
+                    1
+                </visibility>
                 <open>
                     0
                 </open>
                 <description>
                     A aquarium with fish.
                 </description>
-                <visibility>
-                    1
-                </visibility>
-                <name>
-                    Two Oceans Aquarium
-                </name>
             </Placemark>
-            <Placemark id="feat_33">
-                <styleUrl>
-                    #stylesel_3
-                </styleUrl>
+            <Placemark id="feat_17">
                 <Polygon id="geom_8">
+                    <tessellate>
+                        0
+                    </tessellate>
                     <extrude>
                         0
                     </extrude>
                     <innerBoundaryIs>
                         <LinearRing>
-                            <extrude>
-                                0
-                            </extrude>
                             <tessellate>
                                 0
                             </tessellate>
+                            <extrude>
+                                0
+                            </extrude>
                             <coordinates>
                                 18.4154466438,-33.9079775784,0,18.4156687724,-33.9078264617,0,18.4155701281,-33.9077242906,0,18.4153486707,-33.9078706793,0,18.4154466438,-33.9079775784,0
                             </coordinates>
                         </LinearRing>
                     </innerBoundaryIs>
-                    <tessellate>
-                        0
-                    </tessellate>
                     <outerBoundaryIs>
                         <LinearRing>
-                            <extrude>
-                                0
-                            </extrude>
                             <tessellate>
                                 0
                             </tessellate>
+                            <extrude>
+                                0
+                            </extrude>
                             <coordinates>
                                 18.4154335422,-33.9081504278,0,18.4158847532,-33.9078521537,0,18.4155906723,-33.9075504151,0,18.4151403782,-33.9078496688,0,18.4154335422,-33.9081504278,0
                             </coordinates>
                         </LinearRing>
                     </outerBoundaryIs>
                 </Polygon>
+                <name>
+                    Protea Hotel
+                </name>
+                <styleUrl>
+                    #stylesel_3
+                </styleUrl>
+                <visibility>
+                    1
+                </visibility>
                 <open>
                     0
                 </open>
                 <description>
                     A hotel.
                 </description>
-                <visibility>
-                    1
-                </visibility>
-                <name>
-                    Protea Hotel
-                </name>
             </Placemark>
-            <Placemark id="feat_43">
+            <Placemark id="feat_22">
                 <Polygon id="geom_13">
-                    <extrude>
-                        0
-                    </extrude>
                     <tessellate>
                         0
                     </tessellate>
+                    <extrude>
+                        0
+                    </extrude>
                     <outerBoundaryIs>
                         <LinearRing>
-                            <extrude>
-                                0
-                            </extrude>
                             <tessellate>
                                 0
                             </tessellate>
+                            <extrude>
+                                0
+                            </extrude>
                             <coordinates>
                                 18.4175465934,-33.9083517226,0,18.4181239016,-33.9080972302,0,18.4179403811,-33.9078222853,0,18.4177006865,-33.9079343654,0,18.4174740182,-33.9077180893,0,18.4171932854,-33.9079095417,0,18.4173415632,-33.9080782974,0,18.4171706094,-33.9081946647,0,18.417319506,-33.9083516631,0,18.4174525684,-33.9082668015,0,18.4175465934,-33.9083517226,0
                             </coordinates>
                         </LinearRing>
                     </outerBoundaryIs>
                 </Polygon>
+                <name>
+                    Two Oceans Aquarium2
+                </name>
+                <visibility>
+                    1
+                </visibility>
                 <open>
                     0
                 </open>
                 <description>
                     A aquarium with fish.
                 </description>
-                <visibility>
-                    1
-                </visibility>
-                <name>
-                    Two Oceans Aquarium2
-                </name>
             </Placemark>
         </Folder>
     </Document>
