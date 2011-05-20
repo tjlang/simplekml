@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:xal="urn:oasis:names:tc:ciq:xsdschema:xAL:2.0">
+    <Document id="feat_1">
+        <name>
+            CompleteTest
+        </name>
+        <visibility>
+            1
+        </visibility>
+        <open>
+            1
+        </open>
+        <Document id="feat_2">
+            <Style id="stylesel_0">
+                <ListStyle>
+                    <listItemType>
+                        radioFolder
+                    </listItemType>
+                    <ItemIcon>
+                        <href>
+                            kk
+                        </href>
+                    </ItemIcon>
+                </ListStyle>
+            </Style>
+            <name>
+                Document
+            </name>
+            <styleUrl>
+                #stylesel_0
+            </styleUrl>
+            <TimeStamp>
+                <when>
+                    2011
+                </when>
+            </TimeStamp>
+            <atom:author>
+                Kyle Lancaster
+            </atom:author>
+            <visibility>
+                1
+            </visibility>
+            <Snippet maxLines="1">
+                Snippet content that should be more than one line, hopefully
+            </Snippet>
+            <phoneNumber>
+                555-1234
+            </phoneNumber>
+            <atom:link>
+                http://code.google.com/p/simplekml/wiki/Document
+            </atom:link>
+            <address>
+                Cape Town, South Africa
+            </address>
+            <open>
+                1
+            </open>
+            <description>
+                A document description.
+            </description>
+        </Document>
+        <Folder id="feat_3">
+            <Style id="stylesel_1">
+                <IconStyle>
+                    <scale>
+                        1
+                    </scale>
+                    <colorMode>
+                        normal
+                    </colorMode>
+                    <hotSpot x="0.5" xunits="fraction" y="0.5" yunits="fraction"/>
+                    <heading>
+                        0
+                    </heading>
+                    <Icon>
+                        <href>
+                            http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png
+                        </href>
+                    </Icon>
+                </IconStyle>
+            </Style>
+            <name>
+                Geometry
+            </name>
+            <visibility>
+                1
+            </visibility>
+            <open>
+                1
+            </open>
+            <Placemark id="feat_4">
+                <Point id="geom_0">
+                    <extrude>
+                        1
+                    </extrude>
+                    <altitudeMode>
+                        relativeToGround
+                    </altitudeMode>
+                    <coordinates>
+                        1.0,1.0,0.0
+                    </coordinates>
+                </Point>
+                <name>
+                    Point
+                </name>
+                <styleUrl>
+                    #stylesel_1
+                </styleUrl>
+                <visibility>
+                    1
+                </visibility>
+                <Camera>
+                    <altitudeMode>
+                        relativeToGround
+                    </altitudeMode>
+                    <tilt>
+                        10
+                    </tilt>
+                    <altitude>
+                        20000
+                    </altitude>
+                    <longitude>
+                        1.0
+                    </longitude>
+                    <latitude>
+                        1.0
+                    </latitude>
+                    <gx:TimeStamp>
+                        <when>
+                            2010
+                        </when>
+                    </gx:TimeStamp>
+                    <heading>
+                        45
+                    </heading>
+                </Camera>
+                <open>
+                    0
+                </open>
+            </Placemark>
+            <Placemark id="feat_5">
+                <LineString id="geom_1">
+                    <tessellate>
+                        1
+                    </tessellate>
+                    <extrude>
+                        1
+                    </extrude>
+                    <altitudeMode>
+                        relativeToGround
+                    </altitudeMode>
+                    <coordinates>
+                        1.01,1.01,100,1.12,1.12,100
+                    </coordinates>
+                </LineString>
+                <name>
+                    LineString
+                </name>
+                <visibility>
+                    1
+                </visibility>
+                <LookAt>
+                    <altitudeMode>
+                        relativeToGround
+                    </altitudeMode>
+                    <tilt>
+                        5
+                    </tilt>
+                    <altitude>
+                        50000
+                    </altitude>
+                    <longitude>
+                        1.05
+                    </longitude>
+                    <range>
+                        50
+                    </range>
+                    <latitude>
+                        1.05
+                    </latitude>
+                </LookAt>
+                <open>
+                    0
+                </open>
+            </Placemark>
+        </Folder>
+    </Document>
+</kml>

@@ -69,30 +69,23 @@
             <styleUrl>
                 #stylesel_0
             </styleUrl>
-            <Camera/>
+            <Camera>
+                <altitudeMode>
+                    clampToGround
+                </altitudeMode>
+                <altitude>
+                    50
+                </altitude>
+                <longitude>
+                    18.410858
+                </longitude>
+                <latitude>
+                    -33.904446
+                </latitude>
+            </Camera>
             <open>
                 0
             </open>
-            <style>
-                <Style id="stylesel_0">
-                    <IconStyle>
-                        <scale>
-                            1
-                        </scale>
-                        <colorMode>
-                            normal
-                        </colorMode>
-                        <heading>
-                            0
-                        </heading>
-                        <Icon>
-                            <href>
-                                http://maps.google.com/mapfiles/kml/shapes/camera.png
-                            </href>
-                        </Icon>
-                    </IconStyle>
-                </Style>
-            </style>
             <Icon>
                 <href>
                     resources/stadium.jpg

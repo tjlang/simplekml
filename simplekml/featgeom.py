@@ -151,23 +151,25 @@ class Feature(Kmlable): # TODO:ExtendedData
     def camera(self):
         if self._kml['Camera'] is None:
             self._kml['Camera'] = Camera()
-        return self.Camera
+            self._kml['LookAt'] = None
+        return self._kml['Camera']
 
     @camera.setter
     def camera(self, camera):
         self._kml['Camera'] = camera
+        self._kml['LookAt'] = None
 
     @property
     def lookat(self):
-        if self.LookAt is None:
-            self.LookAt = LookAt()
-            self.Camera = None
-        return self.LookAt
+        if self._kml['LookAt'] is None:
+            self._kml['LookAt'] = LookAt()
+            self._kml['Camera'] = None
+        return self._kml['LookAt']
 
     @lookat.setter
     def lookat(self, lookat):
-        self.Camera = None
-        self.LookAt = lookat
+        self._kml['Camera'] = None
+        self._kml['LookAt'] = lookat
 
     @property
     def snippet(self):
@@ -578,23 +580,23 @@ class Geometry(Kmlable):
 
     @property
     def camera(self):
-        if self._placemark.Camera is None:
-            self._placemark.Camera = Camera()
-        return self._placemark.Camera
+        if self._placemark.camera is None:
+            self._placemark.camera = Camera()
+        return self._placemark.camera
 
     @camera.setter
     def camera(self, camera):
-        self._placemark.Camera = camera
+        self._placemark.camera = camera
 
     @property
     def lookat(self):
-        if self._placemark.LookAt is None:
-            self._placemark.LookAt = LookAt()
-        return self._placemark.LookAt
+        if self._placemark.lookat is None:
+            self._placemark.lookat = LookAt()
+        return self._placemark.lookat
 
     @lookat.setter
     def lookat(self, lookat):
-        self._placemark.LookAt = lookat
+        self._placemark.lookat = lookat
 
     @property
     def snippet(self):
@@ -767,7 +769,7 @@ class LinearRing(PointGeometry):  # --Document--
     labelstyle          -- [LabelStyle] (default None)
     linestyle           -- [LineStyle] (default None)
     polystyle           -- [PolyStyle] (default None)
-    placemark           -- [Placemark (default [Placemark], read-only)
+    placemark           -- [Placemark] (default [Placemark], read-only)
 
     """
 
@@ -866,7 +868,7 @@ class Point(PointGeometry):  # --Document--
     labelstyle          -- [LabelStyle] (default None)
     linestyle           -- [LineStyle] (default None)
     polystyle           -- [PolyStyle] (default None)
-    placemark           -- [Placemark (default [Placemark], read-only)
+    placemark           -- [Placemark] (default [Placemark], read-only)
 
     """
 
@@ -948,7 +950,7 @@ class LineString(PointGeometry):  # --Document--
     labelstyle          -- [LabelStyle] (default None)
     linestyle           -- [LineStyle] (default None)
     polystyle           -- [PolyStyle] (default None)
-    placemark           -- [Placemark (default [Placemark], read-only)
+    placemark           -- [Placemark] (default [Placemark], read-only)
 
     """
     def __init__(self,
@@ -1059,7 +1061,7 @@ class Polygon(Geometry):  # --Document--
     labelstyle          -- [LabelStyle] (default None)
     linestyle           -- [LineStyle] (default None)
     polystyle           -- [PolyStyle] (default None)
-    placemark           -- [Placemark (default [Placemark], read-only)
+    placemark           -- [Placemark] (default [Placemark], read-only)
 
     """
     def __init__(self,
@@ -1172,7 +1174,7 @@ class MultiGeometry(Geometry):  # --Document--
     labelstyle          -- [LabelStyle] (default None)
     linestyle           -- [LineStyle] (default None)
     polystyle           -- [PolyStyle] (default None)
-    placemark           -- [Placemark (default [Placemark], read-only)
+    placemark           -- [Placemark] (default [Placemark], read-only)
 
     Public Methods:
     newpoint()          -- Creates a new [Point] and attaches it to the feature
@@ -1316,7 +1318,7 @@ class GroundOverlay(Overlay):  # --Document--
     style               -- [Style] (default None)
     liststyle           -- [ListStyle] (default None)
     balloonstyle        -- [BalloonStyle] (default None)
-    placemark           -- [Placemark (default [Placemark], read-only)
+    placemark           -- [Placemark] (default [Placemark], read-only)
 
     """
 
@@ -1411,7 +1413,7 @@ class ScreenOverlay(Overlay):   # --Document--
     style               -- [Style] (default None)
     liststyle           -- [ListStyle] (default None)
     balloonstyle        -- [BalloonStyle] (default None)
-    placemark           -- [Placemark (default [Placemark], read-only)
+    placemark           -- [Placemark] (default [Placemark], read-only)
 
     """
 
@@ -1511,7 +1513,7 @@ class PhotoOverlay(Overlay):  # --Document--
     iconstyle           -- [IconStyle] (default None)
     liststyle           -- [ListStyle] (default None)
     balloonstyle        -- [BalloonStyle] (default None)
-    placemark           -- [Placemark (default [Placemark], read-only)
+    placemark           -- [Placemark] (default [Placemark], read-only)
 
     """
 

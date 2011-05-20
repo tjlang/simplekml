@@ -155,8 +155,8 @@ class HotSpot(Vector2): # --Document--
     """Specifies the position within the [Icon] that is "anchored" to the [Point].
 
     Arguments:
-    x                   -- int (default None)
-    y                   -- int (default None)
+    x                   -- float (default None)
+    y                   -- float (default None)
     xunits              -- string from [Units] constants (default None)
     yunits              -- string from [Units] constants (default None)
 
@@ -166,7 +166,7 @@ class HotSpot(Vector2): # --Document--
     """
 
     def __init__(self, **kwargs):
-        super(Vector2, self).__init__(**kwargs)
+        super(HotSpot, self).__init__(**kwargs)
 
 
 class Snippet(object): # --Document--

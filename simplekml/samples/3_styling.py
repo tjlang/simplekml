@@ -3,6 +3,8 @@ import os
 from simplekml import *
 
 kml = Kml()
+kml.document.liststyle.listitemtype = ListItemType.radiofolder
+kml.document.liststyle.itemicon.href = "http://maps.google.com/mapfiles/kml/shapes/parks.png"
 
 # A normal Point with both a LabelStyle and IconStyle
 pnt = kml.newpoint(name="Kirstenbosch Normal", description="A style map.", coords=[(18.431486,-33.988)])

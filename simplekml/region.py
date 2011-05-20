@@ -68,7 +68,7 @@ class Box(Kmlable):
         self._kml['west'] = west
 
 
-class LatLonBox(Kmlable): # --Document--
+class LatLonBox(Box): # --Document--
     """Specifies where the top, bottom, right, and left sides of a bounding box for the ground overlay are aligned.
 
     Arguments:

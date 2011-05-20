@@ -2,6 +2,18 @@
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:xal="urn:oasis:names:tc:ciq:xsdschema:xAL:2.0">
     <Document id="feat_1">
         <Style id="stylesel_0">
+            <ListStyle>
+                <listItemType>
+                    radioFolder
+                </listItemType>
+                <ItemIcon>
+                    <href>
+                        http://maps.google.com/mapfiles/kml/shapes/parks.png
+                    </href>
+                </ItemIcon>
+            </ListStyle>
+        </Style>
+        <Style id="stylesel_1">
             <LabelStyle>
                 <color>
                     ffff0000
@@ -33,7 +45,7 @@
                 </Icon>
             </IconStyle>
         </Style>
-        <Style id="stylesel_4">
+        <Style id="stylesel_5">
             <LineStyle>
                 <color>
                     ff0000ff
@@ -46,7 +58,7 @@
                 </width>
             </LineStyle>
         </Style>
-        <Style id="stylesel_5">
+        <Style id="stylesel_6">
             <PolyStyle>
                 <color>
                     990000ff
@@ -62,7 +74,7 @@
                 </fill>
             </PolyStyle>
         </Style>
-        <Style id="stylesel_6">
+        <Style id="stylesel_7">
             <BalloonStyle>
                 <bgColor>
                     ff90ee90
@@ -78,7 +90,7 @@
                 </text>
             </BalloonStyle>
         </Style>
-        <Style id="stylesel_2">
+        <Style id="stylesel_3">
             <LabelStyle>
                 <color>
                     ffff0000
@@ -91,7 +103,7 @@
                 </scale>
             </LabelStyle>
         </Style>
-        <Style id="stylesel_3">
+        <Style id="stylesel_4">
             <LabelStyle>
                 <color>
                     ff0000ff
@@ -104,13 +116,13 @@
                 </scale>
             </LabelStyle>
         </Style>
-        <StyleMap id="stylesel_1">
+        <StyleMap id="stylesel_2">
             <Pair>
                 <key>
                     normal
                 </key>
                 <styleUrl>
-                    #stylesel_2
+                    #stylesel_3
                 </styleUrl>
             </Pair>
             <Pair>
@@ -118,10 +130,13 @@
                     highlight
                 </key>
                 <styleUrl>
-                    #stylesel_3
+                    #stylesel_4
                 </styleUrl>
             </Pair>
         </StyleMap>
+        <styleUrl>
+            #stylesel_0
+        </styleUrl>
         <visibility>
             1
         </visibility>
@@ -141,7 +156,7 @@
                 Kirstenbosch Normal
             </name>
             <styleUrl>
-                #stylesel_0
+                #stylesel_1
             </styleUrl>
             <visibility>
                 1
@@ -166,7 +181,7 @@
                 Kirstenbosch StyleMap
             </name>
             <styleUrl>
-                #stylesel_1
+                #stylesel_2
             </styleUrl>
             <visibility>
                 1
@@ -191,7 +206,7 @@
                 Pathway
             </name>
             <styleUrl>
-                #stylesel_4
+                #stylesel_5
             </styleUrl>
             <visibility>
                 1
@@ -242,7 +257,7 @@
                 Atrium Garden
             </name>
             <styleUrl>
-                #stylesel_5
+                #stylesel_6
             </styleUrl>
             <visibility>
                 1
@@ -264,7 +279,7 @@
                 BallonStyle
             </name>
             <styleUrl>
-                #stylesel_6
+                #stylesel_7
             </styleUrl>
             <visibility>
                 1

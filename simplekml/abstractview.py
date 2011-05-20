@@ -41,9 +41,9 @@ class AbstractView(Kmlable): #TODO: gxViewerOptions
         self._kml["heading"] = heading
         self._kml["tilt"] = tilt
         self._kml["altitudeMode"] = altitudemode
-        self._kml["gx] =AltitudeMode"] = gxaltitudemode
-        self._kml["gx] =TimeSpan"] = gxtimespan
-        self._kml["gx] =TimeStamp"] = gxtimestamp
+        self._kml["gx:AltitudeMode"] = gxaltitudemode
+        self._kml["gx:TimeSpan"] = gxtimespan
+        self._kml["gx:TimeStamp"] = gxtimestamp
 
     @property
     def longitude(self):

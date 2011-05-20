@@ -163,7 +163,7 @@ class IconStyle(ColorStyle): # --Document--
     def __init__(self, scale=1, heading=0, icon=None, hotspot=None, **kwargs):
         super(IconStyle, self).__init__(**kwargs)
         if icon is None:
-            icon = Icon()
+            icon = Icon(href="http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png")
         self._kml["scale"] = scale
         self._kml["heading"] = heading
         self._kml["Icon"] = icon
@@ -306,6 +306,7 @@ class ListStyle(Kmlable): # --Document--
                  listitemtype=ListItemType.check,
                  bgcolor=None,
                  itemicon=None):
+        super(ListStyle, self).__init__()
         self._kml["listItemType"] = listitemtype
         self._kml["bgColor"] = bgcolor
         self._kml["ItemIcon"] = itemicon
@@ -314,7 +315,7 @@ class ListStyle(Kmlable): # --Document--
     def itemicon(self):
         if self._kml["ItemIcon"] is None:
             self._kml["ItemIcon"] = ItemIcon()
-        return self._kml["itemIcon"]
+        return self._kml["ItemIcon"]
 
     @itemicon.setter
     def itemicon(self, itemicon):
