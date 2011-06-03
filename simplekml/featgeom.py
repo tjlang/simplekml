@@ -18,14 +18,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Contact me at kyle.lan@gmail.com
 """
 
-from base import Kmlable
-from constants import *
-from abstractview import *
-from styleselector import *
-from coordinates import *
-from region import *
-from overlay import *
-from timeprimitive import *
+from simplekml.base import Kmlable
+from simplekml.constants import *
+from simplekml.abstractview import *
+from simplekml.styleselector import *
+from simplekml.coordinates import *
+from simplekml.region import *
+from simplekml.overlay import *
+from simplekml.timeprimitive import *
+from simplekml.icon import *
+from simplekml.model import *
 
 
 class Feature(Kmlable): # TODO:ExtendedData
@@ -393,18 +395,25 @@ class Container(Feature):
         super(Container, self).__init__(**kwargs)
 
     def newfolder(self, **kwargs):
-        """Creates a new Folder and attaches it to the feature."""
+        """Creates a new Folder and attaches it to the container."""
         fol = Folder(**kwargs)
         fol._parent = self
         self._addfeature(fol)
         return fol
 
     def newdocument(self, **kwargs):
-        """Creates a new Document and attaches it to the feature."""
+        """Creates a new Document and attaches it to the container."""
         doc = Document(**kwargs)
         doc._parent = self
         self._addfeature(doc)
         return doc
+
+    def newnetworklink(self, **kwargs):
+        """Creates a new NetworkLink and attaches it to the container."""
+        netlink = NetworkLink(**kwargs)
+        netlink._parent = self
+        self._addfeature(netlink)
+        return netlink
 
 class Document(Container):  # --Document--
     """A container for features and styles.
@@ -432,13 +441,14 @@ class Document(Container):  # --Document--
     liststyle           -- [ListStyle] (default None)
 
     Public Methods:
-    newpoint()          -- Creates a new [Point] and attaches it to the feature
-    newlinestring()     -- Creates a new [LineString] and attaches it to the feature
-    newpolygon()        -- Creates a new [Polygon] and attaches it to the feature
-    newmultigeometry()  -- Creates a new [MultiGeometry] and attaches it to the feature
-    newgroundoverlay()  -- Creates a new [GroundOverlay] and attaches it to the feature
-    newscreenoverlay()  -- Creates a new [ScreenOverlay] and attaches it to the feature
-    newphotooverlay()   -- Creates a new [PhotoOverlay] and attaches it to the feature
+    newpoint()          -- Creates a new [Point] and attaches it to the document
+    newlinestring()     -- Creates a new [LineString] and attaches it to the document
+    newpolygon()        -- Creates a new [Polygon] and attaches it to the document
+    newmultigeometry()  -- Creates a new [MultiGeometry] and attaches it to the document
+    newgroundoverlay()  -- Creates a new [GroundOverlay] and attaches it to the document
+    newscreenoverlay()  -- Creates a new [ScreenOverlay] and attaches it to the document
+    newphotooverlay()   -- Creates a new [PhotoOverlay] and attaches it to the document
+    newnetworklink()    -- Creates a new [NetworkLink] and attaches it to the document
 
     """
 
@@ -472,13 +482,14 @@ class Folder(Container):  # --Document--
     liststyle           -- [ListStyle] (default None)
 
     Public Methods:
-    newpoint()          -- Creates a new [Point] and attaches it to the feature
-    newlinestring()     -- Creates a new [LineString] and attaches it to the feature
-    newpolygon()        -- Creates a new [Polygon] and attaches it to the feature
-    newmultigeometry()  -- Creates a new [MultiGeometry] and attaches it to the feature
-    newgroundoverlay()  -- Creates a new [GroundOverlay] and attaches it to the feature
-    newscreenoverlay()  -- Creates a new [ScreenOverlay] and attaches it to the feature
-    newphotooverlay()   -- Creates a new [PhotoOverlay] and attaches it to the feature
+    newpoint()          -- Creates a new [Point] and attaches it to the folder
+    newlinestring()     -- Creates a new [LineString] and attaches it to the folder
+    newpolygon()        -- Creates a new [Polygon] and attaches it to the folder
+    newmultigeometry()  -- Creates a new [MultiGeometry] and attaches it to the folder
+    newgroundoverlay()  -- Creates a new [GroundOverlay] and attaches it to the folder
+    newscreenoverlay()  -- Creates a new [ScreenOverlay] and attaches it to the folder
+    newphotooverlay()   -- Creates a new [PhotoOverlay] and attaches it to the folder
+    newnetworklink()    -- Creates a new [NetworkLink] and attaches it to the folder
 
     """
 
@@ -755,8 +766,8 @@ class LinearRing(PointGeometry):  # --Document--
     region              -- [Region] (default None)
     extrude             -- int (default 0)
     tessellate          -- int (default 0)
-    altitudemode        -- string from [AltitudeMode] contants (default None)
-    gxaltitudemode      -- string from [gxAltitudeMode] contants [Region] (default None)
+    altitudemode        -- string from [AltitudeMode] constants (default None)
+    gxaltitudemode      -- string from [GxAltitudeMode] constants [Region] (default None)
     gxaltitudeoffset    -- float (default None)
 
     Properties:
@@ -855,8 +866,8 @@ class Point(PointGeometry):  # --Document--
     timespan            -- [TimeStamp] (default None)
     region              -- [Region] (default None)
     extrude             -- int (default 0)
-    altitudemode        -- string from [AltitudeMode] contants (default None)
-    gxaltitudemode      -- string from [gxAltitudeMode] contants [Region] (default None)
+    altitudemode        -- string from [AltitudeMode] constants (default None)
+    gxaltitudemode      -- string from [GxAltitudeMode] constants [Region] (default None)
 
     Properties:
     Same as arguments, with the following additional properties:
@@ -935,8 +946,8 @@ class LineString(PointGeometry):  # --Document--
     region              -- [Region] (default None)
     extrude             -- int (default 0)
     tessellate          -- int (default 0)
-    altitudemode        -- string from [AltitudeMode] contants (default None)
-    gxaltitudemode      -- string from [gxAltitudeMode] contants [Region] (default None)
+    altitudemode        -- string from [AltitudeMode] constants (default None)
+    gxaltitudemode      -- string from [GxAltitudeMode] constants [Region] (default None)
     gxaltitudeoffset    -- float (default None)
     gxdraworder         -- int (default None)
 
@@ -1045,10 +1056,10 @@ class Polygon(Geometry):  # --Document--
     region              -- [Region] (default None)
     extrude             -- int (default 0)
     tessellate          -- int (default 0)
-    altitudemode        -- string from [AltitudeMode] contants (default None)
-    gxaltitudemode      -- string from [gxAltitudeMode] contants [Region] (default None)
+    altitudemode        -- string from [AltitudeMode] constants (default None)
+    gxaltitudemode      -- string from [GxAltitudeMode] constants [Region] (default None)
     gxdraworder         -- int (default None)
-    outerboundaryis     -- list of tuples (default [(0.0,0.0,0.0)]
+    outerboundaryis     -- list of tuples (default (0.0,0.0,0.0))
     innerboundaryis     -- list of lists of tuples (default None)
 
     Properties:
@@ -1505,7 +1516,7 @@ class PhotoOverlay(Overlay):  # --Document--
     viewvolume          -- [ViewVolume] (default None)
     imagepyramid        -- [ImagePyramid] (default None)
     point               -- [Point] (default None)
-    shape               -- string from [Shape] contants (default None)
+    shape               -- string from [Shape] constants (default None)
 
     Properties:
     Same as arguments, with the following additional properties:
@@ -1575,4 +1586,153 @@ class PhotoOverlay(Overlay):  # --Document--
     @shape.setter
     def shape(self, shape):
         self._kml['shape'] = shape
+
+
+class NetworkLink(Feature):  # --Document--
+    """References a KML file or KMZ archive on a local or remote network.
+
+    Arguments:
+    refreshvisibility   -- int (default 0)
+    flytoview           -- int (default 0)
+    link                -- [Link] (default None)
+
+    Properties:
+    Same as arguments.
+
+    """
     
+    def __init__(self, refreshvisibility=0,
+                       flytoview=0,
+                       link=None,
+                       **kwargs):
+        super(NetworkLink, self).__init__(**kwargs)
+        self._kml['refreshVisibility'] = refreshvisibility
+        self._kml['flyToView'] = flytoview
+        self._kml['Link'] = link
+
+    @property
+    def refreshvisibility(self):
+        return self._kml['refreshVisibility']
+
+    @refreshvisibility.setter
+    def refreshvisibility(self, refreshvisibility):
+        self._kml['refreshVisibility'] = refreshvisibility
+
+    @property
+    def flytoview(self):
+        return self._kml['flyToView']
+
+    @flytoview.setter
+    def flytoview(self, flytoview):
+        self._kml['flyToView'] = flytoview
+
+    @property
+    def link(self):
+        if self._kml['Link'] is None:
+            self._kml['Link'] = Link()
+        return self._kml['Link']
+
+    @link.setter
+    def link(self, link):
+        self._kml['Link'] = link
+
+
+class Model(Kmlable):  # --Document--
+    """A 3D object described in a COLLADA file.
+
+    Arguments:
+    altitudemode        -- string from [AltitudeMode] constants (default None)
+    gxaltitudemode      -- string from [GxAltitudeMode] constants (default None)
+    location            -- [Location] (default None)
+    orientation         -- [Orientation] (default None)
+    scale               -- [Scale] (default None)
+    link                -- [Link] (default None)
+    resourcemap         -- [ResourceMap] (default None)
+
+    Properties:
+    Same as arguments.
+
+    """
+
+    def __init__(self,
+                 altitudemode=None,
+                 gxaltitudemode=None,
+                 location=None,
+                 orientation=None,
+                 scale=None,
+                 link=None,
+                 resourcemap=None):
+        super(Model, self).__init__()
+        self._kml['altitudeMode'] = altitudemode
+        self._kml['gx:altitudeMode'] = gxaltitudemode
+        self._kml['Location'] = location
+        self._kml['Orientation'] = orientation
+        self._kml['Scale'] = scale
+        self._kml['Link'] = link
+        self._kml['ResourceMap'] = resourcemap
+
+    @property
+    def altitudemode(self):
+        return self._kml['altitudeMode']
+
+    @altitudemode.setter
+    def altitudemode(self, altitudemode):
+        self._kml['altitudeMode'] = altitudemode
+
+    @property
+    def gxaltitudemode(self):
+        return self._kml['gx:altitudeMode']
+
+    @gxaltitudemode.setter
+    def gxaltitudemode(self, gxaltitudemode):
+        self._kml['gx:altitudeMode'] = gxaltitudemode
+
+    @property
+    def location(self):
+        if self._kml['Location'] is None:
+            self._kml['Location'] = Location()
+        return self._kml['Location']
+
+    @location.setter
+    def location(self, location):
+        self._kml['Location'] = location
+
+    @property
+    def orientation(self):
+        if self._kml['Orientation'] is None:
+            self._kml['Orientation'] = Orientation()
+        return self._kml['Orientation']
+
+    @orientation.setter
+    def orientation(self, orientation):
+        self._kml['Orientation'] = orientation
+
+    @property
+    def scale(self):
+        if self._kml['Scale'] is None:
+            self._kml['Scale'] = Scale()
+        return self._kml['Scale']
+
+    @scale.setter
+    def scale(self, scale):
+        self._kml['Scale'] = scale
+
+    @property
+    def link(self):
+        if self._kml['Link'] is None:
+            self._kml['Link'] = Link()
+        return self._kml['Link']
+
+    @link.setter
+    def link(self, link):
+        self._kml['Link'] = link
+
+    @property
+    def resourcemap(self):
+        if self._kml['ResourceMap'] is None:
+            self._kml['ResourceMap'] = ResourceMap()
+        return self._kml['ResourceMap']
+
+    @resourcemap.setter
+    def resourcemap(self, resourcemap):
+        self._kml['ResourceMap'] = resourcemap

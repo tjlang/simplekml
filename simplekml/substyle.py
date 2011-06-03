@@ -18,9 +18,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Contact me at kyle.lan@gmail.com
 """
 
-from base import *
-from constants import *
-from icon import Icon, ItemIcon
+from simplekml.base import *
+from simplekml.constants import *
+from simplekml.icon import Icon, ItemIcon
 
 class ColorStyle(Kmlable):
     """A base class for geometry styles."""

@@ -18,8 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Contact me at kyle.lan@gmail.com
 """
 
-from base import *
-from constants import *
+from simplekml.base import *
+from simplekml.constants import *
 
 
 class ViewVolume(Kmlable): # --Document--

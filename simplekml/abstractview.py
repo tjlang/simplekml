@@ -18,9 +18,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Contact me at kyle.lan@gmail.com
 """
 
-from base import Kmlable
-from constants import *
-from timeprimitive import *
+from simplekml.base import Kmlable
+from simplekml.constants import *
+from simplekml.timeprimitive import *
 
 class AbstractView(Kmlable): #TODO: gxViewerOptions
     """Base class, extended by Camera and LookAt."""

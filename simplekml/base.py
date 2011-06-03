@@ -20,6 +20,7 @@ Contact me at kyle.lan@gmail.com
 
 import os
 import cgi
+import xml.dom.minidom
 
 class Kmlable(object):
     """Enables a subclass to be converted into KML."""
@@ -38,7 +39,8 @@ class Kmlable(object):
                 else:
                     if var in ['name', 'description', 'text']: # Parse value for HTML and convert
                         val = Kmlable._chrconvert(val)
-                    elif var == 'href' and os.path.exists(val) and Kmlable._kmz == True: # Check for local images
+                    elif (var == 'href' and os.path.exists(val) and Kmlable._kmz == True)\
+                            or (var == 'targetHref' and os.path.exists(val) and Kmlable._kmz == True): # Check for local images
                         Kmlable._addimage(val)
                         val = os.path.join('files', os.path.split(val)[1])
                     str += "<{0}>{1}</{0}>".format(var, val)  # Enclose the variable's __str__ with the variables name
@@ -187,3 +189,18 @@ class Snippet(object): # --Document--
         
     def __str__(self):
         return '<Snippet maxLines="{0}">{1}</Snippet>'.format(self.maxlines, self.content)
+
+
+class KmlElement(xml.dom.minidom.Element):
+   """Overrides the original Element to format the KML to Google Maps standards."""
+   original_element = xml.dom.minidom.Element
+
+   def writexml(self, writer, indent="", addindent="", newl=""):
+       """If the element only contains a single string value then don't add white space around it."""
+       if self.childNodes and len(self.childNodes) == 1 and\
+          self.childNodes[0].nodeType == xml.dom.minidom.Node.TEXT_NODE:
+           writer.write(indent)
+           KmlElement.original_element.writexml(self, writer)
+           writer.write(newl)
+       else:
+           KmlElement.original_element.writexml(self, writer, indent, addindent, newl)

@@ -18,8 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Contact me at kyle.lan@gmail.com
 """
 
-from base import Kmlable
-from substyle import *
+from simplekml.base import Kmlable
+from simplekml.substyle import *
 
 class StyleSelector(Kmlable):
     """Base style class, extended by Style."""

@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Contact me at kyle.lan@gmail.com
 """
 
-from base import Kmlable
+from simplekml.base import Kmlable
 
 class Link(Kmlable): # --Document--
     """Defines an image associated with an Icon style or overlay.

@@ -2,7 +2,10 @@ import os
 from simplekml import *
 
 #The KML
-kml = Kml(name="CompleteTest", open=1)
+kml = Kml(name="6_various", open=1)
+#A NetworkLink
+netlink = kml.newnetworklink(name="Broken NetworkLink")
+netlink.link.href = "http://fakelink.com/fakedata"
 #A Document
 doc = kml.newdocument()
 doc.liststyle.listitemtype = ListItemType.radiofolder
@@ -32,6 +35,8 @@ lin.altitudemode = AltitudeMode.relativetoground
 lin.lookat = LookAt(longitude=1.05,latitude=1.05,altitude=50000,tilt=5,altitudemode=AltitudeMode.relativetoground, range=50)
 lin.tessellate = 1
 lin.extrude = 1
+
+
 
 # Saving
 kml.save(os.path.join(os.path.split(__file__)[0], "6_various.kml"))

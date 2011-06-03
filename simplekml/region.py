@@ -18,10 +18,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Contact me at kyle.lan@gmail.com
 """
 
-from base import Kmlable
-from constants import *
-from styleselector import *
-from coordinates import *
+from simplekml.base import Kmlable
+from simplekml.constants import *
+from simplekml.styleselector import *
+from simplekml.coordinates import *
 
 class Box(Kmlable):
     def __init__(self,

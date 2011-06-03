@@ -21,3 +21,5 @@ kml.save(os.path.join(os.path.split(__file__)[0], "1_usage.kml"))
 
 # Saving as KMZ
 kml.savekmz(os.path.join(os.path.split(__file__)[0], "1_usage.kmz"))
+
+print kml.kml()
