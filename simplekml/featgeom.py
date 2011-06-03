@@ -415,6 +415,13 @@ class Container(Feature):
         self._addfeature(netlink)
         return netlink
 
+    def newmodel(self, **kwargs):
+        """Creates a new NetworkLink and attaches it to the container."""
+        model = Model(**kwargs)
+        model._parent = self
+        self._addfeature(model)
+        return model
+
 class Document(Container):  # --Document--
     """A container for features and styles.
 

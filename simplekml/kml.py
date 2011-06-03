@@ -156,3 +156,7 @@ class Kml(object):  # --Document--
     def newnetworklink(self, **kwargs):
         """Creates a new NetworkLink and attaches it to the document."""
         return self.document.newnetworklink(**kwargs)
+
+    def newmodel(self, **kwargs):
+        """Creates a new NetworkLink and attaches it to the document."""
+        return self.document.newmodel(**kwargs)
