@@ -1742,3 +1742,9 @@ class Model(Geometry):  # --Document--
     @resourcemap.setter
     def resourcemap(self, resourcemap):
         self._kml['ResourceMap'] = resourcemap
+
+    def __str__(self):
+        str = '<Model id="{0}">'.format(self._id)
+        str += super(Model, self).__str__()
+        str += "</Model>"
+        return str

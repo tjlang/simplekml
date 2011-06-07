@@ -37,7 +37,9 @@ lin.tessellate = 1
 lin.extrude = 1
 
 # A Model
-kml.newmodel(name="Model")
+model = kml.newmodel(name="Model", description="Model placemark without a model!")
+model.location.latitude = 1
+model.location.longitude = 1
 
 # Saving
 kml.save(os.path.join(os.path.split(__file__)[0], "6_various.kml"))
