@@ -36,7 +36,8 @@ lin.lookat = LookAt(longitude=1.05,latitude=1.05,altitude=50000,tilt=5,altitudem
 lin.tessellate = 1
 lin.extrude = 1
 
-
+# A Model
+kml.newmodel(name="Model")
 
 # Saving
 kml.save(os.path.join(os.path.split(__file__)[0], "6_various.kml"))

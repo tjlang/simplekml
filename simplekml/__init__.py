@@ -21,7 +21,7 @@ Contact me at kyle.lan@gmail.com
 from simplekml.abstractview import Camera, LookAt
 from simplekml.base import HotSpot, OverlayXY, RotationXY, ScreenXY, Size, Snippet
 from simplekml.constants import *
-from simplekml.featgeom import Document, Folder, GroundOverlay, LinearRing, LineString, MultiGeometry, PhotoOverlay, Point, Polygon
+from simplekml.featgeom import Document, Folder, GroundOverlay, LinearRing, LineString, MultiGeometry, PhotoOverlay, Point, Polygon, NetworkLink, Model
 from simplekml.icon import Icon, Link
 from simplekml.overlay import ImagePyramid, ViewVolume
 from simplekml.region import GxLatLonQuad, LatLonBox, LatLonAltBox, Lod, Region

@@ -192,15 +192,26 @@ class Snippet(object): # --Document--
 
 
 class KmlElement(xml.dom.minidom.Element):
-   """Overrides the original Element to format the KML to Google Maps standards."""
-   original_element = xml.dom.minidom.Element
+    """Overrides the original Element to format the KML to Google Maps standards."""
+    _original_element = xml.dom.minidom.Element
 
-   def writexml(self, writer, indent="", addindent="", newl=""):
-       """If the element only contains a single string value then don't add white space around it."""
-       if self.childNodes and len(self.childNodes) == 1 and\
-          self.childNodes[0].nodeType == xml.dom.minidom.Node.TEXT_NODE:
-           writer.write(indent)
-           KmlElement.original_element.writexml(self, writer)
-           writer.write(newl)
-       else:
-           KmlElement.original_element.writexml(self, writer, indent, addindent, newl)
+    @classmethod
+    def patch(cls):
+        """Patch xml.dom.minidom.Element to use KmlElement instead."""
+        cls._original_element = xml.dom.minidom.Element
+        xml.dom.minidom.Element = KmlElement
+
+    @classmethod
+    def unpatch(cls):
+        """Unpatch xml.dom.minidom.Element to use the Element class used last."""
+        xml.dom.minidom.Element = cls._original_element
+
+    def writexml(self, writer, indent="", addindent="", newl=""):
+        """If the element only contains a single string value then don't add white space around it."""
+        if self.childNodes and len(self.childNodes) == 1 and\
+           self.childNodes[0].nodeType == xml.dom.minidom.Node.TEXT_NODE:
+            writer.write(indent)
+            KmlElement._original_element.writexml(self, writer)
+            writer.write(newl)
+        else:
+            KmlElement._original_element.writexml(self, writer, indent, addindent, newl)

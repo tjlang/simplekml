@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Contact me at kyle.lan@gmail.com
 """
 
-from simplekml.base import *
+from simplekml.base import Kmlable
 
 class TimeSpan(Kmlable): # --Document--
     """Represents an extent in time bounded by begin and end dates.

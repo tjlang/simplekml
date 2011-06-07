@@ -91,5 +91,10 @@
                 <open>0</open>
             </Placemark>
         </Folder>
+        <Placemark id="feat_7">
+            <name>Model</name>
+            <visibility>1</visibility>
+            <open>0</open>
+        </Placemark>
     </Document>
 </kml>

@@ -18,16 +18,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Contact me at kyle.lan@gmail.com
 """
 
-from simplekml.base import Kmlable
-from simplekml.constants import *
 from simplekml.abstractview import *
-from simplekml.styleselector import *
-from simplekml.coordinates import *
 from simplekml.region import *
 from simplekml.overlay import *
 from simplekml.timeprimitive import *
 from simplekml.icon import *
 from simplekml.model import *
+
 
 
 class Feature(Kmlable): # TODO:ExtendedData
@@ -66,8 +63,6 @@ class Feature(Kmlable): # TODO:ExtendedData
         self._kml['TimeStamp'] = timestamp
         self._kml['TimeSpan'] = timespan
         self._kml['Region'] = region
-#        self._kml['Style'] = None
-#        self._kml['StyleMap'] = None
         self._kml['styleUrl'] = None
         self._id = "feat_{0}".format(Feature._id)
         self._style = None
@@ -221,13 +216,13 @@ class Feature(Kmlable): # TODO:ExtendedData
     def style(self):
         if self._style is None:
             self._style = Style()
-            self._setStyle(self._style)
+            self._setstyle(self._style)
             self._addschema(self._style)
         return self._style
 
     @style.setter
     def style(self, style):
-        self._setStyle(style)
+        self._setstyle(style)
         self._addschema(style)
         self._style = style
 
@@ -235,13 +230,13 @@ class Feature(Kmlable): # TODO:ExtendedData
     def stylemap(self):
         if self._stylemap is None:
             self._stylemap = StyleMap()
-            self._setStyle(self._stylemap)
+            self._setstyle(self._stylemap)
             self._addschemamap(self._stylemap)
         return self._stylemap
 
     @stylemap.setter
     def stylemap(self, stylemap):
-        self._setStyle(stylemap)
+        self._setstyle(stylemap)
         self._addschemamap(stylemap)
         self._stylemap = stylemap
 
@@ -301,16 +296,6 @@ class Feature(Kmlable): # TODO:ExtendedData
     def liststyle(self, liststyle):
         self.style.liststyle = liststyle
 
-    def _addfeature(self, feature):
-        """Attaches the given feature to this feature."""
-        if isinstance(feature, Geometry):
-            self._features.append(feature._placemark)
-            feature._parent = self
-            if feature._style is not None:
-                self._addschema(feature._style)
-        else:
-            self._features.append(feature)
-
     def _addschema(self, schema):
         """Attaches the given schema (style) to this feature."""
         self._schemas.append(schema)
@@ -319,7 +304,7 @@ class Feature(Kmlable): # TODO:ExtendedData
         """Attaches the given schema (style) to this feature."""
         self._schemasmaps.append(schema)
 
-    def _setStyle(self, style):
+    def _setstyle(self, style):
         self._kml['styleUrl'] = "#{0}".format(style.id)
 
     def __str__(self):
@@ -339,54 +324,50 @@ class Feature(Kmlable): # TODO:ExtendedData
         str += "</{0}>".format(self.__class__.__name__)
         return str
 
+    def _newfeature(self, cls, **kwargs):
+        """Creates a new feature from the given class and attaches it to this feature."""
+        feat = cls(**kwargs)
+        feat._parent = self
+        if isinstance(feat, Geometry):
+            self._features.append(feat._placemark)
+            feat._parent = self
+            if feat._style is not None:
+                self._addschema(feat._style)
+        else:
+            self._features.append(feat)
+        return feat
+
     def newpoint(self, **kwargs):
         """Creates a new Point and attaches it to the feature."""
-        pnt = Point(**kwargs)
-        pnt._parent = self
-        self._addfeature(pnt)
-        return pnt
+        return self._newfeature(Point, **kwargs)
 
     def newlinestring(self, **kwargs):
         """Creates a new Linestring and attaches it to the feature."""
-        ls = LineString(**kwargs)
-        ls._parent = self
-        self._addfeature(ls)
-        return ls
+        return self._newfeature(LineString, **kwargs)
 
     def newpolygon(self, **kwargs):
         """Creates a new Polygon and attaches it to the feature."""
-        poly = Polygon(**kwargs)
-        poly._parent = self
-        self._addfeature(poly)
-        return poly
+        return self._newfeature(Polygon, **kwargs)
 
     def newmultigeometry(self, **kwargs):
         """Creates a new MultiGeometry container and attaches it to the feature."""
-        multi = MultiGeometry(**kwargs)
-        multi._parent = self
-        self._addfeature(multi)
-        return multi
+        return self._newfeature(MultiGeometry, **kwargs)
 
     def newgroundoverlay(self, **kwargs):
         """Creates a new GroundOverlay and attaches it to the feature."""
-        groundover = GroundOverlay(**kwargs)
-        groundover._parent = self
-        self._addfeature(groundover)
-        return groundover
+        return self._newfeature(GroundOverlay, **kwargs)
 
     def newscreenoverlay(self, **kwargs):
         """Creates a new ScreenOverlay and attaches it to the feature."""
-        screenover = ScreenOverlay(**kwargs)
-        screenover._parent = self
-        self._addfeature(screenover)
-        return screenover
+        return self._newfeature(ScreenOverlay, **kwargs)
 
     def newphotooverlay(self, **kwargs):
         """Creates a new PhotoOverlay and attaches it to the feature."""
-        photoover = PhotoOverlay(**kwargs)
-        photoover._parent = self
-        self._addfeature(photoover)
-        return photoover
+        return self._newfeature(PhotoOverlay, **kwargs)
+
+    def newmodel(self, **kwargs):
+        """Creates a new Model and attaches it to the feature."""
+        return self._newfeature(Model, **kwargs)
 
 
 class Container(Feature):
@@ -396,31 +377,16 @@ class Container(Feature):
 
     def newfolder(self, **kwargs):
         """Creates a new Folder and attaches it to the container."""
-        fol = Folder(**kwargs)
-        fol._parent = self
-        self._addfeature(fol)
-        return fol
+        return self._newfeature(Folder, **kwargs)
 
     def newdocument(self, **kwargs):
         """Creates a new Document and attaches it to the container."""
-        doc = Document(**kwargs)
-        doc._parent = self
-        self._addfeature(doc)
-        return doc
+        return self._newfeature(Document, **kwargs)
 
     def newnetworklink(self, **kwargs):
         """Creates a new NetworkLink and attaches it to the container."""
-        netlink = NetworkLink(**kwargs)
-        netlink._parent = self
-        self._addfeature(netlink)
-        return netlink
+        return self._newfeature(NetworkLink, **kwargs)
 
-    def newmodel(self, **kwargs):
-        """Creates a new NetworkLink and attaches it to the container."""
-        model = Model(**kwargs)
-        model._parent = self
-        self._addfeature(model)
-        return model
 
 class Document(Container):  # --Document--
     """A container for features and styles.
@@ -456,6 +422,7 @@ class Document(Container):  # --Document--
     newscreenoverlay()  -- Creates a new [ScreenOverlay] and attaches it to the document
     newphotooverlay()   -- Creates a new [PhotoOverlay] and attaches it to the document
     newnetworklink()    -- Creates a new [NetworkLink] and attaches it to the document
+    newmodel()          -- Creates a new [Model] and attaches it to the document
 
     """
 
@@ -497,6 +464,7 @@ class Folder(Container):  # --Document--
     newscreenoverlay()  -- Creates a new [ScreenOverlay] and attaches it to the folder
     newphotooverlay()   -- Creates a new [PhotoOverlay] and attaches it to the folder
     newnetworklink()    -- Creates a new [NetworkLink] and attaches it to the folder
+    newmodel()          -- Creates a new [Model] and attaches it to the folder
 
     """
 
@@ -652,14 +620,14 @@ class Geometry(Kmlable):
     def style(self):
         if self._style is None:
             self._style = Style()
-            self._placemark._setStyle(self._style)
+            self._placemark._setstyle(self._style)
             if self._parent is not None:
                 self._parent._addschema(self._style)
         return self._style
 
     @style.setter
     def style(self, style):
-        self._placemark._setStyle(style)
+        self._placemark._setstyle(style)
         if self._parent is not None:
             self._parent._addschema(style)
         self._style = style
@@ -668,14 +636,14 @@ class Geometry(Kmlable):
     def stylemap(self):
         if self._stylemap is None:
             self._stylemap = StyleMap()
-            self._placemark._setStyle(self._stylemap)
+            self._placemark._setstyle(self._stylemap)
             if self._parent is not None:
                 self._parent._addschemamap(self._stylemap)
         return self._stylemap
 
     @stylemap.setter
     def stylemap(self, stylemap):
-        self._placemark._setStyle(stylemap)
+        self._placemark._setstyle(stylemap)
         if self._parent is not None:
             self._parent._addschemamap(stylemap)
         self._stylemap = stylemap
@@ -1201,7 +1169,7 @@ class MultiGeometry(Geometry):  # --Document--
     newgroundoverlay()  -- Creates a new [GroundOverlay] and attaches it to the feature
     newscreenoverlay()  -- Creates a new [ScreenOverlay] and attaches it to the feature
     newphotooverlay()   -- Creates a new [PhotoOverlay] and attaches it to the feature
-
+    newmodel()          -- Creates a new [Model] and attaches it to the feature
 
     """
 
@@ -1210,51 +1178,39 @@ class MultiGeometry(Geometry):  # --Document--
         super(MultiGeometry, self).__init__(**kwargs)
         self._geometries = list(geometries)
 
+    def _newfeature(self, cls, **kwargs):
+        feat = cls(**kwargs)
+        feat._parent = self._placemark
+        self._geometries.append(feat)
+        return feat
+
     def newpoint(self, **kwargs):
         """Creates a new Point and attaches it to the MultiGeometry."""
-        pnt = Point(**kwargs)
-        pnt._parent = self._placemark
-        self._addfeature(pnt)
-        return pnt
+        return self._newfeature(Point, **kwargs)
 
     def newlinestring(self, **kwargs):
         """Creates a new Linestring and attaches it to the MultiGeometry."""
-        ls = LineString(**kwargs)
-        ls._parent = self._placemark
-        self._addfeature(ls)
-        return ls
+        return self._newfeature(LineString, **kwargs)
 
     def newpolygon(self, **kwargs):
         """Creates a new Polygon and attaches it to the MultiGeometry."""
-        poly = Polygon(**kwargs)
-        poly._parent = self._placemark
-        self._addfeature(poly)
-        return poly
+        return self._newfeature(Polygon, **kwargs)
 
     def newgroundoverlay(self, **kwargs):
         """Creates a new GroundOverlay and attaches it to the feature."""
-        groundover = GroundOverlay(**kwargs)
-        groundover._parent = self._placemark
-        self._addfeature(groundover)
-        return groundover
+        return self._newfeature(GroundOverlay, **kwargs)
 
     def newscreenoverlay(self, **kwargs):
         """Creates a new ScreenOverlay and attaches it to the feature."""
-        screenover = ScreenOverlay(**kwargs)
-        screenover._parent = self._placemark
-        self._addfeature(screenover)
-        return screenover
+        return self._newfeature(ScreenOverlay, **kwargs)
 
     def newphotooverlay(self, **kwargs):
         """Creates a new PhotoOverlay and attaches it to the feature."""
-        photoover = PhotoOverlay(**kwargs)
-        photoover._parent = self._placemark
-        self._addfeature(photoover)
-        return photoover
-    
-    def _addfeature(self, feat):
-        """Attaches a feature to this MultiGeometry."""
-        self._geometries.append(feat)
+        return self._newfeature(PhotoOverlay, **kwargs)
+
+    def newmodel(self, **kwargs):
+        """Creates a new Model and attaches it to the MultiGeometry."""
+        return self._newfeature(Model, **kwargs)
 
     def __str__(self):
         str = '<MultiGeometry id="{0}">'.format(self._id)
@@ -1599,6 +1555,24 @@ class NetworkLink(Feature):  # --Document--
     """References a KML file or KMZ archive on a local or remote network.
 
     Arguments:
+    name                -- string (default None)
+    visibility          -- int (default 1)
+    open                -- int (default 0)
+    atomauthor          -- string (default None)
+    atomlink            -- string (default None)
+    address             -- string (default None)
+    xaladdressdetails   -- string in xal format (default None)
+    phonenumber         -- string (default None)
+    snippet             -- string (default None)
+    description         -- string (default None)
+    camera              -- [Camera] (default None)
+    lookat              -- [LookAt] (default None)
+    timestamp           -- [TimeStamp] (default None)
+    timespan            -- [TimeStamp] (default None)
+    region              -- [Region] (default None)
+    extrude             -- int (default 0)
+    altitudemode        -- string from [AltitudeMode] constants (default None)
+    gxaltitudemode      -- string from [GxAltitudeMode] constants [Region] (default None)
     refreshvisibility   -- int (default 0)
     flytoview           -- int (default 0)
     link                -- [Link] (default None)
@@ -1644,10 +1618,25 @@ class NetworkLink(Feature):  # --Document--
         self._kml['Link'] = link
 
 
-class Model(Kmlable):  # --Document--
+class Model(Geometry):  # --Document--
     """A 3D object described in a COLLADA file.
 
     Arguments:
+    name                -- string (default None)
+    visibility          -- int (default 1)
+    open                -- int (default 0)
+    atomauthor          -- string (default None)
+    atomlink            -- string (default None)
+    address             -- string (default None)
+    xaladdressdetails   -- string in xal format (default None)
+    phonenumber         -- string (default None)
+    snippet             -- string (default None)
+    description         -- string (default None)
+    camera              -- [Camera] (default None)
+    lookat              -- [LookAt] (default None)
+    timestamp           -- [TimeStamp] (default None)
+    timespan            -- [TimeStamp] (default None)
+    region              -- [Region] (default None)
     altitudemode        -- string from [AltitudeMode] constants (default None)
     gxaltitudemode      -- string from [GxAltitudeMode] constants (default None)
     location            -- [Location] (default None)
@@ -1657,7 +1646,16 @@ class Model(Kmlable):  # --Document--
     resourcemap         -- [ResourceMap] (default None)
 
     Properties:
-    Same as arguments.
+    Same as arguments, with the following additional properties:
+    style               -- [Style] (default None)
+    stylemap            -- [StyleMap] (default None)
+    liststyle           -- [ListStyle] (default None)
+    balloonstyle        -- [BalloonStyle] (default None)
+    iconstyle           -- [IconStyle] (default None)
+    labelstyle          -- [LabelStyle] (default None)
+    linestyle           -- [LineStyle] (default None)
+    polystyle           -- [PolyStyle] (default None)
+    placemark           -- [Placemark] (default [Placemark], read-only)
 
     """
 
@@ -1668,8 +1666,9 @@ class Model(Kmlable):  # --Document--
                  orientation=None,
                  scale=None,
                  link=None,
-                 resourcemap=None):
-        super(Model, self).__init__()
+                 resourcemap=None,
+                 **kwargs):
+        super(Model, self).__init__(**kwargs)
         self._kml['altitudeMode'] = altitudemode
         self._kml['gx:altitudeMode'] = gxaltitudemode
         self._kml['Location'] = location

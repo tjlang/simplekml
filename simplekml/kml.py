@@ -62,6 +62,7 @@ class Kml(object):  # --Document--
     newscreenoverlay()          -- Creates a new [ScreenOverlay] and attaches it to the document
     newphotooverlay()           -- Creates a new [PhotoOverlay] and attaches it to the document
     newnetworklink()            -- Creates a new [NetworkLink] and attaches it to the document
+    newmodel()                  -- Creates a new [Model] and attaches it to the document
     kml(format=True)            -- Returns the generated kml as a string (if format is False, KML is generated as one line)
     save(path, format=True)     -- Saves to a KML file with the given path (if format is False, KML is generated as one line)
     savekmz(path, format=True)  -- Saves to a KMZ file with the given path (if format is False, KML is generated as one line)
@@ -84,10 +85,10 @@ class Kml(object):  # --Document--
         kml_tag = 'xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:xal="urn:oasis:names:tc:ciq:xsdschema:xAL:2.0"'
         xmlstr = "<kml {0}>{1}</kml>".format(kml_tag, self._feature.__str__())
         if format:
-           xml.dom.minidom.Element = KmlElement
-           s = xml.dom.minidom.parseString(xmlstr)
-           result = s.toprettyxml(indent="    ", newl="\n", encoding="UTF-8")
-           return result
+           KmlElement.patch()
+           kmlstr = xml.dom.minidom.parseString(xmlstr)
+           KmlElement.unpatch()
+           return kmlstr.toprettyxml(indent="    ", newl="\n", encoding="UTF-8")
         else:
             return xmlstr
 
@@ -158,5 +159,5 @@ class Kml(object):  # --Document--
         return self.document.newnetworklink(**kwargs)
 
     def newmodel(self, **kwargs):
-        """Creates a new NetworkLink and attaches it to the document."""
+        """Creates a new Model and attaches it to the document."""
         return self.document.newmodel(**kwargs)
