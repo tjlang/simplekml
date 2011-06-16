@@ -18,15 +18,18 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Contact me at kyle.lan@gmail.com
 """
 
-from simplekml.abstractview import Camera, LookAt
-from simplekml.base import HotSpot, OverlayXY, RotationXY, ScreenXY, Size, Snippet
+from simplekml.abstractview import *
+from simplekml.base import *
 from simplekml.constants import *
-from simplekml.featgeom import Document, Folder, GroundOverlay, LinearRing, LineString, MultiGeometry, PhotoOverlay, Point, Polygon, NetworkLink, Model
-from simplekml.icon import Icon, Link
-from simplekml.overlay import ImagePyramid, ViewVolume
-from simplekml.region import GxLatLonQuad, LatLonBox, LatLonAltBox, Lod, Region
-from simplekml.styleselector import Style, StyleMap
-from simplekml.substyle import LabelStyle, LineStyle, ListStyle, ListItemType, BalloonStyle, IconStyle, PolyStyle
-from simplekml.timeprimitive import GxTimeSpan, GxTimeStamp, TimeSpan, TimeStamp
+from simplekml.coordinates import *
+from simplekml.featgeom import *
+from simplekml.icon import *
 from simplekml.kml import Kml
+from simplekml.model import *
+from simplekml.overlay import *
+from simplekml.region import *
+from simplekml.styleselector import *
+from simplekml.substyle import *
+from simplekml.timeprimitive import *
+
 

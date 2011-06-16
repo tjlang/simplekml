@@ -23,6 +23,8 @@ from simplekml.coordinates import *
 
 
 class Box(Kmlable):
+    """_Base class for box elements."""
+
     def __init__(self,
                  north=None,
                  south=None,
@@ -36,6 +38,11 @@ class Box(Kmlable):
         
     @property
     def north(self):
+        """
+        Latitude of the north edge of the bounding box, in decimal degrees
+        from 0 to 90, accepts float.
+
+        """
         return self._kml['north']
     
     @north.setter
@@ -44,6 +51,11 @@ class Box(Kmlable):
         
     @property
     def south(self):
+        """
+        Latitude of the south edge of the bounding box, in decimal degrees
+        from 0 to 90, accepts float.
+
+        """
         return self._kml['south']
     
     @south.setter
@@ -52,6 +64,11 @@ class Box(Kmlable):
         
     @property
     def east(self):
+        """
+        Longitude of the east edge of the bounding box, in decimal degrees
+        from 0 to 90, accepts float.
+
+        """
         return self._kml['east']
     
     @east.setter
@@ -60,6 +77,11 @@ class Box(Kmlable):
         
     @property
     def west(self):
+        """
+        Longitude of the west edge of the bounding box, in decimal degrees
+        from 0 to 90, accepts float.
+
+        """
         return self._kml['west']
     
     @west.setter
@@ -67,26 +89,44 @@ class Box(Kmlable):
         self._kml['west'] = west
 
 
-class LatLonBox(Box): # --Document--
-    """Specifies where the top, bottom, right, and left sides of a bounding box for the ground overlay are aligned.
+class LatLonBox(Box):
+    """
+    Specifies where the top, bottom, right, and left sides of a bounding box
+    for the ground overlay are aligned.
 
-    Arguments:
-    north               -- float (default None)
-    south               -- float (default None)
-    east                -- float (default None)
-    west                -- float (default None)
-    rotation            -- float (default None)
+    Keyword Arguments:
+    north (float)    -- north edge latitude (default None)
+    south (float)    -- south edge latitude (default None)
+    east (float)     -- east edge longitude (default None)
+    west (float)     -- west edge longitude (default None)
+    rotation (float) -- rotation about center (default None)
 
     Properties:
     Same as arguments.
 
     """
     def __init__(self, rotation=None, **kwargs):
+        """
+        Creates latlonbox element.
+
+        Keyword Arguments:
+        north (float)    -- north edge latitude (default None)
+        south (float)    -- south edge latitude (default None)
+        east (float)     -- east edge longitude (default None)
+        west (float)     -- west edge longitude (default None)
+        rotation (float) -- rotation about center (default None)
+
+        """
         super(LatLonBox, self).__init__(**kwargs)
         self._kml['rotation'] = rotation
         
     @property
     def rotation(self):
+        """
+        Rotation of the overlay about its center, in degrees.
+        Values can be 180, accepts float.
+
+        """
         return self._kml['rotation']
     
     @rotation.setter
@@ -94,16 +134,18 @@ class LatLonBox(Box): # --Document--
         self._kml['rotation'] = rotation
 
 
-class LatLonAltBox(Box): # --Document--
-    """A bounding box that describes an area of interest defined by geographic coordinates and altitudes.
+class LatLonAltBox(Box):
+    """
+    A bounding box that describes an area of interest defined by geographic coordinates and altitudes.
 
-    Arguments:
-    north               -- float (default None)
-    south               -- float (default None)
-    east                -- float (default None)
-    west                -- float (default None)
-    minaltitude         -- float (default None)
-    maxaltitude         -- float (default None)
+    Keyword Arguments:
+    north (float)          -- north edge latitude (default None)
+    south (float)          -- south edge latitude (default None)
+    east (float)           -- east edge longitude (default None)
+    west (float)           -- west edge longitude (default None)
+    minaltitude (float)    -- min altitude in meters (default None)
+    maxaltitude (float)    -- max altitude in meters (default None)
+    altitudemode (string)  -- alt use See [AltitudeMode] (default None)
 
     Properties:
     Same as arguments.
@@ -114,6 +156,19 @@ class LatLonAltBox(Box): # --Document--
                  maxaltitude=0,
                  altitudemode=AltitudeMode.clamptoground,
                  **kwargs):
+        """
+        Creates a latlonaltbox element.
+
+        Keyword Arguments:
+        north (float)          -- north edge latitude (default None)
+        south (float)          -- south edge latitude (default None)
+        east (float)           -- east edge longitude (default None)
+        west (float)           -- west edge longitude (default None)
+        minaltitude (float)    -- min altitude in meters (default None)
+        maxaltitude (float)    -- max altitude in meters (default None)
+        altitudemode (string)  -- alt use See [AltitudeMode] (default None)
+
+        """
         super(LatLonAltBox, self).__init__(**kwargs)
         self._kml["minAltitude"] = minaltitude
         self._kml["maxAltitude"] = maxaltitude
@@ -121,6 +176,7 @@ class LatLonAltBox(Box): # --Document--
 
     @property
     def minaltitude(self):
+        """Minimum altitude in meters, accepts float."""
         return self._kml["minAltitude"]
 
     @minaltitude.setter
@@ -129,6 +185,7 @@ class LatLonAltBox(Box): # --Document--
 
     @property
     def maxaltitude(self):
+        """Maximum altitude in meters, accepts float."""
         return self._kml["maxAltitude"]
 
     @maxaltitude.setter
@@ -137,6 +194,11 @@ class LatLonAltBox(Box): # --Document--
 
     @property
     def altitudemode(self):
+        """
+        Specifies how the altitude for the Camera is interpreted.
+        Accepts [AltitudeMode] constants.
+
+        """
         return self._kml["altitudeMode"]
 
     @altitudemode.setter
@@ -144,15 +206,15 @@ class LatLonAltBox(Box): # --Document--
         self._kml["altitudeMode"] = altitudemode
 
 
-class Lod(Kmlable): # --Document--
-    """Level of Detail describes the size of the projected region on the screen that is required in order for the
-    region to be considered "active".
+class Lod(Kmlable):
+    """
+    Level of Detail describes the size of the projected region..
 
-    Arguments:
-    minlodpixels        -- int (default 0)
-    maxlodpixels        -- int (default -1)
-    minfadeextent       -- int (default 0)
-    maxfadeextent       -- int (default 0)
+    Keyword Arguments:
+    minlodpixels (int)   -- minimum limit of the visibility range (default 0)
+    maxlodpixels (int)   -- maximum limit of the visibility range (default -1)
+    minfadeextent (int)  -- min distance which the geometry fades (default 0)
+    maxfadeextent (int)  -- max distance which the geometry fades (default 0)
 
     Properties:
     Same as arguments.
@@ -163,6 +225,16 @@ class Lod(Kmlable): # --Document--
                  maxlodpixels=-1,
                  minfadeextent=0,
                  maxfadeextent=0):
+        """
+        Creates a Lod element.
+
+        Keyword Arguments:
+        minlodpixels (int) -- minimum limit of the visibility range (default 0)
+        maxlodpixels (int) -- maximum limit of the visibility range (default -1)
+        minfadeextent (int)-- min distance which the geometry fades (default 0)
+        maxfadeextent (int) -- max distance which the geometry fades (default 0)
+
+        """
         super(Lod, self).__init__()
         self._kml["minLodPixels"] = minlodpixels
         self._kml["maxLodPixels"] = maxlodpixels
@@ -171,6 +243,7 @@ class Lod(Kmlable): # --Document--
 
     @property
     def minlodpixels(self):
+        """Minimum limit of the visibility range, accepts int."""
         return self._kml["minLodPixels"]
 
     @minlodpixels.setter
@@ -179,6 +252,7 @@ class Lod(Kmlable): # --Document--
 
     @property
     def maxlodpixels(self):
+        """Maximum limit of the visibility range, accepts int."""
         return self._kml["maxLodPixels"]
 
     @maxlodpixels.setter
@@ -187,6 +261,7 @@ class Lod(Kmlable): # --Document--
 
     @property
     def minfadeextent(self):
+        """Minumum distance over which the geometry fades, accepts int."""
         return self._kml["minFadeExtent"]
 
     @minfadeextent.setter
@@ -195,6 +270,7 @@ class Lod(Kmlable): # --Document--
 
     @property
     def maxfadeextent(self):
+        """Maximum distance over which the geometry fades, accepts int."""
         return self._kml["maxFadeExtent"]
 
     @maxfadeextent.setter
@@ -202,23 +278,36 @@ class Lod(Kmlable): # --Document--
         self._kml["maxFadeExtent"] = maxfadeextent
 
 
-class GxLatLonQuad(Kmlable): # --Document--
-    """Used for nonrectangular quadrilateral ground overlays.
+class GxLatLonQuad(Kmlable):
+    """
+    Used for nonrectangular quadrilateral ground overlays.
 
-    Arguments:
-    coords              -- list of 4 tuples (default None)
+    Keyword Arguments:
+    coords (list of 4 tuples) -- four corners of quad (default None)
 
     Properties:
     Same as arguments.
 
     """
     def __init__(self, coords=None):
+        """
+        Creates a gxlatlonquad element.
+
+        Keyword Arguments:
+        coords (list of 4 tuples) -- four corners of quad (default None)
+
+        """
         super(GxLatLonQuad, self).__init__()
         self._coords = None
         self._kml["coordinates"] = coords
 
     @property
     def coords(self):
+        """
+        Four corners of quad coordinates, accepts list of four tuples.
+
+        eg. [(0, 1), (1,1), (1,0), (0,0)]
+        """
         return self._coords
 
     @coords.setter
@@ -230,24 +319,34 @@ class GxLatLonQuad(Kmlable): # --Document--
         self._kml["coordinates"] = self._kml["coordinates"][:-1]
 
 
-class Region(Kmlable): # --Document--
-    """Used for nonrectangular quadrilateral ground overlays.
+class Region(Kmlable):
+    """
+    Used for nonrectangular quadrilateral ground overlays.
 
-    Arguments:
-    latlonaltbox            -- [LatLonAltBox] (default None)
-    lod                     -- [Lod] (default None)
+    Keyword Arguments:
+    latlonaltbox ([LatLonAltBox]) --  bounding box (default None)
+    lod ([Lod])                   --  level of detail (default None)
 
     Properties:
     Same as arguments.
 
     """
     def __init__(self, latlonaltbox=LatLonAltBox(), lod=Lod()):
+        """
+        Creates a region element.
+
+        Keyword Arguments:
+        latlonaltbox ([LatLonAltBox]) --  bounding box (default None)
+        lod ([Lod])                   --  level of detail (default None)
+
+        """
         super(Region, self).__init__()
         self._kml["LatLonAltBox"] = latlonaltbox
         self._kml["Lod"] = lod
 
     @property
     def latlonaltbox(self):
+        """Bounding box that describes an area, accepts [LatLonAltBox]."""
         return self._kml["LatLonAltBox"]
 
     @latlonaltbox.setter
@@ -256,6 +355,7 @@ class Region(Kmlable): # --Document--
 
     @property
     def lod(self):
+        """Level of Detail, accepts [Lod]"""
         return self._kml["Lod"]
 
     @lod.setter

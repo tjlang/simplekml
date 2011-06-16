@@ -21,7 +21,7 @@ Contact me at kyle.lan@gmail.com
 from simplekml.base import Kmlable
 
 class Coordinates(Kmlable):
-    """Represents a list of Coordinate classes."""
+    """_Represents a list of Coordinate classes."""
     def __init__(self, coords=None):
         self._coords = []
         if coords is not None:

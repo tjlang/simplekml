@@ -18,8 +18,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Contact me at kyle.lan@gmail.com
 """
 
-class AltitudeMode(object): # --Document--
-    """Constants for AltitudeMode constants.
+class AltitudeMode(object):
+    """
+    AltitudeMode constants.
 
     Constants:
     clamptoground       -- string "clampToGround"
@@ -32,8 +33,9 @@ class AltitudeMode(object): # --Document--
     absolute = "absolute"
 
 
-class GxAltitudeMode(object): # --Document--
-    """Constants for gx:AltitudeMode constants.
+class GxAltitudeMode(object):
+    """
+    gx:AltitudeMode constants.
 
     Constants:
     clampToSeaFloor     -- string "clampToSeaFloor"
@@ -44,8 +46,9 @@ class GxAltitudeMode(object): # --Document--
     relativeToSeaFloor  = "relativeToSeaFloor "
 
 
-class ColorMode(object): # --Document--
-    """Constants for ColorMode constants.
+class ColorMode(object):
+    """
+    ColorMode constants.
 
     Constants:
     normal              -- string "normal"
@@ -56,8 +59,9 @@ class ColorMode(object): # --Document--
     random = "random"
 
 
-class DisplayMode(object): # --Document--
-    """Constants for DisplayMode constants.
+class DisplayMode(object):
+    """
+    DisplayMode constants.
 
     Constants:
     default             -- string "default"
@@ -68,8 +72,9 @@ class DisplayMode(object): # --Document--
     hide = "hide"
 
 
-class ListItemType(object): # --Document--
-    """Constants for ListItemType constants.
+class ListItemType(object):
+    """
+    ListItemType constants.
 
     Constants:
     check               -- string "check"
@@ -84,8 +89,9 @@ class ListItemType(object): # --Document--
     checkhidechildren = "checkHideChildren"
 
 
-class State(object): # --Document--
-    """Constants for State constants.
+class State(object):
+    """
+    State constants.
 
     Constants:
     open                -- string "open"
@@ -104,8 +110,9 @@ class State(object): # --Document--
     fetching2 = 'fetching2'
 
 
-class Units(object): # --Document--
-    """Constants for Units constants.
+class Units(object):
+    """
+    Units constants.
 
     Constants:
     pixel               -- string "pixel"
@@ -118,8 +125,9 @@ class Units(object): # --Document--
     insetpixels = 'insetPixels'
 
 
-class Shape(object): # --Document--
-    """Constants for Shape constants.
+class Shape(object):
+    """
+    Shape constants.
 
     Constants:
     rectangle           -- string "rectangle"
@@ -132,8 +140,9 @@ class Shape(object): # --Document--
     sphere = 'sphere'
 
 
-class GridOrigin(object): # --Document--
-    """Constants for GridOrigin constants.
+class GridOrigin(object):
+    """
+    GridOrigin constants.
 
     Constants:
     lowerleft           -- string "lowerLeft"
@@ -144,8 +153,9 @@ class GridOrigin(object): # --Document--
     upperleft = 'upperLeft'
 
 
-class RefreshMode(object): # --Document--
-    """Constants for RefreshMode constants.
+class RefreshMode(object):
+    """
+    RefreshMode constants.
 
     Constants:
     onchange            -- string "onChange"
@@ -158,8 +168,9 @@ class RefreshMode(object): # --Document--
     onexpire = 'onExpire'
 
 
-class ViewRefreshMode(object): # --Document--
-    """Constants for ViewRefreshMode constants.
+class ViewRefreshMode(object):
+    """
+    ViewRefreshMode constants.
 
     Constants:
     never               -- string "never"
@@ -174,8 +185,9 @@ class ViewRefreshMode(object): # --Document--
     onregion  = 'onRegion '
 
 
-class Color(object): # --Document--
-    """Color constants (HTML and CSS) and converters.
+class Color(object):
+    """
+    Color constants (HTML and CSS) and converters.
 
     Constants:
     See HTML and CSS standard colors for full list. All constants are lowercase.
@@ -190,24 +202,52 @@ class Color(object): # --Document--
 
     @classmethod
     def rgb(cls, r, g, b, a=255):
-        """Convert rgba to GE hex value."""
+        """
+        Convert rgba to GE hex value.
+
+        Keyword Arguments:
+        r (int) -- red
+        g (int) -- green
+        b (int) -- blue
+        a (int) -- alpha (default 255)
+
+        """
         return '%0.2x%0.2x%0.2x%0.2x' % (a, b, g, r)
 
 
     @classmethod
     def hex(cls, hstr):
-        """Convert hex (without alpha) to GE hex value."""
+        """
+        Convert hex (without alpha) to GE hex value.
+
+        Keyword Arguments:
+        hstr (string) -- hex string without alpha value
+
+        """
         return "ff{0}".format(hstr[::-1])
 
 
     @classmethod
     def hexa(cls, hstr):
-        """Convert hex (with alpha) to GE hex value."""
+        """
+        Convert hex (with alpha) to GE hex value.
+
+        Keyword Arguments:
+        hstr (string) -- hex string with alpha value
+
+        """
         return hstr[::-1]
 
     @classmethod
     def changealpha(cls, alpha, gehex):
-        """Changes the alpha value of the given Google Earth hex value."""
+        """
+        Changes the alpha value of the given Google Earth hex value.
+
+        Keyword Arguments:
+        alpha (string) -- aplha hex string
+        gehex (string) -- Google Earth hex string
+
+        """
         return alpha + gehex[2:]
 
     aliceblue = 'fffff8f0'

@@ -23,7 +23,7 @@ from simplekml.constants import *
 from simplekml.icon import Icon, ItemIcon
 
 class ColorStyle(Kmlable):
-    """A base class for geometry styles."""
+    """_A base class for geometry styles."""
 
     def __init__(self, color=None, colormode=ColorMode.normal):
         super(ColorStyle, self).__init__()
@@ -32,6 +32,7 @@ class ColorStyle(Kmlable):
 
     @property
     def color(self):
+        """Hex string representing a color, accepts string."""
         return self._kml['color']
 
     @color.setter
@@ -40,6 +41,7 @@ class ColorStyle(Kmlable):
 
     @property
     def colormode(self):
+        """How the color is to be used, string from [ColorMode] constants."""
         return self._kml["colorMode"]
 
     @colormode.setter
@@ -47,16 +49,17 @@ class ColorStyle(Kmlable):
         self._kml["colorMode"] = colormode
 
 
-class LineStyle(ColorStyle): # --Document--
-    """Specifies the drawing style for all line geometry.
+class LineStyle(ColorStyle):
+    """
+    Specifies the drawing style for all line geometry.
 
-    Arguments:
-    color               -- string of KML hex value (default None)
-    colormode           -- string from [ColorMode] constants (default "normal")
-    width               -- float (default None)
-    gxoutercolor        -- string from [ColorMode] constants (default "normal")
-    gxouterwidth        -- float (default None)
-    gxphysicalwidth     -- float (default None)
+    Keyword Arguments:
+    color (string)         -- string of KML hex value (default None)
+    colormode (string)     -- string [ColorMode] constants (default "normal")
+    width (float)          -- width of the line (default None)
+    gxoutercolor (string)  -- string [ColorMode] constants (default "normal")
+    gxouterwidth (float)   -- width of the line (default None)
+    gxphysicalwidth (float)-- physical width (default None)
 
     Properties:
     Same as arguments.
@@ -69,6 +72,18 @@ class LineStyle(ColorStyle): # --Document--
                  gxouterwidth=None,
                  gxphysicalwidth=None,
                  **kwargs):
+        """
+        Creates a linestyle element.
+
+        Keyword Arguments:
+        color (string)         -- string of KML hex value (default None)
+        colormode (string)     -- string [ColorMode] constants(default "normal")
+        width (float)          -- width of the line (default None)
+        gxoutercolor (string)  -- string [ColorMode] constants(default "normal")
+        gxouterwidth (float)   -- width of the line (default None)
+        gxphysicalwidth (float)-- physical width (default None)
+
+        """
         super(LineStyle, self).__init__(**kwargs)
         self._kml["width"] = width
         self._kml["gx:outerColor"] = gxoutercolor
@@ -77,6 +92,7 @@ class LineStyle(ColorStyle): # --Document--
 
     @property
     def width(self):
+        """Width of the line, accepts float."""
         return self._kml['width']
 
     @width.setter
@@ -85,6 +101,7 @@ class LineStyle(ColorStyle): # --Document--
 
     @property
     def gxoutercolor(self):
+        """Outer color of the line, accepts string."""
         return self._kml["gx:outerColor"]
 
     @gxoutercolor.setter
@@ -93,6 +110,7 @@ class LineStyle(ColorStyle): # --Document--
 
     @property
     def gxouterwidth(self):
+        """Outer width of the line, accepts float."""
         return self._kml["gx:outerWidth"]
 
     @gxouterwidth.setter
@@ -101,6 +119,7 @@ class LineStyle(ColorStyle): # --Document--
 
     @property
     def gxphysicalwidth(self):
+        """Physical width of the line, accepts float."""
         return self._kml["gx:physicalWidth"]
 
     @gxphysicalwidth.setter
@@ -108,14 +127,15 @@ class LineStyle(ColorStyle): # --Document--
         self._kml["gx:physicalWidth"] = gxphysicalwidth
 
 
-class PolyStyle(ColorStyle): # --Document--
-    """Specifies the drawing style for all polygons.
+class PolyStyle(ColorStyle):
+    """
+    Specifies the drawing style for all polygons.
 
-    Arguments:
-    color               -- string of KML hex value (default None)
-    colormode           -- string from [ColorMode] constants (default "normal")
-    fill                -- int 1 or 0 (default 1)
-    outline             -- int 1 or 0 (default 1)
+    Keyword Arguments:
+    color (string)      -- string of KML hex value (default None)
+    colormode (string)  -- string [ColorMode] constants(default "normal")
+    fill (int)          -- filled polygon 1 or 0 (default 1)
+    outline (int)       -- outlined polygon 1 or 0 (default 1)
 
     Properties:
     Same as arguments.
@@ -123,12 +143,23 @@ class PolyStyle(ColorStyle): # --Document--
     """
 
     def __init__(self, fill=1, outline=1, **kwargs):
+        """
+        Creates a poltstyle element.
+
+        Keyword Arguments:
+        color (string)      -- string of KML hex value (default None)
+        colormode (string)  -- string [ColorMode] constants(default "normal")
+        fill (int)          -- filled polygon 1 or 0 (default 1)
+        outline (int)       -- outlined polygon 1 or 0 (default 1)
+
+        """
         super(PolyStyle, self).__init__(**kwargs)
         self._kml["fill"] = fill
         self._kml["outline"] = outline
 
     @property
     def fill(self):
+        """Must the polygon be filled, accepts int of 0 or 1."""
         return self._kml['fill']
 
     @fill.setter
@@ -137,6 +168,7 @@ class PolyStyle(ColorStyle): # --Document--
 
     @property
     def outline(self):
+        """Must the polygon be outlined, accepts int of 0 or 1."""
         return self._kml['outline']
 
     @outline.setter
@@ -144,16 +176,17 @@ class PolyStyle(ColorStyle): # --Document--
         self._kml['outline'] = outline
 
 
-class IconStyle(ColorStyle): # --Document--
-    """Specifies how icons for point Placemarks are drawn.
+class IconStyle(ColorStyle):
+    """
+    Specifies how icons for point Placemarks are drawn.
 
-    Arguments:
-    color               -- string of KML hex value (default None)
-    colormode           -- string from [ColorMode] constants (default "normal")
-    scale               -- float (default 1)
-    heading             -- float (default 0)
-    icon                -- [Icon] (default [Icon])
-    hotspot             -- [HotSpot] (default None)
+    Keyword Arguments:
+    color (string)      -- string of KML hex value (default None)
+    colormode (string)  -- string [ColorMode] constants(default "normal")
+    scale (float)       -- size of the icon (default 1)
+    heading (float)     -- rotation of the icon (default 0)
+    icon ([Icon])       -- the [Icon] (default [Icon])
+    hotspot ([Hotspot]) -- the [HotSpot] (default None)
 
     Properties:
     Same as arguments.
@@ -161,6 +194,18 @@ class IconStyle(ColorStyle): # --Document--
     """
 
     def __init__(self, scale=1, heading=0, icon=None, hotspot=None, **kwargs):
+        """
+        Creates a iconstyle element.
+
+        Keyword Arguments:
+        color (string)      -- string of KML hex value (default None)
+        colormode (string)  -- string [ColorMode] constants(default "normal")
+        scale (float)       -- size of the icon (default 1)
+        heading (float)     -- rotation of the icon (default 0)
+        icon ([Icon])       -- the [Icon] (default [Icon])
+        hotspot ([Hotspot]) -- the [HotSpot] (default None)
+
+        """
         super(IconStyle, self).__init__(**kwargs)
         if icon is None:
             icon = Icon(href="http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png")
@@ -171,6 +216,7 @@ class IconStyle(ColorStyle): # --Document--
 
     @property
     def scale(self):
+        """Size of the icon, accepts float."""
         return self._kml['scale']
 
     @scale.setter
@@ -179,6 +225,7 @@ class IconStyle(ColorStyle): # --Document--
 
     @property
     def heading(self):
+        """Rotation of the icon, accepts float."""
         return self._kml['heading']
 
     @heading.setter
@@ -187,6 +234,7 @@ class IconStyle(ColorStyle): # --Document--
 
     @property
     def icon(self):
+        """The actual [Icon] to be displayed, accepts [Icon]."""
         return self._kml["Icon"]
 
     @icon.setter
@@ -195,6 +243,7 @@ class IconStyle(ColorStyle): # --Document--
 
     @property
     def hotspot(self):
+        """Anchor position inside of the icon, accepts [HotSpot]."""
         if self._kml["hotspot_"] is None:
             self._kml["hotspot_"] = HotSpot()
         return self._kml["hotspot_"]
@@ -204,13 +253,14 @@ class IconStyle(ColorStyle): # --Document--
         self._kml["hotspot_"] = hotspot
 
 
-class LabelStyle(ColorStyle): # --Document--
-    """Specifies how the name of a Feature is drawn.
+class LabelStyle(ColorStyle):
+    """
+    Specifies how the name of a Feature is drawn.
 
-    Arguments:
-    color               -- string of KML hex value (default None)
-    colormode           -- string from [ColorMode] constants (default "normal")
-    scale               -- float (default 1)
+    Keyword Arguments:
+    color (string)      -- string of KML hex value (default None)
+    colormode (string)  -- string [ColorMode] constants(default "normal")
+    scale (float)       -- size of the icon (default 1)
 
     Properties:
     Same as arguments.
@@ -218,11 +268,21 @@ class LabelStyle(ColorStyle): # --Document--
     """
 
     def __init__(self, scale=1, **kwargs):
+        """
+        Creates a labelstyle element.
+
+        Keyword Arguments:
+        color (string)      -- string of KML hex value (default None)
+        colormode (string)  -- string [ColorMode] constants(default "normal")
+        scale (float)       -- size of the icon (default 1)
+
+        """
         super(LabelStyle, self).__init__(**kwargs)
         self._kml["scale"] = scale
 
     @property
     def scale(self):
+        """Size of the icon, accepts float."""
         return self._kml['scale']
 
     @scale.setter
@@ -230,14 +290,15 @@ class LabelStyle(ColorStyle): # --Document--
         self._kml['scale'] = scale
 
 
-class BalloonStyle(Kmlable): # --Document--
-    """Specifies the content and layout of the description balloon.
+class BalloonStyle(Kmlable):
+    """
+    Specifies the content and layout of the description balloon.
 
-    Arguments:
-    bgcolor             -- string of KML hex value (default None)
-    textcolor           -- string of KML hex value (default None)
-    text                -- string (default None)
-    displaymode         -- string from [DisplayMode] constants (default "default")
+    Keyword Arguments:
+    bgcolor (string)     -- background color hex value (default None)
+    textcolor (string)   -- text color  hex value (default None)
+    text (string)        -- the actual text (default None)
+    displaymode (string) -- string [DisplayMode] constants (default "default")
 
     Properties:
     Same as arguments.
@@ -249,6 +310,16 @@ class BalloonStyle(Kmlable): # --Document--
                  textcolor=None,
                  text=None,
                  displaymode=DisplayMode.default):
+        """
+        Creates a balloonstyle element.
+
+        Keyword Arguments:
+        bgcolor (string)     -- background color hex value (default None)
+        textcolor (string)   -- text color  hex value (default None)
+        text (string)        -- the actual text (default None)
+        displaymode (string) -- string [DisplayMode] constants (default "default")
+
+        """
         super(BalloonStyle, self).__init__()
         self._kml["bgColor"] = bgcolor
         self._kml["textColor"] = textcolor
@@ -257,6 +328,7 @@ class BalloonStyle(Kmlable): # --Document--
 
     @property
     def bgcolor(self):
+        """Background color of the balloon, accepts hex string."""
         return self._kml["bgColor"]
 
     @bgcolor.setter
@@ -265,6 +337,7 @@ class BalloonStyle(Kmlable): # --Document--
 
     @property
     def textcolor(self):
+        """Text color in the balloon, accepts hex string."""
         return self._kml["textColor"]
 
     @textcolor.setter
@@ -273,6 +346,7 @@ class BalloonStyle(Kmlable): # --Document--
 
     @property
     def text(self):
+        """The actual text that will appear in the balloon, accepts string."""
         return self._kml['text']
 
     @text.setter
@@ -281,6 +355,7 @@ class BalloonStyle(Kmlable): # --Document--
 
     @property
     def displaymode(self):
+        """How the balloon is tyo be displayed, accepts string from [DisplayMode] constants."""
         return self._kml["displayMode"]
     
     
@@ -289,13 +364,14 @@ class BalloonStyle(Kmlable): # --Document--
         self._kml["displayMode"] = displaymode
 
 
-class ListStyle(Kmlable): # --Document--
-    """Specifies the display of the elements style in the navigation bar.
+class ListStyle(Kmlable):
+    """
+    Specifies the display of the elements style in the navigation bar.
 
-    Arguments:
-    listitemtype        -- string from [ListItemType] constants (default "check")
-    bgcolor             -- string of KML hex value (default None)
-    itemicon            -- [ItemIcon] (default None)
+    Keyword Arguments:
+    listitemtype (string) -- string from [ListItemType] constants (default "check")
+    bgcolor (string)      -- background color hex value (default None)
+    itemicon ([ItemIcon]) -- an [ItemIcon] instance (default None)
 
     Properties:
     Same as arguments.
@@ -306,6 +382,15 @@ class ListStyle(Kmlable): # --Document--
                  listitemtype=ListItemType.check,
                  bgcolor=None,
                  itemicon=None):
+        """
+        Creates a liststyle element.
+
+        Keyword Arguments:
+        listitemtype (string) -- string from [ListItemType] constants (default "check")
+        bgcolor (string)      -- background color hex value (default None)
+        itemicon ([ItemIcon]) -- an [ItemIcon] instance (default None)
+
+        """
         super(ListStyle, self).__init__()
         self._kml["listItemType"] = listitemtype
         self._kml["bgColor"] = bgcolor
@@ -313,6 +398,7 @@ class ListStyle(Kmlable): # --Document--
 
     @property
     def itemicon(self):
+        """An instance of an [ItemIcon] class, accepts [ItemIcon]."""
         if self._kml["ItemIcon"] is None:
             self._kml["ItemIcon"] = ItemIcon()
         return self._kml["ItemIcon"]
@@ -323,6 +409,7 @@ class ListStyle(Kmlable): # --Document--
 
     @property
     def listitemtype(self):
+        """How an item is diaplyed, accepts string from [ListItemType] constants."""
         return self._kml["listItemType"]
 
     @listitemtype.setter
@@ -331,6 +418,7 @@ class ListStyle(Kmlable): # --Document--
 
     @property
     def bgcolor(self):
+        """The background color of the item, accepts a hex string."""
         return self._kml["bgColor"]
 
     @bgcolor.setter

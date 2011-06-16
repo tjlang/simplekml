@@ -23,7 +23,7 @@ from simplekml.constants import *
 from simplekml.timeprimitive import *
 
 class AbstractView(Kmlable): #TODO: gxViewerOptions
-    """Base class, extended by Camera and LookAt."""
+    """_Base class, extended by Camera and LookAt."""
     def __init__(self,
                  longitude=None,
                  latitude=None,
@@ -47,6 +47,7 @@ class AbstractView(Kmlable): #TODO: gxViewerOptions
 
     @property
     def longitude(self):
+        """Decimal degree value in WGS84 datum, accepts float."""
         return self._kml['longitude']
 
     @longitude.setter
@@ -55,6 +56,7 @@ class AbstractView(Kmlable): #TODO: gxViewerOptions
 
     @property
     def latitude(self):
+        """Decimal degree value in WGS84 datum, accepts float."""
         return self._kml['latitude']
 
     @latitude.setter
@@ -63,6 +65,7 @@ class AbstractView(Kmlable): #TODO: gxViewerOptions
 
     @property
     def altitude(self):
+        """Height above the earth in meters (m), accepts int."""
         return self._kml['altitude']
 
     @altitude.setter
@@ -71,6 +74,7 @@ class AbstractView(Kmlable): #TODO: gxViewerOptions
 
     @property
     def heading(self):
+        """Rotation about the z axis, accepts float."""
         return self._kml['heading']
 
     @heading.setter
@@ -79,6 +83,7 @@ class AbstractView(Kmlable): #TODO: gxViewerOptions
 
     @property
     def tilt(self):
+        """Rotation about the x axis, accepts float."""
         return self._kml['tilt']
 
     @tilt.setter
@@ -87,6 +92,12 @@ class AbstractView(Kmlable): #TODO: gxViewerOptions
 
     @property
     def altitudemode(self):
+        """
+        Specifies how the altitude for the Camera is interpreted.
+
+        Accepts [AltitudeMode] constants.
+
+        """
         return self._kml['altitudeMode']
 
     @altitudemode.setter
@@ -95,6 +106,13 @@ class AbstractView(Kmlable): #TODO: gxViewerOptions
 
     @property
     def gxaltitudemode(self):
+        """
+        Specifies how the altitude for the Camera is interpreted.
+
+        With the addition of being relative to the sea floor.
+        Accepts [GxAltitudeMode] constants.
+
+        """
         return self._kml['gx:altitudeMode']
 
     @gxaltitudemode.setter
@@ -103,6 +121,7 @@ class AbstractView(Kmlable): #TODO: gxViewerOptions
 
     @property
     def gxtimestamp(self):
+        """Represents a single moment in time, accepts [GxTimeStamp]."""
         if self._kml['gx:TimeStamp'] is None:
             self._kml['gx:TimeStamp'] = GxTimeStamp()
         return self._kml['gx:TimeStamp']
@@ -113,6 +132,7 @@ class AbstractView(Kmlable): #TODO: gxViewerOptions
 
     @property
     def gxtimespan(self):
+        """Period of time, accepts [GxTimeSpan]."""
         if self._kml['gx:TimeSpan'] is None:
             self._kml['gx:TimeSpan'] = GxTimeSpan()
         return self._kml['gx:TimeSpan']
@@ -125,17 +145,17 @@ class AbstractView(Kmlable): #TODO: gxViewerOptions
 class Camera(AbstractView): # --Document--
     """A virtual camera that views the scene.
 
-    Arguments:
-    longitude           -- float (default None)
-    latitude            -- float (default None)
-    altitude            -- float (default None)
-    heading             -- float (default None)
-    tilt                -- float (default None)
-    altitudemode        -- string from [AltitudeMode] constants (default None)
-    gxaltitudemode      -- string from [GxAltitudeMode] constants (default None)
-    gxtimespan          -- [GxTimeSpan] (default None)
-    gxtimestamp         -- [GxTimeStamp] (default None)
-    roll                -- float (default None)
+    Keyword Arguments:
+    longitude (float)           -- decimal degree (default None)
+    latitude (float)            -- decimal degree  (default None)
+    altitude (float)            -- height from earth (m) (default None)
+    heading (float)             -- rotation about the z axis (default None)
+    tilt (float)                -- rotation about the x axis (default None)
+    altitudemode (string)       -- alt use See [AltitudeMode] (default None)
+    gxaltitudemode (string)     -- alt use. See [GxAltitudeMode] (default None)
+    gxtimespan ([GxTimeSpan])   -- a single moment in time (default None)
+    gxtimestamp ([GxTimeStamp]) -- a period of time (default None)
+    roll (float)                -- rotation about the y axis (default None)
 
     Properties:
     Same as arguments.
@@ -143,11 +163,28 @@ class Camera(AbstractView): # --Document--
     """
 
     def __init__(self, roll=None, **kwargs):
+        """
+        Creates a camera that views the scene.
+
+        Keyword Arguments:
+        longitude (float)          -- decimal degree (default None)
+        latitude (float)           -- decimal degree  (default None)
+        altitude (float)           -- height from earth (m) (default None)
+        heading (float)            -- rotation about the z axis (default None)
+        tilt (float)               -- rotation about the x axis (default None)
+        altitudemode (string)      -- alt use See [AltitudeMode] (default None)
+        gxaltitudemode (string)    -- alt use.See [GxAltitudeMode](default None)
+        gxtimespan ([GxTimeSpan])  -- a single moment in time (default None)
+        gxtimestamp ([GxTimeStamp])-- a period of time (default None)
+        roll (float)               -- rotation about the y axis (default None)
+
+        """
         super(Camera, self).__init__(**kwargs)
         self._kml['roll'] = roll
 
     @property
     def roll(self):
+        """Rotation about the y axis, accepts float."""
         return self._kml['roll']
 
     @roll.setter
@@ -158,17 +195,17 @@ class Camera(AbstractView): # --Document--
 class LookAt(AbstractView): # --Document--
     """Positions the camera in relation to the object that is being viewed.
 
-    Arguments:
-    longitude           -- float (default None)
-    latitude            -- float (default None)
-    altitude            -- float (default None)
-    heading             -- float (default None)
-    tilt                -- float (default None)
-    altitudemode        -- string from [AltitudeMode] constants (default None)
-    gxaltitudemode      -- string from [GxAltitudeMode] constants (default None)
-    gxtimespan          -- [GxTimeSpan] (default None)
-    gxtimestamp         -- [GxTimeStamp] (default None)
-    range               -- float (default None)
+    Keyword Arguments:
+    longitude (float)           -- decimal degree (default None)
+    latitude (float)            -- decimal degree  (default None)
+    altitude (float)            -- height from earth (m) (default None)
+    heading (float)             -- rotation about the z axis (default None)
+    tilt (float)                -- rotation about the x axis (default None)
+    altitudemode (string)       -- alt use See [AltitudeMode] (default None)
+    gxaltitudemode (string)     -- alt use. See [GxAltitudeMode] (default None)
+    gxtimespan ([GxTimeSpan])   -- a single moment in time (default None)
+    gxtimestamp ([GxTimeStamp]) -- a period of time (default None)
+    range                       -- distance from point (default None)
 
     Properties:
     Same as arguments.
@@ -176,11 +213,28 @@ class LookAt(AbstractView): # --Document--
     """
 
     def __init__(self, range=None, **kwargs):
+        """
+        Creates a LookAt element that positions the camera.
+
+        Keyword Arguments:
+        longitude (float)          -- decimal degree (default None)
+        latitude (float)           -- decimal degree  (default None)
+        altitude (float)           -- height from earth (m) (default None)
+        heading (float)            -- rotation about the z axis (default None)
+        tilt (float)               -- rotation about the x axis (default None)
+        altitudemode (string)      -- alt use See [AltitudeMode] (default None)
+        gxaltitudemode (string)    -- alt use.See [GxAltitudeMode](default None)
+        gxtimespan ([GxTimeSpan])   -- a single moment in time (default None)
+        gxtimestamp ([GxTimeStamp])-- a period of time (default None)
+        range                      -- distance from point (default None)
+
+        """
         super(LookAt, self).__init__(**kwargs)
         self._kml['range'] = range
 
     @property
     def range(self):
+        """Distance in meters from the point, accepts int."""
         return self._kml['range']
 
     @range.setter

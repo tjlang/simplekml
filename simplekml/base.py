@@ -23,7 +23,9 @@ import cgi
 import xml.dom.minidom
 
 class Kmlable(object):
-    """Enables a subclass to be converted into KML."""
+
+    """_Enables a subclass to be converted into KML."""
+
     _images = []
     _kmz = False
 
@@ -68,63 +70,134 @@ class Kmlable(object):
 
 
 class Vector2(object):
+
+    """_A base class representing a vector."""
+
     def __init__(self,
                  x=None,
                  y=None,
                  xunits=None,
                  yunits=None):
+        self._kml = {}
         self.x = x
         self.y = y
         self.xunits = xunits
         self.yunits = yunits
 
+
+    @property
+    def x(self):
+        """Number in xunits, accepts int."""
+        return self._kml['x']
+
+    @x.setter
+    def x(self, x):
+        self._kml['x'] = x
+
+    @property
+    def y(self):
+        """Number in yunits, accepts int."""
+        return self._kml['y']
+
+    @y.setter
+    def y(self, y):
+        self._kml['y'] = y
+
+    @property
+    def xunits(self):
+        """Type of x units, see [Units] for values."""
+        return self._kml['xunits']
+
+    @xunits.setter
+    def xunits(self, xunits):
+        self._kml['xunits'] = xunits
+
+    @property
+    def yunits(self):
+        """Type of y units, see [Units] for values."""
+        return self._kml['yunits']
+
+    @yunits.setter
+    def yunits(self, yunits):
+        self._kml['yunits'] = yunits
+
+
+
     def __str__(self):
         cname = self.__class__.__name__[0].lower() + self.__class__.__name__[1:]
-        return '<{0} x="{1}" y="{2}" xunits="{3}" yunits="{4}" />'.format(cname, self.x, self.y, self.xunits, self.yunits)
+        return '<{0} x="{1}" y="{2}" xunits="{3}" yunits="{4}" />'.format(cname, self._kml['x'], self._kml['y'], self._kml['xunits'], self._kml['yunits'])
 
 
-class OverlayXY(Vector2): # --Document--
-    """Specifies a point on (or outside of) the overlay image that is mapped to the screen coordinate [ScreenXY]
+class OverlayXY(Vector2):
 
-    Arguments:
-    x                   -- int (default None)
-    y                   -- int (default None)
-    xunits              -- string from [Units] constants (default None)
-    yunits              -- string from [Units] constants (default None)
+    """
+    Point in overlay image that is mapped to screen coordinate [ScreenXY]
+
+    Keyword Arguments:
+    x (int)         -- number in xunits (default None)
+    y (int)         -- number in yunits (default None)
+    xunits (string) -- type of x units. See [Units] (default None)
+    yunits (string) -- type of y units. See [Units] (default None)
 
     Properties:
     Same as arguments.
 
     """
+
     def __init__(self, **kwargs):
+        """
+        Creates a OverlayXY element.
+
+        Keyword Arguments:
+        x (int)         -- number in xunits (default None)
+        y (int)         -- number in yunits (default None)
+        xunits (string) -- type of x units. See [Units] (default None)
+        yunits (string) -- type of y units. See [Units] (default None)
+
+        """
         super(OverlayXY, self).__init__(**kwargs)
 
 
-class ScreenXY(Vector2): # --Document--
-    """Specifies a point relative to the screen origin that the overlay image is mapped to.
+class ScreenXY(Vector2):
 
-    Arguments:
-    x                   -- int (default None)
-    y                   -- int (default None)
-    xunits              -- string from [Units] constants (default None)
-    yunits              -- string from [Units] constants (default None)
+    """
+    Point relative to the screen origin that the overlay image is mapped to.
+
+    Keyword Arguments:
+    x (int)         -- number in xunits (default None)
+    y (int)         -- number in yunits (default None)
+    xunits (string) -- type of x units. See [Units] (default None)
+    yunits (string) -- type of y units. See [Units] (default None)
 
     Properties:
     Same as arguments.
 
     """
+
     def __init__(self, **kwargs):
+        """
+        Creates a ScreenXY element.
+
+        Keyword Arguments:
+        x (int)         -- number in xunits (default None)
+        y (int)         -- number in yunits (default None)
+        xunits (string) -- type of x units. See [Units] (default None)
+        yunits (string) -- type of y units. See [Units] (default None)
+
+        """
         super(ScreenXY, self).__init__(**kwargs)
 
 
-class RotationXY(Vector2): # --Document--
-    """Point relative to the screen about which the screen overlay is rotated.
+class RotationXY(Vector2):
 
-    Arguments:
-    x                   -- int (default None)
-    y                   -- int (default None)
-    xunits              -- string from [Units] constants (default None)
-    yunits              -- string from [Units] constants (default None)
+    """
+    Point relative to the screen about which the screen overlay is rotated.
+
+    Keyword Arguments:
+    x (int)         -- number in xunits (default None)
+    y (int)         -- number in yunits (default None)
+    xunits (string) -- type of x units. See [Units] (default None)
+    yunits (string) -- type of y units. See [Units] (default None)
 
     Properties:
     Same as arguments.
@@ -132,17 +205,29 @@ class RotationXY(Vector2): # --Document--
     """
 
     def __init__(self, **kwargs):
+        """
+        Creates a RotationXY element.
+
+        Keyword Arguments:
+        x (int)         -- number in xunits (default None)
+        y (int)         -- number in yunits (default None)
+        xunits (string) -- type of x units. See [Units] (default None)
+        yunits (string) -- type of y units. See [Units] (default None)
+
+        """
         super(RotationXY, self).__init__(**kwargs)
 
 
-class Size(Vector2): # --Document--
-    """Specifies the size of the image for the screen overlay.
+class Size(Vector2):
 
-    Arguments:
-    x                   -- int (default None)
-    y                   -- int (default None)
-    xunits              -- string from [Units] constants (default None)
-    yunits              -- string from [Units] constants (default None)
+    """
+    Specifies the size of the image for the screen overlay.
+
+    Keyword Arguments:
+    x (int)         -- number in xunits (default None)
+    y (int)         -- number in yunits (default None)
+    xunits (string) -- type of x units. See [Units] (default None)
+    yunits (string) -- type of y units. See [Units] (default None)
 
     Properties:
     Same as arguments.
@@ -150,17 +235,29 @@ class Size(Vector2): # --Document--
     """
 
     def __init__(self, **kwargs):
+        """
+        Creates a Size element.
+
+        Keyword Arguments:
+        x (int)         -- number in xunits (default None)
+        y (int)         -- number in yunits (default None)
+        xunits (string) -- type of x units. See [Units] (default None)
+        yunits (string) -- type of y units. See [Units] (default None)
+
+        """
         super(Size, self).__init__(**kwargs)
 
         
-class HotSpot(Vector2): # --Document--
-    """Specifies the position within the [Icon] that is "anchored" to the [Point].
+class HotSpot(Vector2):
 
-    Arguments:
-    x                   -- float (default None)
-    y                   -- float (default None)
-    xunits              -- string from [Units] constants (default None)
-    yunits              -- string from [Units] constants (default None)
+    """
+    Specifies the position inside the [Icon] that is anchored to the [Point].
+
+    Keyword Arguments:
+    x (int)         -- number in xunits (default None)
+    y (int)         -- number in yunits (default None)
+    xunits (string) -- type of x units. See [Units] (default None)
+    yunits (string) -- type of y units. See [Units] (default None)
 
     Properties:
     Same as arguments.
@@ -168,15 +265,27 @@ class HotSpot(Vector2): # --Document--
     """
 
     def __init__(self, **kwargs):
+        """
+        Creates a HotSpot element.
+
+        Keyword Arguments:
+        x (int)         -- number in xunits (default None)
+        y (int)         -- number in yunits (default None)
+        xunits (string) -- type of x units. See [Units] (default None)
+        yunits (string) -- type of y units. See [Units] (default None)
+
+        """
         super(HotSpot, self).__init__(**kwargs)
 
 
-class Snippet(object): # --Document--
-    """A short description of the feature.
+class Snippet(object):
 
-    Arguments:
-    content             -- string (default None)
-    maxlines            -- int (default None)
+    """
+    A short description of the feature.
+
+    Keyword Arguments:
+    content (string)  -- the description (default None)
+    maxlines (string) -- number of lines to display (default None)
 
     Properties:
     Same as arguments.
@@ -184,15 +293,45 @@ class Snippet(object): # --Document--
     """
 
     def __init__(self, content='', maxlines=2):
+        """
+        Creates a Snippet element.
+
+        Keyword Arguments:
+        content (string)  -- the description (default None)
+        maxlines (string) -- number of lines to display (default None)
+
+        """
+        self._kml = {}
         self.content = content
         self.maxlines = maxlines
+
+    @property
+    def content(self):
+        """The description to be used in the snippet, accepts string."""
+        return self._kml['content']
+
+    @content.setter
+    def content(self, content):
+        self._kml['content'] = content
+
+    @property
+    def maxlines(self):
+        """Number of lines to display, accepts int."""
+        return self._kml['maxlines']
+
+    @maxlines.setter
+    def maxlines(self, maxlines):
+        self._kml['maxlines'] = maxlines
         
     def __str__(self):
-        return '<Snippet maxLines="{0}">{1}</Snippet>'.format(self.maxlines, self.content)
+        return '<Snippet maxLines="{0}">{1}</Snippet>'.format(self._kml['maxlines'],
+                                                              self._kml['content'])
 
 
 class KmlElement(xml.dom.minidom.Element):
-    """Overrides the original Element to format the KML to Google Maps standards."""
+
+    """_Overrides the original Element to format the KML to GMaps standards."""
+
     _original_element = xml.dom.minidom.Element
 
     @classmethod

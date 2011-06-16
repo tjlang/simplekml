@@ -1,13 +1,14 @@
 from simplekml.base import Kmlable
 
 
-class Location(Kmlable):  # --Document--
-    """Specifies the exact coordinates of the Model's origin in latitude, longitude, and altitude.
+class Location(Kmlable):
+    """
+    Specifies the exact coordinates of the Model's origin.
 
     Arguments:
-    longitude           -- int (default None)
-    latitude            -- int (default None)
-    altitude            -- int (default 0)
+    longitude (float) -- decimal degree (default None)
+    latitude (float)  -- decimal degree (default None)
+    altitude (float)  -- height above earth (default 0)
 
     Properties:
     Same as arguments.
@@ -18,6 +19,15 @@ class Location(Kmlable):  # --Document--
                  longitude=None,
                  latitude=None,
                  altitude=0):
+        """
+        Creates a location element.
+
+        Keyword Arguments:
+        longitude (float) -- decimal degree (default None)
+        latitude (float)  -- decimal degree (default None)
+        altitude (float)  -- height above earth (default 0)
+
+        """
         super(Location, self).__init__()
         self._kml['longitude'] = longitude
         self._kml['latitude'] = latitude
@@ -25,6 +35,7 @@ class Location(Kmlable):  # --Document--
 
     @property
     def longitude(self):
+        """Decimal degree, accepts float."""
         return self._kml['longitude']
 
     @longitude.setter
@@ -33,6 +44,7 @@ class Location(Kmlable):  # --Document--
 
     @property
     def latitude(self):
+        """Decimal degree, accepts float."""
         return self._kml['latitude']
 
     @latitude.setter
@@ -41,6 +53,7 @@ class Location(Kmlable):  # --Document--
 
     @property
     def altitude(self):
+        """Height above the earth's surface in meters, accepts float."""
         return self._kml['altitude']
 
     @altitude.setter
@@ -48,13 +61,14 @@ class Location(Kmlable):  # --Document--
         self._kml['altitude'] = altitude
 
 
-class Orientation(Kmlable):  # --Document--
-    """Describes rotation of a 3D model's coordinate system to position the object in Google Earth.
+class Orientation(Kmlable):
+    """
+    Describes rotation of a 3D model's coordinate system.
 
-    Arguments:
-    heading             -- int (default 0)
-    tilt                -- int (default 0)
-    roll                -- int (default 0)
+    Keyword Arguments:
+    heading (float) -- rotation about the z axis (default None)
+    tilt (float)    -- rotation about the x axis (default None)
+    roll (float)    -- rotation about the y axis (default None)
 
     Properties:
     Same as arguments.
@@ -64,6 +78,15 @@ class Orientation(Kmlable):  # --Document--
                  heading=0,
                  tilt=0,
                  roll=0):
+        """
+        Creates an orientation element.
+
+        Keyword Arguments:
+        heading (float) -- rotation about the z axis (default None)
+        tilt (float)    -- rotation about the x axis (default None)
+        roll (float)    -- rotation about the y axis (default None)
+
+        """
         super(Orientation, self).__init__()
         self._kml['heading'] = heading
         self._kml['tilt'] = tilt
@@ -71,6 +94,7 @@ class Orientation(Kmlable):  # --Document--
 
     @property
     def heading(self):
+        """Rotation about the z axis, accepts float."""
         return self._kml['heading']
 
     @heading.setter
@@ -79,6 +103,7 @@ class Orientation(Kmlable):  # --Document--
 
     @property
     def tilt(self):
+        """Rotation about the x axis, accepts float."""
         return self._kml['tilt']
 
     @tilt.setter
@@ -87,6 +112,7 @@ class Orientation(Kmlable):  # --Document--
 
     @property
     def roll(self):
+        """Rotation about the y axis, accepts float."""
         return self._kml['roll']
 
     @roll.setter
@@ -94,13 +120,14 @@ class Orientation(Kmlable):  # --Document--
         self._kml['roll'] = roll
 
 
-class Scale(Kmlable): # --Document--
-    """Scales a model along the x, y, and z axes in the model's coordinate space.
+class Scale(Kmlable):
+    """
+    Scales a model along the x, y, and z axes in the model's coordinate space.
 
-    Arguments:
-    x                   -- int (default 1)
-    y                   -- int (default 1)
-    z                   -- int (default 1)
+    Keyword Arguments:
+    x (float) -- scale in the x direction (default 1)
+    y (float) -- scale in the y direction (default 1)
+    z (float) -- scale in the z direction (default 1)
 
     Properties:
     Same as arguments.
@@ -111,6 +138,15 @@ class Scale(Kmlable): # --Document--
                  x=1,
                  y=1,
                  z=1):
+        """
+        Creates a scale element.
+
+        Keyword Arguments:
+        x (float) -- scale in the x direction (default 1)
+        y (float) -- scale in the y direction (default 1)
+        z (float) -- scale in the z direction (default 1)
+
+        """
         super(Scale, self).__init__()
         self._kml['x'] = x
         self._kml['y'] = y
@@ -118,6 +154,7 @@ class Scale(Kmlable): # --Document--
 
     @property
     def x(self):
+        """Scale in the x direction, accepts float."""
         return self._kml['x']
 
     @x.setter
@@ -126,6 +163,7 @@ class Scale(Kmlable): # --Document--
 
     @property
     def y(self):
+        """Scale in the y direction, accepts float."""
         return self._kml['y']
 
     @y.setter
@@ -134,6 +172,7 @@ class Scale(Kmlable): # --Document--
 
     @property
     def z(self):
+        """Scale in the z direction, accepts float."""
         return self._kml['z']
 
     @z.setter
@@ -141,12 +180,13 @@ class Scale(Kmlable): # --Document--
         self._kml['z'] = z
 
 
-class Alias(Kmlable): # --Document--
-    """Contains a mapping from a sourcehref to a targethref.
+class Alias(Kmlable):
+    """
+    Contains a mapping from a sourcehref to a targethref.
 
-    Arguments:
-    targethref          -- string (default None)
-    sourcehref          -- string (default None)
+    Keyword Arguments:
+    targethref (string) -- the target href (default None)
+    sourcehref (string) -- the source href (default None)
 
     Properties:
     Same as arguments.
@@ -156,12 +196,21 @@ class Alias(Kmlable): # --Document--
     def __init__(self,
                  targethref=None,
                  sourcehref=None):
+        """
+        Creates an alias element.
+
+        Keyword Arguments:
+        targethref (string) -- the target href (default None)
+        sourcehref (string) -- the source href (default None)
+
+        """
         super(Alias, self).__init__()
         self._kml['targetHref'] = targethref
         self._kml['sourceHref'] = sourcehref
 
     @property
     def targethref(self):
+        """The target href, accepts string."""
         return self._kml['targetHref']
 
     @targethref.setter
@@ -170,6 +219,7 @@ class Alias(Kmlable): # --Document--
 
     @property
     def sourcehref(self):
+        """The source href, accepts string."""
         return self._kml['sourceHref']
 
     @sourcehref.setter
@@ -177,22 +227,30 @@ class Alias(Kmlable): # --Document--
         self._kml['sourceHref'] = sourcehref
 
 
-class ResourceMap(Kmlable): # --Document--
-    """Contains and specifies 0 or more [Alias] elements.
+class ResourceMap(Kmlable):
+    """
+    Contains and specifies 0 or more [Alias] elements.
 
-    Arguments:
-    aliases             -- list of aliases (default None)
+    Keyword Arguments:
+    aliases (list of [Alias]) -- list of aliases (default None)
 
     Properties:
     Same as arguments.
 
     Public Methods:
-    newalias()          -- Creates a new [Alias] and attaches it to the resourcemap
+    newalias() -- Creates a new [Alias] and attaches it to the resourcemap
 
     """
 
     def __init__(self,
                  aliases=None):
+        """
+        Creates an alias element.
+
+        Keyword Arguments:
+        aliases (list of [Alias]) -- list of aliases (default None)
+
+        """
         super(ResourceMap, self).__init__()
         self._aliases = aliases
         if self._aliases is None:
@@ -200,6 +258,7 @@ class ResourceMap(Kmlable): # --Document--
 
     @property
     def aliases(self):
+        """A list of all the aliases, accepts a list of aliases"""
         return self._aliases
 
     @aliases.setter
@@ -207,6 +266,13 @@ class ResourceMap(Kmlable): # --Document--
         self._aliases = aliases
 
     def newalias(self, **kwargs):
+        """
+        Creates a new [Alias] and attaches it to the [ResourceMap].
+
+        Keyword Arguments:
+        Same as [Alias].
+
+        """
         alias = Alias(**kwargs)
         self._aliases.append(alias)
         return alias

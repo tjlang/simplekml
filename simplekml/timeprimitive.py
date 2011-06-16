@@ -20,24 +20,34 @@ Contact me at kyle.lan@gmail.com
 
 from simplekml.base import Kmlable
 
-class TimeSpan(Kmlable): # --Document--
-    """Represents an extent in time bounded by begin and end dates.
+class TimeSpan(Kmlable):
+    """
+    Represents an extent in time bounded by begin and end dates.
 
-    Arguments:
-    begin               -- string (default None)
-    end                 -- string (default None)
+    Keyword Arguments:
+    begin (string) -- the start time (default None)
+    end (string)   -- the ending time (default None)
 
     Properties:
     Same as arguments.
 
     """
     def __init__(self, begin=None, end=None):
+        """
+        Creates a timespan element.
+
+        Keyword Arguments:
+        begin (string) -- the start time (default None)
+        end (string)   -- the ending time (default None)
+
+        """
         super(TimeSpan, self).__init__()
         self._kml["begin"] = begin
         self._kml["end"] = end
 
     @property
     def begin(self):
+        """The starting time, accepts string."""
         return self._kml['begin']
 
     @begin.setter
@@ -46,6 +56,7 @@ class TimeSpan(Kmlable): # --Document--
 
     @property
     def end(self):
+        """The ending time, accepts string."""
         return self._kml['end']
 
     @end.setter
@@ -53,37 +64,55 @@ class TimeSpan(Kmlable): # --Document--
         self._kml['end'] = end
 
 
-class GxTimeSpan(TimeSpan): # --Document--
-    """A copy of the [TimeSpan] element, in the extension namespace.
+class GxTimeSpan(TimeSpan):
+    """
+    A copy of the [TimeSpan] element, in the extension namespace.
 
-    Arguments:
-    begin               -- string (default None)
-    end                 -- string (default None)
+    Keyword Arguments:
+    begin (string) -- the start time (default None)
+    end (string)   -- the ending time (default None)
 
     Properties:
     Same as arguments.
 
     """
     def __init__(self, **kwargs):
+        """
+        Creates a gx:timespan element.
+
+        Keyword Arguments:
+        begin (string) -- the start time (default None)
+        end (string)   -- the ending time (default None)
+
+        """
         super(GxTimeSpan, self).__init__(**kwargs)
 
 
-class TimeStamp(Kmlable): # --Document--
-    """Represents a single moment in time.
+class TimeStamp(Kmlable):
+    """
+    Represents a single moment in time.
 
-    Arguments:
-    when                -- string (default None)
+    Keyword Arguments:
+    when (string) -- a moment in time (default None)
 
     Properties:
     Same as arguments.
 
     """
     def __init__(self, when=None):
+        """
+        Creates a timestamp element.
+
+        Keyword Arguments:
+        when (string) -- a moment in time (default None)
+
+        """
         super(TimeStamp, self).__init__()
         self._kml["when"] = when
 
     @property
     def when(self):
+        """A moment in time, accepts string."""
         return self._kml['when']
 
     @when.setter
@@ -91,15 +120,23 @@ class TimeStamp(Kmlable): # --Document--
         self._kml['when'] = when
 
 
-class GxTimeStamp(TimeStamp): # --Document--
-    """A copy of the [TimeStamp] element, in the extension namespace.
+class GxTimeStamp(TimeStamp):
+    """
+    A copy of the [TimeStamp] element, in the extension namespace.
 
-    Arguments:
-    when                -- string (default None)
+    Keyword Arguments:
+    when (string) -- a moment in time (default None)
 
     Properties:
     Same as arguments.
 
     """
     def __init__(self, **kwargs):
+        """
+        Creates a gx:timestamp element.
+
+        Keyword Arguments:
+        when (string) -- a moment in time (default None)
+
+        """
         super(GxTimeStamp, self).__init__(**kwargs)
