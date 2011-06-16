@@ -899,9 +899,9 @@ class PointGeometry(Geometry):
         given, it defaults to zero. A point feature has just one point, therefore a list with one tuple is given.
 
         Examples:
-        No height: [(1.0, 1.0), (2.0, 1.0)]
-        Height:    [(1.0, 1.0, 50.0), (2.0, 1.0, 10.0)]
-        Point:     [(1.0, 1.0)]
+        No height: `[(1.0, 1.0), (2.0, 1.0)]`
+        Height:    `[(1.0, 1.0, 50.0), (2.0, 1.0, 10.0)]`
+        Point:     `[(1.0, 1.0)]`
         """
         return self._kml['coordinates']
 
