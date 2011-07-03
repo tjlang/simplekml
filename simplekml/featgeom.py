@@ -70,8 +70,8 @@ class Feature(Kmlable): # TODO:ExtendedData
         self._style = None
         self._stylemap = None
         self._features = []
-        self._schemas = []
-        self._schemasmaps = []
+        self._styles = []
+        self._stylemaps = []
         self._folders = []
 
     @property
@@ -236,13 +236,13 @@ class Feature(Kmlable): # TODO:ExtendedData
         if self._style is None:
             self._style = Style()
             self._setstyle(self._style)
-            self._addschema(self._style)
+            self._addstyle(self._style)
         return self._style
 
     @style.setter
     def style(self, style):
         self._setstyle(style)
-        self._addschema(style)
+        self._addstyle(style)
         self._style = style
 
     @property
@@ -251,13 +251,13 @@ class Feature(Kmlable): # TODO:ExtendedData
         if self._stylemap is None:
             self._stylemap = StyleMap()
             self._setstyle(self._stylemap)
-            self._addschemamap(self._stylemap)
+            self._addstylemap(self._stylemap)
         return self._stylemap
 
     @stylemap.setter
     def stylemap(self, stylemap):
         self._setstyle(stylemap)
-        self._addschemamap(stylemap)
+        self._addstylemap(stylemap)
         self._stylemap = stylemap
 
     @property
@@ -323,26 +323,28 @@ class Feature(Kmlable): # TODO:ExtendedData
     def liststyle(self, liststyle):
         self.style.liststyle = liststyle
 
-    def _addschema(self, schema):
-        """Attaches the given schema (style) to this feature."""
-        self._schemas.append(schema)
+    def _addstyle(self, style):
+        """Attaches the given style (style) to this feature."""
+        if style not in self._styles:
+            self._styles.append(style)
 
-    def _addschemamap(self, schema):
-        """Attaches the given schema (style) to this feature."""
-        self._schemasmaps.append(schema)
+    def _addstylemap(self, style):
+        """Attaches the given style (style) to this feature."""
+        if style not in self._stylemaps:
+            self._stylemaps.append(style)
 
     def _setstyle(self, style):
         self._kml['styleUrl'] = "#{0}".format(style.id)
 
     def __str__(self):
-        for schemamap in self._schemasmaps:
-            self._addschema(schemamap.normalstyle)
-            self._addschema(schemamap.highlightstyle)
+        for stylemap in self._stylemaps:
+            self._addstyle(stylemap.normalstyle)
+            self._addstyle(stylemap.highlightstyle)
         str = '<{0} id="{1}">'.format(self.__class__.__name__, self._id)
-        for schema in self._schemas:
-            str += schema.__str__()
-        for schemamap in self._schemasmaps:
-            str += schemamap.__str__()
+        for style in self._styles:
+            str += style.__str__()
+        for stylemap in self._stylemaps:
+            str += stylemap.__str__()
         str += super(Feature, self).__str__()
         for folder in self._folders:
             str += folder.__str__()
@@ -363,7 +365,7 @@ class Feature(Kmlable): # TODO:ExtendedData
             self._features.append(feat._placemark)
             feat._parent = self
             if feat._style is not None:
-                self._addschema(feat._style)
+                self._addstyle(feat._style)
         else:
             self._features.append(feat)
         return feat
@@ -496,7 +498,6 @@ class Container(Feature):
         Same as [NetworkLink].
         """
         return self._newfeature(NetworkLink, **kwargs)
-
 
 class Document(Container):
 
@@ -795,14 +796,14 @@ class Geometry(Kmlable):
             self._style = Style()
             self._placemark._setstyle(self._style)
             if self._parent is not None:
-                self._parent._addschema(self._style)
+                self._parent._addstyle(self._style)
         return self._style
 
     @style.setter
     def style(self, style):
         self._placemark._setstyle(style)
         if self._parent is not None:
-            self._parent._addschema(style)
+            self._parent._addstyle(style)
         self._style = style
 
     @property
@@ -812,14 +813,14 @@ class Geometry(Kmlable):
             self._stylemap = StyleMap()
             self._placemark._setstyle(self._stylemap)
             if self._parent is not None:
-                self._parent._addschemamap(self._stylemap)
+                self._parent._addstylemap(self._stylemap)
         return self._stylemap
 
     @stylemap.setter
     def stylemap(self, stylemap):
         self._placemark._setstyle(stylemap)
         if self._parent is not None:
-            self._parent._addschemamap(stylemap)
+            self._parent._addstylemap(stylemap)
         self._stylemap = stylemap
 
     @property
@@ -1713,7 +1714,6 @@ class Overlay(Feature):
 
 
 class GroundOverlay(Overlay):
-
     """
     Draws an image overlay draped onto the terrain.
 
@@ -1863,8 +1863,9 @@ class GroundOverlay(Overlay):
         self._kml['gx:LatLonQuad'] = gxlatlonquad
 
 
-class ScreenOverlay(Overlay):   # --Document--
-    """Draws an image overlay fixed to the screen.
+class ScreenOverlay(Overlay):
+    """
+    Draws an image overlay fixed to the screen.
 
     Keyword Arguments:
     name (string)            -- name of placemark (default None)
@@ -2011,7 +2012,7 @@ class ScreenOverlay(Overlay):   # --Document--
         self._kml['size_'] = size
 
 
-class PhotoOverlay(Overlay):  # --Document--
+class PhotoOverlay(Overlay):
     """
     Geographically locate a photograph in Google Earth.
 
@@ -2144,8 +2145,9 @@ class PhotoOverlay(Overlay):  # --Document--
         self._kml['shape'] = shape
 
 
-class NetworkLink(Feature):  # --Document--
-    """References a KML file or KMZ archive on a local or remote network.
+class NetworkLink(Feature):
+    """
+    References a KML file or KMZ archive on a local or remote network.
 
     Keyword Arguments:
     name (string)            -- name of placemark (default None)
@@ -2253,8 +2255,9 @@ class NetworkLink(Feature):  # --Document--
         self._kml['Link'] = link
 
 
-class Model(Geometry):  # --Document--
-    """A 3D object described in a COLLADA file.
+class Model(Geometry):
+    """
+    A 3D object described in a COLLADA file.
 
     Keyword Arguments:
     name (string)            -- name of placemark (default None)

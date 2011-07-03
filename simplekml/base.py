@@ -28,6 +28,7 @@ class Kmlable(object):
 
     _images = []
     _kmz = False
+    _parse = True
 
     def __init__(self):
         self._kml = {}
@@ -39,14 +40,20 @@ class Kmlable(object):
                 if var.endswith("_"):
                     str += "{0}".format(val)  # Use the variable's __str__ as is
                 else:
-                    if var in ['name', 'description', 'text']: # Parse value for HTML and convert
+                    if var in ['name', 'description', 'text'] and Kmlable._parse: # Parse value for HTML and convert
                         val = Kmlable._chrconvert(val)
                     elif (var == 'href' and os.path.exists(val) and Kmlable._kmz == True)\
                             or (var == 'targetHref' and os.path.exists(val) and Kmlable._kmz == True): # Check for local images
                         Kmlable._addimage(val)
                         val = os.path.join('files', os.path.split(val)[1])
                     str += "<{0}>{1}</{0}>".format(var, val)  # Enclose the variable's __str__ with the variables name
+        Kmlable._clearimages()
         return str
+
+    @classmethod
+    def _parsetext(cls, parse=True):
+        """Sets whether text elements are escaped."""
+        Kmlable._parse = parse
 
     @classmethod
     def _chrconvert(cls, text):

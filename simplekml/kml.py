@@ -132,6 +132,21 @@ class Kml(object):
         else:
             return xmlstr
 
+    def parsetext(self, parse=True):
+        """
+        Sets the behavior of how text tags are parsed.
+
+        If True the values of the text tags (<name>, <description> and <text>)
+        are escaped, so that the values are rendered properly. If False, the
+        values are left as is. If the CDATA element is being used to escape
+        the text strings, them set this to False.
+
+        Keyword arguments:
+        parse (bool) -- whether to parse text values
+
+        """
+        Kmlable._parsetext(parse)
+
     def kml(self, format=True):
         """
         Returns a string containing the KML.
