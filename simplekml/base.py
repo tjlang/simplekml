@@ -47,7 +47,6 @@ class Kmlable(object):
                         Kmlable._addimage(val)
                         val = os.path.join('files', os.path.split(val)[1])
                     str += "<{0}>{1}</{0}>".format(var, val)  # Enclose the variable's __str__ with the variables name
-        Kmlable._clearimages()
         return str
 
     @classmethod

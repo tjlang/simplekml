@@ -38,8 +38,8 @@ hwlin = fol.newlinestring(name='Habour Wall', description='The harbour wall.', c
 rblin = fol.newlinestring()
 rblin.name = "Rotating Bridge"
 rblin.description = 'The bridge rotates!'
-rblin.coords = [(18.42180448650733,-33.90615962911964,0),(18.42201572227569,-33.9064462880076,0)]
-rblin.altitudemode = AltitudeMode.clamptoground
+rblin.coords = [(18.42180448650733,-33.90615962911964,20.5),(18.42201572227569,-33.9064462880076,10.5)]
+rblin.altitudemode = AltitudeMode.relativetoground
 rblin.style.linestyle.width = 10
 rblin.linestyle.color = "ff00ffff"
 

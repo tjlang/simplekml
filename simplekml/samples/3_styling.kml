@@ -100,7 +100,7 @@
             <LineString id="geom_2">
                 <tessellate>0</tessellate>
                 <extrude>0</extrude>
-                <coordinates>18.43312,-33.98924,0.0,18.43224,-33.98914,0.0,18.43144,-33.98911,0.0,18.43095,-33.98904,0.0</coordinates>
+                <coordinates>18.43312,-33.98924,0.0 18.43224,-33.98914,0.0 18.43144,-33.98911,0.0 18.43095,-33.98904,0.0</coordinates>
             </LineString>
             <name>Pathway</name>
             <styleUrl>#stylesel_5</styleUrl>
@@ -116,14 +116,14 @@
                     <LinearRing>
                         <tessellate>0</tessellate>
                         <extrude>0</extrude>
-                        <coordinates>18.4336,-33.98982,0.0,18.43386,-33.98995,0.0,18.43401,-33.98974,0.0,18.43376,-33.98962,0.0,18.4336,-33.98982,0.0</coordinates>
+                        <coordinates>18.4336,-33.98982,0.0 18.43386,-33.98995,0.0 18.43401,-33.98974,0.0 18.43376,-33.98962,0.0 18.4336,-33.98982,0.0</coordinates>
                     </LinearRing>
                 </innerBoundaryIs>
                 <outerBoundaryIs>
                     <LinearRing>
                         <tessellate>0</tessellate>
                         <extrude>0</extrude>
-                        <coordinates>18.43348,-33.98985,0.0,18.43387,-33.9900426222,0.0,18.4341,-33.98972,0.0,18.43371,-33.98952,0.0,18.43348,-33.98985,0.0</coordinates>
+                        <coordinates>18.43348,-33.98985,0.0 18.43387,-33.9900426222,0.0 18.4341,-33.98972,0.0 18.43371,-33.98952,0.0 18.43348,-33.98985,0.0</coordinates>
                     </LinearRing>
                 </outerBoundaryIs>
             </Polygon>

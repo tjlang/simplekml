@@ -76,7 +76,7 @@
                     <tessellate>1</tessellate>
                     <extrude>1</extrude>
                     <altitudeMode>relativeToGround</altitudeMode>
-                    <coordinates>1.01,1.01,100,1.12,1.12,100</coordinates>
+                    <coordinates>1.01,1.01,100 1.12,1.12,100</coordinates>
                 </LineString>
                 <name>LineString</name>
                 <visibility>1</visibility>

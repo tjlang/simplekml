@@ -40,5 +40,5 @@ class Coordinates(Kmlable):
         if not len(self._coords):
             return "0.0, 0.0, 0.0"
         for cd in self._coords:
-            str += "{0},{1},{2},".format(cd[0], cd[1], cd[2])
+            str += "{0},{1},{2} ".format(cd[0], cd[1], cd[2])
         return str[:-1]

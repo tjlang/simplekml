@@ -34,3 +34,4 @@ photo.icon.href = 'resources/stadium.jpg'
 photo.viewvolume = ViewVolume(-25,25,-15,15,1)
 
 kml.save("5_overlays.kml")
+kml.savekmz('5_overlays.kmz')
