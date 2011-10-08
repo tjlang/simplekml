@@ -291,7 +291,7 @@ class Snippet(object):
 
     """
 
-    def __init__(self, content='', maxlines=2):
+    def __init__(self, content='', maxlines=None):
         """
         Creates a Snippet element.
 
@@ -323,8 +323,12 @@ class Snippet(object):
         self._kml['maxlines'] = maxlines
         
     def __str__(self):
-        return '<Snippet maxLines="{0}">{1}</Snippet>'.format(self._kml['maxlines'],
-                                                              self._kml['content'])
+        if self._kml['maxlines'] is not None:
+            return '<Snippet maxLines="{0}">{1}</Snippet>'.format(self._kml['maxlines'],
+                                                                  self._kml['content'])
+        else:
+            return '<Snippet>{0}</Snippet>'.format(self._kml['content'])
+
 
 
 class KmlElement(xml.dom.minidom.Element):

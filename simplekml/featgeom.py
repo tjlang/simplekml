@@ -48,7 +48,8 @@ class Feature(Kmlable):
                  lookat=None,
                  timestamp=None,
                  timespan=None,
-                 region=None):
+                 region=None,
+                 extendeddata=None):
         Feature._id += 1
         super(Feature, self).__init__()
         self._kml['name'] = name
@@ -67,7 +68,7 @@ class Feature(Kmlable):
         self._kml['TimeSpan'] = timespan
         self._kml['Region'] = region
         self._kml['styleUrl'] = None
-        self._kml['ExtendedData'] = None
+        self._kml['ExtendedData'] = extendeddata
         self._id = "feat_{0}".format(Feature._id)
         self._style = None
         self._stylemap = None
@@ -203,7 +204,7 @@ class Feature(Kmlable):
 
     @extendeddata.setter
     def extendeddata(self, extendeddata):
-        self._kml['ExtendedData'] = etendeddata
+        self._kml['ExtendedData'] = extendeddata
 
     @property
     def timestamp(self):
@@ -534,6 +535,7 @@ class Container(Feature):
         """
         return self._newfeature(NetworkLink, **kwargs)
 
+
 class Document(Container):
 
     """
@@ -541,8 +543,8 @@ class Document(Container):
 
     Keyword Arguments:
     name (string)              -- name of placemark (default None)
-    visibility (int)           -- whether the feature is shown (default 1)
-    open (int)                 -- whether open or closed in Places (default 0)
+    visibility (int)           -- whether the feature is shown (default None)
+    open (int)                 -- whether open or closed in Places (default None)
     atomauthor (string)        -- author of the document (default None)
     atomlink (string)          -- URL containing this KML (default None)
     address (string)           -- standard address (default None)
@@ -581,8 +583,8 @@ class Document(Container):
 
         Keyword Arguments:
         name (string)            -- name of placemark (default None)
-        visibility (int)         -- whether the feature is shown (default 1)
-        open (int)               -- whether open or closed in Places (default 0)
+        visibility (int)         -- whether the feature is shown (default None)
+        open (int)               -- whether open or closed in Places (default None)
         atomauthor (string)      -- author of the document (default None)
         atomlink (string)        -- URL containing this KML (default None)
         address (string)         -- standard address (default None)
@@ -617,8 +619,8 @@ class Folder(Container):
 
     Keyword Arguments:
     name (string)              -- name of placemark (default None)
-    visibility (int)           -- whether the feature is shown (default 1)
-    open (int)                 -- whether open or closed in Places (default 0)
+    visibility (int)           -- whether the feature is shown (default None)
+    open (int)                 -- whether open or closed in Places (default None)
     atomauthor (string)        -- author of the document (default None)
     atomlink (string)          -- URL containing this KML (default None)
     address (string)           -- standard address (default None)
@@ -656,8 +658,8 @@ class Folder(Container):
 
         Keyword Arguments:
         name (string)            -- name of placemark (default None)
-        visibility (int)         -- whether the feature is shown (default 1)
-        open (int)               -- whether open or closed in Places (default 0)
+        visibility (int)         -- whether the feature is shown (default None)
+        open (int)               -- whether open or closed in Places (default None)
         atomauthor (string)      -- author of the document (default None)
         atomlink (string)        -- URL containing this KML (default None)
         address (string)         -- standard address (default None)
@@ -975,8 +977,8 @@ class LinearRing(PointGeometry):
     Keyword Arguments:
     coords (list of tuples)    -- ring coordinates (default [(0.0,0.0,0.0)]
     name (string)              -- name of placemark (default None)
-    visibility (int)           -- whether the feature is shown (default 1)
-    open (int)                 -- whether open or closed in Places (default 0)
+    visibility (int)           -- whether the feature is shown (default None)
+    open (int)                 -- whether open or closed in Places (default None)
     atomauthor (string)        -- author of the document (default None)
     atomlink (string)          -- URL containing this KML (default None)
     address (string)           -- standard address (default None)
@@ -989,8 +991,8 @@ class LinearRing(PointGeometry):
     timestamp ([TimeStamp])    -- single moment in time (default None)
     timespan ([TimeSpan])      -- period of time (default None)
     region ([Region])          -- bounding box of features (default None)
-    extrude (int)              -- whether to connect to the ground (default 0)
-    tessellate (int)           -- allowed to follow the terrain (default 0)
+    extrude (int)              -- whether to connect to the ground (default None)
+    tessellate (int)           -- allowed to follow the terrain (default None)
     altitudemode (string)      -- alt use See [AltitudeMode] (default None)
     gxaltitudemode (string)    -- alt use. See [GxAltitudeMode] (default None)
     gxaltitudeoffset           -- offsets feature vertically (default None)
@@ -1010,8 +1012,8 @@ class LinearRing(PointGeometry):
     """
 
     def __init__(self, coords=(),
-                 extrude=0,
-                 tessellate=0,
+                 extrude=None,
+                 tessellate=None,
                  altitudemode=None,
                  gxaltitudemode=None,
                  gxaltitudeoffset=None,
@@ -1022,8 +1024,8 @@ class LinearRing(PointGeometry):
         Keyword Arguments:
         coords (list of tuples)  -- ring coordinates (default [(0.0,0.0,0.0)]
         name (string)            -- name of placemark (default None)
-        visibility (int)         -- whether the feature is shown (default 1)
-        open (int)               -- whether open or closed in Places (default 0)
+        visibility (int)         -- whether the feature is shown (default None)
+        open (int)               -- whether open or closed in Places (default None)
         atomauthor (string)      -- author of the document (default None)
         atomlink (string)        -- URL containing this KML (default None)
         address (string)         -- standard address (default None)
@@ -1036,8 +1038,8 @@ class LinearRing(PointGeometry):
         timestamp ([TimeStamp])  -- single moment in time (default None)
         timespan ([TimeSpan])    -- period of time (default None)
         region ([Region])        -- bounding box of features (default None)
-        extrude (int)            -- connect to the ground? (default 0)
-        tessellate (int)         -- allowed to follow the terrain (default 0)
+        extrude (int)            -- connect to the ground? (default None)
+        tessellate (int)         -- allowed to follow the terrain (default None)
         altitudemode (string)    -- alt use See [AltitudeMode] (default None)
         gxaltitudemode (string)  -- alt use. See [GxAltitudeMode] (default None)
         gxaltitudeoffset         -- offsets feature vertically (default None)
@@ -1121,8 +1123,8 @@ class Point(PointGeometry):
     Keyword Arguments:
     coords (list of tuples)    -- ring coordinates (default [(0.0,0.0,0.0)]
     name (string)              -- name of placemark (default None)
-    visibility (int)           -- whether the feature is shown (default 1)
-    open (int)                 -- whether open or closed in Places (default 0)
+    visibility (int)           -- whether the feature is shown (default None)
+    open (int)                 -- whether open or closed in Places (default None)
     atomauthor (string)        -- author of the document (default None)
     atomlink (string)          -- URL containing this KML (default None)
     address (string)           -- standard address (default None)
@@ -1135,9 +1137,11 @@ class Point(PointGeometry):
     timestamp ([TimeStamp])    -- single moment in time (default None)
     timespan ([TimeSpan])      -- period of time (default None)
     region ([Region])          -- bounding box of features (default None)
-    extrude (int)              -- whether to connect to the ground (default 0)
+    extrude (int)              -- whether to connect to the ground (default None)
     altitudemode (string)      -- alt use See [AltitudeMode] (default None)
     gxaltitudemode (string)    -- alt use. See [GxAltitudeMode] (default None)
+    extendeddata ([ExtendedData]) -- extra data (default None)
+
 
     Properties:
     Same as arguments, with the following additional properties:
@@ -1154,7 +1158,7 @@ class Point(PointGeometry):
     """
 
     def __init__(self,
-                 extrude=0,
+                 extrude=None,
                  altitudemode=None,
                  gxaltitudemode=None,
                  **kwargs):
@@ -1164,8 +1168,8 @@ class Point(PointGeometry):
         Keyword Arguments:
         coords (list of tuples)  -- ring coordinates (default [(0.0,0.0,0.0)]
         name (string)            -- name of placemark (default None)
-        visibility (int)         -- whether the feature is shown (default 1)
-        open (int)               -- whether open or closed in Places (default 0)
+        visibility (int)         -- whether the feature is shown (default None)
+        open (int)               -- whether open or closed in Places (default None)
         atomauthor (string)      -- author of the document (default None)
         atomlink (string)        -- URL containing this KML (default None)
         address (string)         -- standard address (default None)
@@ -1178,9 +1182,10 @@ class Point(PointGeometry):
         timestamp ([TimeStamp])  -- single moment in time (default None)
         timespan ([TimeSpan])    -- period of time (default None)
         region ([Region])        -- bounding box of features (default None)
-        extrude (int)            -- connect to the ground? (default 0)
+        extrude (int)            -- connect to the ground? (default None)
         altitudemode (string)    -- alt use See [AltitudeMode] (default None)
         gxaltitudemode (string)  -- alt use. See [GxAltitudeMode] (default None)
+        extendeddata ([ExtendedData]) -- extra data (default None)
 
         """
         super(Point, self).__init__(**kwargs)
@@ -1240,8 +1245,8 @@ class LineString(PointGeometry):
     Keyword Arguments:
     coords (list of tuples)  -- ring coordinates (default [(0.0,0.0,0.0)]
     name (string)            -- name of placemark (default None)
-    visibility (int)         -- whether the feature is shown (default 1)
-    open (int)               -- whether open or closed in Places (default 0)
+    visibility (int)         -- whether the feature is shown (default None)
+    open (int)               -- whether open or closed in Places (default None)
     atomauthor (string)      -- author of the document (default None)
     atomlink (string)        -- URL containing this KML (default None)
     address (string)         -- standard address (default None)
@@ -1254,12 +1259,13 @@ class LineString(PointGeometry):
     timestamp ([TimeStamp])  -- single moment in time (default None)
     timespan ([TimeSpan])    -- period of time (default None)
     region ([Region])        -- bounding box of features (default None)
-    extrude (int)            -- connect to the ground? (default 0)
-    tessellate (int)         -- allowed to follow the terrain (default 0)
+    extrude (int)            -- connect to the ground? (default None)
+    tessellate (int)         -- allowed to follow the terrain (default None)
     altitudemode (string)    -- alt use See [AltitudeMode] (default None)
     gxaltitudemode (string)  -- alt use. See [GxAltitudeMode] (default None)
     gxaltitudeoffset         -- offsets feature vertically (default None)
     gxdraworder (int)        -- draw order many linestrings (default None)
+    extendeddata ([ExtendedData]) -- extra data (default None)
 
     Properties:
     Same as arguments, with the following additional properties:
@@ -1275,8 +1281,8 @@ class LineString(PointGeometry):
 
     """
     def __init__(self,
-                 extrude=0,
-                 tessellate=0,
+                 extrude=None,
+                 tessellate=None,
                  altitudemode=None,
                  gxaltitudemode=None,
                  gxaltitudeoffset=None,
@@ -1288,8 +1294,8 @@ class LineString(PointGeometry):
         Keyword Arguments:
         coords (list of tuples)  -- ring coordinates (default [(0.0,0.0,0.0)]
         name (string)            -- name of placemark (default None)
-        visibility (int)         -- whether the feature is shown (default 1)
-        open (int)               -- whether open or closed in Places (default 0)
+        visibility (int)         -- whether the feature is shown (default None)
+        open (int)               -- whether open or closed in Places (default None)
         atomauthor (string)      -- author of the document (default None)
         atomlink (string)        -- URL containing this KML (default None)
         address (string)         -- standard address (default None)
@@ -1302,12 +1308,13 @@ class LineString(PointGeometry):
         timestamp ([TimeStamp])  -- single moment in time (default None)
         timespan ([TimeSpan])    -- period of time (default None)
         region ([Region])        -- bounding box of features (default None)
-        extrude (int)            -- connect to the ground? (default 0)
-        tessellate (int)         -- allowed to follow the terrain (default 0)
+        extrude (int)            -- connect to the ground? (default None)
+        tessellate (int)         -- allowed to follow the terrain (default None)
         altitudemode (string)    -- alt use See [AltitudeMode] (default None)
         gxaltitudemode (string)  -- alt use. See [GxAltitudeMode] (default None)
         gxaltitudeoffset         -- offsets feature vertically (default None)
         gxdraworder (int)        -- draw order many linestrings (default None)
+        extendeddata ([ExtendedData]) -- extra data (default None)
 
         """
         super(LineString, self).__init__(**kwargs)
@@ -1397,8 +1404,8 @@ class Polygon(Geometry):
 
     Keyword Arguments:
     name (string)            -- name of placemark (default None)
-    visibility (int)         -- whether the feature is shown (default 1)
-    open (int)               -- whether open or closed in Places (default 0)
+    visibility (int)         -- whether the feature is shown (default None)
+    open (int)               -- whether open or closed in Places (default None)
     atomauthor (string)      -- author of the document (default None)
     atomlink (string)        -- URL containing this KML (default None)
     address (string)         -- standard address (default None)
@@ -1411,14 +1418,15 @@ class Polygon(Geometry):
     timestamp ([TimeStamp])  -- single moment in time (default None)
     timespan ([TimeSpan])    -- period of time (default None)
     region ([Region])        -- bounding box of features (default None)
-    extrude (int)            -- connect to the ground? (default 0)
-    tessellate (int)         -- allowed to follow the terrain (default 0)
+    extrude (int)            -- connect to the ground? (default None)
+    tessellate (int)         -- allowed to follow the terrain (default None)
     altitudemode (string)    -- alt use See [AltitudeMode] (default None)
     gxaltitudemode (string)  -- alt use. See [GxAltitudeMode] (default None)
     gxaltitudeoffset         -- offsets feature vertically (default None)
     gxdraworder (int)        -- draw order many linestrings (default None)
     outerboundaryis (tuples) -- list of tuples for outer (default (0.0,0.0,0.0))
     innerboundaryis (tuples) -- list of lists of tuples for inner (default None)
+    extendeddata ([ExtendedData]) -- extra data (default None)
 
     Properties:
     Same as arguments, with the following additional properties:
@@ -1435,8 +1443,8 @@ class Polygon(Geometry):
     """
 
     def __init__(self,
-                 extrude=0,
-                 tessellate=0,
+                 extrude=None,
+                 tessellate=None,
                  altitudemode=None,
                  gxaltitudemode=None,
                  outerboundaryis=(),
@@ -1446,8 +1454,8 @@ class Polygon(Geometry):
 
         Keyword Arguments:
         name (string)          -- name of placemark (default None)
-        visibility (int)       -- whether the feature is shown (default 1)
-        open (int)             -- whether open or closed in Places (default 0)
+        visibility (int)       -- whether the feature is shown (default None)
+        open (int)             -- whether open or closed in Places (default None)
         atomauthor (string)    -- author of the document (default None)
         atomlink (string)      -- URL containing this KML (default None)
         address (string)       -- standard address (default None)
@@ -1460,14 +1468,15 @@ class Polygon(Geometry):
         timestamp ([TimeStamp])-- single moment in time (default None)
         timespan ([TimeSpan])  -- period of time (default None)
         region ([Region])      -- bounding box of features (default None)
-        extrude (int)          -- connect to the ground? (default 0)
-        tessellate (int)       -- allowed to follow the terrain (default 0)
+        extrude (int)          -- connect to the ground? (default None)
+        tessellate (int)       -- allowed to follow the terrain (default None)
         altitudemode (string)  -- alt use See [AltitudeMode] (default None)
         gxaltitudemode (string)-- alt use. See [GxAltitudeMode] (default None)
         gxaltitudeoffset       -- offsets feature vertically (default None)
         gxdraworder (int)      -- draw order many linestrings (default None)
         outerboundaryis(tuples)--list of tuples for outer(default (0.0,0.0,0.0))
         innerboundaryis(tuples)--list of lists of tuples for inner(default None)
+        extendeddata ([ExtendedData]) -- extra data (default None)
 
         """
         super(Polygon, self).__init__(**kwargs)
@@ -1572,8 +1581,8 @@ class MultiGeometry(Geometry):
 
     Keyword Arguments:
     name (string)            -- name of placemark (default None)
-    visibility (int)         -- whether the feature is shown (default 1)
-    open (int)               -- whether open or closed in Places (default 0)
+    visibility (int)         -- whether the feature is shown (default None)
+    open (int)               -- whether open or closed in Places (default None)
     atomauthor (string)      -- author of the document (default None)
     atomlink (string)        -- URL containing this KML (default None)
     address (string)         -- standard address (default None)
@@ -1617,8 +1626,8 @@ class MultiGeometry(Geometry):
 
         Keyword Arguments:
         name (string)            -- name of placemark (default None)
-        visibility (int)         -- whether the feature is shown (default 1)
-        open (int)               -- whether open or closed in Places (default 0)
+        visibility (int)         -- whether the feature is shown (default None)
+        open (int)               -- whether open or closed in Places (default None)
         atomauthor (string)      -- author of the document (default None)
         atomlink (string)        -- URL containing this KML (default None)
         address (string)         -- standard address (default None)
@@ -1775,8 +1784,8 @@ class GroundOverlay(Overlay):
 
     Keyword Arguments:
     name (string)            -- name of placemark (default None)
-    visibility (int)         -- whether the feature is shown (default 1)
-    open (int)               -- whether open or closed in Places (default 0)
+    visibility (int)         -- whether the feature is shown (default None)
+    open (int)               -- whether open or closed in Places (default None)
     atomauthor (string)      -- author of the document (default None)
     atomlink (string)        -- URL containing this KML (default None)
     address (string)         -- standard address (default None)
@@ -1797,6 +1806,7 @@ class GroundOverlay(Overlay):
     gxaltitudemode (string)  -- alt use. See [GxAltitudeMode] (default None)
     latlonbox ([LatLonBox])  -- position of overlay (default None)
     gxlatlonquad ([GxLatLonQuad])-- position of overlay (default None)
+    extendeddata ([ExtendedData]) -- extra data (default None)
 
     Properties:
     Same as arguments, with the following additional properties:
@@ -1818,8 +1828,8 @@ class GroundOverlay(Overlay):
 
         Keyword Arguments:
         name (string)            -- name of placemark (default None)
-        visibility (int)         -- whether the feature is shown (default 1)
-        open (int)               -- whether open or closed in Places (default 0)
+        visibility (int)         -- whether the feature is shown (default None)
+        open (int)               -- whether open or closed in Places (default None)
         atomauthor (string)      -- author of the document (default None)
         atomlink (string)        -- URL containing this KML (default None)
         address (string)         -- standard address (default None)
@@ -1840,6 +1850,7 @@ class GroundOverlay(Overlay):
         gxaltitudemode (string)  -- alt use. See [GxAltitudeMode] (default None)
         latlonbox ([LatLonBox])  -- position of overlay (default None)
         gxlatlonquad ([GxLatLonQuad])-- position of overlay (default None)
+        extendeddata ([ExtendedData]) -- extra data (default None)
 
         """
         super(GroundOverlay, self).__init__(**kwargs)
@@ -1925,8 +1936,8 @@ class ScreenOverlay(Overlay):
 
     Keyword Arguments:
     name (string)            -- name of placemark (default None)
-    visibility (int)         -- whether the feature is shown (default 1)
-    open (int)               -- whether open or closed in Places (default 0)
+    visibility (int)         -- whether the feature is shown (default None)
+    open (int)               -- whether open or closed in Places (default None)
     atomauthor (string)      -- author of the document (default None)
     atomlink (string)        -- URL containing this KML (default None)
     address (string)         -- standard address (default None)
@@ -1947,6 +1958,7 @@ class ScreenOverlay(Overlay):
     rotationxy ([RotationXY])-- screen point to rotate about (default None)
     size ([Size])            -- size of the image(default None)
     rotation (float)         -- rotation of the image (default None)
+    extendeddata ([ExtendedData]) -- extra data (default None)
 
     Properties:
     Same as arguments, with the following additional properties:
@@ -1968,8 +1980,8 @@ class ScreenOverlay(Overlay):
 
         Keyword Arguments:
         name (string)            -- name of placemark (default None)
-        visibility (int)         -- whether the feature is shown (default 1)
-        open (int)               -- whether open or closed in Places (default 0)
+        visibility (int)         -- whether the feature is shown (default None)
+        open (int)               -- whether open or closed in Places (default None)
         atomauthor (string)      -- author of the document (default None)
         atomlink (string)        -- URL containing this KML (default None)
         address (string)         -- standard address (default None)
@@ -1990,6 +2002,7 @@ class ScreenOverlay(Overlay):
         rotationxy ([RotationXY])-- screen point to rotate about (default None)
         size ([Size])            -- size of the image(default None)
         rotation (float)         -- rotation of the image (default None)
+        extendeddata ([ExtendedData]) -- extra data (default None)
 
         """
         super(ScreenOverlay, self).__init__(**kwargs)
@@ -2074,8 +2087,8 @@ class PhotoOverlay(Overlay):
 
     Keyword Arguments:
     name (string)            -- name of placemark (default None)
-    visibility (int)         -- whether the feature is shown (default 1)
-    open (int)               -- whether open or closed in Places (default 0)
+    visibility (int)         -- whether the feature is shown (default None)
+    open (int)               -- whether open or closed in Places (default None)
     atomauthor (string)      -- author of the document (default None)
     atomlink (string)        -- URL containing this KML (default None)
     address (string)         -- standard address (default None)
@@ -2091,11 +2104,12 @@ class PhotoOverlay(Overlay):
     color (hex string)       -- string of [Color] constants (default None)
     draworder (int)          -- the order the overlay is drawn (default None)
     icon ([Icon])            -- an icon for the overlay (default None)
-    rotation (float)         -- the rotation of the overlay (default 0)
+    rotation (float)         -- the rotation of the overlay (default None)
     viewvolume ([ViewVolume])-- extent current scene is visible (default None)
     imagepyramid([ImagePyramid])-- hierarchical set of images (default None)
     point ([Point])          -- draws an icon to mark position (default None)
     shape (string)           -- string from [Shape] constants (default None)
+    extendeddata ([ExtendedData]) -- extra data (default None)
 
     Properties:
     Same as arguments, with the following additional properties:
@@ -2107,7 +2121,7 @@ class PhotoOverlay(Overlay):
 
     """
 
-    def __init__(self, rotation=0,
+    def __init__(self, rotation=None,
                        viewvolume=None,
                        imagepyramid=None,
                        point=None,
@@ -2118,8 +2132,8 @@ class PhotoOverlay(Overlay):
 
         Keyword Arguments:
         name (string)            -- name of placemark (default None)
-        visibility (int)         -- whether the feature is shown (default 1)
-        open (int)               -- whether open or closed in Places (default 0)
+        visibility (int)         -- whether the feature is shown (default None)
+        open (int)               -- whether open or closed in Places (default None)
         atomauthor (string)      -- author of the document (default None)
         atomlink (string)        -- URL containing this KML (default None)
         address (string)         -- standard address (default None)
@@ -2135,11 +2149,12 @@ class PhotoOverlay(Overlay):
         color (hex string)       -- string of [Color] constants (default None)
         draworder (int)          -- the order the overlay is drawn (default None)
         icon ([Icon])            -- an icon for the overlay (default None)
-        rotation (float)         -- the rotation of the overlay (default 0)
+        rotation (float)         -- the rotation of the overlay (default None)
         viewvolume ([ViewVolume])-- extent current scene is visible (default None)
         imagepyramid([ImagePyramid])-- hierarchical set of images (default None)
         point ([Point])          -- draws an icon to mark position (default None)
         shape (string)           -- string from [Shape] constants (default None)
+        extendeddata ([ExtendedData]) -- extra data (default None)
 
         """
         super(PhotoOverlay, self).__init__(**kwargs)
@@ -2207,8 +2222,8 @@ class NetworkLink(Feature):
 
     Keyword Arguments:
     name (string)            -- name of placemark (default None)
-    visibility (int)         -- whether the feature is shown (default 1)
-    open (int)               -- whether open or closed in Places (default 0)
+    visibility (int)         -- whether the feature is shown (default None)
+    open (int)               -- whether open or closed in Places (default None)
     atomauthor (string)      -- author of the document (default None)
     atomlink (string)        -- URL containing this KML (default None)
     address (string)         -- standard address (default None)
@@ -2224,8 +2239,8 @@ class NetworkLink(Feature):
     extrude (int)            -- connect to the ground? (default 0)
     altitudemode (string)    -- alt use See [AltitudeMode] (default None)
     gxaltitudemode (string)  -- alt use. See [GxAltitudeMode] (default None)
-    refreshvisibility (int)  -- action to be taken on refresh (default 0)
-    flytoview (int)          -- whether to fly to the view (default 0)
+    refreshvisibility (int)  -- action to be taken on refresh (default None)
+    flytoview (int)          -- whether to fly to the view (default None)
     link ([Link])            -- link element (default None)
 
     Properties:
@@ -2233,8 +2248,8 @@ class NetworkLink(Feature):
 
     """
     
-    def __init__(self, refreshvisibility=0,
-                       flytoview=0,
+    def __init__(self, refreshvisibility=None,
+                       flytoview=None,
                        link=None,
                        **kwargs):
         """
@@ -2242,8 +2257,8 @@ class NetworkLink(Feature):
 
         Keyword Arguments:
         name (string)            -- name of placemark (default None)
-        visibility (int)         -- whether the feature is shown (default 1)
-        open (int)               -- whether open or closed in Places (default 0)
+        visibility (int)         -- whether the feature is shown (default None)
+        open (int)               -- whether open or closed in Places (default None)
         atomauthor (string)      -- author of the document (default None)
         atomlink (string)        -- URL containing this KML (default None)
         address (string)         -- standard address (default None)
@@ -2256,11 +2271,11 @@ class NetworkLink(Feature):
         timestamp ([TimeStamp])  -- single moment in time (default None)
         timespan ([TimeSpan])    -- period of time (default None)
         region ([Region])        -- bounding box of features (default None)
-        extrude (int)            -- connect to the ground? (default 0)
+        extrude (int)            -- connect to the ground? (default None)
         altitudemode (string)    -- alt use See [AltitudeMode] (default None)
         gxaltitudemode (string)  -- alt use. See [GxAltitudeMode] (default None)
-        refreshvisibility (int)  -- action to be taken on refresh (default 0)
-        flytoview (int)          -- whether to fly to the view (default 0)
+        refreshvisibility (int)  -- action to be taken on refresh (default None)
+        flytoview (int)          -- whether to fly to the view (default None)
         link ([Link])            -- link element (default None)
 
         """
@@ -2317,8 +2332,8 @@ class Model(Geometry):
 
     Keyword Arguments:
     name (string)            -- name of placemark (default None)
-    visibility (int)         -- whether the feature is shown (default 1)
-    open (int)               -- whether open or closed in Places (default 0)
+    visibility (int)         -- whether the feature is shown (default None)
+    open (int)               -- whether open or closed in Places (default None)
     atomauthor (string)      -- author of the document (default None)
     atomlink (string)        -- URL containing this KML (default None)
     address (string)         -- standard address (default None)
@@ -2331,7 +2346,7 @@ class Model(Geometry):
     timestamp ([TimeStamp])  -- single moment in time (default None)
     timespan ([TimeSpan])    -- period of time (default None)
     region ([Region])        -- bounding box of features (default None)
-    extrude (int)            -- connect to the ground? (default 0)
+    extrude (int)            -- connect to the ground? (default None)
     altitudemode (string)    -- alt use See [AltitudeMode] (default None)
     gxaltitudemode (string)  -- alt use. See [GxAltitudeMode] (default None)
     location ([Location])    -- coordinates of the origin (default None)
@@ -2339,6 +2354,7 @@ class Model(Geometry):
     scale ([Scale])          -- the scale along the axes (default None)
     link ([Link])            -- a [Link] instance (default None)
     resourcemap ([ResourceMap])-- texture mapper (default None)
+    extendeddata ([ExtendedData]) -- extra data (default None)
 
     Properties:
     Same as arguments, with the following additional properties:
@@ -2368,8 +2384,8 @@ class Model(Geometry):
 
         Keyword Arguments:
         name (string)            -- name of placemark (default None)
-        visibility (int)         -- whether the feature is shown (default 1)
-        open (int)               -- whether open or closed in Places (default 0)
+        visibility (int)         -- whether the feature is shown (default None)
+        open (int)               -- whether open or closed in Places (default None)
         atomauthor (string)      -- author of the document (default None)
         atomlink (string)        -- URL containing this KML (default None)
         address (string)         -- standard address (default None)
@@ -2382,7 +2398,7 @@ class Model(Geometry):
         timestamp ([TimeStamp])  -- single moment in time (default None)
         timespan ([TimeSpan])    -- period of time (default None)
         region ([Region])        -- bounding box of features (default None)
-        extrude (int)            -- connect to the ground? (default 0)
+        extrude (int)            -- connect to the ground? (default None)
         altitudemode (string)    -- alt use See [AltitudeMode] (default None)
         gxaltitudemode (string)  -- alt use. See [GxAltitudeMode] (default None)
         location ([Location])    -- coordinates of the origin (default None)
@@ -2390,6 +2406,7 @@ class Model(Geometry):
         scale ([Scale])          -- the scale along the axes (default None)
         link ([Link])            -- a [Link] instance (default None)
         resourcemap ([ResourceMap])-- texture mapper (default None)
+        extendeddata ([ExtendedData]) -- extra data (default None)
 
         """
         super(Model, self).__init__(**kwargs)
@@ -2497,24 +2514,25 @@ class GxTrack(Geometry):
     A track describes how an object moves through the world over a given time period.
 
     Keyword Arguments:
-    name (string)            -- name of placemark (default None)
-    visibility (int)         -- whether the feature is shown (default 1)
-    open (int)               -- whether open or closed in Places (default 0)
-    atomauthor (string)      -- author of the document (default None)
-    atomlink (string)        -- URL containing this KML (default None)
-    address (string)         -- standard address (default None)
-    xaladdressdetails(string)-- address as xAL (default None)
-    phonenumber (string)     -- phone number for Maps mobile (default None)
-    snippet ([Snippet])      -- short description of feature (default None)
-    description (string)     -- description shown in balloon (default None)
-    camera ([Camera])        -- camera that views the scene (default None)
-    lookat ([LookAt])        -- camera relative to feature (default None)
-    timestamp ([TimeStamp])  -- single moment in time (default None)
-    timespan ([TimeSpan])    -- period of time (default None)
-    region ([Region])        -- bounding box of features (default None)
-    extrude (int)            -- connect to the ground? (default 0)
-    altitudemode (string)    -- alt use See [AltitudeMode] (default None)
-    gxaltitudemode (string)  -- alt use. See [GxAltitudeMode] (default None)
+    name (string)                 -- name of placemark (default None)
+    visibility (int)              -- whether the feature is shown (default None)
+    open (int)                    -- whether open or closed in Places (default None)
+    atomauthor (string)           -- author of the document (default None)
+    atomlink (string)             -- URL containing this KML (default None)
+    address (string)              -- standard address (default None)
+    xaladdressdetails(string)     -- address as xAL (default None)
+    phonenumber (string)          -- phone number for Maps mobile (default None)
+    snippet ([Snippet])           -- short description of feature (default None)
+    description (string)          -- description shown in balloon (default None)
+    camera ([Camera])             -- camera that views the scene (default None)
+    lookat ([LookAt])             -- camera relative to feature (default None)
+    timestamp ([TimeStamp])       -- single moment in time (default None)
+    timespan ([TimeSpan])         -- period of time (default None)
+    region ([Region])             -- bounding box of features (default None)
+    extrude (int)                 -- connect to the ground? (default None)
+    altitudemode (string)         -- alt use See [AltitudeMode] (default None)
+    gxaltitudemode (string)       -- alt use. See [GxAltitudeMode] (default None)
+    extendeddata ([ExtendedData]) -- extra data (default None)
 
     Properties:
     Same as arguments, with the following additional properties:
@@ -2547,29 +2565,30 @@ class GxTrack(Geometry):
         Creates a gx:track element.
 
         Keyword Arguments:
-        name (string)            -- name of placemark (default None)
-        visibility (int)         -- whether the feature is shown (default 1)
-        open (int)               -- whether open or closed in Places (default 0)
-        atomauthor (string)      -- author of the document (default None)
-        atomlink (string)        -- URL containing this KML (default None)
-        address (string)         -- standard address (default None)
-        xaladdressdetails(string)-- address as xAL (default None)
-        phonenumber (string)     -- phone number for Maps mobile (default None)
-        snippet ([Snippet])      -- short description of feature (default None)
-        description (string)     -- description shown in balloon (default None)
-        camera ([Camera])        -- camera that views the scene (default None)
-        lookat ([LookAt])        -- camera relative to feature (default None)
-        timestamp ([TimeStamp])  -- single moment in time (default None)
-        timespan ([TimeSpan])    -- period of time (default None)
-        region ([Region])        -- bounding box of features (default None)
-        extrude (int)            -- connect to the ground? (default 0)
-        altitudemode (string)    -- alt use See [AltitudeMode] (default None)
-        gxaltitudemode (string)  -- alt use. See [GxAltitudeMode] (default None)
-        location ([Location])    -- coordinates of the origin (default None)
-        orientation ([Orientation])-- rotation of a model (default None)
-        scale ([Scale])          -- the scale along the axes (default None)
-        link ([Link])            -- a [Link] instance (default None)
-        resourcemap ([ResourceMap])-- texture mapper (default None)
+        name (string)                 -- name of placemark (default None)
+        visibility (int)              -- whether the feature is shown (default None)
+        open (int)                    -- whether open or closed in Places (default None)
+        atomauthor (string)           -- author of the document (default None)
+        atomlink (string)             -- URL containing this KML (default None)
+        address (string)              -- standard address (default None)
+        xaladdressdetails(string)     -- address as xAL (default None)
+        phonenumber (string)          -- phone number for Maps mobile (default None)
+        snippet ([Snippet])           -- short description of feature (default None)
+        description (string)          -- description shown in balloon (default None)
+        camera ([Camera])             -- camera that views the scene (default None)
+        lookat ([LookAt])             -- camera relative to feature (default None)
+        timestamp ([TimeStamp])       -- single moment in time (default None)
+        timespan ([TimeSpan])         -- period of time (default None)
+        region ([Region])             -- bounding box of features (default None)
+        extrude (int)                 -- connect to the ground? (default None)
+        altitudemode (string)         -- alt use See [AltitudeMode] (default None)
+        gxaltitudemode (string)       -- alt use. See [GxAltitudeMode] (default None)
+        location ([Location])         -- coordinates of the origin (default None)
+        orientation ([Orientation])   -- rotation of a model (default None)
+        scale ([Scale])               -- the scale along the axes (default None)
+        link ([Link])                 -- a [Link] instance (default None)
+        resourcemap ([ResourceMap])   -- texture mapper (default None)
+        extendeddata ([ExtendedData]) -- extra data (default None)
 
         """
         super(GxTrack, self).__init__(**kwargs)
@@ -2696,8 +2715,8 @@ class GxMultiTrack(Geometry):
 
     Keyword Arguments:
     name (string)            -- name of placemark (default None)
-    visibility (int)         -- whether the feature is shown (default 1)
-    open (int)               -- whether open or closed in Places (default 0)
+    visibility (int)         -- whether the feature is shown (default None)
+    open (int)               -- whether open or closed in Places (default None)
     atomauthor (string)      -- author of the document (default None)
     atomlink (string)        -- URL containing this KML (default None)
     address (string)         -- standard address (default None)
@@ -2737,8 +2756,8 @@ class GxMultiTrack(Geometry):
 
         Keyword Arguments:
         name (string)            -- name of placemark (default None)
-        visibility (int)         -- whether the feature is shown (default 1)
-        open (int)               -- whether open or closed in Places (default 0)
+        visibility (int)         -- whether the feature is shown (default None)
+        open (int)               -- whether open or closed in Places (default None)
         atomauthor (string)      -- author of the document (default None)
         atomlink (string)        -- URL containing this KML (default None)
         address (string)         -- standard address (default None)

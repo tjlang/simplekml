@@ -61,7 +61,6 @@
             <name>1. World of Birds (Data)</name>
             <styleUrl>#stylesel_0</styleUrl>
             <Point id="geom_0">
-                <extrude>0</extrude>
                 <coordinates>18.36196,-34.016543,0.0</coordinates>
             </Point>
         </Placemark>
@@ -87,7 +86,6 @@
             <name>2. World of Birds (Simple Data)</name>
             <styleUrl>#stylesel_1</styleUrl>
             <Point id="geom_1">
-                <extrude>0</extrude>
                 <coordinates>18.36196,-34.017224,0.0</coordinates>
             </Point>
         </Placemark>

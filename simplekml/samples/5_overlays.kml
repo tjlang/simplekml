@@ -41,9 +41,7 @@
             <Icon>
                 <href>resources/stadium.jpg</href>
             </Icon>
-            <rotation>0</rotation>
             <Point id="geom_0">
-                <extrude>0</extrude>
                 <coordinates>18.410858,-33.90444,0.0</coordinates>
             </Point>
             <name>PhotoOverlay Test</name>

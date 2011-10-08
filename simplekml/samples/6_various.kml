@@ -4,12 +4,10 @@
         <name>6_various</name>
         <open>1</open>
         <NetworkLink id="feat_2">
-            <refreshVisibility>0</refreshVisibility>
             <Link>
                 <href>http://fakelink.com/fakedata</href>
             </Link>
             <name>Broken NetworkLink</name>
-            <flyToView>0</flyToView>
         </NetworkLink>
         <Document id="feat_3">
             <Style id="stylesel_0">
