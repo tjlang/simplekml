@@ -72,43 +72,38 @@
                 <styleUrl>#stylesel_4</styleUrl>
             </Pair>
         </StyleMap>
+        <name>3_styling</name>
         <styleUrl>#stylesel_0</styleUrl>
-        <visibility>1</visibility>
-        <open>0</open>
         <Placemark id="feat_2">
+            <name>Kirstenbosch Normal</name>
+            <styleUrl>#stylesel_1</styleUrl>
             <Point id="geom_0">
                 <extrude>0</extrude>
                 <coordinates>18.431486,-33.988,0.0</coordinates>
             </Point>
-            <name>Kirstenbosch Normal</name>
-            <styleUrl>#stylesel_1</styleUrl>
-            <visibility>1</visibility>
-            <open>0</open>
             <description>A style map.</description>
         </Placemark>
         <Placemark id="feat_3">
+            <name>Kirstenbosch StyleMap</name>
+            <styleUrl>#stylesel_2</styleUrl>
             <Point id="geom_1">
                 <extrude>0</extrude>
                 <coordinates>18.432314,-33.988862,0.0</coordinates>
             </Point>
-            <name>Kirstenbosch StyleMap</name>
-            <styleUrl>#stylesel_2</styleUrl>
-            <visibility>1</visibility>
-            <open>0</open>
         </Placemark>
         <Placemark id="feat_4">
+            <name>Pathway</name>
+            <styleUrl>#stylesel_5</styleUrl>
             <LineString id="geom_2">
                 <tessellate>0</tessellate>
                 <extrude>0</extrude>
                 <coordinates>18.43312,-33.98924,0.0 18.43224,-33.98914,0.0 18.43144,-33.98911,0.0 18.43095,-33.98904,0.0</coordinates>
             </LineString>
-            <name>Pathway</name>
-            <styleUrl>#stylesel_5</styleUrl>
-            <visibility>1</visibility>
-            <open>0</open>
             <description>A pathway in Kirstenbosch</description>
         </Placemark>
         <Placemark id="feat_5">
+            <name>Atrium Garden</name>
+            <styleUrl>#stylesel_6</styleUrl>
             <Polygon id="geom_3">
                 <tessellate>0</tessellate>
                 <extrude>0</extrude>
@@ -127,20 +122,14 @@
                     </LinearRing>
                 </outerBoundaryIs>
             </Polygon>
-            <name>Atrium Garden</name>
-            <styleUrl>#stylesel_6</styleUrl>
-            <visibility>1</visibility>
-            <open>0</open>
         </Placemark>
         <Placemark id="feat_9">
+            <name>BallonStyle</name>
+            <styleUrl>#stylesel_7</styleUrl>
             <Point id="geom_7">
                 <extrude>0</extrude>
                 <coordinates>18.429191,-33.987286,0.0</coordinates>
             </Point>
-            <name>BallonStyle</name>
-            <styleUrl>#stylesel_7</styleUrl>
-            <visibility>1</visibility>
-            <open>0</open>
         </Placemark>
     </Document>
 </kml>

@@ -2,7 +2,6 @@
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:xal="urn:oasis:names:tc:ciq:xsdschema:xAL:2.0">
     <Document id="feat_1">
         <name>6_various</name>
-        <visibility>1</visibility>
         <open>1</open>
         <NetworkLink id="feat_2">
             <refreshVisibility>0</refreshVisibility>
@@ -10,8 +9,6 @@
                 <href>http://fakelink.com/fakedata</href>
             </Link>
             <name>Broken NetworkLink</name>
-            <visibility>1</visibility>
-            <open>0</open>
             <flyToView>0</flyToView>
         </NetworkLink>
         <Document id="feat_3">
@@ -47,17 +44,10 @@
                 </IconStyle>
             </Style>
             <name>Geometry</name>
-            <visibility>1</visibility>
             <open>1</open>
             <Placemark id="feat_5">
-                <Point id="geom_0">
-                    <extrude>1</extrude>
-                    <altitudeMode>relativeToGround</altitudeMode>
-                    <coordinates>1.0,1.0,0.0</coordinates>
-                </Point>
                 <name>Point</name>
                 <styleUrl>#stylesel_1</styleUrl>
-                <visibility>1</visibility>
                 <Camera>
                     <altitudeMode>relativeToGround</altitudeMode>
                     <tilt>10</tilt>
@@ -69,17 +59,20 @@
                     </gx:TimeStamp>
                     <heading>45</heading>
                 </Camera>
-                <open>0</open>
+                <Point id="geom_0">
+                    <extrude>1</extrude>
+                    <altitudeMode>relativeToGround</altitudeMode>
+                    <coordinates>1.0,1.0,0.0</coordinates>
+                </Point>
             </Placemark>
             <Placemark id="feat_6">
+                <name>LineString</name>
                 <LineString id="geom_1">
                     <tessellate>1</tessellate>
                     <extrude>1</extrude>
                     <altitudeMode>relativeToGround</altitudeMode>
                     <coordinates>1.01,1.01,100 1.12,1.12,100</coordinates>
                 </LineString>
-                <name>LineString</name>
-                <visibility>1</visibility>
                 <LookAt>
                     <altitudeMode>relativeToGround</altitudeMode>
                     <tilt>5</tilt>
@@ -88,10 +81,10 @@
                     <range>50</range>
                     <latitude>1.05</latitude>
                 </LookAt>
-                <open>0</open>
             </Placemark>
         </Folder>
         <Placemark id="feat_7">
+            <name>Model</name>
             <Model id="geom_2">
                 <Location>
                     <latitude>1</latitude>
@@ -99,9 +92,6 @@
                     <longitude>1</longitude>
                 </Location>
             </Model>
-            <name>Model</name>
-            <visibility>1</visibility>
-            <open>0</open>
             <description>Model placemark without a model!</description>
         </Placemark>
     </Document>

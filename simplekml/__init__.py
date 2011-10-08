@@ -28,8 +28,7 @@ from simplekml.kml import Kml
 from simplekml.model import *
 from simplekml.overlay import *
 from simplekml.region import *
+from simplekml.schema import *
 from simplekml.styleselector import *
 from simplekml.substyle import *
 from simplekml.timeprimitive import *
-
-

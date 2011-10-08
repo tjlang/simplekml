@@ -185,6 +185,31 @@ class ViewRefreshMode(object):
     onregion  = 'onRegion '
 
 
+class Types(object):
+    """
+    Types constants.
+
+    Constants:
+    string           -- string "string"
+    int              -- string "int"
+    uint             -- string "uint"
+    short            -- string "short"
+    ushort           -- string "ushort"
+    float            -- string "float"
+    double           -- string "double"
+    bool             -- string "bool"
+
+    """
+    string = 'string'
+    int = 'int'
+    uint = 'uint'
+    short = 'short'
+    ushort = 'ushort'
+    float = 'float'
+    double = 'double'
+    bool = 'bool'
+
+
 class Color(object):
     """
     Color constants (HTML and CSS) and converters.

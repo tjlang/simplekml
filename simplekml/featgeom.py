@@ -24,18 +24,19 @@ from simplekml.overlay import *
 from simplekml.timeprimitive import *
 from simplekml.icon import *
 from simplekml.model import *
+from simplekml.schema import *
 
 
 
-class Feature(Kmlable): # TODO:ExtendedData
+class Feature(Kmlable):
 
     """_Base class extended by all features."""
 
     _id = 0
     def __init__(self,
                  name=None,
-                 visibility=1,
-                 open=0,
+                 visibility=None,
+                 open=None,
                  atomauthor=None,
                  atomlink=None,
                  address=None,
@@ -66,6 +67,7 @@ class Feature(Kmlable): # TODO:ExtendedData
         self._kml['TimeSpan'] = timespan
         self._kml['Region'] = region
         self._kml['styleUrl'] = None
+        self._kml['ExtendedData'] = None
         self._id = "feat_{0}".format(Feature._id)
         self._style = None
         self._stylemap = None
@@ -191,6 +193,17 @@ class Feature(Kmlable): # TODO:ExtendedData
     @snippet.setter
     def snippet(self, snippet):
         self._kml['snippet_'] = snippet
+
+    @property
+    def extendeddata(self):
+        """Extra data for the feature."""
+        if self._kml['ExtendedData'] is None:
+            self._kml['ExtendedData'] = ExtendedData()
+        return self._kml['ExtendedData']
+
+    @extendeddata.setter
+    def extendeddata(self, extendeddata):
+        self._kml['ExtendedData'] = etendeddata
 
     @property
     def timestamp(self):
@@ -458,6 +471,28 @@ class Feature(Kmlable): # TODO:ExtendedData
         """
         return self._newfeature(Model, **kwargs)
 
+    def newgxtrack(self, **kwargs):
+        """
+        Creates a new [GxTrack] and attaches it to this KML document.
+
+        Returns an instance of [GxTrack] class.
+
+        Keyword Arguments:
+        Same as [GxTrack].
+        """
+        return self._newfeature(GxTrack, **kwargs)
+
+    def newgxmultitrack(self, **kwargs):
+        """
+        Creates a new [GxMultiTrack] and attaches it to this KML document.
+
+        Returns an instance of [GxMultiTrack] class.
+
+        Keyword Arguments:
+        Same as [GxMultiTrack].
+        """
+        return self._newfeature(GxMultiTrack, **kwargs)
+
 
 class Container(Feature):
 
@@ -536,6 +571,7 @@ class Document(Container):
     newphotooverlay            -- Creates a new [PhotoOverlay]
     newnetworklink             -- Creates a new [NetworkLink]
     newmodel                   -- Creates a new [Model]
+    newschema                  -- Creates a new [Schema]
 
     """
 
@@ -562,6 +598,17 @@ class Document(Container):
 
         """
         super(Document, self).__init__(**kwargs)
+
+    def newschema(self, **kwargs):
+        """
+        Creates a new [Schema] and attaches it to the this document.
+
+        Returns an instance of [Schema] class.
+
+        Keyword Arguments:
+        Same as [Schema].
+        """
+        return self._newfeature(Schema, **kwargs)
 
 
 class Folder(Container):
@@ -761,6 +808,15 @@ class Geometry(Kmlable):
     @snippet.setter
     def snippet(self, snippet):
         self._placemark.snippet = snippet
+
+    @property
+    def extendeddata(self):
+        """Short description of the feature, accepts [Snippet]."""
+        return self._placemark.extendeddata
+
+    @extendeddata.setter
+    def extendeddata(self, extendeddata):
+        self._placemark.extendeddata = extendeddata
 
     @property
     def timespan(self):
@@ -2433,4 +2489,293 @@ class Model(Geometry):
         str = '<Model id="{0}">'.format(self._id)
         str += super(Model, self).__str__()
         str += "</Model>"
+        return str
+
+
+class GxTrack(Geometry):
+    """
+    A track describes how an object moves through the world over a given time period.
+
+    Keyword Arguments:
+    name (string)            -- name of placemark (default None)
+    visibility (int)         -- whether the feature is shown (default 1)
+    open (int)               -- whether open or closed in Places (default 0)
+    atomauthor (string)      -- author of the document (default None)
+    atomlink (string)        -- URL containing this KML (default None)
+    address (string)         -- standard address (default None)
+    xaladdressdetails(string)-- address as xAL (default None)
+    phonenumber (string)     -- phone number for Maps mobile (default None)
+    snippet ([Snippet])      -- short description of feature (default None)
+    description (string)     -- description shown in balloon (default None)
+    camera ([Camera])        -- camera that views the scene (default None)
+    lookat ([LookAt])        -- camera relative to feature (default None)
+    timestamp ([TimeStamp])  -- single moment in time (default None)
+    timespan ([TimeSpan])    -- period of time (default None)
+    region ([Region])        -- bounding box of features (default None)
+    extrude (int)            -- connect to the ground? (default 0)
+    altitudemode (string)    -- alt use See [AltitudeMode] (default None)
+    gxaltitudemode (string)  -- alt use. See [GxAltitudeMode] (default None)
+
+    Properties:
+    Same as arguments, with the following additional properties:
+    style               -- [Style] (default None)
+    stylemap            -- [StyleMap] (default None)
+    liststyle           -- [ListStyle] (default None)
+    balloonstyle        -- [BalloonStyle] (default None)
+    iconstyle           -- [IconStyle] (default None)
+    labelstyle          -- [LabelStyle] (default None)
+    linestyle           -- [LineStyle] (default None)
+    polystyle           -- [PolyStyle] (default None)
+    placemark           -- [Placemark] (default [Placemark], read-only)
+    whens               -- list of times given (default [])
+    angles              -- list of angles given (default [])
+    gxcoords            -- list of coords given (default [])
+
+    Public Methods:
+    newwhen    -- Attaches new when entry/entries
+    newangle   -- Attaches new angle entry/entries
+    newgxcoord -- Attaches new gxcoord entry/entries
+    newdata    -- Attaches new when, gxcoord and/or angle entry/entries
+
+    """
+
+    def __init__(self,
+                 altitudemode=None,
+                 gxaltitudemode=None,
+                 **kwargs):
+        """
+        Creates a gx:track element.
+
+        Keyword Arguments:
+        name (string)            -- name of placemark (default None)
+        visibility (int)         -- whether the feature is shown (default 1)
+        open (int)               -- whether open or closed in Places (default 0)
+        atomauthor (string)      -- author of the document (default None)
+        atomlink (string)        -- URL containing this KML (default None)
+        address (string)         -- standard address (default None)
+        xaladdressdetails(string)-- address as xAL (default None)
+        phonenumber (string)     -- phone number for Maps mobile (default None)
+        snippet ([Snippet])      -- short description of feature (default None)
+        description (string)     -- description shown in balloon (default None)
+        camera ([Camera])        -- camera that views the scene (default None)
+        lookat ([LookAt])        -- camera relative to feature (default None)
+        timestamp ([TimeStamp])  -- single moment in time (default None)
+        timespan ([TimeSpan])    -- period of time (default None)
+        region ([Region])        -- bounding box of features (default None)
+        extrude (int)            -- connect to the ground? (default 0)
+        altitudemode (string)    -- alt use See [AltitudeMode] (default None)
+        gxaltitudemode (string)  -- alt use. See [GxAltitudeMode] (default None)
+        location ([Location])    -- coordinates of the origin (default None)
+        orientation ([Orientation])-- rotation of a model (default None)
+        scale ([Scale])          -- the scale along the axes (default None)
+        link ([Link])            -- a [Link] instance (default None)
+        resourcemap ([ResourceMap])-- texture mapper (default None)
+
+        """
+        super(GxTrack, self).__init__(**kwargs)
+        self._kml['altitudeMode'] = altitudemode
+        self._kml['gx:altitudeMode'] = gxaltitudemode
+        self._kml['ExtendedData'] = None
+        self.whens = []
+        self.gxcoords = []
+        self.angles = []
+
+    @property
+    def altitudemode(self):
+        """
+        Specifies how the altitude for the Camera is interpreted.
+
+        Accepts [AltitudeMode] constants.
+
+        """
+        return self._kml['altitudeMode']
+
+    @altitudemode.setter
+    def altitudemode(self, altitudemode):
+        self._kml['altitudeMode'] = altitudemode
+
+    @property
+    def gxaltitudemode(self):
+        """
+        Specifies how the altitude for the Camera is interpreted.
+
+        With the addition of being relative to the sea floor.
+        Accepts [GxAltitudeMode] constants.
+
+        """
+        return self._kml['gx:altitudeMode']
+
+    @gxaltitudemode.setter
+    def gxaltitudemode(self, gxaltitudemode):
+        self._kml['gx:altitudeMode'] = gxaltitudemode
+
+    def newdata(self, gxcoord, when, angle=None):
+        """
+        Creates a new gxcoord, when time and angle (if provided).
+
+        This is a convenience method for calling newwhen, newgxcoord and newangle. when and gxcoord are required,
+        angle is optional.
+
+        """
+        self.newgxcoord(gxcoord)
+        self.newwhen(when)
+        if angle is not None:
+            self.newangle(angle)
+
+    def newwhen(self, when):
+        """
+        Creates a new when time, accepts string or list of string.
+
+        If one string is given a single when entry is created, but if a list of strings is given, a when entry is
+        created for each string in the list.
+
+        """
+        if type(when) == list:
+            self.whens += when
+        else:
+            self.whens.append(when)
+
+    def newgxcoord(self, coord):
+        """
+        Creates a gx:coord, accepts list of one tuples.
+
+        A gxcoord entry is created for every tuple in the list.
+
+        """
+        if type(coord) == list:
+            for crd in coord:
+                coords = Coordinates()
+                coords.addcoordinates([crd])
+                self.gxcoords.append(coords)
+        else:
+            coords = Coordinates()
+            coords.addcoordinates(list(coord))
+            self.gxcoords.append(coords)
+
+    def newangle(self, angle):
+        """
+        Creates a new angle, accepts float or list of floats.
+
+        If one float is given a single angle entry is created, but if a list of floats is given, a angle entry is
+        created for each float in the list.
+
+        """
+        if type(angle) == list:
+            self.angles += angle
+        else:
+            self.angles.append(angle)
+
+    @property
+    def extendeddata(self):
+        """Extra data for the feature."""
+        if self._kml['ExtendedData'] is None:
+            self._kml['ExtendedData'] = ExtendedData()
+        return self._kml['ExtendedData']
+
+    @extendeddata.setter
+    def extendeddata(self, extendeddata):
+        self._kml['ExtendedData'] = extendeddata
+
+    def __str__(self):
+        str = '<gx:Track>'
+        for when in self.whens:
+            str += "<when>{0}</when>".format(when)
+        for angle in self.angles:
+            str += "<angle>{0}</angle>".format(angle)
+        for gxcoord in self.gxcoords:
+            str += "<gx:coord>{0}</gx:coord>".format(gxcoord.__str__().replace(',', ' '))
+        str += super(GxTrack, self).__str__()
+        str += '</gx:Track>'
+        return str
+
+
+
+class GxMultiTrack(Geometry):
+    """
+    A container for grouping gx:tracks.
+
+    Keyword Arguments:
+    name (string)            -- name of placemark (default None)
+    visibility (int)         -- whether the feature is shown (default 1)
+    open (int)               -- whether open or closed in Places (default 0)
+    atomauthor (string)      -- author of the document (default None)
+    atomlink (string)        -- URL containing this KML (default None)
+    address (string)         -- standard address (default None)
+    xaladdressdetails(string)-- address as xAL (default None)
+    phonenumber (string)     -- phone number for Maps mobile (default None)
+    snippet ([Snippet])      -- short description of feature (default None)
+    description (string)     -- description shown in balloon (default None)
+    camera ([Camera])        -- camera that views the scene (default None)
+    lookat ([LookAt])        -- camera relative to feature (default None)
+    timestamp ([TimeStamp])  -- single moment in time (default None)
+    timespan ([TimeSpan])    -- period of time (default None)
+    region ([Region])        -- bounding box of features (default None)
+    gxinterpolate (int)      -- interpolate values between tracks (default None)
+    tracks (list)            -- a list of GxTracks (default ())
+
+    Properties:
+    Same as arguments, with the following additional properties:
+    style               -- [Style] (default None)
+    stylemap            -- [StyleMap] (default None)
+    liststyle           -- [ListStyle] (default None)
+    balloonstyle        -- [BalloonStyle] (default None)
+    iconstyle           -- [IconStyle] (default None)
+    labelstyle          -- [LabelStyle] (default None)
+    linestyle           -- [LineStyle] (default None)
+    polystyle           -- [PolyStyle] (default None)
+    placemark           -- [Placemark] (default [Placemark], read-only)
+
+    Public Methods:
+    newtrack            -- Creates a [GxTrack]
+
+    """
+
+    def __init__(self,
+                 tracks=(), gxinterpolate=None, **kwargs):
+        """
+        Creates a new gxmultitrack element.
+
+        Keyword Arguments:
+        name (string)            -- name of placemark (default None)
+        visibility (int)         -- whether the feature is shown (default 1)
+        open (int)               -- whether open or closed in Places (default 0)
+        atomauthor (string)      -- author of the document (default None)
+        atomlink (string)        -- URL containing this KML (default None)
+        address (string)         -- standard address (default None)
+        xaladdressdetails(string)-- address as xAL (default None)
+        phonenumber (string)     -- phone number for Maps mobile (default None)
+        snippet ([Snippet])      -- short description of feature (default None)
+        description (string)     -- description shown in balloon (default None)
+        camera ([Camera])        -- camera that views the scene (default None)
+        lookat ([LookAt])        -- camera relative to feature (default None)
+        timestamp ([TimeStamp])  -- single moment in time (default None)
+        timespan ([TimeSpan])    -- period of time (default None)
+        region ([Region])        -- bounding box of features (default None)
+        gxinterpolate (int)      -- interpolate values between tracks (default None)
+        tracks (list)            -- a list of GxTracks (default ())
+
+        """
+        super(GxMultiTrack, self).__init__(**kwargs)
+        self._kml['gx:interpolate'] = gxinterpolate
+        self.tracks = list(tracks)
+
+    def newgxtrack(self, **kwargs):
+        """
+        Creates a new [GxTrack] and attaches it to this mutlitrack.
+
+        Returns an instance of [GxTrack] class.
+
+        Keyword Arguments:
+        Same as [GxTrack], except arguments that are not applicale in a multitrack grouping will be ignored, such as
+        name, visibility, open, etc.
+        """
+        self.tracks.append(GxTrack(**kwargs))
+        return self.tracks[-1]
+
+    def __str__(self):
+        str = '<gx:MultiTrack id="{0}">'.format(self._id)
+        str += super(GxMultiTrack, self).__str__()
+        for track in self.tracks:
+            str += track.__str__()
+        str += "</gx:MultiTrack>"
         return str

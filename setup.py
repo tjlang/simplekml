@@ -3,7 +3,7 @@ from distutils.core import setup
 setup(
     name = 'simplekml',
     packages = ['simplekml'],
-    version = '0.7.3',
+    version = '0.8.0',
     description = 'A Simple KML creator',
     author='Kyle Lancaster',
     author_email='kyle.lan@gmail.com',
@@ -26,7 +26,7 @@ setup(
     long_description="""
 simplekml is a python package which enables you to generate KML with as little effort as possible.
 
-At the time of making this package nothing was available (at least I could not find anything) that could create KML files easily. You needed a lot of bloated code to even create a simple point. This is understandable because the KML standard is quite extensive, but what if you just work with the simple elements of KML like Document, Folder, Point, LineString and Polygon? This package supports those elements and more (MultiGeometry, Overlays, NetworkLinks, Models) with advanced styling. This makes creating a KML file containing a point as simple as::
+At the time of making this package nothing was available (at least I could not find anything) that could create KML files easily. You needed a lot of bloated code to even create a simple point. This is understandable because the KML standard is quite extensive, but what if you just work with the simple elements of KML like Document, Folder, Point, LineString and Polygon? This package supports those elements and more (MultiGeometry, Overlays, NetworkLinks, Models, Track and MultiTrack) with advanced styling. This makes creating a KML file containing a point as simple as::
 
     import simplekml
     kml = simplekml.Kml()

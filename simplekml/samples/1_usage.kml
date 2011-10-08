@@ -1,29 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:xal="urn:oasis:names:tc:ciq:xsdschema:xAL:2.0">
     <Document id="feat_1">
-        <visibility>1</visibility>
-        <open>0</open>
+        <name>1_usage</name>
         <Placemark id="feat_2">
+            <name>Kirstenbosch</name>
             <Point id="geom_0">
                 <extrude>0</extrude>
                 <coordinates>18.432314,-33.988862,0.0</coordinates>
             </Point>
-            <name>Kirstenbosch</name>
-            <visibility>1</visibility>
-            <open>0</open>
         </Placemark>
         <Placemark id="feat_3">
+            <name>Pathway</name>
             <LineString id="geom_1">
                 <tessellate>0</tessellate>
                 <extrude>0</extrude>
                 <coordinates>18.43312,-33.98924,0.0 18.43224,-33.98914,0.0 18.43144,-33.98911,0.0 18.43095,-33.98904,0.0</coordinates>
             </LineString>
-            <name>Pathway</name>
-            <visibility>1</visibility>
-            <open>0</open>
             <description>A pathway in &lt;b&gt;Kirstenbosch&lt;/b&gt;</description>
         </Placemark>
         <Placemark id="feat_4">
+            <name>Atrium Garden</name>
             <Polygon id="geom_2">
                 <tessellate>0</tessellate>
                 <extrude>0</extrude>
@@ -42,9 +38,6 @@
                     </LinearRing>
                 </outerBoundaryIs>
             </Polygon>
-            <name>Atrium Garden</name>
-            <visibility>1</visibility>
-            <open>0</open>
         </Placemark>
     </Document>
 </kml>

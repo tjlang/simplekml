@@ -2,7 +2,7 @@ import os
 
 from simplekml import *
 
-kml = Kml()
+kml = Kml(name='4_multigeometry')
 
 # Creating MultiGeometry
 multipnt = kml.newmultigeometry(name="MultiPoint") # SA (Hartebeeshoek94) Grid Intersections
@@ -50,4 +50,4 @@ multipoleven.linestyle.color = Color.changealpha("77", Color.orange)
 multipolodd.polystyle.color = Color.changealpha("77", Color.lightblue)
 multipolodd.linestyle.color = Color.changealpha("77", Color.lightblue)
 
-kml.save(os.path.join(os.path.split(__file__)[0], "4_advanced.kml"))
+kml.save(os.path.splitext(__file__)[0] + ".kml")

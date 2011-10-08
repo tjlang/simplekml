@@ -20,14 +20,14 @@ Contact me at kyle.lan@gmail.com
 
 import xml.dom.minidom
 import zipfile
-from simplekml.featgeom import *
-from simplekml.abstractview import *
-from simplekml.overlay import *
-from simplekml.base import KmlElement
+import codecs
+import os
+
+from simplekml.base import Kmlable, KmlElement
+from simplekml.featgeom import Document
 
 
 class Kml(object):
-
     """
     The main class that represents a KML file.
 
@@ -69,6 +69,9 @@ class Kml(object):
     newphotooverlay            -- Creates a new [PhotoOverlay]
     newnetworklink             -- Creates a new [NetworkLink]
     newmodel                   -- Creates a new [Model]
+    newschema                  -- Creates a new [Schema]
+    newgxtrack                 -- Creates a new [GxTrack]
+    newgxmultitrack            -- Creates a new [GxMultiTrack]
     kml                        -- Returns the generated kml as a string
     save                       -- Saves to a KML file
     savekmz                    -- Saves to a KMZ file
@@ -123,12 +126,12 @@ class Kml(object):
 
         """
         kml_tag = 'xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:xal="urn:oasis:names:tc:ciq:xsdschema:xAL:2.0"'
-        xmlstr = "<kml {0}>{1}</kml>".format(kml_tag, self._feature.__str__())
+        xmlstr = u"<kml {0}>{1}</kml>".format(kml_tag, self._feature.__str__())
         if format:
            KmlElement.patch()
-           kmlstr = xml.dom.minidom.parseString(xmlstr)
+           kmlstr = xml.dom.minidom.parseString(xmlstr.encode("utf-8"))
            KmlElement.unpatch()
-           return kmlstr.toprettyxml(indent="    ", newl="\n", encoding="UTF-8")
+           return kmlstr.toprettyxml(indent="    ", newl="\n", encoding="UTF-8").decode("utf-8")
         else:
             return xmlstr
 
@@ -156,7 +159,7 @@ class Kml(object):
 
         """
         Kmlable._setkmz(False)
-        return self._genkml(format).decode("utf-8")
+        return self._genkml(format)
 
     def save(self, path, format=True):
         """
@@ -169,7 +172,7 @@ class Kml(object):
         """
         Kmlable._setkmz(False)
         out = self._genkml(format)
-        f = open(path, 'wb')
+        f = codecs.open(path, 'wb', 'utf-8')
         try:
             f.write(out)
         finally:
@@ -313,3 +316,40 @@ class Kml(object):
         Same as [Model].
         """
         return self.document.newmodel(**kwargs)
+
+    def newschema(self, **kwargs):
+        """
+        Creates a new [Schema] and attaches it to this KML document.
+
+        Returns an instance of [Schema] class.
+
+        Keyword Arguments:
+        Same as [Schema].
+        """
+        return self.document.newschema(**kwargs)
+
+    def newgxtrack(self, **kwargs):
+        """
+        Creates a new [GxTrack] and attaches it to this KML document.
+
+        Returns an instance of [GxTrack] class.
+
+        Keyword Arguments:
+        Same as [GxTrack].
+        """
+        return self.document.newgxtrack(**kwargs)
+
+    def newgxmultitrack(self, **kwargs):
+        """
+        Creates a new [GxMultiTrack] and attaches it to this KML document.
+
+        Returns an instance of [GxMultiTrack] class.
+
+        Keyword Arguments:
+        Same as [GxMultiTrack].
+        """
+        return self.document.newgxmultitrack(**kwargs)
+
+
+if __name__ == "__main__":
+    pass

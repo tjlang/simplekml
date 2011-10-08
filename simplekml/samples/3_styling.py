@@ -2,7 +2,7 @@ import os
 
 from simplekml import *
 
-kml = Kml()
+kml = Kml(name='3_styling')
 kml.document.liststyle.listitemtype = ListItemType.radiofolder
 kml.document.liststyle.itemicon.href = "http://maps.google.com/mapfiles/kml/shapes/parks.png"
 
@@ -40,4 +40,4 @@ pnt.balloonstyle.bgcolor = Color.lightgreen
 pnt.balloonstyle.textcolor = Color.rgb(0, 0, 255)
 
 # Saving
-kml.save(os.path.join(os.path.split(__file__)[0], "3_styling.kml"))
+kml.save(os.path.splitext(__file__)[0] + ".kml")

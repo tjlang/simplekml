@@ -2,7 +2,7 @@ import os
 
 from simplekml import *
 
-kml = Kml()
+kml = Kml(name='1_usage')
 
 # A simple Point
 kml.newpoint(name="Kirstenbosch", coords=[(18.432314,-33.988862)])
@@ -17,9 +17,7 @@ pol = kml.newpolygon(name="Atrium Garden",
                      innerboundaryis=[[(18.43360,-33.98982), (18.43386,-33.98995), (18.43401,-33.98974), (18.43376,-33.98962), (18.43360,-33.98982)]])
 
 # Saving
-kml.save(os.path.join(os.path.split(__file__)[0], "1_usage.kml"))
+kml.save(os.path.splitext(__file__)[0] + ".kml")
 
 # Saving as KMZ
-kml.savekmz(os.path.join(os.path.split(__file__)[0], "1_usage.kmz"))
-
-print kml.kml()
+kml.savekmz(os.path.splitext(__file__)[0] + ".kmz")

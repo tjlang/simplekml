@@ -2,7 +2,7 @@ import os
 
 from simplekml import *
 
-kml = Kml()
+kml = Kml(name='2_basic')
 
 doc = kml.newdocument(name="A Document")
 nestdoc = doc.newdocument()
@@ -57,4 +57,4 @@ pol.style.polystyle.color = 'ffff00ff'
 fol.newpolygon(name='Two Oceans Aquarium2', description='A aquarium with fish.', outerboundaryis=[(18.41754659343738,-33.90835172260248,0),(18.41812390156041,-33.90809723020431,0),(18.41794038110668,-33.9078222852994,0),(18.41770068653614,-33.90793436536714,0),(18.41747401819836,-33.90771808929424,0),(18.41719328543339,-33.9079095416603,0),(18.41734156322152,-33.90807829739979,0),(18.41717060935807,-33.90819466465658,0),(18.41731950597035,-33.90835166308609,0),(18.41745256837932,-33.90826680151411,0),(18.41754659343738,-33.90835172260248,0 )])
 
 
-kml.save(os.path.join(os.path.split(__file__)[0], "2_basic.kml"))
+kml.save(os.path.splitext(__file__)[0] + ".kml")

@@ -1,6 +1,8 @@
+import os
+
 from simplekml import *
 
-kml = Kml()
+kml = Kml(name='5_overlays')
 
 # GroundOverlay
 ground = kml.newgroundoverlay(name='GroundOverlay Test')
@@ -18,8 +20,6 @@ screen = kml.newscreenoverlay(name='ScreenOverlay Test')
 screen.icon.href = 'resources/simplekml-logo.png'
 screen.overlayxy = OverlayXY(x=0,y=1,xunits=Units.fraction,yunits=Units.fraction)
 screen.screenxy = ScreenXY(x=15,y=15,xunits=Units.pixel,yunits=Units.insetpixels)
-#    screen.rotationxy = RotationXY(x=10,y=10,xunits=Units.pixel,yunits=Units.pixel)
-#    screen.rotation = 45
 screen.size.x = -1
 screen.size.y = -1
 screen.size.xunits = Units.fraction
@@ -33,5 +33,5 @@ photo.iconstyle.icon.href = 'http://maps.google.com/mapfiles/kml/shapes/camera.p
 photo.icon.href = 'resources/stadium.jpg'
 photo.viewvolume = ViewVolume(-25,25,-15,15,1)
 
-kml.save("5_overlays.kml")
-kml.savekmz('5_overlays.kmz')
+kml.save(os.path.splitext(__file__)[0] + ".kml")
+kml.savekmz(os.path.splitext(__file__)[0] + ".kmz")

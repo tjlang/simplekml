@@ -46,7 +46,7 @@ class Kmlable(object):
                             or (var == 'targetHref' and os.path.exists(val) and Kmlable._kmz == True): # Check for local images
                         Kmlable._addimage(val)
                         val = os.path.join('files', os.path.split(val)[1])
-                    str += "<{0}>{1}</{0}>".format(var, val)  # Enclose the variable's __str__ with the variables name
+                    str += u"<{0}>{1}</{0}>".format(var, val)  # Enclose the variable's __str__ with the variables name
         return str
 
     @classmethod
@@ -76,7 +76,6 @@ class Kmlable(object):
 
 
 class Vector2(object):
-
     """_A base class representing a vector."""
 
     def __init__(self,
@@ -135,7 +134,6 @@ class Vector2(object):
 
 
 class OverlayXY(Vector2):
-
     """
     Point in overlay image that is mapped to screen coordinate [ScreenXY]
 
@@ -165,7 +163,6 @@ class OverlayXY(Vector2):
 
 
 class ScreenXY(Vector2):
-
     """
     Point relative to the screen origin that the overlay image is mapped to.
 
@@ -195,7 +192,6 @@ class ScreenXY(Vector2):
 
 
 class RotationXY(Vector2):
-
     """
     Point relative to the screen about which the screen overlay is rotated.
 
@@ -225,7 +221,6 @@ class RotationXY(Vector2):
 
 
 class Size(Vector2):
-
     """
     Specifies the size of the image for the screen overlay.
 
@@ -255,7 +250,6 @@ class Size(Vector2):
 
         
 class HotSpot(Vector2):
-
     """
     Specifies the position inside the [Icon] that is anchored to the [Point].
 
@@ -285,7 +279,6 @@ class HotSpot(Vector2):
 
 
 class Snippet(object):
-
     """
     A short description of the feature.
 
@@ -335,7 +328,6 @@ class Snippet(object):
 
 
 class KmlElement(xml.dom.minidom.Element):
-
     """_Overrides the original Element to format the KML to GMaps standards."""
 
     _original_element = xml.dom.minidom.Element
