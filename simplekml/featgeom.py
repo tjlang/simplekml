@@ -2558,6 +2558,7 @@ class GxTrack(Geometry):
     """
 
     def __init__(self,
+                 extrude=None,
                  altitudemode=None,
                  gxaltitudemode=None,
                  **kwargs):
@@ -2592,12 +2593,22 @@ class GxTrack(Geometry):
 
         """
         super(GxTrack, self).__init__(**kwargs)
+        self._kml['extrude'] = extrude
         self._kml['altitudeMode'] = altitudemode
         self._kml['gx:altitudeMode'] = gxaltitudemode
         self._kml['ExtendedData'] = None
         self.whens = []
         self.gxcoords = []
         self.angles = []
+
+    @property
+    def extrude(self):
+        """Connect the GxTrack to the ground, accepts int (0 or 1)."""
+        return self._kml['extrude']
+
+    @extrude.setter
+    def extrude(self, extrude):
+        self._kml['extrude'] = extrude
 
     @property
     def altitudemode(self):

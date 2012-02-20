@@ -272,7 +272,10 @@ class Schema(Kmlable):
         return self.gxsimplearrayfields[-1]
 
     def __str__(self):
-        str = '<Schema name="{0}" id="{1}">'.format(self.name, self._id)
+        if self.name is not None:
+            str = '<Schema name="{0}" id="{1}">'.format(self.name, self._id)
+        else:
+            str = '<Schema id="{0}">'.format(self._id)
         for field in self.simplefields:
             str += field.__str__()
         for field in self.gxsimplearrayfields:
