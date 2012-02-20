@@ -21,6 +21,7 @@ Contact me at kyle.lan@gmail.com
 import os
 import cgi
 import xml.dom.minidom
+from simplekml.makeunicode import u
 
 class Kmlable(object):
 
@@ -46,7 +47,7 @@ class Kmlable(object):
                             or (var == 'targetHref' and os.path.exists(val) and Kmlable._kmz == True): # Check for local images
                         Kmlable._addimage(val)
                         val = os.path.join('files', os.path.split(val)[1])
-                    str += u"<{0}>{1}</{0}>".format(var, val)  # Enclose the variable's __str__ with the variables name
+                    str += u("<{0}>{1}</{0}>").format(var, val)  # Enclose the variable's __str__ with the variables name
         return str
 
     @classmethod

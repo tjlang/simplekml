@@ -2798,3 +2798,4 @@ class GxMultiTrack(Geometry):
             str += track.__str__()
         str += "</gx:MultiTrack>"
         return str
+

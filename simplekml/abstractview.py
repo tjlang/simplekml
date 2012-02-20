@@ -21,6 +21,7 @@ Contact me at kyle.lan@gmail.com
 from simplekml.base import Kmlable
 from simplekml.constants import *
 from simplekml.timeprimitive import *
+from simplekml.makeunicode import u
 
 class AbstractView(Kmlable): #TODO: gxViewerOptions
     """_Base class, extended by Camera and LookAt."""

@@ -1,3 +1,4 @@
+from __future__ import unicode_literals
 import os
 
 from simplekml import *
@@ -8,14 +9,14 @@ doc = kml.newdocument(name="A Document")
 nestdoc = doc.newdocument()
 
 nestdoc.name = "A Nested Document"
-nestdoc.description = "This is the nested document's description."
+nestdoc.description = "\u2013 This is the nested document's description with unicode."
 
 fol = kml.newfolder()
 fol.name = "A Folder"
 fol.description = "Description of a folder"
 fol = fol.newfolder(name='A Nested Folder', description="Description of a nested folder")
 fol = kml.newfolder(name='Point Tests', description="Description of Point Folder")
-stpnt = fol.newpoint(name="Cape Town Stadium", description='The Cape Town statdium built for the 2010 world cup soccer.', coords=[(18.411102, -33.903486)])
+stpnt = fol.newpoint(name="Cape Town Stadium", description='The Cape Town stadium built for the 2010 world cup soccer.', coords=[(18.411102, -33.903486)])
 vapnt = fol.newpoint()
 vapnt.name = "V&A Waterfront"
 vapnt.description = "The V&A Waterfront in Cape Town"
@@ -58,3 +59,4 @@ fol.newpolygon(name='Two Oceans Aquarium2', description='A aquarium with fish.',
 
 
 kml.save(os.path.splitext(__file__)[0] + ".kml")
+kml.savekmz(os.path.splitext(__file__)[0] + ".kmz")

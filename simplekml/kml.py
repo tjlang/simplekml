@@ -25,6 +25,7 @@ import os
 
 from simplekml.base import Kmlable, KmlElement
 from simplekml.featgeom import Document
+from simplekml.makeunicode import u
 
 
 class Kml(object):
@@ -126,7 +127,7 @@ class Kml(object):
 
         """
         kml_tag = 'xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:xal="urn:oasis:names:tc:ciq:xsdschema:xAL:2.0"'
-        xmlstr = u"<kml {0}>{1}</kml>".format(kml_tag, self._feature.__str__())
+        xmlstr = u("<kml {0}>{1}</kml>").format(kml_tag, self._feature.__str__())
         if format:
            KmlElement.patch()
            kmlstr = xml.dom.minidom.parseString(xmlstr.encode("utf-8"))
@@ -188,7 +189,7 @@ class Kml(object):
 
         """
         Kmlable._setkmz()
-        out = self._genkml(format)
+        out = self._genkml(format).encode('utf-8')
         kmz = zipfile.ZipFile(path, 'w', zipfile.ZIP_DEFLATED)
         kmz.writestr("doc.kml", out)
         for image in Kmlable._getimages():
