@@ -1,28 +1,31 @@
+"""
+Copyright 2011-2012 Kyle Lancaster
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+Contact me at kyle.lan@gmail.com
+"""
+
 from simplekml.base import Kmlable
 
 class SimpleField(Kmlable):
-    """
-    Custom field, forms part of a schema.
+    """Custom field, forms part of a schema.
 
-    Keyword Arguments:
-    name (string)        -- name of field (required)
-    type (string)        -- type of field (default "string")
-    displayname (string) -- alternative name (default None)
-
-    Properties:
-    Same as arguments.
-
+    The arguments are the same as the properties.
     """
 
     def __init__(self, name=None, type='string', displayname=None):
-        """
-        Creates a simplefield.
-
-        Keyword Arguments:
-        name (string)        -- name of field (default None)
-        type (string)        -- base type of field (default "string")
-        displayname (string) -- alternative name (default None)
-        """
         super(SimpleField, self).__init__()
         self._kml['name'] = name
         self._kml['type'] = type
@@ -39,7 +42,7 @@ class SimpleField(Kmlable):
 
     @property
     def type(self):
-        """Type of field, accepts string from [Types] constants."""
+        """Type of field, accepts string from :class:`simplekml.Types` constants."""
         return self._kml['type']
 
     @type.setter
@@ -56,67 +59,40 @@ class SimpleField(Kmlable):
         self._kml['displayName'] = displayname
 
     def __str__(self):
-        str = '<SimpleField type="{0}" name="{1}">'.format(self.type, self.name)
+        buf = ['<SimpleField type="{0}" name="{1}">'.format(self.type, self.name)]
         if self.displayname is not None:
-            str += '<displayName>{0}</displayName>'.format(self.displayname)
-        str += '</SimpleField>'
-        return str
+            buf.append('<displayName>{0}</displayName>'.format(self.displayname))
+        buf.append('</SimpleField>')
+        return "".join(buf)
 
 
 class GxSimpleArrayField(SimpleField):
-    """
-    Custom array field for gx:track, forms part of a schema.
+    """Custom array field for gx:track, forms part of a schema.
 
-    Keyword Arguments:
-    name (string)        -- name of field (required)
-    type (string)        -- type of field (default "string")
-    displayname (string) -- alternative name (default None)
-
-    Properties:
-    Same as arguments.
-
+    Args:
+      * *same as properties*
+      * *all other args same as* :class:`simplekml.SimpleField`
     """
 
     def __init__(self, name=None, type='string', displayname=None):
-        """
-        Creates a gx:simplearrayfield.
-
-        Keyword Arguments:
-        name (string)        -- name of field (default None)
-        type (string)        -- base type of field (default "string")
-        displayname (string) -- alternative name (default None)
-        """
         super(GxSimpleArrayField, self).__init__(name, type, displayname)
 
     def __str__(self):
-        str = '<gx:SimpleArrayField type="{0}" name="{1}">'.format(self.type, self.name)
+        buf = ['<gx:SimpleArrayField type="{0}" name="{1}">'.format(self.type,
+                                                                    self.name)]
         if self.displayname is not None:
-            str += '<displayName>{0}</displayName>'.format(self.displayname)
-        str += '</gx:SimpleArrayField>'
-        return str
+            buf.append('<displayName>{0}</displayName>'.format(self.displayname))
+        buf.append('</gx:SimpleArrayField>')
+        return "".join(buf)
 
 
 class SimpleData(Kmlable):
-    """
-    Data of a schema.
+    """Data of a schema.
 
-    Keyword Arguments:
-    name (string)              -- name of field from schema (required)
-    value (int, float, string) -- value of field (default None)
-
-    Properties:
-    Same as arguments.
-
+    The arguments are the same as the properties.
     """
 
     def __init__(self, name, value):
-        """
-        Creates simpledata.
-
-        Keyword Arguments:
-        name (string)              -- name of field from schema (required)
-        value (int, float, string) -- value of field (required)
-        """
         super(SimpleData, self).__init__()
         self._kml['name'] = name
         self._kml['value'] = value
@@ -140,33 +116,16 @@ class SimpleData(Kmlable):
         self._kml['value'] = value
 
     def __str__(self):
-        str = '<SimpleData name="{0}">{1}</SimpleData>'.format(self.name, self.value)
-        return str
+        return '<SimpleData name="{0}">{1}</SimpleData>'.format(self.name, self.value)
 
 
 class GxSimpleArrayData(Kmlable):
-    """
-    Data of a [GxSimpleArrayField].
+    """Data of a :class:`simplekml.GxSimpleArrayField`.
 
-    Keyword Arguments:
-    name (string) -- name of array field from schema (required)
-    values (list) -- values of the array field (default None)
-
-    Properties:
-    Same as arguments.
-
-    Public Methods:
-    newvalue            -- Adds a value to the gxsimpledarraydata
+    The arguments are the same as the properties.
     """
 
     def __init__(self, name, values=None):
-        """
-        Creates gxsimplearraydata.
-
-        Keyword Arguments:
-        name (string) -- name of field from schema (required)
-        values (list) -- values of the array field (default None)
-        """
         super(GxSimpleArrayData, self).__init__()
         self._kml['name'] = name
         self.values = []
@@ -187,41 +146,22 @@ class GxSimpleArrayData(Kmlable):
         self.values.append(value)
 
     def __str__(self):
-        str = '<gx:SimpleArrayData name="{0}">'.format(self.name)
+        buf = ['<gx:SimpleArrayData name="{0}">'.format(self.name)]
         for value in self.values:
-            str += "<gx:value>{0}</gx:value>".format(value)
-        str += "</gx:SimpleArrayData>"
-        return str
+            buf.append("<gx:value>{0}</gx:value>".format(value))
+        buf.append("</gx:SimpleArrayData>")
+        return "".join(buf)
 
 
 
 class Schema(Kmlable):
-    """
-    Custom KML schema that is used to add custom data to KML Features.
+    """Custom KML schema that is used to add custom data to KML Features.
 
-    Keyword Arguments:
-    name (string) -- name of schema (default None)
-
-    Properties:
-    Same as arguments, with the following additional properties:
-    id                   -- unique id of the schema
-    simplefields         -- returns a list of [SimpleField]s
-    gxsimplearrayfields  -- returns a list of [GxSimpleArrayFields]s
-
-    Public Methods:
-    newsimplefield            -- Creates a [SimpleField]
-    newgxsimplearrayfield     -- Creates a [GxSimpleArrayField]
-
+    The arguments are the same as the properties.
     """
 
     _id = 0
     def __init__(self, name=None):
-        """
-        Creates a schema.
-
-        Keyword Arguments:
-        name (string) -- name of schema (default None)
-        """
         self._id = "schema_{0}".format(Schema._id + 1)
         Schema._id += 1
         super(Schema, self).__init__()
@@ -244,64 +184,53 @@ class Schema(Kmlable):
         self._kml['name'] = name
 
     def newsimplefield(self, name, type, displayname=None):
-        """
-        Creates a new [SimpleField] and attaches it to this schema.
+        """Creates a new :class:`simplekml.SimpleField` and attaches it to this schema.
 
-        Returns an instance of [SimpleField] class.
+        Returns an instance of :class:`simplekml.SimpleField` class.
 
-        Keyword Arguments:
-        name (string)        -- name of simplefield (required)
-        type (string)        -- type of field (required)
-        displayname (string) -- pretty name that will be displayed (default None)
+        Args:
+          * name: string name of simplefield (required)
+          * type: string type of field (required)
+          * displayname: string for pretty name that will be displayed (default None)
         """
         self.simplefields.append(SimpleField(name, type, displayname))
         return self.simplefields[-1]
 
     def newgxsimplearrayfield(self, name, type, displayname=None):
-        """
-        Creates a new [GxSimpleArrayField] and attaches it to this schema.
+        """Creates a new :class:`simplekml.GxSimpleArrayField` and attaches it to this schema.
 
-        Returns an instance of [GxSimpleArrayField] class.
+        Returns an instance of :class:`simplekml.GxSimpleArrayField` class.
 
-        Keyword Arguments:
-        name (string)        -- name of simplefield (required)
-        type (string)        -- type of field (required)
-        displayname (string) -- pretty name that will be displayed (default None)
+        Args:
+          * name: string name of simplefield (required)
+          * type: string type of field (required)
+          * displayname: string for pretty name that will be displayed (default None)
         """
         self.gxsimplearrayfields.append(GxSimpleArrayField(name, type, displayname))
         return self.gxsimplearrayfields[-1]
 
     def __str__(self):
+        buf = []
         if self.name is not None:
-            str = '<Schema name="{0}" id="{1}">'.format(self.name, self._id)
+            buf.append('<Schema name="{0}" id="{1}">'.format(self.name, self._id))
         else:
-            str = '<Schema id="{0}">'.format(self._id)
+            buf.append('<Schema id="{0}">'.format(self._id))
         for field in self.simplefields:
-            str += field.__str__()
+            buf.append(field.__str__())
         for field in self.gxsimplearrayfields:
-            str += field.__str__()
-        str += '</Schema>'
-        return str
+            buf.append(field.__str__())
+        buf.append('</Schema>')
+        return "".join(buf)
 
 
 
 class Data(Kmlable):
-    """
-    Data of extended data used to add custom data to KML Features.
+    """Data of extended data used to add custom data to KML Features.
 
-    Keyword Arguments:
-    schemaurl (string) -- url of a schema (default None)
+    The arguments are the same as the properties.
     """
 
     def __init__(self, name=None, value=None, displayname=None):
-        """
-        Creates a data element.
-
-        Keyword Arguments:
-        name (string)            -- name of the data (default None)
-        value (int, float,string)-- value of the data (default None)
-        displayname (string)     -- pretty name that will be displayed (default None)
-        """
         super(Data, self).__init__()
         self._kml['name'] = name
         self._kml['value'] = value
@@ -335,40 +264,36 @@ class Data(Kmlable):
         self._kml['displayName'] = displayname
 
     def __str__(self):
-        str = '<Data name="{0}">'.format(self.name)
+        buf = ['<Data name="{0}">'.format(self.name)]
         if self._kml['value'] is not None:
-            str += "<value>{0}</value>".format(self._kml['value'])
+            buf.append("<value>{0}</value>".format(self._kml['value']))
         if self._kml['displayName'] is not None:
-            str += "<displayName>{0}</displayName>".format(self._kml['displayName'])
-        str += '</Data>'
-        return str
+            buf.append("<displayName>{0}</displayName>".format(self._kml['displayName']))
+        buf.append('</Data>')
+        return "".join(buf)
 
 
 
 class SchemaData(Kmlable):
-    """
-    Data of a schema that is used to add custom data to KML Features.
+    """Data of a schema that is used to add custom data to KML Features.
 
-    Keyword Arguments:
-    schemaurl (string) -- url of a schema (default None)
+    The arguments are the same as the properties.
     """
 
     _id = 0
     def __init__(self, schemaurl=None):
-        """
-        Creates a schema.
-
-        Keyword Arguments:
-        name (string) -- name of schema (required)
-        """
         super(SchemaData, self).__init__()
         self.simpledatas = []
         self.gxsimplearraydatas = []
+        self._kml["schemaUrl"] = schemaurl
 
     @property
     def schemaurl(self):
         """Schema url, accepts string."""
-        return '#{0}'.format(self._kml['schemaUrl'])
+        if self._kml['schemaUrl'] is not None:
+            return '#{0}'.format(self._kml['schemaUrl'])
+        else:
+            return None
 
     @schemaurl.setter
     def schemaurl(self, schemaurl):
@@ -376,53 +301,47 @@ class SchemaData(Kmlable):
 
     def newsimpledata(self, name, value):
         """
-        Creates a new [SimpleData] and attaches it to this schemadata.
+        Creates a new :class:`simplekml.SimpleData` and attaches it to this schemadata.
 
-        Returns an instance of [SimpleData] class.
+        Returns an instance of :class:`simplekml.SimpleData` class.
 
-        Keyword Arguments:
-        name (string)                     -- name of simplefield (required)
-        value (int, float, string)        -- value of field (required)
+        Args:
+          * name: string name of simplefield (required)
+          * value: int, float or string for value of field (required)
         """
         self.simpledatas.append(SimpleData(name, value))
         return self.simpledatas[-1]
 
     def newgxsimplearraydata(self, name, value):
-        """
-        Creates a new [GxSimpleArrayData] and attaches it to this schemadata.
+        """Creates a new :class:`simplekml.GxSimpleArrayData` and attaches it to this schemadata.
 
-        Returns an instance of [GxSimpleArrayData] class.
+        Returns an instance of :class:`simplekml.GxSimpleArrayData` class.
 
-        Keyword Arguments:
-        name (string)                     -- name of gx:simplearrayfield (required)
-        value (int, float, string)        -- value of field (required)
+        Args:
+          * name: string name of simplefield (required)
+          * value: int, float or string for value of field (required)
         """
         self.gxsimplearraydatas.append(GxSimpleArrayData(name, value))
         return self.gxsimplearraydatas[-1]
 
     def __str__(self):
-        str = '<SchemaData schemaUrl="{0}">'.format(self.schemaurl)
+        buf = ['<SchemaData schemaUrl="{0}">'.format(self.schemaurl)]
         for field in self.simpledatas:
-            str += field.__str__()
+            buf.append(field.__str__())
         for field in self.gxsimplearraydatas:
-            str += field.__str__()
-        str += '</SchemaData>'
-        return str
+            buf.append(field.__str__())
+        buf.append('</SchemaData>')
+        return "".join(buf)
 
 
 
 class ExtendedData(Kmlable):
-    """
-    Data of a schema that is used to add custom data to KML Features.
+    """Data of a schema that is used to add custom data to KML Features.
 
-    Keyword Arguments:
-    schemaurl (string) -- url of a schema (default None)
+    The arguments are the same as the properties.
     """
 
     def __init__(self):
-        """
-        Creates an extendeddata.
-        """
         super(ExtendedData, self).__init__()
         self._kml['schemaData_'] = None
         self.datas = []
@@ -439,23 +358,22 @@ class ExtendedData(Kmlable):
         self._kml['schemaData_'] = schemadata
 
     def newdata(self, name, value, displayname=None):
-        """
-        Creates a new [Data] and attaches it to this schemadata.
+        """Creates a new :class:`simplekml.Data` and attaches it to this schemadata.
 
-        Returns an instance of [Data] class.
+        Returns an instance of :class:`simplekml.Data` class.
 
-        Keyword Arguments:
-        name (string)             -- name of simplefield (required)
-        value (int, float, string)-- value of field (required)
-        displayname (string)      -- pretty name that will be displayed (default None)
+        Args:
+          * name: string name of simplefield (required)
+          * value: int, float or string for value of field (required)
+          * displayname: string for pretty name that will be displayed (default None)
         """
         self.datas.append(Data(name, value, displayname))
         return self.datas[-1]
 
     def __str__(self):
-        str = ''
+        buf = []
         for data in self.datas:
-            str += data.__str__()
+            buf.append(data.__str__())
         if self._kml['schemaData_'] is not None:
-            str += self._kml['schemaData_'].__str__()
-        return str
+            buf.append(self._kml['schemaData_'].__str__())
+        return "".join(buf)

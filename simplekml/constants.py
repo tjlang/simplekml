@@ -1,6 +1,5 @@
 """
-simplekml
-Copyright 2011 Kyle Lancaster
+Copyright 2011-2012 Kyle Lancaster
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -19,70 +18,32 @@ Contact me at kyle.lan@gmail.com
 """
 
 class AltitudeMode(object):
-    """
-    AltitudeMode constants.
-
-    Constants:
-    clamptoground       -- string "clampToGround"
-    relativetoground    -- string "relativeToGround"
-    absolute            -- string "absolute"
-
-    """
+    """AltitudeMode constants."""
     clamptoground = "clampToGround"
     relativetoground = "relativeToGround"
     absolute = "absolute"
 
 
 class GxAltitudeMode(object):
-    """
-    gx:AltitudeMode constants.
-
-    Constants:
-    clampToSeaFloor     -- string "clampToSeaFloor"
-    relativeToSeaFloor  -- string "relativeToSeaFloor"
-
-    """
+    """gx:AltitudeMode constants."""
     clampToSeaFloor  = "clampToSeaFloor "
     relativeToSeaFloor  = "relativeToSeaFloor "
 
 
 class ColorMode(object):
-    """
-    ColorMode constants.
-
-    Constants:
-    normal              -- string "normal"
-    random              -- string "random"
-
-    """
+    """ColorMode constants."""
     normal = "normal"
     random = "random"
 
 
 class DisplayMode(object):
-    """
-    DisplayMode constants.
-
-    Constants:
-    default             -- string "default"
-    hide                -- string "hide"
-
-    """
+    """DisplayMode constants."""
     default = "default"
     hide = "hide"
 
 
 class ListItemType(object):
-    """
-    ListItemType constants.
-
-    Constants:
-    check               -- string "check"
-    radiofolder         -- string "radioFolder"
-    checkoffonly        -- string "checkOffOnly"
-    checkhidechildren   -- string "checkHideChildren"
-
-    """
+    """ListItemType constants."""
     check = "check"
     radiofolder = "radioFolder"
     checkoffonly = "checkOffOnly"
@@ -90,18 +51,7 @@ class ListItemType(object):
 
 
 class State(object):
-    """
-    State constants.
-
-    Constants:
-    open                -- string "open"
-    closed              -- string "closed"
-    error               -- string "error"
-    fetching0           -- string "fetching0"
-    fetching1           -- string "fetching1"
-    fetching2           -- string "fetching2"
-
-    """
+    """State constants."""
     open = 'open'
     closed = 'closed'
     error = 'error'
@@ -111,74 +61,34 @@ class State(object):
 
 
 class Units(object):
-    """
-    Units constants.
-
-    Constants:
-    pixel               -- string "pixel"
-    fraction            -- string "fraction"
-    insetpixels         -- string "insetPixels"
-
-    """
+    """Units constants."""
     pixel = 'pixel'
     fraction = 'fraction'
     insetpixels = 'insetPixels'
 
 
 class Shape(object):
-    """
-    Shape constants.
-
-    Constants:
-    rectangle           -- string "rectangle"
-    circle              -- string "circle"
-    sphere              -- string "sphere"
-
-    """
+    """Shape constants."""
     rectangle = 'rectangle'
     circle = 'circle'
     sphere = 'sphere'
 
 
 class GridOrigin(object):
-    """
-    GridOrigin constants.
-
-    Constants:
-    lowerleft           -- string "lowerLeft"
-    upperleft           -- string "upperLeft"
-
-    """
+    """GridOrigin constants."""
     lowerleft = 'lowerLeft'
     upperleft = 'upperLeft'
 
 
 class RefreshMode(object):
-    """
-    RefreshMode constants.
-
-    Constants:
-    onchange            -- string "onChange"
-    oninterval          -- string "onInterval"
-    onexpire            -- string "onExpire"
-
-    """
+    """RefreshMode constants."""
     onchange = 'onChange'
     oninterval = 'onInterval '
     onexpire = 'onExpire'
 
 
 class ViewRefreshMode(object):
-    """
-    ViewRefreshMode constants.
-
-    Constants:
-    never               -- string "never"
-    onstop              -- string "onStop"
-    onrequest           -- string "onRequest"
-    onregion            -- string "onRegion"
-
-    """
+    """ViewRefreshMode constants."""
     never  = 'never '
     onstop  = 'onStop '
     onrequest  = 'onRequest '
@@ -186,20 +96,7 @@ class ViewRefreshMode(object):
 
 
 class Types(object):
-    """
-    Types constants.
-
-    Constants:
-    string           -- string "string"
-    int              -- string "int"
-    uint             -- string "uint"
-    short            -- string "short"
-    ushort           -- string "ushort"
-    float            -- string "float"
-    double           -- string "double"
-    bool             -- string "bool"
-
-    """
+    """Types constants."""
     string = 'string'
     int = 'int'
     uint = 'uint'
@@ -211,67 +108,57 @@ class Types(object):
 
 
 class Color(object):
-    """
-    Color constants (HTML and CSS) and converters.
+    """Color constants (HTML and CSS) and converters.
 
     Constants:
-    See HTML and CSS standard colors for full list. All constants are lowercase.
+    Same as HTML and CSS standard colors. All constants are lowercase.
 
-    Class Methods:
-    rgb(r, g, b, a) -- Convert rgba to GE hex value.
-    hex(hstr)       -- Convert hex (without alpha) to GE hex value.
-    hexa(hstr)      -- Changes the alpha value of the given Google Earth hex value.
-    changealpha(alpha, gehex) -- Changes the alpha value of the given Google Earth hex value.
-
+    Class methods:
+      * :func:`simplekml.Color.rgb`
+      * :func:`simplekml.Color.hex`
+      * :func:`simplekml.Color.hexa`
+      * :func:`simplekml.Color.changealpha`
     """
 
     @classmethod
     def rgb(cls, r, g, b, a=255):
-        """
-        Convert rgba to GE hex value.
+        """Convert rgba to GE hex value.
 
-        Keyword Arguments:
-        r (int) -- red
-        g (int) -- green
-        b (int) -- blue
-        a (int) -- alpha (default 255)
-
+        Args:
+          * r: int between 0 - 255 representing red
+          * g: int between 0 - 255 representing green
+          * b: int between 0 - 255 representing blue
+          * a: int between 0 - 255 representing alpha (default 255)
         """
         return '%0.2x%0.2x%0.2x%0.2x' % (a, b, g, r)
 
 
     @classmethod
     def hex(cls, hstr):
-        """
-        Convert hex (without alpha) to GE hex value.
+        """Convert hex (without alpha) to GE hex value.
 
-        Keyword Arguments:
-        hstr (string) -- hex string without alpha value
-
+        Args:
+          * hstr: hex string without alpha value
         """
         return "ff{0}".format(hstr[::-1])
 
 
     @classmethod
     def hexa(cls, hstr):
-        """
-        Convert hex (with alpha) to GE hex value.
+        """Convert hex (with alpha) to GE hex value.
 
-        Keyword Arguments:
-        hstr (string) -- hex string with alpha value
-
+        Args:
+          * hstr: hex string without alpha value
         """
         return hstr[::-1]
 
     @classmethod
     def changealpha(cls, alpha, gehex):
-        """
-        Changes the alpha value of the given Google Earth hex value.
+        """Changes the alpha value of the given Google Earth hex value.
 
-        Keyword Arguments:
-        alpha (string) -- aplha hex string
-        gehex (string) -- Google Earth hex string
-
+        Args:
+          * alpha: aplha hex string
+          * gehex: Google Earth hex string
         """
         return alpha + gehex[2:]
 
@@ -422,5 +309,3 @@ class Color(object):
     whitesmoke = 'fff5f5f5'
     yellow = 'ff00ffff'
     yellowgreen = 'ff32cd9a'
-
-        

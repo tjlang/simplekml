@@ -1,33 +1,35 @@
+"""
+Copyright 2011-2012 Kyle Lancaster
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+Contact me at kyle.lan@gmail.com
+"""
+
 from simplekml.base import Kmlable
 
 
 class Location(Kmlable):
-    """
-    Specifies the exact coordinates of the Model's origin.
+    """Specifies the exact coordinates of the Model's origin.
 
-    Arguments:
-    longitude (float) -- decimal degree (default None)
-    latitude (float)  -- decimal degree (default None)
-    altitude (float)  -- height above earth (default 0)
-
-    Properties:
-    Same as arguments.
-
+    The arguments are the same as the properties.
     """
 
     def __init__(self,
                  longitude=None,
                  latitude=None,
                  altitude=0):
-        """
-        Creates a location element.
-
-        Keyword Arguments:
-        longitude (float) -- decimal degree (default None)
-        latitude (float)  -- decimal degree (default None)
-        altitude (float)  -- height above earth (default 0)
-
-        """
         super(Location, self).__init__()
         self._kml['longitude'] = longitude
         self._kml['latitude'] = latitude
@@ -62,31 +64,14 @@ class Location(Kmlable):
 
 
 class Orientation(Kmlable):
-    """
-    Describes rotation of a 3D model's coordinate system.
+    """Describes rotation of a 3D model's coordinate system.
 
-    Keyword Arguments:
-    heading (float) -- rotation about the z axis (default None)
-    tilt (float)    -- rotation about the x axis (default None)
-    roll (float)    -- rotation about the y axis (default None)
-
-    Properties:
-    Same as arguments.
-
+    The arguments are the same as the properties.
     """
     def __init__(self,
                  heading=0,
                  tilt=0,
                  roll=0):
-        """
-        Creates an orientation element.
-
-        Keyword Arguments:
-        heading (float) -- rotation about the z axis (default None)
-        tilt (float)    -- rotation about the x axis (default None)
-        roll (float)    -- rotation about the y axis (default None)
-
-        """
         super(Orientation, self).__init__()
         self._kml['heading'] = heading
         self._kml['tilt'] = tilt
@@ -121,32 +106,15 @@ class Orientation(Kmlable):
 
 
 class Scale(Kmlable):
-    """
-    Scales a model along the x, y, and z axes in the model's coordinate space.
+    """Scales a model along the x, y, and z axes in the model's coordinate space.
 
-    Keyword Arguments:
-    x (float) -- scale in the x direction (default 1)
-    y (float) -- scale in the y direction (default 1)
-    z (float) -- scale in the z direction (default 1)
-
-    Properties:
-    Same as arguments.
-
+    The arguments are the same as the properties.
     """
 
     def __init__(self,
                  x=1,
                  y=1,
                  z=1):
-        """
-        Creates a scale element.
-
-        Keyword Arguments:
-        x (float) -- scale in the x direction (default 1)
-        y (float) -- scale in the y direction (default 1)
-        z (float) -- scale in the z direction (default 1)
-
-        """
         super(Scale, self).__init__()
         self._kml['x'] = x
         self._kml['y'] = y
@@ -181,29 +149,14 @@ class Scale(Kmlable):
 
 
 class Alias(Kmlable):
-    """
-    Contains a mapping from a sourcehref to a targethref.
+    """Contains a mapping from a sourcehref to a targethref.
 
-    Keyword Arguments:
-    targethref (string) -- the target href (default None)
-    sourcehref (string) -- the source href (default None)
-
-    Properties:
-    Same as arguments.
-
+    The arguments are the same as the properties.
     """
 
     def __init__(self,
                  targethref=None,
                  sourcehref=None):
-        """
-        Creates an alias element.
-
-        Keyword Arguments:
-        targethref (string) -- the target href (default None)
-        sourcehref (string) -- the source href (default None)
-
-        """
         super(Alias, self).__init__()
         self._kml['targetHref'] = targethref
         self._kml['sourceHref'] = sourcehref
@@ -228,29 +181,13 @@ class Alias(Kmlable):
 
 
 class ResourceMap(Kmlable):
-    """
-    Contains and specifies 0 or more [Alias] elements.
+    """Contains and specifies 0 or more [Alias] elements.
 
-    Keyword Arguments:
-    aliases (list of [Alias]) -- list of aliases (default None)
-
-    Properties:
-    Same as arguments.
-
-    Public Methods:
-    newalias() -- Creates a new [Alias] and attaches it to the resourcemap
-
+    The arguments are the same as the properties.
     """
 
     def __init__(self,
                  aliases=None):
-        """
-        Creates an alias element.
-
-        Keyword Arguments:
-        aliases (list of [Alias]) -- list of aliases (default None)
-
-        """
         super(ResourceMap, self).__init__()
         self._aliases = aliases
         if self._aliases is None:
@@ -266,11 +203,10 @@ class ResourceMap(Kmlable):
         self._aliases = aliases
 
     def newalias(self, **kwargs):
-        """
-        Creates a new [Alias] and attaches it to the [ResourceMap].
+        """Creates a new :class:`simplekml.Alias` and attaches it to the :class:`simplekml.ResourceMap`.
 
-        Keyword Arguments:
-        Same as [Alias].
+        Args:
+          * Same as :class:`simplekml.Alias`
 
         """
         alias = Alias(**kwargs)
@@ -278,7 +214,7 @@ class ResourceMap(Kmlable):
         return alias
 
     def __str__(self):
-        str = ''
+        buf = []
         for alias in self._aliases:
-            str += alias.__str__() 
-        return str
+            buf.append(alias.__str__())
+        return "".join(buf)

@@ -1,6 +1,5 @@
 """
-simplekml
-Copyright 2011 Kyle Lancaster
+Copyright 2011-2012 Kyle Lancaster
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -29,78 +28,29 @@ from simplekml.makeunicode import u
 
 
 class Kml(object):
-    """
-    The main class that represents a KML file.
+    """The main class that represents a KML file.
 
     This class represents a KML file, and the compilation of the KML file will
     be done through this class. The base feature is a document, all arguments
-    passed to the class on creation are the same as that of a [Document]. To
-    change any properties after creation you can do so through the `document`
-    property (eg. `kml.document.name = "Test"`). For a description of what the
+    passed to the class on creation are the same as that of a
+    :class:`simplekml.Document`. To change any properties after creation you can
+    do so through the :attr:`simplekml.Kml.document` property
+    (eg. `kml.document.name = "Test"`). For a description of what the
     arguments mean see the KML reference documentation published by Google:
     http://code.google.com/apis/kml/documentation/kmlreference.html
 
-    Keyword Arguments:
-    name (string)              -- name of placemark (default None)
-    visibility (int)           -- whether the feature is shown (default 1)
-    open (int)                 -- whether open or closed in Places (default 0)
-    atomauthor (string)        -- author of the document (default None)
-    atomlink (string)          -- URL containing this KML (default None)
-    address (string)           -- standard address (default None)
-    xaladdressdetails (string) -- address as xAL (default None)
-    phonenumber (string)       -- phone number for Maps mobile (default None)
-    snippet ([Snippet])        -- short description of feature (default None)
-    description (string)       -- description shown in balloon (default None)
-    camera ([Camera])          -- camera that views the scene (default None)
-    lookat ([LookAt])          -- camera relative to feature (default None)
-    timestamp ([TimeStamp])    -- single moment in time (default None)
-    timespan ([TimeSpan])      -- period of time (default None)
-    region ([Region])          -- bounding box of features (default None)
+    Usage::
 
-    Properties:
-    document ([Document])      -- [Document] or [Folder] (default [Document])
+        from simplekml import Kml
 
-    Public Methods:
-    newpoint                   -- Creates a new [Point]
-    newlinestring              -- Creates a new [LineString]
-    newpolygon                 -- Creates a new [Polygon]
-    newmultigeometry           -- Creates a new [MultiGeometry]
-    newgroundoverlay           -- Creates a new [GroundOverlay]
-    newscreenoverlay           -- Creates a new [ScreenOverlay]
-    newphotooverlay            -- Creates a new [PhotoOverlay]
-    newnetworklink             -- Creates a new [NetworkLink]
-    newmodel                   -- Creates a new [Model]
-    newschema                  -- Creates a new [Schema]
-    newgxtrack                 -- Creates a new [GxTrack]
-    newgxmultitrack            -- Creates a new [GxMultiTrack]
-    kml                        -- Returns the generated kml as a string
-    save                       -- Saves to a KML file
-    savekmz                    -- Saves to a KMZ file
-
+        kml = Kml(name='KmlUsage')
+        kml.newpoint(name="Kirstenbosch", coords=[(18.432314,-33.988862)])  # A simple Point
+        kml.save("KmlClass.kml")  # Saving
+        kml.savekmz("KmlClass.kmz", format=False)  # Saving as KMZ
+        
     """
 
     def __init__(self, **kwargs):
-        """
-        Creates the Kml document with a [Document] as the top level feature.
-
-        Keyword Arguments:
-        name (string)            -- name of placemark (default None)
-        visibility (int)         -- whether the feature is shown (default 1)
-        open (int)               -- whether open or closed in Places (default 0)
-        atomauthor (string)      -- author of the document (default None)
-        atomlink (string)        -- URL containing this KML (default None)
-        address (string)         -- standard address (default None)
-        xaladdressdetails(string)-- address as xAL (default None)
-        phonenumber (string)     -- phone number for Maps mobile (default None)
-        snippet ([Snippet])      -- short description of feature (default None)
-        description (string)     -- description shown in balloon (default None)
-        camera ([Camera])        -- camera that views the scene (default None)
-        lookat ([LookAt])        -- camera relative to feature (default None)
-        timestamp ([TimeStamp])  -- single moment in time (default None)
-        timespan ([TimeSpan])    -- period of time (default None)
-        region ([Region])        -- bounding box of features (default None)
-
-        """
         self._feature = Document(**kwargs)
 
     @property
@@ -109,8 +59,8 @@ class Kml(object):
         The top level item in the kml document.
 
         A top level document is required for a kml document, the default is an
-        instance of the [Document] class. This property can be set to an
-        instance of a container class: [Document] or [Folder]
+        instance of :class:`simplekml.Document`. This property can be set to an
+        instance of :class:`simplekml.Document` or :class:`simplekml.Folder`
         """
         return self._feature
 
@@ -119,13 +69,7 @@ class Kml(object):
         self._feature = doc
 
     def _genkml(self, format=True):
-        """
-        Returns the kml as a string or as a single line or formatted.
-
-        Keyword arguments:
-        format (bool) -- format the resulting kml "prettyprint" (default True)
-
-        """
+        """Returns the kml as a string or "prettyprinted" if format = True."""
         kml_tag = 'xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:xal="urn:oasis:names:tc:ciq:xsdschema:xAL:2.0"'
         xmlstr = u("<kml {0}>{1}</kml>").format(kml_tag, self._feature.__str__())
         if format:
@@ -137,38 +81,48 @@ class Kml(object):
             return xmlstr
 
     def parsetext(self, parse=True):
-        """
-        Sets the behavior of how text tags are parsed.
+        """Sets the behavior of how text tags are parsed.
 
         If True the values of the text tags (<name>, <description> and <text>)
         are escaped, so that the values are rendered properly. If False, the
         values are left as is. If the CDATA element is being used to escape
         the text strings, them set this to False.
-
-        Keyword arguments:
-        parse (bool) -- whether to parse text values
-
         """
         Kmlable._parsetext(parse)
 
     def kml(self, format=True):
-        """
-        Returns a string containing the KML.
-
-        Keyword arguments:
-        format (bool) -- format the resulting kml "prettyprint" (default True)
-
-        """
+        """Returns the kml as a string or "prettyprinted" if `format = True`, see :func:`simplekml.Kml.save` for an example."""
         Kmlable._setkmz(False)
         return self._genkml(format)
 
     def save(self, path, format=True):
-        """
-        Save the kml to the given file supplied by path.
+        """Save the kml to the given file supplied by `path`.
 
-        Keyword arguments:
-        path (string) -- the path of the kml file to be saved
-        format (bool) -- format the resulting kml "prettyprint" (default True)
+        The KML is saved to a file in one long string if `format=False` else it
+        gets saved "prettyprinted" (as formatted xml) as shown below:
+
+        format=False:
+
+        .. code-block:: xml
+
+            <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:xal="urn:oasis:names:tc:ciq:xsdschema:xAL:2.0"><Document id="feat_1"><name>KmlUsage</name><Placemark id="feat_2"><name>Kirstenbosch</name><Point id="geom_0"><coordinates>18.432314,-33.988862,0.0</coordinates></Point></Placemark></Document></kml>
+
+        format=True:
+        
+        .. code-block:: xml
+
+            <?xml version="1.0" encoding="UTF-8"?>
+            <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:xal="urn:oasis:names:tc:ciq:xsdschema:xAL:2.0">
+                <Document id="feat_1">
+                    <name>KmlUsage</name>
+                    <Placemark id="feat_2">
+                        <name>Kirstenbosch</name>
+                        <Point id="geom_0">
+                            <coordinates>18.432314,-33.988862,0.0</coordinates>
+                        </Point>
+                    </Placemark>
+                </Document>
+            </kml>
 
         """
         Kmlable._setkmz(False)
@@ -180,13 +134,11 @@ class Kml(object):
             f.close()
 
     def savekmz(self, path, format=True):
-        """
-        Save the kml as a kmz file to the given file supplied by `path`.
+        """Save the kml as a kmz to the given file supplied by `path`.
 
-        Keyword arguments:
-        path (string) -- the path of the kmz file to be saved
-        format (bool) -- format the resulting kml "prettyprint" (default True)
-
+        The KML is saved to a file in a long string if `format=False` else it
+        gets saved "prettyprinted" (as formatted xml), see
+        :func:`simplekml.Kml.save` for an example.
         """
         Kmlable._setkmz()
         out = self._genkml(format).encode('utf-8')
@@ -199,157 +151,138 @@ class Kml(object):
 
     def newdocument(self, **kwargs):
         """
-        Creates a new [Document] and attaches it to this KML document.
+        Creates a new :class:`simplekml.Document`.
 
-        Returns an instance of [Document] class.
-
-        Keyword Arguments:
-        Same as [Document].
+        The document is attached to this KML document. The arguments are the
+        same as those for :class:`simplekml.Document`
         """
         return self.document.newdocument(**kwargs)
 
     def newfolder(self, **kwargs):
         """
-        Creates a new [Folder] and attaches it to this KML document.
+        Creates a new :class:`simplekml.Folder`.
 
-        Returns an instance of [Folder] class.
-
-        Keyword Arguments:
-        Same as [Folder].
+        The document is attached to this KML document. The arguments are the
+        same as those for :class:`simplekml.Folder`
         """
         return self.document.newfolder(**kwargs)
 
     def newpoint(self, **kwargs):
         """
-        Creates a new [Point] and attaches it to this KML document.
+        Creates a new :class:`simplekml.Point`.
 
-        Returns an instance of [Point] class.
-
-        Keyword Arguments:
-        Same as [Point].
+        The document is attached to this KML document. The arguments are the
+        same as those for :class:`simplekml.Point`
         """
         return self.document.newpoint(**kwargs)
 
     def newlinestring(self, **kwargs):
         """
-        Creates a new [LineString] and attaches it to this KML document.
+        Creates a new :class:`simplekml.LineString`.
 
-        Returns an instance of [LineString] class.
-
-        Keyword Arguments:
-        Same as [LineString].
+        The document is attached to this KML document. The arguments are the
+        same as those for :class:`simplekml.LineString`
         """
         return self.document.newlinestring(**kwargs)
 
     def newpolygon(self, **kwargs):
         """
-        Creates a new [Polygon] and attaches it to this KML document.
+        Creates a new :class:`simplekml.Polygon`.
 
-        Returns an instance of [Polygon] class.
-
-        Keyword Arguments:
-        Same as [Polygon].
+        The document is attached to this KML document. The arguments are the
+        same as those for :class:`simplekml.Polygon`
         """
         return self.document.newpolygon(**kwargs)
 
     def newmultigeometry(self, **kwargs):
         """
-        Creates a new [MultiGeometry] and attaches it to this KML document.
+        Creates a new :class:`simplekml.MultiGeometry`.
 
-        Returns an instance of [MultiGeometry] class.
-
-        Keyword Arguments:
-        Same as [MultiGeometry].
+        The document is attached to this KML document. The arguments are the
+        same as those for :class:`simplekml.MultiGeometry`
         """
         return self.document.newmultigeometry(**kwargs)
 
     def newgroundoverlay(self, **kwargs):
         """
-        Creates a new [GroundOverlay] and attaches it to this KML document.
+        Creates a new :class:`simplekml.GroundOverlay`.
 
-        Returns an instance of [GroundOverlay] class.
-
-        Keyword Arguments:
-        Same as [GroundOverlay].
+        The document is attached to this KML document. The arguments are the
+        same as those for :class:`simplekml.GroundOverlay`
         """
         return self.document.newgroundoverlay(**kwargs)
 
     def newscreenoverlay(self, **kwargs):
         """
-        Creates a new [ScreenOverlay] and attaches it to this KML document.
+        Creates a new :class:`simplekml.ScreenOverlay`.
 
-        Returns an instance of [ScreenOverlay] class.
-
-        Keyword Arguments:
-        Same as [ScreenOverlay].
+        The document is attached to this KML document. The arguments are the
+        same as those for :class:`simplekml.ScreenOverlay`
         """
         return self.document.newscreenoverlay(**kwargs)
 
     def newphotooverlay(self, **kwargs):
         """
-        Creates a new [PhotoOverlay] and attaches it to this KML document.
+        Creates a new :class:`simplekml.PhotoOverlay`.
 
-        Returns an instance of [PhotoOverlay] class.
-
-        Keyword Arguments:
-        Same as [PhotoOverlay].
+        The document is attached to this KML document. The arguments are the
+        same as those for :class:`simplekml.PhotoOverlay`
         """
         return self.document.newphotooverlay(**kwargs)
 
     def newnetworklink(self, **kwargs):
         """
-        Creates a new [NetworkLink] and attaches it to the this KML document.
+        Creates a new :class:`simplekml.NetworkLink`.
 
-        Returns an instance of [NetworkLink] class.
-
-        Keyword Arguments:
-        Same as [NetworkLink].
+        The document is attached to this KML document. The arguments are the
+        same as those for :class:`simplekml.NetworkLink`
         """
         return self.document.newnetworklink(**kwargs)
 
     def newmodel(self, **kwargs):
         """
-        Creates a new [Model] and attaches it to this KML document.
+        Creates a new :class:`simplekml.Model`.
 
-        Returns an instance of [Model] class.
-
-        Keyword Arguments:
-        Same as [Model].
+        The document is attached to this KML document. The arguments are the
+        same as those for :class:`simplekml.Model`
         """
         return self.document.newmodel(**kwargs)
 
     def newschema(self, **kwargs):
         """
-        Creates a new [Schema] and attaches it to this KML document.
+        Creates a new :class:`simplekml.Schema`.
 
-        Returns an instance of [Schema] class.
-
-        Keyword Arguments:
-        Same as [Schema].
+        The document is attached to this KML document. The arguments are the
+        same as those for :class:`simplekml.Schema`
         """
         return self.document.newschema(**kwargs)
 
     def newgxtrack(self, **kwargs):
         """
-        Creates a new [GxTrack] and attaches it to this KML document.
+        Creates a new :class:`simplekml.GxTrack`.
 
-        Returns an instance of [GxTrack] class.
-
-        Keyword Arguments:
-        Same as [GxTrack].
+        The document is attached to this KML document. The arguments are the
+        same as those for :class:`simplekml.GxTrack`
         """
         return self.document.newgxtrack(**kwargs)
 
     def newgxmultitrack(self, **kwargs):
         """
-        Creates a new [GxMultiTrack] and attaches it to this KML document.
+        Creates a new :class:`simplekml.GxMultiTrack`.
 
-        Returns an instance of [GxMultiTrack] class.
-
-        Keyword Arguments:
-        Same as [GxMultiTrack].
+        The document is attached to this KML document. The arguments are the
+        same as those for :class:`simplekml.GxMultiTrack`
         """
         return self.document.newgxmultitrack(**kwargs)
+
+    def newgxtour(self, **kwargs):
+        """
+        Creates a new :class:`simplekml.GxTour`.
+
+        The tour is attached to this KML document. The arguments are the
+        same as those for :class:`simplekml.GxTour`
+        """
+        return self.document.newgxtour(**kwargs)
 
 
 if __name__ == "__main__":

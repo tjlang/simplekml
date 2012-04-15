@@ -74,7 +74,6 @@
                         <gx:coord>-122.203451 37.374706 141.800003</gx:coord>
                         <gx:coord>-122.203329 37.37478 141.199997</gx:coord>
                         <gx:coord>-122.203207 37.374857 140.199997</gx:coord>
-                        <extrude>1</extrude>
                         <ExtendedData>
                             <SchemaData schemaUrl="#schema_1">
                                 <gx:SimpleArrayData name="heartrate">

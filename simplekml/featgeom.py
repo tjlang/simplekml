@@ -1,6 +1,5 @@
 """
-simplekml
-Copyright 2011 Kyle Lancaster
+Copyright 2011-2012 Kyle Lancaster
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -18,19 +17,27 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Contact me at kyle.lan@gmail.com
 """
 
-from simplekml.abstractview import *
-from simplekml.region import *
-from simplekml.overlay import *
-from simplekml.timeprimitive import *
-from simplekml.icon import *
-from simplekml.model import *
-from simplekml.schema import *
-
+from abstractview import Camera, LookAt
+from simplekml.base import Kmlable, Snippet, OverlayXY, ScreenXY, RotationXY, Size
+from simplekml.coordinates import Coordinates
+from simplekml.icon import Icon, Link
+from simplekml.model import Location, Orientation, Scale, ResourceMap
+from simplekml.overlay import ViewVolume, ImagePyramid
+from simplekml.region import LatLonBox, GxLatLonQuad, Region
+from simplekml.schema import ExtendedData, Schema
+from simplekml.styleselector import Style, StyleMap
+from simplekml.timeprimitive import TimeSpan, TimeStamp
+from simplekml.tour import GxTour
 
 
 class Feature(Kmlable):
+    """Abstract class extended by all features.
 
-    """_Base class extended by all features."""
+    The arguments are the same as the properties.
+
+    .. note::
+      Not to be used directly.
+    """
 
     _id = 0
     def __init__(self,
@@ -160,7 +167,7 @@ class Feature(Kmlable):
 
     @property
     def camera(self):
-        """Camera that views the scene, accepts [Camera]"""
+        """Camera that views the scene, accepts :class:`simplekml.Camera`"""
         if self._kml['Camera'] is None:
             self._kml['Camera'] = Camera()
             self._kml['LookAt'] = None
@@ -173,7 +180,7 @@ class Feature(Kmlable):
 
     @property
     def lookat(self):
-        """Camera relative to the feature, accepts [LookAt]."""
+        """Camera relative to the feature, accepts :class:`simplekml.LookAt`"""
         if self._kml['LookAt'] is None:
             self._kml['LookAt'] = LookAt()
             self._kml['Camera'] = None
@@ -186,7 +193,7 @@ class Feature(Kmlable):
 
     @property
     def snippet(self):
-        """Short description of the feature, accepts [Snippet]."""
+        """Short description of the feature, accepts :class:`simplekml.Snippet`"""
         if self._kml['snippet_'] is None:
             self._kml['snippet_'] = Snippet()
         return self._kml['snippet_']
@@ -208,7 +215,7 @@ class Feature(Kmlable):
 
     @property
     def timestamp(self):
-        """Single moment in time, accepts [TimeStamp]."""
+        """Single moment in time, accepts :class:`simplekml.TimeStamp`"""
         if self._kml['TimeStamp'] is None:
             self._kml['TimeStamp'] = TimeStamp()
         return self._kml['TimeStamp']
@@ -219,7 +226,7 @@ class Feature(Kmlable):
 
     @property
     def timespan(self):
-        """Period of time, accepts [TimeSpan]."""
+        """Period of time, accepts :class:`simplekml.TimeSpan`"""
         if self._kml['TimeSpan'] is None:
             self._kml['TimeSpan'] = TimeSpan()
         return self._kml['TimeSpan']
@@ -230,7 +237,7 @@ class Feature(Kmlable):
 
     @property
     def region(self):
-        """Bounding box of feature, accepts [Region]."""
+        """Bounding box of feature, accepts :class:`simplekml.Region`"""
         if self._kml['Region'] is None:
             self._kml['Region'] = Region()
         return self._kml['Region']
@@ -246,7 +253,7 @@ class Feature(Kmlable):
 
     @property
     def style(self):
-        """The current style of the feature, accepts [Style]."""
+        """The current style of the feature, accepts :class:`simplekml.Style`"""
         if self._style is None:
             self._style = Style()
             self._setstyle(self._style)
@@ -261,7 +268,7 @@ class Feature(Kmlable):
 
     @property
     def stylemap(self):
-        """The current StyleMap of the feature, accepts [StyleMap]."""
+        """The current StyleMap of the feature, accepts :class:`simplekml.StyleMap`"""
         if self._stylemap is None:
             self._stylemap = StyleMap()
             self._setstyle(self._stylemap)
@@ -285,7 +292,7 @@ class Feature(Kmlable):
 
     @property
     def iconstyle(self):
-        """IconStyle of the feature, accepts [IconStyle]."""
+        """IconStyle of the feature, accepts :class:`simplekml.IconStyle`"""
         return self.style.iconstyle
 
     @iconstyle.setter
@@ -294,7 +301,7 @@ class Feature(Kmlable):
 
     @property
     def labelstyle(self):
-        """LabelStyle of the feature, accepts [LabelStyle]."""
+        """LabelStyle of the feature, accepts :class:`simplekml.LabelStyle`"""
         return self.style.labelstyle
 
     @labelstyle.setter
@@ -303,7 +310,7 @@ class Feature(Kmlable):
 
     @property
     def linestyle(self):
-        """LineStyle of the feature, accepts [LineStyle]."""
+        """LineStyle of the feature, accepts :class:`simplekml.LineStyle`"""
         return self.style.linestyle
 
     @linestyle.setter
@@ -312,7 +319,7 @@ class Feature(Kmlable):
 
     @property
     def polystyle(self):
-        """PolyStyle of the feature, accepts [PolyStyle]."""
+        """PolyStyle of the feature, accepts :class:`simplekml.PolyStyle`"""
         return self.style.polystyle
 
     @polystyle.setter
@@ -321,7 +328,7 @@ class Feature(Kmlable):
 
     @property
     def balloonstyle(self):
-        """BalloonStyle of the feature, accepts [BalloonStyle]."""
+        """BalloonStyle of the feature, accepts :class:`simplekml.BalloonStyle`"""
         return self.style.balloonstyle
 
     @balloonstyle.setter
@@ -330,7 +337,7 @@ class Feature(Kmlable):
 
     @property
     def liststyle(self):
-        """ListStyle of the feature, accepts [ListStyle]."""
+        """ListStyle of the feature, accepts :class:`simplekml.ListStyle`"""
         return self.style.liststyle
 
     @liststyle.setter
@@ -351,27 +358,27 @@ class Feature(Kmlable):
         self._kml['styleUrl'] = "#{0}".format(style.id)
 
     def __str__(self):
+        buf = []
         for stylemap in self._stylemaps:
             self._addstyle(stylemap.normalstyle)
             self._addstyle(stylemap.highlightstyle)
         str = '<{0} id="{1}">'.format(self.__class__.__name__, self._id)
+        buf.append(str.encode('utf-8'))
         for style in self._styles:
-            str += style.__str__()
+            buf.append(style.__str__())
         for stylemap in self._stylemaps:
-            str += stylemap.__str__()
-        str += super(Feature, self).__str__()
+            buf.append(stylemap.__str__())
+        buf.append(super(Feature, self).__str__())
         for folder in self._folders:
-            str += folder.__str__()
+            buf.append(folder.__str__())
         for feat in self._features:
-            str += feat.__str__()
-        str += "</{0}>".format(self.__class__.__name__)
-        return str
+            buf.append(feat.__str__())
+        buf.append("</{0}>".format(self.__class__.__name__))
+        return "".join(buf)
 
     def _newfeature(self, cls, **kwargs):
-        """
-        Creates a new feature from the given class and attaches it to this
+        """Creates a new feature from the given class and attaches it to this
         feature.
-
         """
         feat = cls(**kwargs)
         feat._parent = self
@@ -385,301 +392,198 @@ class Feature(Kmlable):
         return feat
 
     def newpoint(self, **kwargs):
-        """
-        Creates a new [Point] and attaches it to this KML document.
+        """Creates a new :class:`simplekml.Point` and attaches it to this KML document.
 
-        Returns an instance of [Point] class.
+        Arguments are the same as :class:`simplekml.Point`
 
-        Keyword Arguments:
-        Same as [Point].
+        Returns:
+          * an instance of :class:`simplekml.Point` class.
         """
         return self._newfeature(Point, **kwargs)
 
     def newlinestring(self, **kwargs):
-        """
-        Creates a new [LineString] and attaches it to this KML document.
+        """Creates a new :class:`simplekml.LineString` and attaches it to this KML document.
 
-        Returns an instance of [LineString] class.
+        Arguments are the same as :class:`simplekml.LineString`
 
-        Keyword Arguments:
-        Same as [LineString].
+        Returns:
+          * an instance of :class:`simplekml.LineString` class.
         """
         return self._newfeature(LineString, **kwargs)
 
     def newpolygon(self, **kwargs):
-        """
-        Creates a new [Polygon] and attaches it to this KML document.
+        """Creates a new :class:`simplekml.Polygon` and attaches it to this KML document.
 
-        Returns an instance of [Polygon] class.
+        Arguments are the same as :class:`simplekml.Polygon`
 
-        Keyword Arguments:
-        Same as [Polygon].
+        Returns:
+          * an instance of :class:`simplekml.Polygon` class.
         """
         return self._newfeature(Polygon, **kwargs)
 
     def newmultigeometry(self, **kwargs):
-        """
-        Creates a new [MultiGeometry] and attaches it to this KML document.
+        """Creates a new :class:`simplekml.MultiGeometry` and attaches it to this KML document.
 
-        Returns an instance of [MultiGeometry] class.
+        Arguments are the same as :class:`simplekml.MultiGeometry`
 
-        Keyword Arguments:
-        Same as [MultiGeometry].
+        Returns:
+          * an instance of :class:`simplekml.MultiGeometry` class.
         """
         return self._newfeature(MultiGeometry, **kwargs)
 
     def newgroundoverlay(self, **kwargs):
-        """
-        Creates a new [GroundOverlay] and attaches it to this KML document.
+        """Creates a new :class:`simplekml.GroundOverlay` and attaches it to this KML document.
 
-        Returns an instance of [GroundOverlay] class.
+        Arguments are the same as :class:`simplekml.GroundOverlay`
 
-        Keyword Arguments:
-        Same as [GroundOverlay].
+        Returns:
+          * an instance of :class:`simplekml.GroundOverlay` class.
         """
         return self._newfeature(GroundOverlay, **kwargs)
 
     def newscreenoverlay(self, **kwargs):
-        """
-        Creates a new [ScreenOverlay] and attaches it to this KML document.
+        """Creates a new :class:`simplekml.ScreenOverlay` and attaches it to this KML document.
 
-        Returns an instance of [ScreenOverlay] class.
+        Arguments are the same as :class:`simplekml.ScreenOverlay`
 
-        Keyword Arguments:
-        Same as [ScreenOverlay].
+        Returns:
+          * an instance of :class:`simplekml.ScreenOverlay` class.
         """
         return self._newfeature(ScreenOverlay, **kwargs)
 
     def newphotooverlay(self, **kwargs):
-        """
-        Creates a new [PhotoOverlay] and attaches it to this KML document.
+        """Creates a new :class:`simplekml.PhotoOverlay` and attaches it to this KML document.
 
-        Returns an instance of [PhotoOverlay] class.
+        Arguments are the same as :class:`simplekml.PhotoOverlay`
 
-        Keyword Arguments:
-        Same as [PhotoOverlay].
+        Returns:
+          * an instance of :class:`simplekml.PhotoOverlay` class.
         """
         return self._newfeature(PhotoOverlay, **kwargs)
 
     def newmodel(self, **kwargs):
-        """
-        Creates a new [Model] and attaches it to this KML document.
+        """Creates a new :class:`simplekml.Model` and attaches it to this KML document.
 
-        Returns an instance of [Model] class.
+        Arguments are the same as :class:`simplekml.Model`
 
-        Keyword Arguments:
-        Same as [Model].
+        Returns:
+          * an instance of :class:`simplekml.Model` class.
         """
         return self._newfeature(Model, **kwargs)
 
     def newgxtrack(self, **kwargs):
-        """
-        Creates a new [GxTrack] and attaches it to this KML document.
+        """Creates a new :class:`simplekml.GxTrack` and attaches it to this KML document.
 
-        Returns an instance of [GxTrack] class.
+        Arguments are the same as :class:`simplekml.GxTrack`
 
-        Keyword Arguments:
-        Same as [GxTrack].
+        Returns:
+          * an instance of :class:`simplekml.GxTrack` class.
         """
         return self._newfeature(GxTrack, **kwargs)
 
     def newgxmultitrack(self, **kwargs):
-        """
-        Creates a new [GxMultiTrack] and attaches it to this KML document.
+        """Creates a new :class:`simplekml.GxMultiTrack` and attaches it to this KML document.
 
-        Returns an instance of [GxMultiTrack] class.
+        Arguments are the same as :class:`simplekml.GxMultiTrack`
 
-        Keyword Arguments:
-        Same as [GxMultiTrack].
+        Returns:
+          * an instance of :class:`simplekml.GxMultiTrack` class.
         """
         return self._newfeature(GxMultiTrack, **kwargs)
 
 
 class Container(Feature):
+    """Abstract class, extended by :class:`simplekml.Document` and :class:`simplekml.Folder`
 
-    """_Base class, extended by Document and Folder."""
+    Arguments are the same as :class:`simplekml.Feature`
 
+    .. note::
+       Not to be used directly.
+    """
     def __init__(self, **kwargs):
         super(Container, self).__init__(**kwargs)
 
     def newfolder(self, **kwargs):
-        """
-        Creates a new [Folder] and attaches it to this container.
+        """Creates a new :class:`simplekml.Folder` and attaches it to this KML document.
 
-        Returns an instance of [Folder] class.
+        Arguments are the same as :class:`simplekml.Folder`
 
-        Keyword Arguments:
-        Same as [Folder].
+        Returns:
+          * an instance of :class:`simplekml.Folder` class.
         """
         return self._newfeature(Folder, **kwargs)
 
     def newdocument(self, **kwargs):
-        """
-        Creates a new [Document] and attaches it to this container.
+        """Creates a new :class:`simplekml.Folder` and attaches it to this KML document.
 
-        Returns an instance of [Document] class.
+        Arguments are the same as :class:`simplekml.Folder`
 
-        Keyword Arguments:
-        Same as [Document].
+        Returns:
+          * an instance of :class:`simplekml.Folder` class.
         """
         return self._newfeature(Document, **kwargs)
 
     def newnetworklink(self, **kwargs):
-        """
-        Creates a new [NetworkLink] and attaches it to the this container.
+        """Creates a new :class:`simplekml.NetworkLink` and attaches it to this KML document.
 
-        Returns an instance of [NetworkLink] class.
+        Arguments are the same as :class:`simplekml.NetworkLink`
 
-        Keyword Arguments:
-        Same as [NetworkLink].
+        Returns:
+          * an instance of :class:`simplekml.NetworkLink` class.
         """
         return self._newfeature(NetworkLink, **kwargs)
 
+    def newgxtour(self, **kwargs):
+        """Creates a new :class:`simplekml.GxTour` and attaches it to this KML document.
+
+        Arguments are the same as :class:`simplekml.GxTour`
+
+        Returns:
+          * an instance of :class:`simplekml.NetworkLink` class.
+        """
+        return self._newfeature(GxTour, **kwargs)
+
 
 class Document(Container):
+    """A container for features and styles.
 
-    """
-    A container for features and styles.
-
-    Keyword Arguments:
-    name (string)              -- name of placemark (default None)
-    visibility (int)           -- whether the feature is shown (default None)
-    open (int)                 -- whether open or closed in Places (default None)
-    atomauthor (string)        -- author of the document (default None)
-    atomlink (string)          -- URL containing this KML (default None)
-    address (string)           -- standard address (default None)
-    xaladdressdetails (string) -- address as xAL (default None)
-    phonenumber (string)       -- phone number for Maps mobile (default None)
-    snippet ([Snippet])        -- short description of feature (default None)
-    description (string)       -- description shown in balloon (default None)
-    camera ([Camera])          -- camera that views the scene (default None)
-    lookat ([LookAt])          -- camera relative to feature (default None)
-    timestamp ([TimeStamp])    -- single moment in time (default None)
-    timespan ([TimeSpan])      -- period of time (default None)
-    region ([Region])          -- bounding box of features (default None)
-
-    Properties:
-    Same as arguments, with the following additional properties:
-    style ([Style])            -- the current style (default None)
-    liststyle ([ListStyle])    -- the current liststyle (default None)
-
-    Public Methods:
-    newpoint                   -- Creates a new [Point]
-    newlinestring              -- Creates a new [LineString]
-    newpolygon                 -- Creates a new [Polygon]
-    newmultigeometry           -- Creates a new [MultiGeometry]
-    newgroundoverlay           -- Creates a new [GroundOverlay]
-    newscreenoverlay           -- Creates a new [ScreenOverlay]
-    newphotooverlay            -- Creates a new [PhotoOverlay]
-    newnetworklink             -- Creates a new [NetworkLink]
-    newmodel                   -- Creates a new [Model]
-    newschema                  -- Creates a new [Schema]
-
+    Arguments are the same as the properties.
     """
 
     def __init__(self, **kwargs):
-        """
-        Creates a document container.
-
-        Keyword Arguments:
-        name (string)            -- name of placemark (default None)
-        visibility (int)         -- whether the feature is shown (default None)
-        open (int)               -- whether open or closed in Places (default None)
-        atomauthor (string)      -- author of the document (default None)
-        atomlink (string)        -- URL containing this KML (default None)
-        address (string)         -- standard address (default None)
-        xaladdressdetails(string)-- address as xAL (default None)
-        phonenumber (string)     -- phone number for Maps mobile (default None)
-        snippet ([Snippet])      -- short description of feature (default None)
-        description (string)     -- description shown in balloon (default None)
-        camera ([Camera])        -- camera that views the scene (default None)
-        lookat ([LookAt])        -- camera relative to feature (default None)
-        timestamp ([TimeStamp])  -- single moment in time (default None)
-        timespan ([TimeSpan])    -- period of time (default None)
-        region ([Region])        -- bounding box of features (default None)
-
-        """
         super(Document, self).__init__(**kwargs)
 
     def newschema(self, **kwargs):
-        """
-        Creates a new [Schema] and attaches it to the this document.
+        """Creates a new :class:`simplekml.Schema` and attaches it to this KML document.
 
-        Returns an instance of [Schema] class.
+        Arguments are the same as :class:`simplekml.Schema`
 
-        Keyword Arguments:
-        Same as [Schema].
+        Returns:
+          * an instance of :class:`simplekml.Schema` class.
         """
         return self._newfeature(Schema, **kwargs)
 
 
 class Folder(Container):
-    """
-    A container for features that act like a folder.
+    """A container for features that act like a folder.
 
-    Keyword Arguments:
-    name (string)              -- name of placemark (default None)
-    visibility (int)           -- whether the feature is shown (default None)
-    open (int)                 -- whether open or closed in Places (default None)
-    atomauthor (string)        -- author of the document (default None)
-    atomlink (string)          -- URL containing this KML (default None)
-    address (string)           -- standard address (default None)
-    xaladdressdetails (string) -- address as xAL (default None)
-    phonenumber (string)       -- phone number for Maps mobile (default None)
-    snippet ([Snippet])        -- short description of feature (default None)
-    description (string)       -- description shown in balloon (default None)
-    camera ([Camera])          -- camera that views the scene (default None)
-    lookat ([LookAt])          -- camera relative to feature (default None)
-    timestamp ([TimeStamp])    -- single moment in time (default None)
-    timespan ([TimeSpan])      -- period of time (default None)
-    region ([Region])          -- bounding box of features (default None)
-
-    Properties:
-    Same as arguments, with the following additional properties:
-    style ([Style])            -- the current style (default None)
-    liststyle ([ListStyle])    -- the current liststyle (default None)
-
-    Public Methods:
-    newpoint                   -- Creates a new [Point]
-    newlinestring              -- Creates a new [LineString]
-    newpolygon                 -- Creates a new [Polygon]
-    newmultigeometry           -- Creates a new [MultiGeometry]
-    newgroundoverlay           -- Creates a new [GroundOverlay]
-    newscreenoverlay           -- Creates a new [ScreenOverlay]
-    newphotooverlay            -- Creates a new [PhotoOverlay]
-    newnetworklink             -- Creates a new [NetworkLink]
-    newmodel                   -- Creates a new [Model]
-
+    Arguments are the same as the properties.
     """
 
     def __init__(self, **kwargs):
-        """
-        Creates a folder container.
-
-        Keyword Arguments:
-        name (string)            -- name of placemark (default None)
-        visibility (int)         -- whether the feature is shown (default None)
-        open (int)               -- whether open or closed in Places (default None)
-        atomauthor (string)      -- author of the document (default None)
-        atomlink (string)        -- URL containing this KML (default None)
-        address (string)         -- standard address (default None)
-        xaladdressdetails(string)-- address as xAL (default None)
-        phonenumber (string)     -- phone number for Maps mobile (default None)
-        snippet ([Snippet])      -- short description of feature (default None)
-        description (string)     -- description shown in balloon (default None)
-        camera ([Camera])        -- camera that views the scene (default None)
-        lookat ([LookAt])        -- camera relative to feature (default None)
-        timestamp ([TimeStamp])  -- single moment in time (default None)
-        timespan ([TimeSpan])    -- period of time (default None)
-        region ([Region])        -- bounding box of features (default None)
-
-        """
         super(Folder, self).__init__(**kwargs)
 
 
 class Placemark(Feature):
+    """A Placemark is a Feature with associated Geometry.
 
-    """_A Placemark is a Feature with associated Geometry."""
+    Args:
+      * geometry: any class that inherits from :class:`simplekml.Geometry`
+      * *all other args same as* :class:`simplekml.Feature`
+
+    .. note::
+       Not to be used directly.
+    """
 
     def __init__(self, geometry=None, **kwargs):
         super(Placemark, self).__init__(**kwargs)
@@ -687,6 +591,7 @@ class Placemark(Feature):
 
     @property
     def geometry(self):
+        """A class that inherits from :class:`simplekml.Geometry`"""
         return self._kml['Geometry_']
 
     @geometry.setter
@@ -695,10 +600,15 @@ class Placemark(Feature):
 
 
 class Geometry(Kmlable):
-    """_Base class for all Geometries."""
+    """Abstract class for all Geometries.
 
+    Arguments are the same as :class:`simplekml.Placemark`
+    
+    .. note::
+       Not to be used directly.
+    """
     _id = 0
-    def __init__(self, **kwargs): # same arguments as feature
+    def __init__(self, **kwargs):
         super(Geometry, self).__init__()
         self._id = "geom_{0}".format(Geometry._id)
         Geometry._id += 1
@@ -782,7 +692,7 @@ class Geometry(Kmlable):
 
     @property
     def camera(self):
-        """Camera that views the scene, accepts [Camera]"""
+        """Camera that views the scene, accepts :class:`simplekml.Camera`"""
         if self._placemark.camera is None:
             self._placemark.camera = Camera()
         return self._placemark.camera
@@ -793,7 +703,7 @@ class Geometry(Kmlable):
 
     @property
     def lookat(self):
-        """Camera relative to the feature, accepts [LookAt]."""
+        """Camera relative to the feature, accepts :class:`simplekml.LookAt`"""
         if self._placemark.lookat is None:
             self._placemark.lookat = LookAt()
         return self._placemark.lookat
@@ -804,7 +714,7 @@ class Geometry(Kmlable):
 
     @property
     def snippet(self):
-        """Short description of the feature, accepts [Snippet]."""
+        """Short description of the feature, accepts :class:`simplekml.Snippet`"""
         return self._placemark.snippet
 
     @snippet.setter
@@ -813,7 +723,7 @@ class Geometry(Kmlable):
 
     @property
     def extendeddata(self):
-        """Short description of the feature, accepts [Snippet]."""
+        """Short description of the feature, accepts :class:`simplekml.Snippet`"""
         return self._placemark.extendeddata
 
     @extendeddata.setter
@@ -822,7 +732,7 @@ class Geometry(Kmlable):
 
     @property
     def timespan(self):
-        """Period of time, accepts [TimeSpan]."""
+        """Period of time, accepts :class:`simplekml.TimeSpan`"""
         return self._placemark.timespan
 
     @timespan.setter
@@ -831,7 +741,7 @@ class Geometry(Kmlable):
 
     @property
     def timestamp(self):
-        """Single moment in time, accepts [TimeStamp]."""
+        """Single moment in time, accepts :class:`simplekml.TimeStamp`"""
         return self._placemark.timestamp
 
     @timestamp.setter
@@ -840,7 +750,7 @@ class Geometry(Kmlable):
 
     @property
     def region(self):
-        """Bounding box of feature, accepts [Region]."""
+        """Bounding box of feature, accepts :class:`simplekml.Region`"""
         return self._placemark.region
 
     @region.setter
@@ -849,7 +759,7 @@ class Geometry(Kmlable):
 
     @property
     def style(self):
-        """The current style of the feature, accepts [Style]."""
+        """The current style of the feature, accepts :class:`simplekml.Style`"""
         if self._style is None:
             self._style = Style()
             self._placemark._setstyle(self._style)
@@ -866,7 +776,7 @@ class Geometry(Kmlable):
 
     @property
     def stylemap(self):
-        """The current StyleMap of the feature, accepts [StyleMap]."""
+        """The current StyleMap of the feature, accepts :class:`simplekml.StyleMap`"""
         if self._stylemap is None:
             self._stylemap = StyleMap()
             self._placemark._setstyle(self._stylemap)
@@ -883,7 +793,7 @@ class Geometry(Kmlable):
 
     @property
     def iconstyle(self):
-        """IconStyle of the feature, accepts [IconStyle]."""
+        """IconStyle of the feature, accepts :class:`simplekml.IconStyle`"""
         return self.style.iconstyle
 
     @iconstyle.setter
@@ -892,7 +802,7 @@ class Geometry(Kmlable):
 
     @property
     def labelstyle(self):
-        """LabelStyle of the feature, accepts [LabelStyle]."""
+        """LabelStyle of the feature, accepts :class:`simplekml.LabelStyle`"""
         return self.style.labelstyle
 
     @labelstyle.setter
@@ -901,7 +811,7 @@ class Geometry(Kmlable):
 
     @property
     def linestyle(self):
-        """LineStyle of the feature, accepts [LineStyle]."""
+        """LineStyle of the feature, accepts :class:`simplekml.LineStyle`"""
         return self.style.linestyle
 
     @linestyle.setter
@@ -910,7 +820,7 @@ class Geometry(Kmlable):
 
     @property
     def polystyle(self):
-        """PolyStyle of the feature, accepts [PolyStyle]."""
+        """PolyStyle of the feature, accepts :class:`simplekml.PolyStyle`"""
         return self.style.polystyle
 
     @polystyle.setter
@@ -919,7 +829,7 @@ class Geometry(Kmlable):
 
     @property
     def balloonstyle(self):
-        """BalloonStyle of the feature, accepts [BalloonStyle]."""
+        """BalloonStyle of the feature, accepts :class:`simplekml.BalloonStyle`"""
         return self.style.balloonstyle
 
     @balloonstyle.setter
@@ -928,7 +838,7 @@ class Geometry(Kmlable):
 
     @property
     def liststyle(self):
-        """ListStyle of the feature, accepts [ListStyle]."""
+        """ListStyle of the feature, accepts :class:`simplekml.ListStyle`"""
         return self.style.liststyle
 
     @liststyle.setter
@@ -942,7 +852,15 @@ class Geometry(Kmlable):
 
 
 class PointGeometry(Geometry):
-    """_Base class for any geometry requiring coordinates (not Polygon)."""
+    """Abstract class for any geometry requiring coordinates (not :class:`simplekml.Polygon`).
+
+    Args:
+      * coords: list of tuples (see :func:`simplekml.coords` for examples)
+      * *all other args same as* :class:`simplekml.Geometry`
+
+    .. note::
+       Not to be used directly.
+    """
     def __init__(self,
                  coords=(), **kwargs):
         super(PointGeometry, self).__init__(**kwargs)
@@ -951,11 +869,12 @@ class PointGeometry(Geometry):
 
     @property
     def coords(self):
-        """
-        The coordinates of the feature, accepts list of tuples.
+        """The coordinates of the feature, accepts list of tuples.
 
-        A tuple represents a coordinate in lat/lon. The tuple has the option of specifying a height. If no height is
-        given, it defaults to zero. A point feature has just one point, therefore a list with one tuple is given.
+        A tuple represents a coordinate in lat/lon. The tuple has the option
+        of specifying a height. If no height is given, it defaults to zero.
+        A point feature has just one point, therefore a list with one tuple
+        is given.
 
         Examples:
         No height: `[(1.0, 1.0), (2.0, 1.0)]`
@@ -971,46 +890,10 @@ class PointGeometry(Geometry):
 
 
 class LinearRing(PointGeometry):
+    """A closed line string, typically the outer boundary of a :class:`simplekml.Polygon`
 
-    """A closed line string, typically the outer boundary of a Polygon.
-
-    Keyword Arguments:
-    coords (list of tuples)    -- ring coordinates (default [(0.0,0.0,0.0)]
-    name (string)              -- name of placemark (default None)
-    visibility (int)           -- whether the feature is shown (default None)
-    open (int)                 -- whether open or closed in Places (default None)
-    atomauthor (string)        -- author of the document (default None)
-    atomlink (string)          -- URL containing this KML (default None)
-    address (string)           -- standard address (default None)
-    xaladdressdetails (string) -- address as xAL (default None)
-    phonenumber (string)       -- phone number for Maps mobile (default None)
-    snippet ([Snippet])        -- short description of feature (default None)
-    description (string)       -- description shown in balloon (default None)
-    camera ([Camera])          -- camera that views the scene (default None)
-    lookat ([LookAt])          -- camera relative to feature (default None)
-    timestamp ([TimeStamp])    -- single moment in time (default None)
-    timespan ([TimeSpan])      -- period of time (default None)
-    region ([Region])          -- bounding box of features (default None)
-    extrude (int)              -- whether to connect to the ground (default None)
-    tessellate (int)           -- allowed to follow the terrain (default None)
-    altitudemode (string)      -- alt use See [AltitudeMode] (default None)
-    gxaltitudemode (string)    -- alt use. See [GxAltitudeMode] (default None)
-    gxaltitudeoffset           -- offsets feature vertically (default None)
-
-    Properties:
-    Same as arguments, with the following additional properties:
-    style ([Style])               -- stlye of feature (default None)
-    stylemap ([StyleMap])         -- stylemap of feature (default None)
-    liststyle ([ListStyle])       -- liststyle of feature(default None)
-    balloonstyle ([BalloonStyle]) -- balloonstyle of feature(default None)
-    iconstyle ([IconStyle])       -- iconstyle of feature(default None)
-    labelstyle ([LabelStyle])     -- labelstyle of feature(default None)
-    linestyle ( [LineStyle])      -- linestyle of feature(default None)
-    polystyle ([PolyStyle])       -- polystyle of feature(default None)
-    placemark ([Placemark])       -- feature's placemark(default [Placemark])
-
+    Arguments are the same as the properties.
     """
-
     def __init__(self, coords=(),
                  extrude=None,
                  tessellate=None,
@@ -1018,33 +901,6 @@ class LinearRing(PointGeometry):
                  gxaltitudemode=None,
                  gxaltitudeoffset=None,
                  **kwargs):
-        """
-        Creates a linearring element.
-
-        Keyword Arguments:
-        coords (list of tuples)  -- ring coordinates (default [(0.0,0.0,0.0)]
-        name (string)            -- name of placemark (default None)
-        visibility (int)         -- whether the feature is shown (default None)
-        open (int)               -- whether open or closed in Places (default None)
-        atomauthor (string)      -- author of the document (default None)
-        atomlink (string)        -- URL containing this KML (default None)
-        address (string)         -- standard address (default None)
-        xaladdressdetails(string)-- address as xAL (default None)
-        phonenumber (string)     -- phone number for Maps mobile (default None)
-        snippet ([Snippet])      -- short description of feature (default None)
-        description (string)     -- description shown in balloon (default None)
-        camera ([Camera])        -- camera that views the scene (default None)
-        lookat ([LookAt])        -- camera relative to feature (default None)
-        timestamp ([TimeStamp])  -- single moment in time (default None)
-        timespan ([TimeSpan])    -- period of time (default None)
-        region ([Region])        -- bounding box of features (default None)
-        extrude (int)            -- connect to the ground? (default None)
-        tessellate (int)         -- allowed to follow the terrain (default None)
-        altitudemode (string)    -- alt use See [AltitudeMode] (default None)
-        gxaltitudemode (string)  -- alt use. See [GxAltitudeMode] (default None)
-        gxaltitudeoffset         -- offsets feature vertically (default None)
-        
-        """
         super(LinearRing, self).__init__(list(coords), **kwargs)
         self._kml['extrude'] = extrude
         self._kml['tessellate'] = tessellate
@@ -1053,10 +909,7 @@ class LinearRing(PointGeometry):
         self._kml['gx:altitudeOffset'] = gxaltitudeoffset
 
     def __str__(self):
-        str = '<LinearRing>'
-        str += super(LinearRing, self).__str__()
-        str += "</LinearRing>"
-        return str
+        return '<LinearRing>{0}</LinearRing>'.format(super(LinearRing, self).__str__())
 
     @property
     def extrude(self):
@@ -1069,7 +922,7 @@ class LinearRing(PointGeometry):
 
     @property
     def tessellate(self):
-        """Allowe the LinearRing to follow the terrain, accepts int (0 or 1)."""
+        """Allows the LinearRing to follow the terrain, accepts int (0 or 1)."""
         return self._kml['tessellate']
 
     @tessellate.setter
@@ -1078,11 +931,9 @@ class LinearRing(PointGeometry):
 
     @property
     def altitudemode(self):
-        """
-        Specifies how the altitude for the Camera is interpreted.
+        """Specifies how the altitude for the Camera is interpreted.
 
-        Accepts [AltitudeMode] constants.
-
+        Accepts :class:`simplekml.AltitudeMode` constants.
         """
         return self._kml['altitudeMode']
 
@@ -1092,12 +943,10 @@ class LinearRing(PointGeometry):
 
     @property
     def gxaltitudemode(self):
-        """
-        Specifies how the altitude for the Camera is interpreted.
+        """Specifies how the altitude for the Camera is interpreted.
 
         With the addition of being relative to the sea floor.
-        Accepts [GxAltitudeMode] constants.
-
+        Accepts :class:`simplekml.GxAltitudeMode` constants.
         """
         return self._kml['gx:altitudeMode']
 
@@ -1116,45 +965,9 @@ class LinearRing(PointGeometry):
 
 
 class Point(PointGeometry):
+    """A geographic location defined by lon, lat, and altitude.
 
-    """
-    A geographic location defined by lon, lat, and altitude.
-
-    Keyword Arguments:
-    coords (list of tuples)    -- ring coordinates (default [(0.0,0.0,0.0)]
-    name (string)              -- name of placemark (default None)
-    visibility (int)           -- whether the feature is shown (default None)
-    open (int)                 -- whether open or closed in Places (default None)
-    atomauthor (string)        -- author of the document (default None)
-    atomlink (string)          -- URL containing this KML (default None)
-    address (string)           -- standard address (default None)
-    xaladdressdetails (string) -- address as xAL (default None)
-    phonenumber (string)       -- phone number for Maps mobile (default None)
-    snippet ([Snippet])        -- short description of feature (default None)
-    description (string)       -- description shown in balloon (default None)
-    camera ([Camera])          -- camera that views the scene (default None)
-    lookat ([LookAt])          -- camera relative to feature (default None)
-    timestamp ([TimeStamp])    -- single moment in time (default None)
-    timespan ([TimeSpan])      -- period of time (default None)
-    region ([Region])          -- bounding box of features (default None)
-    extrude (int)              -- whether to connect to the ground (default None)
-    altitudemode (string)      -- alt use See [AltitudeMode] (default None)
-    gxaltitudemode (string)    -- alt use. See [GxAltitudeMode] (default None)
-    extendeddata ([ExtendedData]) -- extra data (default None)
-
-
-    Properties:
-    Same as arguments, with the following additional properties:
-    style ([Style])               -- stlye of feature (default None)
-    stylemap ([StyleMap])         -- stylemap of feature (default None)
-    liststyle ([ListStyle])       -- liststyle of feature(default None)
-    balloonstyle ([BalloonStyle]) -- balloonstyle of feature(default None)
-    iconstyle ([IconStyle])       -- iconstyle of feature(default None)
-    labelstyle ([LabelStyle])     -- labelstyle of feature(default None)
-    linestyle ( [LineStyle])      -- linestyle of feature(default None)
-    polystyle ([PolyStyle])       -- polystyle of feature(default None)
-    placemark ([Placemark])       -- feature's placemark(default [Placemark])
-
+    Arguments are the same as the properties.
     """
 
     def __init__(self,
@@ -1162,32 +975,6 @@ class Point(PointGeometry):
                  altitudemode=None,
                  gxaltitudemode=None,
                  **kwargs):
-        """
-        Creates a Point element.
-
-        Keyword Arguments:
-        coords (list of tuples)  -- ring coordinates (default [(0.0,0.0,0.0)]
-        name (string)            -- name of placemark (default None)
-        visibility (int)         -- whether the feature is shown (default None)
-        open (int)               -- whether open or closed in Places (default None)
-        atomauthor (string)      -- author of the document (default None)
-        atomlink (string)        -- URL containing this KML (default None)
-        address (string)         -- standard address (default None)
-        xaladdressdetails(string)-- address as xAL (default None)
-        phonenumber (string)     -- phone number for Maps mobile (default None)
-        snippet ([Snippet])      -- short description of feature (default None)
-        description (string)     -- description shown in balloon (default None)
-        camera ([Camera])        -- camera that views the scene (default None)
-        lookat ([LookAt])        -- camera relative to feature (default None)
-        timestamp ([TimeStamp])  -- single moment in time (default None)
-        timespan ([TimeSpan])    -- period of time (default None)
-        region ([Region])        -- bounding box of features (default None)
-        extrude (int)            -- connect to the ground? (default None)
-        altitudemode (string)    -- alt use See [AltitudeMode] (default None)
-        gxaltitudemode (string)  -- alt use. See [GxAltitudeMode] (default None)
-        extendeddata ([ExtendedData]) -- extra data (default None)
-
-        """
         super(Point, self).__init__(**kwargs)
         self._kml['extrude'] = extrude
         self._kml['altitudeMode'] = altitudemode
@@ -1204,11 +991,9 @@ class Point(PointGeometry):
 
     @property
     def altitudemode(self):
-        """
-        Specifies how the altitude for the Camera is interpreted.
+        """Specifies how the altitude for the Camera is interpreted.
 
-        Accepts [AltitudeMode] constants.
-
+        Accepts :class:`simplekml.AltitudeMode` constants.
         """
         return self._kml['altitudeMode']
 
@@ -1218,12 +1003,10 @@ class Point(PointGeometry):
 
     @property
     def gxaltitudemode(self):
-        """
-        Specifies how the altitude for the Camera is interpreted.
+        """Specifies how the altitude for the Camera is interpreted.
 
         With the addition of being relative to the sea floor.
-        Accepts [GxAltitudeMode] constants.
-
+        Accepts :class:`simplekml.GxAltitudeMode` constants.
         """
         return self._kml['gx:altitudeMode']
 
@@ -1232,53 +1015,13 @@ class Point(PointGeometry):
         self._kml['gx:altitudeMode'] = mode
 
     def __str__(self):
-        str = '<Point id="{0}">'.format(self._id)
-        str += super(Point, self).__str__()
-        str += "</Point>"
-        return str
+        return '<Point id="{0}">{1}</Point>'.format(self._id, super(Point, self).__str__())
 
 
 class LineString(PointGeometry):
-    """
-    A connected set of line segments.
+    """A connected set of line segments.
 
-    Keyword Arguments:
-    coords (list of tuples)  -- ring coordinates (default [(0.0,0.0,0.0)]
-    name (string)            -- name of placemark (default None)
-    visibility (int)         -- whether the feature is shown (default None)
-    open (int)               -- whether open or closed in Places (default None)
-    atomauthor (string)      -- author of the document (default None)
-    atomlink (string)        -- URL containing this KML (default None)
-    address (string)         -- standard address (default None)
-    xaladdressdetails(string)-- address as xAL (default None)
-    phonenumber (string)     -- phone number for Maps mobile (default None)
-    snippet ([Snippet])      -- short description of feature (default None)
-    description (string)     -- description shown in balloon (default None)
-    camera ([Camera])        -- camera that views the scene (default None)
-    lookat ([LookAt])        -- camera relative to feature (default None)
-    timestamp ([TimeStamp])  -- single moment in time (default None)
-    timespan ([TimeSpan])    -- period of time (default None)
-    region ([Region])        -- bounding box of features (default None)
-    extrude (int)            -- connect to the ground? (default None)
-    tessellate (int)         -- allowed to follow the terrain (default None)
-    altitudemode (string)    -- alt use See [AltitudeMode] (default None)
-    gxaltitudemode (string)  -- alt use. See [GxAltitudeMode] (default None)
-    gxaltitudeoffset         -- offsets feature vertically (default None)
-    gxdraworder (int)        -- draw order many linestrings (default None)
-    extendeddata ([ExtendedData]) -- extra data (default None)
-
-    Properties:
-    Same as arguments, with the following additional properties:
-    style               -- [Style] (default None)
-    stylemap            -- [StyleMap] (default None)
-    liststyle           -- [ListStyle] (default None)
-    balloonstyle        -- [BalloonStyle] (default None)
-    iconstyle           -- [IconStyle] (default None)
-    labelstyle          -- [LabelStyle] (default None)
-    linestyle           -- [LineStyle] (default None)
-    polystyle           -- [PolyStyle] (default None)
-    placemark           -- [Placemark] (default [Placemark], read-only)
-
+    Arguments are the same as the properties.
     """
     def __init__(self,
                  extrude=None,
@@ -1288,35 +1031,6 @@ class LineString(PointGeometry):
                  gxaltitudeoffset=None,
                  gxdraworder=None,
                  **kwargs):
-        """
-        Create a linestring element
-
-        Keyword Arguments:
-        coords (list of tuples)  -- ring coordinates (default [(0.0,0.0,0.0)]
-        name (string)            -- name of placemark (default None)
-        visibility (int)         -- whether the feature is shown (default None)
-        open (int)               -- whether open or closed in Places (default None)
-        atomauthor (string)      -- author of the document (default None)
-        atomlink (string)        -- URL containing this KML (default None)
-        address (string)         -- standard address (default None)
-        xaladdressdetails(string)-- address as xAL (default None)
-        phonenumber (string)     -- phone number for Maps mobile (default None)
-        snippet ([Snippet])      -- short description of feature (default None)
-        description (string)     -- description shown in balloon (default None)
-        camera ([Camera])        -- camera that views the scene (default None)
-        lookat ([LookAt])        -- camera relative to feature (default None)
-        timestamp ([TimeStamp])  -- single moment in time (default None)
-        timespan ([TimeSpan])    -- period of time (default None)
-        region ([Region])        -- bounding box of features (default None)
-        extrude (int)            -- connect to the ground? (default None)
-        tessellate (int)         -- allowed to follow the terrain (default None)
-        altitudemode (string)    -- alt use See [AltitudeMode] (default None)
-        gxaltitudemode (string)  -- alt use. See [GxAltitudeMode] (default None)
-        gxaltitudeoffset         -- offsets feature vertically (default None)
-        gxdraworder (int)        -- draw order many linestrings (default None)
-        extendeddata ([ExtendedData]) -- extra data (default None)
-
-        """
         super(LineString, self).__init__(**kwargs)
         self._kml['extrude'] = extrude
         self._kml['tessellate'] = tessellate
@@ -1345,11 +1059,9 @@ class LineString(PointGeometry):
 
     @property
     def altitudemode(self):
-        """
-        Specifies how the altitude for the Camera is interpreted.
+        """Specifies how the altitude for the Camera is interpreted.
 
-        Accepts [AltitudeMode] constants.
-
+        Accepts :class:`simplekml.AltitudeMode` constants.
         """
         return self._kml['altitudeMode']
 
@@ -1359,12 +1071,10 @@ class LineString(PointGeometry):
 
     @property
     def gxaltitudemode(self):
-        """
-        Specifies how the altitude for the Camera is interpreted.
+        """Specifies how the altitude for the Camera is interpreted.
 
         With the addition of being relative to the sea floor.
-        Accepts [GxAltitudeMode] constants.
-
+        Accepts :class:`simplekml.GxAltitudeMode` constants.
         """
         return self._kml['gx:altitudeMode']
 
@@ -1391,55 +1101,13 @@ class LineString(PointGeometry):
         self._kml['gx:drawOrder'] = gxdraworder
 
     def __str__(self):
-        str = '<LineString id="{0}">'.format(self._id)
-        str += super(LineString, self).__str__()
-        str += "</LineString>"
-        return str
+        return '<LineString id="{0}">{1}</LineString>'.format(self._id, super(LineString, self).__str__())
 
 
 class Polygon(Geometry):
+    """A Polygon is defined by an outer boundary and/or an inner boundary.
 
-    """
-    A Polygon is defined by an outer boundary and/or an inner boundary.
-
-    Keyword Arguments:
-    name (string)            -- name of placemark (default None)
-    visibility (int)         -- whether the feature is shown (default None)
-    open (int)               -- whether open or closed in Places (default None)
-    atomauthor (string)      -- author of the document (default None)
-    atomlink (string)        -- URL containing this KML (default None)
-    address (string)         -- standard address (default None)
-    xaladdressdetails(string)-- address as xAL (default None)
-    phonenumber (string)     -- phone number for Maps mobile (default None)
-    snippet ([Snippet])      -- short description of feature (default None)
-    description (string)     -- description shown in balloon (default None)
-    camera ([Camera])        -- camera that views the scene (default None)
-    lookat ([LookAt])        -- camera relative to feature (default None)
-    timestamp ([TimeStamp])  -- single moment in time (default None)
-    timespan ([TimeSpan])    -- period of time (default None)
-    region ([Region])        -- bounding box of features (default None)
-    extrude (int)            -- connect to the ground? (default None)
-    tessellate (int)         -- allowed to follow the terrain (default None)
-    altitudemode (string)    -- alt use See [AltitudeMode] (default None)
-    gxaltitudemode (string)  -- alt use. See [GxAltitudeMode] (default None)
-    gxaltitudeoffset         -- offsets feature vertically (default None)
-    gxdraworder (int)        -- draw order many linestrings (default None)
-    outerboundaryis (tuples) -- list of tuples for outer (default (0.0,0.0,0.0))
-    innerboundaryis (tuples) -- list of lists of tuples for inner (default None)
-    extendeddata ([ExtendedData]) -- extra data (default None)
-
-    Properties:
-    Same as arguments, with the following additional properties:
-    style               -- [Style] (default None)
-    stylemap            -- [StyleMap] (default None)
-    liststyle           -- [ListStyle] (default None)
-    balloonstyle        -- [BalloonStyle] (default None)
-    iconstyle           -- [IconStyle] (default None)
-    labelstyle          -- [LabelStyle] (default None)
-    linestyle           -- [LineStyle] (default None)
-    polystyle           -- [PolyStyle] (default None)
-    placemark           -- [Placemark] (default [Placemark], read-only)
-
+    Arguments are the same as the properties.
     """
 
     def __init__(self,
@@ -1449,36 +1117,6 @@ class Polygon(Geometry):
                  gxaltitudemode=None,
                  outerboundaryis=(),
                  innerboundaryis=(), **kwargs):
-        """
-        Creates a polygon element
-
-        Keyword Arguments:
-        name (string)          -- name of placemark (default None)
-        visibility (int)       -- whether the feature is shown (default None)
-        open (int)             -- whether open or closed in Places (default None)
-        atomauthor (string)    -- author of the document (default None)
-        atomlink (string)      -- URL containing this KML (default None)
-        address (string)       -- standard address (default None)
-        xaladdressdetails(string)-- address as xAL (default None)
-        phonenumber (string)   -- phone number for Maps mobile (default None)
-        snippet ([Snippet])    -- short description of feature (default None)
-        description (string)   -- description shown in balloon (default None)
-        camera ([Camera])      -- camera that views the scene (default None)
-        lookat ([LookAt])      -- camera relative to feature (default None)
-        timestamp ([TimeStamp])-- single moment in time (default None)
-        timespan ([TimeSpan])  -- period of time (default None)
-        region ([Region])      -- bounding box of features (default None)
-        extrude (int)          -- connect to the ground? (default None)
-        tessellate (int)       -- allowed to follow the terrain (default None)
-        altitudemode (string)  -- alt use See [AltitudeMode] (default None)
-        gxaltitudemode (string)-- alt use. See [GxAltitudeMode] (default None)
-        gxaltitudeoffset       -- offsets feature vertically (default None)
-        gxdraworder (int)      -- draw order many linestrings (default None)
-        outerboundaryis(tuples)--list of tuples for outer(default (0.0,0.0,0.0))
-        innerboundaryis(tuples)--list of lists of tuples for inner(default None)
-        extendeddata ([ExtendedData]) -- extra data (default None)
-
-        """
         super(Polygon, self).__init__(**kwargs)
         self._kml['extrude'] = extrude
         self._kml['tessellate'] = tessellate
@@ -1499,7 +1137,7 @@ class Polygon(Geometry):
 
     @property
     def tessellate(self):
-        """Allowe the LinearRing to follow the terrain, accepts int (0 or 1)."""
+        """Allows the Polygon to follow the terrain, accepts int (0 or 1)."""
         return self._kml['tessellate']
 
     @tessellate.setter
@@ -1508,11 +1146,9 @@ class Polygon(Geometry):
 
     @property
     def altitudemode(self):
-        """
-        Specifies how the altitude for the Camera is interpreted.
+        """Specifies how the altitude for the Camera is interpreted.
 
-        Accepts [AltitudeMode] constants.
-
+        Accepts :class:`simplekml.AltitudeMode` constants.
         """
         return self._kml['altitudeMode']
 
@@ -1522,12 +1158,10 @@ class Polygon(Geometry):
 
     @property
     def gxaltitudemode(self):
-        """
-        Specifies how the altitude for the Camera is interpreted.
+        """Specifies how the altitude for the Camera is interpreted.
 
         With the addition of being relative to the sea floor.
-        Accepts [GxAltitudeMode] constants.
-
+        Accepts :class:`simplekml.GxAltitudeMode` constants.
         """
         return self._kml['gx:altitudeMode']
 
@@ -1537,12 +1171,10 @@ class Polygon(Geometry):
 
     @property
     def innerboundaryis(self):
-        """
-        The inner boundaries.
+        """The inner boundaries.
 
         Accepts list of list of tuples of floats for multiple boundaries, or a
         list of tuples of floats for a single boundary.
-
         """
         return self._innerboundaryis
 
@@ -1569,79 +1201,17 @@ class Polygon(Geometry):
         self._kml['outerBoundaryIs'] = LinearRing(coords)
 
     def __str__(self):
-        str = '<Polygon id="{0}">'.format(self._id)
-        str += super(Polygon, self).__str__()
-        str += "</Polygon>"
-        return str
+        return '<Polygon id="{0}">{1}</Polygon>'.format(self._id, super(Polygon, self).__str__())
 
 
 class MultiGeometry(Geometry):
-    """
-    A Polygon is defined by an outer boundary and/or an inner boundary.
+    """MultiGeometry is a collection of simple features (Points, LineStrings, etc).
 
-    Keyword Arguments:
-    name (string)            -- name of placemark (default None)
-    visibility (int)         -- whether the feature is shown (default None)
-    open (int)               -- whether open or closed in Places (default None)
-    atomauthor (string)      -- author of the document (default None)
-    atomlink (string)        -- URL containing this KML (default None)
-    address (string)         -- standard address (default None)
-    xaladdressdetails(string)-- address as xAL (default None)
-    phonenumber (string)     -- phone number for Maps mobile (default None)
-    snippet ([Snippet])      -- short description of feature (default None)
-    description (string)     -- description shown in balloon (default None)
-    camera ([Camera])        -- camera that views the scene (default None)
-    lookat ([LookAt])        -- camera relative to feature (default None)
-    timestamp ([TimeStamp])  -- single moment in time (default None)
-    timespan ([TimeSpan])    -- period of time (default None)
-    region ([Region])        -- bounding box of features (default None)
-
-    Properties:
-    Same as arguments, with the following additional properties:
-    style               -- [Style] (default None)
-    stylemap            -- [StyleMap] (default None)
-    liststyle           -- [ListStyle] (default None)
-    balloonstyle        -- [BalloonStyle] (default None)
-    iconstyle           -- [IconStyle] (default None)
-    labelstyle          -- [LabelStyle] (default None)
-    linestyle           -- [LineStyle] (default None)
-    polystyle           -- [PolyStyle] (default None)
-    placemark           -- [Placemark] (default [Placemark], read-only)
-
-    Public Methods:
-    newpoint                   -- Creates a new [Point]
-    newlinestring              -- Creates a new [LineString]
-    newpolygon                 -- Creates a new [Polygon]
-    newgroundoverlay           -- Creates a new [GroundOverlay]
-    newscreenoverlay           -- Creates a new [ScreenOverlay]
-    newphotooverlay            -- Creates a new [PhotoOverlay]
-    newmodel                   -- Creates a new [Model]
-
+    Arguments are the same as the properties.
     """
 
     def __init__(self,
                  geometries=(), **kwargs):
-        """
-        Creates a new multigeometry element.
-
-        Keyword Arguments:
-        name (string)            -- name of placemark (default None)
-        visibility (int)         -- whether the feature is shown (default None)
-        open (int)               -- whether open or closed in Places (default None)
-        atomauthor (string)      -- author of the document (default None)
-        atomlink (string)        -- URL containing this KML (default None)
-        address (string)         -- standard address (default None)
-        xaladdressdetails(string)-- address as xAL (default None)
-        phonenumber (string)     -- phone number for Maps mobile (default None)
-        snippet ([Snippet])      -- short description of feature (default None)
-        description (string)     -- description shown in balloon (default None)
-        camera ([Camera])        -- camera that views the scene (default None)
-        lookat ([LookAt])        -- camera relative to feature (default None)
-        timestamp ([TimeStamp])  -- single moment in time (default None)
-        timespan ([TimeSpan])    -- period of time (default None)
-        region ([Region])        -- bounding box of features (default None)
-
-        """
         super(MultiGeometry, self).__init__(**kwargs)
         self._geometries = list(geometries)
 
@@ -1652,93 +1222,92 @@ class MultiGeometry(Geometry):
         return feat
 
     def newpoint(self, **kwargs):
-        """
-        Creates a new [Point] and attaches it to this MultiGeometry.
+        """Creates a new :class:`simplekml.Point` and attaches it to this MultiGeometry.
 
-        Returns an instance of [Point] class.
+        The arguments are the same as :class:`simplekml.Point`
 
-        Keyword Arguments:
-        Same as [Point].
+        Returns:
+          * an instance of :class:`simplekml.Point`
         """
         return self._newfeature(Point, **kwargs)
 
     def newlinestring(self, **kwargs):
-        """
-        Creates a new [LineString] and attaches it to this MultiGeometry.
+        """Creates a new :class:`simplekml.LineString` and attaches it to this MultiGeometry.
 
-        Returns an instance of [LineString] class.
+        The arguments are the same as :class:`simplekml.LineString`
 
-        Keyword Arguments:
-        Same as [LineString].
+        Returns:
+          * an instance of :class:`simplekml.LineString`
         """
         return self._newfeature(LineString, **kwargs)
 
     def newpolygon(self, **kwargs):
-        """
-        Creates a new [Polygon] and attaches it to this MultiGeometry.
+        """Creates a new :class:`simplekml.Polygon` and attaches it to this MultiGeometry.
 
-        Returns an instance of [Polygon] class.
+        The arguments are the same as :class:`simplekml.Polygon`
 
-        Keyword Arguments:
-        Same as [Polygon].
+        Returns:
+          * an instance of :class:`simplekml.Polygon`
         """
         return self._newfeature(Polygon, **kwargs)
 
     def newgroundoverlay(self, **kwargs):
-        """
-        Creates a new [GroundOverlay] and attaches it to this MultiGeometry.
+        """Creates a new :class:`simplekml.GroundOverlay` and attaches it to this MultiGeometry.
 
-        Returns an instance of [GroundOverlay] class.
+        The arguments are the same as :class:`simplekml.GroundOverlay`
 
-        Keyword Arguments:
-        Same as [GroundOverlay].
+        Returns:
+          * an instance of :class:`simplekml.GroundOverlay`
         """
         return self._newfeature(GroundOverlay, **kwargs)
 
     def newscreenoverlay(self, **kwargs):
-        """
-        Creates a new [ScreenOverlay] and attaches it to this MultiGeometry.
+        """Creates a new :class:`simplekml.ScreenOverlay` and attaches it to this MultiGeometry.
 
-        Returns an instance of [ScreenOverlay] class.
+        The arguments are the same as :class:`simplekml.ScreenOverlay`
 
-        Keyword Arguments:
-        Same as [ScreenOverlay].
+        Returns:
+          * an instance of :class:`simplekml.ScreenOverlay`
         """
         return self._newfeature(ScreenOverlay, **kwargs)
 
     def newphotooverlay(self, **kwargs):
-        """
-        Creates a new [PhotoOverlay] and attaches it to this MultiGeometry.
+        """Creates a new :class:`simplekml.PhotoOverlay` and attaches it to this MultiGeometry.
 
-        Returns an instance of [PhotoOverlay] class.
+        The arguments are the same as :class:`simplekml.PhotoOverlay`
 
-        Keyword Arguments:
-        Same as [PhotoOverlay].
+        Returns:
+          * an instance of :class:`simplekml.PhotoOverlay`
         """
         return self._newfeature(PhotoOverlay, **kwargs)
 
     def newmodel(self, **kwargs):
-        """
-        Creates a new [Model] and attaches it to this MultiGeometry.
+        """Creates a new :class:`simplekml.Model` and attaches it to this MultiGeometry.
 
-        Returns an instance of [Model] class.
+        The arguments are the same as :class:`simplekml.Model`
 
-        Keyword Arguments:
-        Same as [Model].
+        Returns:
+          * an instance of :class:`simplekml.Model`
         """
         return self._newfeature(Model, **kwargs)
 
     def __str__(self):
-        str = '<MultiGeometry id="{0}">'.format(self._id)
-        str += super(MultiGeometry, self).__str__()
+        buf = ['<MultiGeometry id="{0}">'.format(self._id),
+               super(MultiGeometry, self).__str__()]
         for geom in self._geometries:
-            str += geom.__str__()
-        str += "</MultiGeometry>"
-        return str
+            buf.append(geom.__str__())
+        buf.append("</MultiGeometry>")
+        return "".join(buf)
 
 
 class Overlay(Feature):
-    """_Base type for image overlays."""
+    """Abstract class for image overlays.
+
+    Arguments are the same as the properties.
+
+    .. note::
+      Not to be used directly.
+    """
     def __init__(self, color=None,
                        draworder=None,
                        icon=None,
@@ -1768,7 +1337,7 @@ class Overlay(Feature):
 
     @property
     def icon(self):
-        """The icon to use for the overlay, accepts [Icon]."""
+        """The icon to use for the overlay, accepts :class:`simplekml.Icon]`"""
         if self._kml['Icon'] is None:
             self._kml['Icon'] = Icon()
         return self._kml['Icon']
@@ -1779,42 +1348,9 @@ class Overlay(Feature):
 
 
 class GroundOverlay(Overlay):
-    """
-    Draws an image overlay draped onto the terrain.
+    """Draws an image overlay draped onto the terrain.
 
-    Keyword Arguments:
-    name (string)            -- name of placemark (default None)
-    visibility (int)         -- whether the feature is shown (default None)
-    open (int)               -- whether open or closed in Places (default None)
-    atomauthor (string)      -- author of the document (default None)
-    atomlink (string)        -- URL containing this KML (default None)
-    address (string)         -- standard address (default None)
-    xaladdressdetails(string)-- address as xAL (default None)
-    phonenumber (string)     -- phone number for Maps mobile (default None)
-    snippet ([Snippet])      -- short description of feature (default None)
-    description (string)     -- description shown in balloon (default None)
-    camera ([Camera])        -- camera that views the scene (default None)
-    lookat ([LookAt])        -- camera relative to feature (default None)
-    timestamp ([TimeStamp])  -- single moment in time (default None)
-    timespan ([TimeSpan])    -- period of time (default None)
-    region ([Region])        -- bounding box of features (default None)
-    color (hex string)       -- string of [Color] constants (default None)
-    draworder (int)          -- the order the overlay is drawn (default None)
-    icon ([Icon])            -- an icon for the overlay (default None)
-    altitude (float)         -- distance above earth's surface  (default None)
-    altitudemode (string)    -- alt use See [AltitudeMode] (default None)
-    gxaltitudemode (string)  -- alt use. See [GxAltitudeMode] (default None)
-    latlonbox ([LatLonBox])  -- position of overlay (default None)
-    gxlatlonquad ([GxLatLonQuad])-- position of overlay (default None)
-    extendeddata ([ExtendedData]) -- extra data (default None)
-
-    Properties:
-    Same as arguments, with the following additional properties:
-    style               -- [Style] (default None)
-    liststyle           -- [ListStyle] (default None)
-    balloonstyle        -- [BalloonStyle] (default None)
-    placemark           -- [Placemark] (default [Placemark], read-only)
-
+    Arguments are the same as the properties.
     """
 
     def __init__(self, altitude=None,
@@ -1823,36 +1359,6 @@ class GroundOverlay(Overlay):
                        latlonbox=None,
                        gxlatlonquad=None,
                        **kwargs):
-        """
-        Creates a groundoverlay element.
-
-        Keyword Arguments:
-        name (string)            -- name of placemark (default None)
-        visibility (int)         -- whether the feature is shown (default None)
-        open (int)               -- whether open or closed in Places (default None)
-        atomauthor (string)      -- author of the document (default None)
-        atomlink (string)        -- URL containing this KML (default None)
-        address (string)         -- standard address (default None)
-        xaladdressdetails(string)-- address as xAL (default None)
-        phonenumber (string)     -- phone number for Maps mobile (default None)
-        snippet ([Snippet])      -- short description of feature (default None)
-        description (string)     -- description shown in balloon (default None)
-        camera ([Camera])        -- camera that views the scene (default None)
-        lookat ([LookAt])        -- camera relative to feature (default None)
-        timestamp ([TimeStamp])  -- single moment in time (default None)
-        timespan ([TimeSpan])    -- period of time (default None)
-        region ([Region])        -- bounding box of features (default None)
-        color (hex string)       -- string of [Color] constants (default None)
-        draworder (int)          -- int (default None)
-        icon ([Icon])            -- [Icon] (default None)
-        altitude (float)         -- distance above earth (default None)
-        altitudemode (string)    -- alt use See [AltitudeMode] (default None)
-        gxaltitudemode (string)  -- alt use. See [GxAltitudeMode] (default None)
-        latlonbox ([LatLonBox])  -- position of overlay (default None)
-        gxlatlonquad ([GxLatLonQuad])-- position of overlay (default None)
-        extendeddata ([ExtendedData]) -- extra data (default None)
-
-        """
         super(GroundOverlay, self).__init__(**kwargs)
         self._kml['altitude'] = altitude
         self._kml['altitudeMode'] = altitudemode
@@ -1871,11 +1377,9 @@ class GroundOverlay(Overlay):
 
     @property
     def altitudemode(self):
-        """
-        Specifies how the altitude for the Camera is interpreted.
+        """Specifies how the altitude for the Camera is interpreted.
 
-        Accepts [AltitudeMode] constants.
-
+        Accepts :class:`simplekml.AltitudeMode` constants.
         """
         return self._kml['altitudeMode']
 
@@ -1885,12 +1389,10 @@ class GroundOverlay(Overlay):
 
     @property
     def gxaltitudemode(self):
-        """
-        Specifies how the altitude for the Camera is interpreted.
+        """Specifies how the altitude for the Camera is interpreted.
 
         With the addition of being relative to the sea floor.
-        Accepts [GxAltitudeMode] constants.
-
+        Accepts :class:`simplekml.GxAltitudeMode` constants.
         """
         return self._kml['gx:altitudeMode']
 
@@ -1900,11 +1402,9 @@ class GroundOverlay(Overlay):
 
     @property
     def latlonbox(self):
-        """
-        Specifies where the top, bottom, right, and left sides are.
+        """Specifies where the top, bottom, right, and left sides are.
 
-        Accepts [LatLonBox].
-
+        Accepts :class:`simplekml.LatLonBox`.
         """
         if self._kml['LatLonBox'] is None:
             self._kml['LatLonBox'] = LatLonBox()
@@ -1916,10 +1416,8 @@ class GroundOverlay(Overlay):
 
     @property
     def gxlatlonquad(self):
-        """
-        Specifies the coordinates of the four corner points of a quadrilateral
-        defining the overlay area. Accepts [GxLatLonQuad].
-
+        """Specifies the coordinates of the four corner points of a quadrilateral
+        defining the overlay area. Accepts :class:`simplekml.GxLatLonQuad`
         """
         if self._kml['gx:LatLonQuad'] is None:
             self._kml['gx:LatLonQuad'] = GxLatLonQuad()
@@ -1931,42 +1429,9 @@ class GroundOverlay(Overlay):
 
 
 class ScreenOverlay(Overlay):
-    """
-    Draws an image overlay fixed to the screen.
+    """Draws an image overlay fixed to the screen.
 
-    Keyword Arguments:
-    name (string)            -- name of placemark (default None)
-    visibility (int)         -- whether the feature is shown (default None)
-    open (int)               -- whether open or closed in Places (default None)
-    atomauthor (string)      -- author of the document (default None)
-    atomlink (string)        -- URL containing this KML (default None)
-    address (string)         -- standard address (default None)
-    xaladdressdetails(string)-- address as xAL (default None)
-    phonenumber (string)     -- phone number for Maps mobile (default None)
-    snippet ([Snippet])      -- short description of feature (default None)
-    description (string)     -- description shown in balloon (default None)
-    camera ([Camera])        -- camera that views the scene (default None)
-    lookat ([LookAt])        -- camera relative to feature (default None)
-    timestamp ([TimeStamp])  -- single moment in time (default None)
-    timespan ([TimeSpan])    -- period of time (default None)
-    region ([Region])        -- bounding box of features (default None)
-    color (hex string)       -- string of [Color] constants (default None)
-    draworder (int)          -- int (default None)
-    icon ([Icon])            -- an icon (default None)
-    overlayxy ([OverlayXY])  -- point in overlay image (default None)
-    screenxy ([ScreenXY])    -- point on screen (default None)
-    rotationxy ([RotationXY])-- screen point to rotate about (default None)
-    size ([Size])            -- size of the image(default None)
-    rotation (float)         -- rotation of the image (default None)
-    extendeddata ([ExtendedData]) -- extra data (default None)
-
-    Properties:
-    Same as arguments, with the following additional properties:
-    style               -- [Style] (default None)
-    liststyle           -- [ListStyle] (default None)
-    balloonstyle        -- [BalloonStyle] (default None)
-    placemark           -- [Placemark] (default [Placemark], read-only)
-
+    Arguments are the same as the properties.
     """
 
     def __init__(self, overlayxy=None,
@@ -1975,36 +1440,6 @@ class ScreenOverlay(Overlay):
                        size=None,
                        rotation=None,
                        **kwargs):
-        """
-        Creates a screenoverlay element.
-
-        Keyword Arguments:
-        name (string)            -- name of placemark (default None)
-        visibility (int)         -- whether the feature is shown (default None)
-        open (int)               -- whether open or closed in Places (default None)
-        atomauthor (string)      -- author of the document (default None)
-        atomlink (string)        -- URL containing this KML (default None)
-        address (string)         -- standard address (default None)
-        xaladdressdetails(string)-- address as xAL (default None)
-        phonenumber (string)     -- phone number for Maps mobile (default None)
-        snippet ([Snippet])      -- short description of feature (default None)
-        description (string)     -- description shown in balloon (default None)
-        camera ([Camera])        -- camera that views the scene (default None)
-        lookat ([LookAt])        -- camera relative to feature (default None)
-        timestamp ([TimeStamp])  -- single moment in time (default None)
-        timespan ([TimeSpan])    -- period of time (default None)
-        region ([Region])        -- bounding box of features (default None)
-        color (hex string)       -- string of [Color] constants (default None)
-        draworder (int)          -- int (default None)
-        icon ([Icon])            -- an icon (default None)
-        overlayxy ([OverlayXY])  -- point in overlay image (default None)
-        screenxy ([ScreenXY])    -- point on screen (default None)
-        rotationxy ([RotationXY])-- screen point to rotate about (default None)
-        size ([Size])            -- size of the image(default None)
-        rotation (float)         -- rotation of the image (default None)
-        extendeddata ([ExtendedData]) -- extra data (default None)
-
-        """
         super(ScreenOverlay, self).__init__(**kwargs)
         self._kml['rotation'] =rotation
         self._kml['overlayXY_'] = overlayxy
@@ -2023,11 +1458,11 @@ class ScreenOverlay(Overlay):
 
     @property
     def overlayxy(self):
-        """
-        Point on the overlay image that is mapped to a screen coordinate.
+        """Point on the overlay image that is mapped to a screen coordinate.
 
         Specifies a point on (or outside of) the overlay image that is mapped
-        to the screen coordinate [ScreenXY], accepts [OverlayXY]
+        to the screen coordinate :class:`simplekml.ScreenXY`,
+        accepts :class:`simplekml.OverlayXY`
         """
         if self._kml['overlayXY_'] is None:
             self._kml['overlayXY_'] = OverlayXY()
@@ -2039,12 +1474,10 @@ class ScreenOverlay(Overlay):
 
     @property
     def screenxy(self):
-        """
-        Point relative to screen origin that the image is mapped to.
+        """Point relative to screen origin that the image is mapped to.
 
         Specifies a point relative to the screen origin that the overlay image
-        is mapped to, accepts [ScreenXY].
-        
+        is mapped to, accepts :class:`simplekml.ScreenXY`
         """
         if self._kml['screenXY_'] is None:
             self._kml['screenXY_'] = ScreenXY()
@@ -2056,10 +1489,9 @@ class ScreenOverlay(Overlay):
 
     @property
     def rotationxy(self):
-        """
-        Point relative to the screen about which the overlay is rotated.
+        """Point relative to the screen about which the overlay is rotated.
 
-        Accepts [RotationXY]
+        Accepts :class:`simplekml.RotationXY`
         """
         if self._kml['rotationXY_'] is None:
             self._kml['rotationXY_'] = RotationXY()
@@ -2071,7 +1503,7 @@ class ScreenOverlay(Overlay):
 
     @property
     def size(self):
-        """The size of the image for the screen overlay, accepts [Size]."""
+        """The size of the image for the screen overlay, accepts :class:`simplekml.Size`"""
         if self._kml['size_'] is None:
             self._kml['size_'] = Size()
         return self._kml['size_']
@@ -2082,43 +1514,9 @@ class ScreenOverlay(Overlay):
 
 
 class PhotoOverlay(Overlay):
-    """
-    Geographically locate a photograph in Google Earth.
+    """Geographically locate a photograph in Google Earth.
 
-    Keyword Arguments:
-    name (string)            -- name of placemark (default None)
-    visibility (int)         -- whether the feature is shown (default None)
-    open (int)               -- whether open or closed in Places (default None)
-    atomauthor (string)      -- author of the document (default None)
-    atomlink (string)        -- URL containing this KML (default None)
-    address (string)         -- standard address (default None)
-    xaladdressdetails(string)-- address as xAL (default None)
-    phonenumber (string)     -- phone number for Maps mobile (default None)
-    snippet ([Snippet])      -- short description of feature (default None)
-    description (string)     -- description shown in balloon (default None)
-    camera ([Camera])        -- camera that views the scene (default None)
-    lookat ([LookAt])        -- camera relative to feature (default None)
-    timestamp ([TimeStamp])  -- single moment in time (default None)
-    timespan ([TimeSpan])    -- period of time (default None)
-    region ([Region])        -- bounding box of features (default None)
-    color (hex string)       -- string of [Color] constants (default None)
-    draworder (int)          -- the order the overlay is drawn (default None)
-    icon ([Icon])            -- an icon for the overlay (default None)
-    rotation (float)         -- the rotation of the overlay (default None)
-    viewvolume ([ViewVolume])-- extent current scene is visible (default None)
-    imagepyramid([ImagePyramid])-- hierarchical set of images (default None)
-    point ([Point])          -- draws an icon to mark position (default None)
-    shape (string)           -- string from [Shape] constants (default None)
-    extendeddata ([ExtendedData]) -- extra data (default None)
-
-    Properties:
-    Same as arguments, with the following additional properties:
-    style               -- [Style] (default None)
-    iconstyle           -- [IconStyle] (default None)
-    liststyle           -- [ListStyle] (default None)
-    balloonstyle        -- [BalloonStyle] (default None)
-    placemark           -- [Placemark] (default [Placemark], read-only)
-
+    Arguments are the same as the properties.
     """
 
     def __init__(self, rotation=None,
@@ -2127,36 +1525,6 @@ class PhotoOverlay(Overlay):
                        point=None,
                        shape=None,
                        **kwargs):
-        """
-        Creates a photooverlay element.
-
-        Keyword Arguments:
-        name (string)            -- name of placemark (default None)
-        visibility (int)         -- whether the feature is shown (default None)
-        open (int)               -- whether open or closed in Places (default None)
-        atomauthor (string)      -- author of the document (default None)
-        atomlink (string)        -- URL containing this KML (default None)
-        address (string)         -- standard address (default None)
-        xaladdressdetails(string)-- address as xAL (default None)
-        phonenumber (string)     -- phone number for Maps mobile (default None)
-        snippet ([Snippet])      -- short description of feature (default None)
-        description (string)     -- description shown in balloon (default None)
-        camera ([Camera])        -- camera that views the scene (default None)
-        lookat ([LookAt])        -- camera relative to feature (default None)
-        timestamp ([TimeStamp])  -- single moment in time (default None)
-        timespan ([TimeSpan])    -- period of time (default None)
-        region ([Region])        -- bounding box of features (default None)
-        color (hex string)       -- string of [Color] constants (default None)
-        draworder (int)          -- the order the overlay is drawn (default None)
-        icon ([Icon])            -- an icon for the overlay (default None)
-        rotation (float)         -- the rotation of the overlay (default None)
-        viewvolume ([ViewVolume])-- extent current scene is visible (default None)
-        imagepyramid([ImagePyramid])-- hierarchical set of images (default None)
-        point ([Point])          -- draws an icon to mark position (default None)
-        shape (string)           -- string from [Shape] constants (default None)
-        extendeddata ([ExtendedData]) -- extra data (default None)
-
-        """
         super(PhotoOverlay, self).__init__(**kwargs)
         self._kml['rotation'] = rotation
         self._kml['ViewVolume'] = viewvolume
@@ -2175,7 +1543,7 @@ class PhotoOverlay(Overlay):
 
     @property
     def viewvolume(self):
-        """How much of the current scene is visible, accepts [ViewVolume]."""
+        """How much of the current scene is visible, accepts :class:`simplekml.ViewVolume`"""
         if self._kml['ViewVolume'] is None:
             self._kml['ViewVolume'] = ViewVolume()
         return self._kml['ViewVolume']
@@ -2186,7 +1554,7 @@ class PhotoOverlay(Overlay):
 
     @property
     def imagepyramid(self):
-        """Hierarchical set of images, accepts [ImagePyramid]."""
+        """Hierarchical set of images, accepts :class:`simplekml.ImagePyramid`"""
         if self._kml['ImagePyramid'] is None:
             self._kml['ImagePyramid'] = ImagePyramid()
         return self._kml['ImagePyramid']
@@ -2197,7 +1565,7 @@ class PhotoOverlay(Overlay):
 
     @property
     def point(self):
-        """Draws an icon to mark the position of the overlay,accepts [Point]."""
+        """Draws an icon to mark the position of the overlay,accepts :class:`simplekml.Point`"""
         if self._kml['point_'] is None:
             self._kml['point_'] = Point()
         return self._kml['point_']
@@ -2208,7 +1576,7 @@ class PhotoOverlay(Overlay):
 
     @property
     def shape(self):
-        """Shape the photo is drawn, accepts string from [Shape] constants."""
+        """Shape the photo is drawn, accepts string from :class:`simplekml.Shape` constants."""
         return self._kml['shape']
 
     @shape.setter
@@ -2217,68 +1585,15 @@ class PhotoOverlay(Overlay):
 
 
 class NetworkLink(Feature):
-    """
-    References a KML file or KMZ archive on a local or remote network.
+    """References a KML file or KMZ archive on a local or remote network.
 
-    Keyword Arguments:
-    name (string)            -- name of placemark (default None)
-    visibility (int)         -- whether the feature is shown (default None)
-    open (int)               -- whether open or closed in Places (default None)
-    atomauthor (string)      -- author of the document (default None)
-    atomlink (string)        -- URL containing this KML (default None)
-    address (string)         -- standard address (default None)
-    xaladdressdetails(string)-- address as xAL (default None)
-    phonenumber (string)     -- phone number for Maps mobile (default None)
-    snippet ([Snippet])      -- short description of feature (default None)
-    description (string)     -- description shown in balloon (default None)
-    camera ([Camera])        -- camera that views the scene (default None)
-    lookat ([LookAt])        -- camera relative to feature (default None)
-    timestamp ([TimeStamp])  -- single moment in time (default None)
-    timespan ([TimeSpan])    -- period of time (default None)
-    region ([Region])        -- bounding box of features (default None)
-    extrude (int)            -- connect to the ground? (default 0)
-    altitudemode (string)    -- alt use See [AltitudeMode] (default None)
-    gxaltitudemode (string)  -- alt use. See [GxAltitudeMode] (default None)
-    refreshvisibility (int)  -- action to be taken on refresh (default None)
-    flytoview (int)          -- whether to fly to the view (default None)
-    link ([Link])            -- link element (default None)
-
-    Properties:
-    Same as arguments.
-
+    Arguments are the same as the properties.
     """
     
     def __init__(self, refreshvisibility=None,
                        flytoview=None,
                        link=None,
                        **kwargs):
-        """
-        Creates a NetworkLink Element.
-
-        Keyword Arguments:
-        name (string)            -- name of placemark (default None)
-        visibility (int)         -- whether the feature is shown (default None)
-        open (int)               -- whether open or closed in Places (default None)
-        atomauthor (string)      -- author of the document (default None)
-        atomlink (string)        -- URL containing this KML (default None)
-        address (string)         -- standard address (default None)
-        xaladdressdetails(string)-- address as xAL (default None)
-        phonenumber (string)     -- phone number for Maps mobile (default None)
-        snippet ([Snippet])      -- short description of feature (default None)
-        description (string)     -- description shown in balloon (default None)
-        camera ([Camera])        -- camera that views the scene (default None)
-        lookat ([LookAt])        -- camera relative to feature (default None)
-        timestamp ([TimeStamp])  -- single moment in time (default None)
-        timespan ([TimeSpan])    -- period of time (default None)
-        region ([Region])        -- bounding box of features (default None)
-        extrude (int)            -- connect to the ground? (default None)
-        altitudemode (string)    -- alt use See [AltitudeMode] (default None)
-        gxaltitudemode (string)  -- alt use. See [GxAltitudeMode] (default None)
-        refreshvisibility (int)  -- action to be taken on refresh (default None)
-        flytoview (int)          -- whether to fly to the view (default None)
-        link ([Link])            -- link element (default None)
-
-        """
         super(NetworkLink, self).__init__(**kwargs)
         self._kml['refreshVisibility'] = refreshvisibility
         self._kml['flyToView'] = flytoview
@@ -2286,8 +1601,7 @@ class NetworkLink(Feature):
 
     @property
     def refreshvisibility(self):
-        """
-        How the visibility is affected by a refresh
+        """How the visibility is affected by a refresh
 
         A value of 0 leaves the visibility of features within the control of
         the Google Earth user. Set the value to 1 to reset the visibility of
@@ -2302,11 +1616,9 @@ class NetworkLink(Feature):
 
     @property
     def flytoview(self):
-        """
-        A value of 1 causes Google Earth to fly to the view of the AbstractView.
+        """A value of 1 causes Google Earth to fly to the view of the AbstractView.
 
         Accepts int (0 or 1).
-
         """
         return self._kml['flyToView']
 
@@ -2316,7 +1628,7 @@ class NetworkLink(Feature):
 
     @property
     def link(self):
-        """A [Link] class instance, accepts [Link]"""
+        """A :class:`simplekml.Link` class instance, accepts :class:`simplekml.Link`"""
         if self._kml['Link'] is None:
             self._kml['Link'] = Link()
         return self._kml['Link']
@@ -2327,47 +1639,9 @@ class NetworkLink(Feature):
 
 
 class Model(Geometry):
-    """
-    A 3D object described in a COLLADA file.
+    """A 3D object described in a COLLADA file.
 
-    Keyword Arguments:
-    name (string)            -- name of placemark (default None)
-    visibility (int)         -- whether the feature is shown (default None)
-    open (int)               -- whether open or closed in Places (default None)
-    atomauthor (string)      -- author of the document (default None)
-    atomlink (string)        -- URL containing this KML (default None)
-    address (string)         -- standard address (default None)
-    xaladdressdetails(string)-- address as xAL (default None)
-    phonenumber (string)     -- phone number for Maps mobile (default None)
-    snippet ([Snippet])      -- short description of feature (default None)
-    description (string)     -- description shown in balloon (default None)
-    camera ([Camera])        -- camera that views the scene (default None)
-    lookat ([LookAt])        -- camera relative to feature (default None)
-    timestamp ([TimeStamp])  -- single moment in time (default None)
-    timespan ([TimeSpan])    -- period of time (default None)
-    region ([Region])        -- bounding box of features (default None)
-    extrude (int)            -- connect to the ground? (default None)
-    altitudemode (string)    -- alt use See [AltitudeMode] (default None)
-    gxaltitudemode (string)  -- alt use. See [GxAltitudeMode] (default None)
-    location ([Location])    -- coordinates of the origin (default None)
-    orientation ([Orientation])-- rotation of a model (default None)
-    scale ([Scale])          -- the scale along the axes (default None)
-    link ([Link])            -- a [Link] instance (default None)
-    resourcemap ([ResourceMap])-- texture mapper (default None)
-    extendeddata ([ExtendedData]) -- extra data (default None)
-
-    Properties:
-    Same as arguments, with the following additional properties:
-    style               -- [Style] (default None)
-    stylemap            -- [StyleMap] (default None)
-    liststyle           -- [ListStyle] (default None)
-    balloonstyle        -- [BalloonStyle] (default None)
-    iconstyle           -- [IconStyle] (default None)
-    labelstyle          -- [LabelStyle] (default None)
-    linestyle           -- [LineStyle] (default None)
-    polystyle           -- [PolyStyle] (default None)
-    placemark           -- [Placemark] (default [Placemark], read-only)
-
+    Arguments are the same as the properties.
     """
 
     def __init__(self,
@@ -2379,36 +1653,6 @@ class Model(Geometry):
                  link=None,
                  resourcemap=None,
                  **kwargs):
-        """
-        Creates a model element.
-
-        Keyword Arguments:
-        name (string)            -- name of placemark (default None)
-        visibility (int)         -- whether the feature is shown (default None)
-        open (int)               -- whether open or closed in Places (default None)
-        atomauthor (string)      -- author of the document (default None)
-        atomlink (string)        -- URL containing this KML (default None)
-        address (string)         -- standard address (default None)
-        xaladdressdetails(string)-- address as xAL (default None)
-        phonenumber (string)     -- phone number for Maps mobile (default None)
-        snippet ([Snippet])      -- short description of feature (default None)
-        description (string)     -- description shown in balloon (default None)
-        camera ([Camera])        -- camera that views the scene (default None)
-        lookat ([LookAt])        -- camera relative to feature (default None)
-        timestamp ([TimeStamp])  -- single moment in time (default None)
-        timespan ([TimeSpan])    -- period of time (default None)
-        region ([Region])        -- bounding box of features (default None)
-        extrude (int)            -- connect to the ground? (default None)
-        altitudemode (string)    -- alt use See [AltitudeMode] (default None)
-        gxaltitudemode (string)  -- alt use. See [GxAltitudeMode] (default None)
-        location ([Location])    -- coordinates of the origin (default None)
-        orientation ([Orientation])-- rotation of a model (default None)
-        scale ([Scale])          -- the scale along the axes (default None)
-        link ([Link])            -- a [Link] instance (default None)
-        resourcemap ([ResourceMap])-- texture mapper (default None)
-        extendeddata ([ExtendedData]) -- extra data (default None)
-
-        """
         super(Model, self).__init__(**kwargs)
         self._kml['altitudeMode'] = altitudemode
         self._kml['gx:altitudeMode'] = gxaltitudemode
@@ -2420,11 +1664,9 @@ class Model(Geometry):
 
     @property
     def altitudemode(self):
-        """
-        Specifies how the altitude for the Camera is interpreted.
+        """Specifies how the altitude for the Camera is interpreted.
 
-        Accepts [AltitudeMode] constants.
-
+        Accepts :class:`simplekml.AltitudeMode` constants.
         """
         return self._kml['altitudeMode']
 
@@ -2434,12 +1676,10 @@ class Model(Geometry):
 
     @property
     def gxaltitudemode(self):
-        """
-        Specifies how the altitude for the Camera is interpreted.
+        """Specifies how the altitude for the Camera is interpreted.
 
         With the addition of being relative to the sea floor.
-        Accepts [GxAltitudeMode] constants.
-
+        Accepts :class:`simplekml.GxAltitudeMode` constants.
         """
         return self._kml['gx:altitudeMode']
 
@@ -2449,7 +1689,7 @@ class Model(Geometry):
 
     @property
     def location(self):
-        """Position of the origin of the model, accepts [Location]."""
+        """Position of the origin of the model, accepts :class:`simplekml.Location`"""
         if self._kml['Location'] is None:
             self._kml['Location'] = Location()
         return self._kml['Location']
@@ -2460,7 +1700,7 @@ class Model(Geometry):
 
     @property
     def orientation(self):
-        """The rotation on the model, accepts [Orientation]."""
+        """The rotation on the model, accepts :class:`simplekml.Orientation`"""
         if self._kml['Orientation'] is None:
             self._kml['Orientation'] = Orientation()
         return self._kml['Orientation']
@@ -2471,7 +1711,7 @@ class Model(Geometry):
 
     @property
     def scale(self):
-        """"The scale of the model, accepts [Scale]."""
+        """"The scale of the model, accepts :class:`simplekml.Scale`"""
         if self._kml['Scale'] is None:
             self._kml['Scale'] = Scale()
         return self._kml['Scale']
@@ -2482,7 +1722,7 @@ class Model(Geometry):
 
     @property
     def link(self):
-        """"A [Link] class instance, accepts [Link]."""
+        """"A :class:`simplekml.Link` class instance, accepts :class:`simplekml.Link`"""
         if self._kml['Link'] is None:
             self._kml['Link'] = Link()
         return self._kml['Link']
@@ -2493,7 +1733,7 @@ class Model(Geometry):
 
     @property
     def resourcemap(self):
-        """Used for mapping textures, accepts [ResourceMap]."""
+        """Used for mapping textures, accepts :class:`simplekml.ResourceMap`"""
         if self._kml['ResourceMap'] is None:
             self._kml['ResourceMap'] = ResourceMap()
         return self._kml['ResourceMap']
@@ -2503,58 +1743,13 @@ class Model(Geometry):
         self._kml['ResourceMap'] = resourcemap
 
     def __str__(self):
-        str = '<Model id="{0}">'.format(self._id)
-        str += super(Model, self).__str__()
-        str += "</Model>"
-        return str
+        return '<Model id="{0}">{1}</Model>'.format(self._id, super(Model, self).__str__())
 
 
 class GxTrack(Geometry):
-    """
-    A track describes how an object moves through the world over a given time period.
+    """A track describes how an object moves through the world over a given time period.
 
-    Keyword Arguments:
-    name (string)                 -- name of placemark (default None)
-    visibility (int)              -- whether the feature is shown (default None)
-    open (int)                    -- whether open or closed in Places (default None)
-    atomauthor (string)           -- author of the document (default None)
-    atomlink (string)             -- URL containing this KML (default None)
-    address (string)              -- standard address (default None)
-    xaladdressdetails(string)     -- address as xAL (default None)
-    phonenumber (string)          -- phone number for Maps mobile (default None)
-    snippet ([Snippet])           -- short description of feature (default None)
-    description (string)          -- description shown in balloon (default None)
-    camera ([Camera])             -- camera that views the scene (default None)
-    lookat ([LookAt])             -- camera relative to feature (default None)
-    timestamp ([TimeStamp])       -- single moment in time (default None)
-    timespan ([TimeSpan])         -- period of time (default None)
-    region ([Region])             -- bounding box of features (default None)
-    extrude (int)                 -- connect to the ground? (default None)
-    altitudemode (string)         -- alt use See [AltitudeMode] (default None)
-    gxaltitudemode (string)       -- alt use. See [GxAltitudeMode] (default None)
-    extendeddata ([ExtendedData]) -- extra data (default None)
-
-    Properties:
-    Same as arguments, with the following additional properties:
-    style               -- [Style] (default None)
-    stylemap            -- [StyleMap] (default None)
-    liststyle           -- [ListStyle] (default None)
-    balloonstyle        -- [BalloonStyle] (default None)
-    iconstyle           -- [IconStyle] (default None)
-    labelstyle          -- [LabelStyle] (default None)
-    linestyle           -- [LineStyle] (default None)
-    polystyle           -- [PolyStyle] (default None)
-    placemark           -- [Placemark] (default [Placemark], read-only)
-    whens               -- list of times given (default [])
-    angles              -- list of angles given (default [])
-    gxcoords            -- list of coords given (default [])
-
-    Public Methods:
-    newwhen    -- Attaches new when entry/entries
-    newangle   -- Attaches new angle entry/entries
-    newgxcoord -- Attaches new gxcoord entry/entries
-    newdata    -- Attaches new when, gxcoord and/or angle entry/entries
-
+    Arguments are the same as the properties.
     """
 
     def __init__(self,
@@ -2562,36 +1757,6 @@ class GxTrack(Geometry):
                  altitudemode=None,
                  gxaltitudemode=None,
                  **kwargs):
-        """
-        Creates a gx:track element.
-
-        Keyword Arguments:
-        name (string)                 -- name of placemark (default None)
-        visibility (int)              -- whether the feature is shown (default None)
-        open (int)                    -- whether open or closed in Places (default None)
-        atomauthor (string)           -- author of the document (default None)
-        atomlink (string)             -- URL containing this KML (default None)
-        address (string)              -- standard address (default None)
-        xaladdressdetails(string)     -- address as xAL (default None)
-        phonenumber (string)          -- phone number for Maps mobile (default None)
-        snippet ([Snippet])           -- short description of feature (default None)
-        description (string)          -- description shown in balloon (default None)
-        camera ([Camera])             -- camera that views the scene (default None)
-        lookat ([LookAt])             -- camera relative to feature (default None)
-        timestamp ([TimeStamp])       -- single moment in time (default None)
-        timespan ([TimeSpan])         -- period of time (default None)
-        region ([Region])             -- bounding box of features (default None)
-        extrude (int)                 -- connect to the ground? (default None)
-        altitudemode (string)         -- alt use See [AltitudeMode] (default None)
-        gxaltitudemode (string)       -- alt use. See [GxAltitudeMode] (default None)
-        location ([Location])         -- coordinates of the origin (default None)
-        orientation ([Orientation])   -- rotation of a model (default None)
-        scale ([Scale])               -- the scale along the axes (default None)
-        link ([Link])                 -- a [Link] instance (default None)
-        resourcemap ([ResourceMap])   -- texture mapper (default None)
-        extendeddata ([ExtendedData]) -- extra data (default None)
-
-        """
         super(GxTrack, self).__init__(**kwargs)
         self._kml['extrude'] = extrude
         self._kml['altitudeMode'] = altitudemode
@@ -2612,10 +1777,9 @@ class GxTrack(Geometry):
 
     @property
     def altitudemode(self):
-        """
-        Specifies how the altitude for the Camera is interpreted.
+        """Specifies how the altitude for the Camera is interpreted.
 
-        Accepts [AltitudeMode] constants.
+        Accepts :class:`simplekml.AltitudeMode` constants.
 
         """
         return self._kml['altitudeMode']
@@ -2626,12 +1790,10 @@ class GxTrack(Geometry):
 
     @property
     def gxaltitudemode(self):
-        """
-        Specifies how the altitude for the Camera is interpreted.
+        """Specifies how the altitude for the Camera is interpreted.
 
         With the addition of being relative to the sea floor.
-        Accepts [GxAltitudeMode] constants.
-
+        Accepts :class:`simplekml.GxAltitudeMode` constants.
         """
         return self._kml['gx:altitudeMode']
 
@@ -2640,12 +1802,10 @@ class GxTrack(Geometry):
         self._kml['gx:altitudeMode'] = gxaltitudemode
 
     def newdata(self, gxcoord, when, angle=None):
-        """
-        Creates a new gxcoord, when time and angle (if provided).
+        """Creates a new gxcoord, when time and angle (if provided).
 
-        This is a convenience method for calling newwhen, newgxcoord and newangle. when and gxcoord are required,
-        angle is optional.
-
+        This is a convenience method for calling newwhen, newgxcoord and
+        newangle. when and gxcoord are required, angle is optional.
         """
         self.newgxcoord(gxcoord)
         self.newwhen(when)
@@ -2653,12 +1813,10 @@ class GxTrack(Geometry):
             self.newangle(angle)
 
     def newwhen(self, when):
-        """
-        Creates a new when time, accepts string or list of string.
+        """Creates a new when time, accepts string or list of string.
 
-        If one string is given a single when entry is created, but if a list of strings is given, a when entry is
-        created for each string in the list.
-
+        If one string is given a single when entry is created, but if a list of
+        strings is given, a when entry is created for each string in the list.
         """
         if type(when) == list:
             self.whens += when
@@ -2666,11 +1824,9 @@ class GxTrack(Geometry):
             self.whens.append(when)
 
     def newgxcoord(self, coord):
-        """
-        Creates a gx:coord, accepts list of one tuples.
+        """Creates a gx:coord, accepts list of one tuples.
 
         A gxcoord entry is created for every tuple in the list.
-
         """
         if type(coord) == list:
             for crd in coord:
@@ -2683,12 +1839,10 @@ class GxTrack(Geometry):
             self.gxcoords.append(coords)
 
     def newangle(self, angle):
-        """
-        Creates a new angle, accepts float or list of floats.
+        """Creates a new angle, accepts float or list of floats.
 
-        If one float is given a single angle entry is created, but if a list of floats is given, a angle entry is
-        created for each float in the list.
-
+        If one float is given a single angle entry is created, but if a list of
+        floats is given, a angle entry is created for each float in the list.
         """
         if type(angle) == list:
             self.angles += angle
@@ -2707,106 +1861,45 @@ class GxTrack(Geometry):
         self._kml['ExtendedData'] = extendeddata
 
     def __str__(self):
-        str = '<gx:Track>'
+        buf = ['<gx:Track>']
         for when in self.whens:
-            str += "<when>{0}</when>".format(when)
+            buf.append("<when>{0}</when>".format(when))
         for angle in self.angles:
-            str += "<angle>{0}</angle>".format(angle)
+            buf.append("<angle>{0}</angle>".format(angle))
         for gxcoord in self.gxcoords:
-            str += "<gx:coord>{0}</gx:coord>".format(gxcoord.__str__().replace(',', ' '))
-        str += super(GxTrack, self).__str__()
-        str += '</gx:Track>'
-        return str
-
+            buf.append("<gx:coord>{0}</gx:coord>".format(gxcoord.__str__().replace(',', ' ')))
+        buf.append(super(GxTrack, self).__str__())
+        buf.append('</gx:Track>')
+        return "".join(buf)
 
 
 class GxMultiTrack(Geometry):
-    """
-    A container for grouping gx:tracks.
+    """A container for grouping gx:tracks.
 
-    Keyword Arguments:
-    name (string)            -- name of placemark (default None)
-    visibility (int)         -- whether the feature is shown (default None)
-    open (int)               -- whether open or closed in Places (default None)
-    atomauthor (string)      -- author of the document (default None)
-    atomlink (string)        -- URL containing this KML (default None)
-    address (string)         -- standard address (default None)
-    xaladdressdetails(string)-- address as xAL (default None)
-    phonenumber (string)     -- phone number for Maps mobile (default None)
-    snippet ([Snippet])      -- short description of feature (default None)
-    description (string)     -- description shown in balloon (default None)
-    camera ([Camera])        -- camera that views the scene (default None)
-    lookat ([LookAt])        -- camera relative to feature (default None)
-    timestamp ([TimeStamp])  -- single moment in time (default None)
-    timespan ([TimeSpan])    -- period of time (default None)
-    region ([Region])        -- bounding box of features (default None)
-    gxinterpolate (int)      -- interpolate values between tracks (default None)
-    tracks (list)            -- a list of GxTracks (default ())
-
-    Properties:
-    Same as arguments, with the following additional properties:
-    style               -- [Style] (default None)
-    stylemap            -- [StyleMap] (default None)
-    liststyle           -- [ListStyle] (default None)
-    balloonstyle        -- [BalloonStyle] (default None)
-    iconstyle           -- [IconStyle] (default None)
-    labelstyle          -- [LabelStyle] (default None)
-    linestyle           -- [LineStyle] (default None)
-    polystyle           -- [PolyStyle] (default None)
-    placemark           -- [Placemark] (default [Placemark], read-only)
-
-    Public Methods:
-    newtrack            -- Creates a [GxTrack]
-
+    Arguments are the same as the properties.
     """
 
     def __init__(self,
                  tracks=(), gxinterpolate=None, **kwargs):
-        """
-        Creates a new gxmultitrack element.
-
-        Keyword Arguments:
-        name (string)            -- name of placemark (default None)
-        visibility (int)         -- whether the feature is shown (default None)
-        open (int)               -- whether open or closed in Places (default None)
-        atomauthor (string)      -- author of the document (default None)
-        atomlink (string)        -- URL containing this KML (default None)
-        address (string)         -- standard address (default None)
-        xaladdressdetails(string)-- address as xAL (default None)
-        phonenumber (string)     -- phone number for Maps mobile (default None)
-        snippet ([Snippet])      -- short description of feature (default None)
-        description (string)     -- description shown in balloon (default None)
-        camera ([Camera])        -- camera that views the scene (default None)
-        lookat ([LookAt])        -- camera relative to feature (default None)
-        timestamp ([TimeStamp])  -- single moment in time (default None)
-        timespan ([TimeSpan])    -- period of time (default None)
-        region ([Region])        -- bounding box of features (default None)
-        gxinterpolate (int)      -- interpolate values between tracks (default None)
-        tracks (list)            -- a list of GxTracks (default ())
-
-        """
         super(GxMultiTrack, self).__init__(**kwargs)
         self._kml['gx:interpolate'] = gxinterpolate
         self.tracks = list(tracks)
 
     def newgxtrack(self, **kwargs):
-        """
-        Creates a new [GxTrack] and attaches it to this mutlitrack.
+        """Creates a new :class:`simplekml.GxTrack` and attaches it to this mutlitrack.
 
-        Returns an instance of [GxTrack] class.
+        Returns an instance of :class:`simplekml.GxTrack` class.
 
-        Keyword Arguments:
-        Same as [GxTrack], except arguments that are not applicale in a multitrack grouping will be ignored, such as
-        name, visibility, open, etc.
+        Args:
+          * Same as :class:`simplekml.GxTrack`, except arguments that are not applicable in a multitrack grouping will be ignored, such as name, visibility, open, etc.
         """
         self.tracks.append(GxTrack(**kwargs))
         return self.tracks[-1]
 
     def __str__(self):
-        str = '<gx:MultiTrack id="{0}">'.format(self._id)
-        str += super(GxMultiTrack, self).__str__()
+        buf = ['<gx:MultiTrack id="{0}">'.format(self._id),
+               super(GxMultiTrack, self).__str__()]
         for track in self.tracks:
-            str += track.__str__()
-        str += "</gx:MultiTrack>"
-        return str
-
+            buf.append(track.__str__())
+        buf.append("</gx:MultiTrack>")
+        return "".join(buf)

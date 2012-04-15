@@ -1,6 +1,5 @@
 """
-simplekml
-Copyright 2011 Kyle Lancaster
+Copyright 2011-2012 Kyle Lancaster
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -21,22 +20,9 @@ Contact me at kyle.lan@gmail.com
 from simplekml.base import Kmlable
 
 class Link(Kmlable):
-    """
-    Defines an image associated with an Icon style or overlay.
+    """Defines an image associated with an Icon style or overlay.
 
-    Keyword Arguments:
-    href (string)            -- target url (default None)
-    refreshmode (string)     -- one of [RefreshMode] constants (default None)
-    refreshinterval (float)  -- time between refreshes (default None)
-    viewrefreshmode (string) -- one of [ViewRefreshMode] constants(default None)
-    viewrefreshtime (float)  -- time to refresh after camera stop (default None)
-    viewboundscale (float)   -- extent to request (default None)
-    viewformat (string)      -- query string format (default None)
-    httpquery (string)       -- extra info for query string (default None)
-
-    Properties:
-    Same as arguments.
-
+    The arguments are the same as the properties.
     """
 
     def __init__(self,
@@ -48,20 +34,6 @@ class Link(Kmlable):
                  viewboundscale=None,
                  viewformat=None,
                  httpquery=None):
-        """
-        Creates a link element.
-
-        Keyword Arguments:
-        href (string)           -- target url (default None)
-        refreshmode (string)    -- one of [RefreshMode] constants (default None)
-        refreshinterval (float) -- time between refreshes (default None)
-        viewrefreshmode (string)-- [ViewRefreshMode] constants(default None)
-        viewrefreshtime (float) -- time to refresh after camera (default None)
-        viewboundscale (float)  -- extent to request (default None)
-        viewformat (string)     -- query string format (default None)
-        httpquery (string)      -- extra info for query string (default None)
-
-        """
         super(Link, self).__init__()
         self._kml["href"] = href
         self._kml["refreshMode"] = refreshmode
@@ -83,7 +55,7 @@ class Link(Kmlable):
 
     @property
     def refreshmode(self):
-        """Type of refresh, accepts string of [RefreshMode] constants."""
+        """Type of refresh, accepts string of :class:`simplekml.RefreshMode` constants."""
         return self._kml['refreshMode']
 
     @refreshmode.setter
@@ -101,7 +73,7 @@ class Link(Kmlable):
 
     @property
     def viewrefreshmode(self):
-        """Camera specific refresh, accepts [ViewRefreshMode] constants."""
+        """Camera specific refresh, accepts :class:`simplekml.ViewRefreshMode` constants."""
         return self._kml['viewRefreshMode']
 
     @viewrefreshmode.setter
@@ -146,26 +118,11 @@ class Link(Kmlable):
 
 
 class Icon(Link):
-    """
-    Defines an image associated with an Icon style or overlay.
+    """Defines an image associated with an Icon style or overlay.
 
-    Keyword Arguments:
-    href (string)            -- target url (default None)
-    refreshmode (string)     -- one of [RefreshMode] constants (default None)
-    refreshinterval (float)  -- time between refreshes (default None)
-    viewrefreshmode (string) -- one of [ViewRefreshMode] constants(default None)
-    viewrefreshtime (float)  -- time to refresh after camera stop (default None)
-    viewboundscale (float)   -- extent to request (default None)
-    viewformat (string)      -- query string format (default None)
-    httpquery (string)       -- extra info for query string (default None)
-    gxx (int)                -- x position of icon palette (default None)
-    gxy (int)                -- y position of icon palette (default None)
-    gxh (int)                -- height of icon palette (default None)
-    gxw (int)                -- width of icon palette (default None)
-
-    Properties:
-    Same as arguments.
-
+    Args:
+      * *same as properties*
+      * *all other args same as* :class:`simplekml.Link`
     """
 
     def __init__(self,
@@ -174,24 +131,6 @@ class Icon(Link):
                  gxw=None,
                  gxh=None,
                  **kwargs):
-        """
-        Creates a icon element.
-
-        Keyword Arguments:
-        href (string)            -- target url (default None)
-        refreshmode (string)     -- one of [RefreshMode] constants (default None)
-        refreshinterval (float)  -- time between refreshes (default None)
-        viewrefreshmode (string) -- one of [ViewRefreshMode] constants(default None)
-        viewrefreshtime (float)  -- time to refresh after camera stop (default None)
-        viewboundscale (float)   -- extent to request (default None)
-        viewformat (string)      -- query string format (default None)
-        httpquery (string)       -- extra info for query string (default None)
-        gxx (int)                -- x position of icon palette (default None)
-        gxy (int)                -- y position of icon palette (default None)
-        gxh (int)                -- height of icon palette (default None)
-        gxw (int)                -- width of icon palette (default None)
-
-        """
         super(Icon, self).__init__(**kwargs)
         self._kml["gx:x"] = gxx
         self._kml["gx:y"] = gxy
@@ -237,27 +176,12 @@ class Icon(Link):
 
 
 class ItemIcon(Kmlable):
-    """
-    Defines an image associated with an Icon style or overlay.
+    """Defines an image associated with an Icon style or overlay.
 
-    Keyword Arguments:
-    href (string)  -- URL of the image (default None)
-    state (string) -- string from [State] constants (default None)
-
-    Properties:
-    Same as arguments.
-
+    The arguments are the same as the properties.
     """
 
     def __init__(self, state=None, href=None):
-        """
-        Creates a itemicon element.
-
-        Keyword Arguments:
-        href (string)  -- URL of the image (default None)
-        state (string) -- string from [State] constants (default None)
-
-        """
         super(ItemIcon, self).__init__()
         self._kml["href"] = href
         self._kml["state"] = state
@@ -273,7 +197,7 @@ class ItemIcon(Kmlable):
 
     @property
     def state(self):
-        """Current state of the link, accepts string from [State] constants."""
+        """Current state of the link, accepts string from :class:`simplekml.State` constants."""
         return self._kml['state']
 
     @state.setter

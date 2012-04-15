@@ -1,6 +1,5 @@
 """
-simplekml
-Copyright 2011 Kyle Lancaster
+Copyright 2011-2012 Kyle Lancaster
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -18,11 +17,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Contact me at kyle.lan@gmail.com
 """
 
-from simplekml.substyle import *
+from simplekml.base import Kmlable
+from simplekml.substyle import IconStyle, LabelStyle, LineStyle, PolyStyle, BalloonStyle, ListStyle
 
 
 class StyleSelector(Kmlable):
-    """_Base style class, extended by Style."""
+    """Abstract style class, extended by :class:`simplekml.Style` and :class:`simplekml.StyleMap`
+
+    There are no arguments.
+    """
     _id = 0
     def __init__(self):
         super(StyleSelector, self).__init__()
@@ -36,20 +39,9 @@ class StyleSelector(Kmlable):
 
 
 class Style(StyleSelector):
-    """
-    Styles affect how Geometry is presented.
+    """Styles affect how Geometry is presented.
 
-    Keyword Arguments:
-    iconstyle ([IconStyle])      -- the [IconStyle] (default None)
-    labelstyle ([LabelStyle])    -- the [LabelStyle] (default None)
-    linestyle ([LineStyle])      -- the [LineStyle] (default None)
-    polystyle ([PolyStyle])      -- the [PolyStyle] (default None)
-    balloonstyle ([BalloonStyle])-- the [BalloonStyle] (default None)
-    liststyle ([ListStyle])      -- the [ListStyle] (default None)
-
-    Properties:
-    Same as arguments.
-
+    Arguments are the same as the properties.
     """
     def __init__(self,
                  iconstyle=None,
@@ -58,18 +50,6 @@ class Style(StyleSelector):
                  polystyle=None,
                  balloonstyle=None,
                  liststyle=None):
-        """
-        Creates a style element.
-
-        Keyword Arguments:
-        iconstyle ([IconStyle])      -- the [IconStyle] (default None)
-        labelstyle ([LabelStyle])    -- the [LabelStyle] (default None)
-        linestyle ([LineStyle])      -- the [LineStyle] (default None)
-        polystyle ([PolyStyle])      -- the [PolyStyle] (default None)
-        balloonstyle ([BalloonStyle])-- the [BalloonStyle] (default None)
-        liststyle ([ListStyle])      -- the [ListStyle] (default None)
-
-        """
         super(Style, self).__init__()
         self._kml["IconStyle"] = iconstyle
         self._kml["LabelStyle"] = labelstyle
@@ -79,14 +59,11 @@ class Style(StyleSelector):
         self._kml["ListStyle"] = liststyle
 
     def __str__(self):
-        str = '<Style id="{0}">'.format(self._id)
-        str += super(Style, self).__str__()
-        str += "</Style>"
-        return str
+        return '<Style id="{0}">{1}</Style>'.format(self._id, super(Style, self).__str__())
       
     @property
     def iconstyle(self):
-        """The iconstyle, accepts [IconStyle]."""
+        """The iconstyle, accepts :class:`simplekml.IconStyle`."""
         if self._kml["IconStyle"] is None:
             self._kml["IconStyle"] = IconStyle()
         return self._kml["IconStyle"]
@@ -97,7 +74,7 @@ class Style(StyleSelector):
         
     @property
     def labelstyle(self):
-        """The labelstyle, accepts [LabelStyle]."""
+        """The labelstyle, accepts :class:`simplekml.LabelStyle`."""
         if self._kml["LabelStyle"] is None:
             self._kml["LabelStyle"] = LabelStyle()
         return self._kml["LabelStyle"]
@@ -108,7 +85,7 @@ class Style(StyleSelector):
         
     @property
     def linestyle(self):
-        """The linestyle, accepts [LineStyle]."""
+        """The linestyle, accepts :class:`simplekml.LineStyle`."""
         if self._kml["LineStyle"] is None:
             self._kml["LineStyle"] = LineStyle()
         return self._kml["LineStyle"]
@@ -119,7 +96,7 @@ class Style(StyleSelector):
 
     @property
     def polystyle(self):
-        """The polystyle, accepts [PolyStyle]."""
+        """The polystyle, accepts :class:`simplekml.PolyStyle`."""
         if self._kml["PolyStyle"] is None:
             self._kml["PolyStyle"] = PolyStyle()
         return self._kml["PolyStyle"]
@@ -130,7 +107,7 @@ class Style(StyleSelector):
         
     @property
     def balloonstyle(self):
-        """The balloonstyle, accepts [BalloonStyle]."""
+        """The balloonstyle, accepts :class:`simplekml.BalloonStyle`."""
         if self._kml["BalloonStyle"] is None:
             self._kml["BalloonStyle"] = BalloonStyle()
         return self._kml["BalloonStyle"]
@@ -141,7 +118,7 @@ class Style(StyleSelector):
 
     @property
     def liststyle(self):
-        """The liststyle, accepts [ListStyle]."""
+        """The liststyle, accepts :class:`simplekml.ListStyle`."""
         if self._kml["ListStyle"] is None:
             self._kml["ListStyle"] = ListStyle()
         return self._kml["ListStyle"]
@@ -152,28 +129,13 @@ class Style(StyleSelector):
 
 
 class StyleMap(StyleSelector):
-    """
-    Styles affect how Geometry is presented.
+    """Styles affect how Geometry is presented.
 
-    Keyword Arguments:
-    normalstyle ([Style])    -- a [Style] for normal view (default None)
-    highlightstyle ([Style]) -- a [Style] for highlight view (default None)
-
-    Properties:
-    Same as arguments.
-
+    Arguments are the same as the properties.
     """
     def __init__(self,
                  normalstyle=None,
                  highlightstyle=None):
-        """
-        Creates a stylemap element.
-
-        Keyword Arguments:
-        normalstyle ([Style])    -- a [Style] for normal view (default None)
-        highlightstyle ([Style]) -- a [Style] for highlight view (default None)
-
-        """
         super(StyleMap, self).__init__()
         self._pairnormal = None
         self._pairhighlight = None
@@ -181,24 +143,24 @@ class StyleMap(StyleSelector):
         self.highlightstyle = highlightstyle
 
     def __str__(self):
-        str = '<StyleMap id="{0}">'.format(self._id)
-        str += super(StyleMap, self).__str__()
+        buf = ['<StyleMap id="{0}">'.format(self._id),
+               super(StyleMap, self).__str__()]
         if self._pairnormal is not None:
-            str += "<Pair>"
-            str += "<key>normal</key>"
-            str += "<styleUrl>#{0}</styleUrl>".format(self._pairnormal._id)
-            str += "</Pair>"
+            buf.append("<Pair>")
+            buf.append("<key>normal</key>")
+            buf.append("<styleUrl>#{0}</styleUrl>".format(self._pairnormal._id))
+            buf.append("</Pair>")
         if self._pairhighlight is not None:
-            str += "<Pair>"
-            str += "<key>highlight</key>"
-            str += "<styleUrl>#{0}</styleUrl>".format(self._pairhighlight._id)
-            str += "</Pair>"
-        str += "</StyleMap>"
-        return str
+            buf.append("<Pair>")
+            buf.append("<key>highlight</key>")
+            buf.append("<styleUrl>#{0}</styleUrl>".format(self._pairhighlight._id))
+            buf.append("</Pair>")
+        buf.append("</StyleMap>")
+        return "".join(buf)
 
     @property
     def normalstyle(self):
-        """The normal [Style], accepts [Style]."""
+        """The normal :class:`simplekml.Style`, accepts :class:`simplekml.Style`."""
         if self._pairnormal is None:
             self._pairnormal = Style()
         return self._pairnormal
@@ -209,7 +171,7 @@ class StyleMap(StyleSelector):
 
     @property
     def highlightstyle(self):
-        """The highlighted [Style], accepts [Style]."""
+        """The highlighted :class:`simplekml.Style`, accepts :class:`simplekml.Style`."""
         if self._pairhighlight is None:
             self._pairhighlight = Style()
         return self._pairhighlight

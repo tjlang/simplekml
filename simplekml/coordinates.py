@@ -1,6 +1,5 @@
 """
-simplekml
-Copyright 2011 Kyle Lancaster
+Copyright 2011-2012 Kyle Lancaster
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -18,10 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Contact me at kyle.lan@gmail.com
 """
 
-from simplekml.base import Kmlable
-
-class Coordinates(Kmlable):
-    """_Represents a list of Coordinate classes."""
+class Coordinates(object):
+    """Represents a list of Coordinate classes."""
     def __init__(self, coords=None):
         self._coords = []
         if coords is not None:
@@ -36,9 +33,9 @@ class Coordinates(Kmlable):
         self._coords += newcoords
 
     def __str__(self):
-        str = ""
+        buf = []
         if not len(self._coords):
             return "0.0, 0.0, 0.0"
         for cd in self._coords:
-            str += "{0},{1},{2} ".format(cd[0], cd[1], cd[2])
-        return str[:-1]
+            buf.append("{0},{1},{2}".format(cd[0], cd[1], cd[2]))
+        return " ".join(buf)

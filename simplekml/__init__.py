@@ -18,17 +18,18 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Contact me at kyle.lan@gmail.com
 """
 
-from simplekml.abstractview import *
-from simplekml.base import *
-from simplekml.constants import *
-from simplekml.coordinates import *
-from simplekml.featgeom import *
-from simplekml.icon import *
+from simplekml.abstractview import AbstractView,Camera,GxOption,GxTimeSpan,GxTimeStamp,GxViewerOptions,LookAt
+from simplekml.base import HotSpot,OverlayXY,RotationXY,ScreenXY,Size,Snippet
+from simplekml.constants import AltitudeMode,Color,ColorMode,DisplayMode,GridOrigin,GxAltitudeMode,ListItemType,RefreshMode,Shape,State,Types,Units,ViewRefreshMode
+from simplekml.coordinates import Coordinates
+from simplekml.featgeom import Container,Document, Folder,GroundOverlay,GxMultiTrack,GxTrack,LinearRing,LineString,Model,MultiGeometry,NetworkLink,Point,Polygon,PhotoOverlay,ScreenOverlay
+from simplekml.icon import Icon,ItemIcon,Link
 from simplekml.kml import Kml
-from simplekml.model import *
-from simplekml.overlay import *
-from simplekml.region import *
-from simplekml.schema import *
-from simplekml.styleselector import *
-from simplekml.substyle import *
-from simplekml.timeprimitive import *
+from simplekml.model import Alias,Location,Orientation,ResourceMap,Scale
+from simplekml.overlay import GridOrigin,ImagePyramid,ViewVolume
+from simplekml.region import Box,GxLatLonQuad,LatLonAltBox,LatLonBox,Lod,Region
+from simplekml.schema import Data,ExtendedData,GxSimpleArrayData,GxSimpleArrayField,SchemaData,SimpleData,Schema,SimpleField
+from simplekml.styleselector import Style,StyleMap
+from simplekml.substyle import BalloonStyle,IconStyle,LabelStyle,LineStyle,ListStyle,PolyStyle
+from simplekml.timeprimitive import GxTimeSpan,GxTimeStamp,TimeSpan,TimeStamp
+from simplekml.tour import GxAnimatedUpdate,GxFlyToMode,GxPlaylist,GxSoundCue,GxTour,GxTourControl,GxWait,Update

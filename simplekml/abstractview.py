@@ -1,6 +1,5 @@
 """
-simplekml
-Copyright 2011 Kyle Lancaster
+Copyright 2011-2012 Kyle Lancaster
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -19,12 +18,19 @@ Contact me at kyle.lan@gmail.com
 """
 
 from simplekml.base import Kmlable
-from simplekml.constants import *
-from simplekml.timeprimitive import *
-from simplekml.makeunicode import u
+from simplekml.timeprimitive import GxTimeStamp, GxTimeSpan
 
-class AbstractView(Kmlable): #TODO: gxViewerOptions
-    """_Base class, extended by Camera and LookAt."""
+
+class AbstractView(Kmlable):
+    """Abstract element, extended by :class:`simplekml.Camera` and :class:`simplekml.LookAt`
+
+    The arguments are the same as the properties.
+    
+     .. note::
+       Not to be used directly.
+
+
+    """
     def __init__(self,
                  longitude=None,
                  latitude=None,
@@ -34,7 +40,8 @@ class AbstractView(Kmlable): #TODO: gxViewerOptions
                  altitudemode=None,
                  gxaltitudemode=None,
                  gxtimespan=None,
-                 gxtimestamp=None):
+                 gxtimestamp=None,
+                 gxhorizfov=None):
         super(AbstractView, self).__init__()
         self._kml["longitude"] = longitude
         self._kml["latitude"] = latitude
@@ -45,6 +52,7 @@ class AbstractView(Kmlable): #TODO: gxViewerOptions
         self._kml["gx:AltitudeMode"] = gxaltitudemode
         self._kml["gx:TimeSpan"] = gxtimespan
         self._kml["gx:TimeStamp"] = gxtimestamp
+        self._kml['gx:horizFov'] = gxhorizfov
 
     @property
     def longitude(self):
@@ -93,10 +101,9 @@ class AbstractView(Kmlable): #TODO: gxViewerOptions
 
     @property
     def altitudemode(self):
-        """
-        Specifies how the altitude for the Camera is interpreted.
+        """Specifies how the altitude for the Camera is interpreted.
 
-        Accepts [AltitudeMode] constants.
+        Accepts :class:`simplekml.AltitudeMode` constants.
 
         """
         return self._kml['altitudeMode']
@@ -107,11 +114,10 @@ class AbstractView(Kmlable): #TODO: gxViewerOptions
 
     @property
     def gxaltitudemode(self):
-        """
-        Specifies how the altitude for the Camera is interpreted.
+        """Specifies how the altitude for the Camera is interpreted.
 
         With the addition of being relative to the sea floor.
-        Accepts [GxAltitudeMode] constants.
+        Accepts :class:`simplekml.GxAltitudeMode` constants.
 
         """
         return self._kml['gx:altitudeMode']
@@ -122,7 +128,7 @@ class AbstractView(Kmlable): #TODO: gxViewerOptions
 
     @property
     def gxtimestamp(self):
-        """Represents a single moment in time, accepts [GxTimeStamp]."""
+        """Represents a single moment in time, accepts :class:`simplekml.GxTimeStamp`"""
         if self._kml['gx:TimeStamp'] is None:
             self._kml['gx:TimeStamp'] = GxTimeStamp()
         return self._kml['gx:TimeStamp']
@@ -133,7 +139,7 @@ class AbstractView(Kmlable): #TODO: gxViewerOptions
 
     @property
     def gxtimespan(self):
-        """Period of time, accepts [GxTimeSpan]."""
+        """Period of time, accepts :class:`simplekml.GxTimeSpan`"""
         if self._kml['gx:TimeSpan'] is None:
             self._kml['gx:TimeSpan'] = GxTimeSpan()
         return self._kml['gx:TimeSpan']
@@ -142,44 +148,24 @@ class AbstractView(Kmlable): #TODO: gxViewerOptions
     def gxtimespan(self, gxtimespan):
         self._kml['gx:TimeSpan'] = gxtimespan
 
+    @property
+    def gxhorizfov(self):
+        """Rotation about the x axis, accepts float."""
+        return self._kml['gx:horizFov']
 
-class Camera(AbstractView): # --Document--
+    @gxhorizfov.setter
+    def gxhorizfov(self, gxhorizfov):
+        self._kml['gx:horizFov'] = gxhorizfov
+
+
+class Camera(AbstractView):
     """A virtual camera that views the scene.
 
-    Keyword Arguments:
-    longitude (float)           -- decimal degree (default None)
-    latitude (float)            -- decimal degree  (default None)
-    altitude (float)            -- height from earth (m) (default None)
-    heading (float)             -- rotation about the z axis (default None)
-    tilt (float)                -- rotation about the x axis (default None)
-    altitudemode (string)       -- alt use See [AltitudeMode] (default None)
-    gxaltitudemode (string)     -- alt use. See [GxAltitudeMode] (default None)
-    gxtimespan ([GxTimeSpan])   -- a single moment in time (default None)
-    gxtimestamp ([GxTimeStamp]) -- a period of time (default None)
-    roll (float)                -- rotation about the y axis (default None)
-
-    Properties:
-    Same as arguments.
-
+    The arguments are the same as the properties (most inherited from
+    :class:`simplekml.AbstractView`)
     """
 
     def __init__(self, roll=None, **kwargs):
-        """
-        Creates a camera that views the scene.
-
-        Keyword Arguments:
-        longitude (float)          -- decimal degree (default None)
-        latitude (float)           -- decimal degree  (default None)
-        altitude (float)           -- height from earth (m) (default None)
-        heading (float)            -- rotation about the z axis (default None)
-        tilt (float)               -- rotation about the x axis (default None)
-        altitudemode (string)      -- alt use See [AltitudeMode] (default None)
-        gxaltitudemode (string)    -- alt use.See [GxAltitudeMode](default None)
-        gxtimespan ([GxTimeSpan])  -- a single moment in time (default None)
-        gxtimestamp ([GxTimeStamp])-- a period of time (default None)
-        roll (float)               -- rotation about the y axis (default None)
-
-        """
         super(Camera, self).__init__(**kwargs)
         self._kml['roll'] = roll
 
@@ -196,40 +182,11 @@ class Camera(AbstractView): # --Document--
 class LookAt(AbstractView): # --Document--
     """Positions the camera in relation to the object that is being viewed.
 
-    Keyword Arguments:
-    longitude (float)           -- decimal degree (default None)
-    latitude (float)            -- decimal degree  (default None)
-    altitude (float)            -- height from earth (m) (default None)
-    heading (float)             -- rotation about the z axis (default None)
-    tilt (float)                -- rotation about the x axis (default None)
-    altitudemode (string)       -- alt use See [AltitudeMode] (default None)
-    gxaltitudemode (string)     -- alt use. See [GxAltitudeMode] (default None)
-    gxtimespan ([GxTimeSpan])   -- a single moment in time (default None)
-    gxtimestamp ([GxTimeStamp]) -- a period of time (default None)
-    range                       -- distance from point (default None)
-
-    Properties:
-    Same as arguments.
-
+    The arguments are the same as the properties (most inherited from
+    :class:`simplekml.AbstractView`)
     """
 
     def __init__(self, range=None, **kwargs):
-        """
-        Creates a LookAt element that positions the camera.
-
-        Keyword Arguments:
-        longitude (float)          -- decimal degree (default None)
-        latitude (float)           -- decimal degree  (default None)
-        altitude (float)           -- height from earth (m) (default None)
-        heading (float)            -- rotation about the z axis (default None)
-        tilt (float)               -- rotation about the x axis (default None)
-        altitudemode (string)      -- alt use See [AltitudeMode] (default None)
-        gxaltitudemode (string)    -- alt use.See [GxAltitudeMode](default None)
-        gxtimespan ([GxTimeSpan])   -- a single moment in time (default None)
-        gxtimestamp ([GxTimeStamp])-- a period of time (default None)
-        range                      -- distance from point (default None)
-
-        """
         super(LookAt, self).__init__(**kwargs)
         self._kml['range'] = range
 
@@ -243,3 +200,64 @@ class LookAt(AbstractView): # --Document--
         self._kml['range'] = range
 
 
+class GxOption(Kmlable):
+    """Child element of :class:`simplekml.GxViewerOptions`.
+
+    The arguments are the same as the properties.
+    """
+    streetview = "streetview"  # Used in Street View
+    historicalimagery = "historicalimagery"  #Used for Historical Imagery
+    sunlight = "sunlight"  # Used to control lighting
+
+    def __init__(self, name=None, enabled=False):
+        super(GxOption, self).__init__()
+        self._kml = {'name': name,
+                     'enabled': enabled}
+
+    @property
+    def name(self):
+        """Name of the effect being applied.
+
+        The following strings can be used :attr:`simplekml.GxOption.streetview`,
+        :attr:`simplekml.GxOption.historicalimagery` or :attr:`simplekml.GxOption.sunlight`
+        """
+        return self._kml['name']
+
+    @name.setter
+    def name(self, name):
+        self._kml['name'] = name
+
+    @property
+    def enabled(self):
+        """Whether the effect must be turned on or off, boolean."""
+        return self._kml['enabled']
+
+    @enabled.setter
+    def enabled(self, enabled):
+        self._kml['enabled'] = enabled
+
+    def __str__(self):
+        return '<gx:option name="{0}" enabled={1}></gx:option>'.format(self._kml['name'], self._kml['enabled'])
+
+
+class GxViewerOptions(Kmlable):
+    """Enables special viewer modes.
+
+    The arguments are the same as the properties.
+    """
+    def __init__(self, gxoptions=None):
+        super(GxViewerOptions, self).__init__()
+        self.gxoptions = []
+        if gxoptions is not None:
+            self.gxoptions += gxoptions
+
+    def newgxoption(self, name, enabled=True):
+        """Adds a :class:`simplekml.GxOption`."""
+        self.gxoptions.append(GxOption(name, enabled))
+
+    def __str__(self):
+        buf = ['<gx:ViewerOptions>']
+        for gxoption in self.gxoptions:
+            buf.append(gxoption.__str__())
+        buf.append("</gx:ViewerOptions>")
+        return "".join(buf)

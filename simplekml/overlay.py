@@ -1,6 +1,5 @@
 """
-simplekml
-Copyright 2011 Kyle Lancaster
+Copyright 2011-2012 Kyle Lancaster
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -18,24 +17,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Contact me at kyle.lan@gmail.com
 """
 
-from simplekml.base import *
-from simplekml.constants import *
+from simplekml.base import Kmlable
+from simplekml.constants import GridOrigin
 
 
 class ViewVolume(Kmlable):
-    """
-    Defines how much of the current scene is visible.
+    """Defines how much of the current scene is visible.
 
-    Keyword Arguments:
-    leftfov (float)   -- left angle from camera (default None)
-    rightfov (float)  -- right angle from camera (default None)
-    bottomfov (float) -- bottom angle from camera (default None)
-    topfov (float)    -- top angle from camera (default None)
-    near (float)      -- distance to camera (default None)
-
-    Properties:
-    Same as arguments.
-
+    The arguments are the same as the properties.
     """
 
     def __init__(self,
@@ -44,17 +33,6 @@ class ViewVolume(Kmlable):
                  bottomfov=0,
                  topfov=0,
                  near=0):
-        """
-        Creates a viewvolume element.
-
-        Keyword Arguments:
-        leftfov (float)   -- left angle from camera (default None)
-        rightfov (float)  -- right angle from camera (default None)
-        bottomfov (float) -- bottom angle from camera (default None)
-        topfov (float)    -- top angle from camera (default None)
-        near (float)      -- distance to camera (default None)
-
-        """
         super(ViewVolume, self).__init__()
         self._kml["leftFov"] = leftfov
         self._kml["rightFov"] = rightfov
@@ -64,10 +42,7 @@ class ViewVolume(Kmlable):
 
     @property
     def leftfov(self):
-        """
-        Angle, in degrees, accepts float.
-
-        """
+        """Angle, in degrees, accepts float."""
         return self._kml['leftFov']
     
     @leftfov.setter
@@ -76,10 +51,7 @@ class ViewVolume(Kmlable):
 
     @property
     def rightfov(self):
-        """
-        Angle, in degrees, accepts float.
-
-        """
+        """Angle, in degrees, accepts float."""
         return self._kml['rightFov']
     
     @rightfov.setter
@@ -88,10 +60,7 @@ class ViewVolume(Kmlable):
 
     @property
     def topfov(self):
-        """
-        Angle, in degrees, accepts float.
-
-        """
+        """Angle, in degrees, accepts float."""
         return self._kml['topFov']
     
     @topfov.setter
@@ -100,10 +69,7 @@ class ViewVolume(Kmlable):
 
     @property
     def bottomfov(self):
-        """
-        Angle, in degrees, accepts float.
-
-        """
+        """Angle, in degrees, accepts float."""
         return self._kml['bottomFov']
     
     @bottomfov.setter
@@ -112,8 +78,7 @@ class ViewVolume(Kmlable):
         
     @property
     def near(self):
-        """
-        Measurement of viewing direction from the camera, accepts float."""
+        """Measurement of viewing direction from the camera, accepts float."""
         return self._kml['near']
     
     @near.setter
@@ -122,18 +87,9 @@ class ViewVolume(Kmlable):
 
 
 class ImagePyramid(Kmlable):
-    """
-    A hierarchical set of images.
+    """A hierarchical set of images.
 
-    Keyword Arguments:
-    titlesize (int)     -- size of the tiles, in pixels. (default 256)
-    maxwidth (int)      -- width (pixels) of the original image (default None)
-    maxheight (int)     -- height (pixels) of the original image (default None)
-    gridorigin (string) -- string from [GridOrigin] constants(default lowerLeft)
-
-    Properties:
-    Same as arguments.
-
+    The arguments are the same as the properties.
     """
     
     def __init__(self,
@@ -141,16 +97,6 @@ class ImagePyramid(Kmlable):
                  maxwidth=0,
                  maxheight=0,
                  gridorigin=GridOrigin.lowerleft):
-        """
-        Creates an imagepyramid element.
-
-        Keyword Arguments:
-        titlesize (int)     -- size of the tiles, in pixels. (default 256)
-        maxwidth (int)      -- width of the original image (default None)
-        maxheight (int)     -- height of the original image (default None)
-        gridorigin (string) -- string [GridOrigin] constants(default lowerLeft)
-
-        """
         super(ImagePyramid, self).__init__()
         self._kml["titleSize"] = titlesize
         self._kml["maxWidth"] = maxwidth
@@ -193,4 +139,3 @@ class ImagePyramid(Kmlable):
     @gridorigin.setter
     def gridorigin(self, gridorigin):
         self._kml["gridOrigin"] = gridorigin
-
