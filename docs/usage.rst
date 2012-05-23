@@ -15,7 +15,7 @@ Here is a quick example to get you started::
 
     import simplekml
     kml = simplekml.Kml()
-    kml.newpoint(name="Kirstenbosch", coords=[(18.432314,-33.988862)])
+    kml.newpoint(name="Kirstenbosch", coords=[(18.432314,-33.988862)])  # lon, lat, optional height
     kml.save("botanicalgarden.kml")
 
 Creating a KML document
@@ -36,12 +36,16 @@ Creating a Point
 
 A Point is a geographic location defined by longitude, latitude, and altitude.
 
+.. note::
+
+    All coordinates in simplekml are in the order longitude, latitude and then an optional height.
+
 Creating a :class:`simplekml.Point` is quite simple and has been done in the section above. Once you have your :class:`simplekml.Kml` object you have to ask it to create a new :class:`simplekml.Point` for you by calling :func:`simplekml.Kml.newpoint`. If you call :func:`simplekml.Kml.newpoint` without any parameters a :class:`simplekml.Point` is created at 0.0, 0.0 with no name. You can later change the name and location (among other things) by changing the attributes of the :class:`simplekml.Point` instance that was returned to you by calling :func:`simplekml.Kml.newpoint`. Passing parameters to :func:`simplekml.Kml.newpoint` may be more convenient. All the attributes have to be set like so: `attributename=value`. See :class:`simplekml.Point` for a list of possible parameters and attributes.
 
 Here is an example::
 
     pnt = kml.newpoint(name="Kirstenbosch", description="A botanical Garden", 
-                       coords=[(18.432314,-33.988862)])
+                       coords=[(18.432314,-33.988862)])  # lon, lat optional height
 
 The values of the above parameters can be changed later by directly assigning to them::
 
@@ -77,4 +81,4 @@ Here is an example::
                          innerboundaryis=[(18.43360,-33.98982), (18.43386,-33.98995),
                                           (18.43401,-33.98974), (18.43376,-33.98962),
                                           (18.43360,-33.98982)])
-                                      
+
