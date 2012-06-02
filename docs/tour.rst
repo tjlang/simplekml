@@ -9,7 +9,7 @@ GxAnimatedUpdate
     :inherited-members:
     
 GxFlyTo
------------
+-------
 
 .. autoclass:: simplekml.GxFlyTo
     :members:
