@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:xal="urn:oasis:names:tc:ciq:xsdschema:xAL:2.0">
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2">
     <Document id="feat_1">
         <Style id="stylesel_0">
-            <IconStyle>
+            <IconStyle id="substyle_0">
                 <scale>1</scale>
                 <colorMode>normal</colorMode>
                 <heading>0</heading>
@@ -12,7 +12,7 @@
             </IconStyle>
         </Style>
         <Style id="stylesel_1">
-            <IconStyle>
+            <IconStyle id="substyle_1">
                 <scale>1</scale>
                 <colorMode>normal</colorMode>
                 <heading>0</heading>
@@ -22,7 +22,7 @@
             </IconStyle>
         </Style>
         <Style id="stylesel_2">
-            <IconStyle>
+            <IconStyle id="substyle_2">
                 <scale>1</scale>
                 <colorMode>normal</colorMode>
                 <heading>0</heading>
@@ -30,17 +30,17 @@
                     <href>http://maps.google.com/mapfiles/kml/paddle/3.png</href>
                 </Icon>
             </IconStyle>
+            <LineStyle id="substyle_3">
+                <color>ff0000ff</color>
+                <colorMode>normal</colorMode>
+                <width>3</width>
+            </LineStyle>
             <ListStyle>
                 <listItemType>check</listItemType>
                 <ItemIcon>
                     <href>http://maps.google.com/mapfiles/kml/paddle/3.png</href>
                 </ItemIcon>
             </ListStyle>
-            <LineStyle>
-                <color>ff0000ff</color>
-                <colorMode>normal</colorMode>
-                <width>3</width>
-            </LineStyle>
         </Style>
         <name>7_extendeddata</name>
         <Placemark id="feat_2">

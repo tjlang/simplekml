@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:xal="urn:oasis:names:tc:ciq:xsdschema:xAL:2.0">
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2">
     <Document id="feat_1">
         <name>2_basic</name>
         <Document id="feat_2">
@@ -19,12 +19,7 @@
         </Folder>
         <Folder id="feat_6">
             <Style id="stylesel_0">
-                <LabelStyle>
-                    <color>ff0000ff</color>
-                    <colorMode>random</colorMode>
-                    <scale>2</scale>
-                </LabelStyle>
-                <IconStyle>
+                <IconStyle id="substyle_1">
                     <scale>1</scale>
                     <color>ffff00ff</color>
                     <colorMode>normal</colorMode>
@@ -33,9 +28,14 @@
                         <href>http://maps.google.com/mapfiles/kml/shapes/arrow.png</href>
                     </Icon>
                 </IconStyle>
+                <LabelStyle id="substyle_0">
+                    <color>ff0000ff</color>
+                    <colorMode>random</colorMode>
+                    <scale>2</scale>
+                </LabelStyle>
             </Style>
             <Style id="stylesel_1">
-                <LabelStyle>
+                <LabelStyle id="substyle_2">
                     <color>ff00ffff</color>
                     <colorMode>normal</colorMode>
                     <scale>1</scale>
@@ -77,7 +77,7 @@
         </Folder>
         <Folder id="feat_11">
             <Style id="stylesel_2">
-                <LineStyle>
+                <LineStyle id="substyle_3">
                     <color>ff00ffff</color>
                     <colorMode>normal</colorMode>
                     <width>10</width>
@@ -104,13 +104,13 @@
         </Folder>
         <Folder id="feat_14">
             <Style id="stylesel_3">
-                <PolyStyle>
+                <PolyStyle id="substyle_5">
                     <color>ffff00ff</color>
                     <colorMode>normal</colorMode>
                     <outline>1</outline>
                     <fill>1</fill>
                 </PolyStyle>
-                <LineStyle>
+                <LineStyle id="substyle_4">
                     <color>ff0000ff</color>
                     <colorMode>normal</colorMode>
                     <width>5</width>

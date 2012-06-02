@@ -871,16 +871,15 @@ class PointGeometry(Geometry):
     def coords(self):
         """The coordinates of the feature, accepts list of tuples.
 
-        A tuple represents a coordinate in the format: (longitude, latitude, optional height). The tuple has the option
-        of specifying a height, which will default to 0.0 if no height is given. A point feature has just one point,
-        therefore a list with one tuple is needed.
+        A tuple represents a coordinate in lat/lon. The tuple has the option
+        of specifying a height. If no height is given, it defaults to zero.
+        A point feature has just one point, therefore a list with one tuple
+        is given.
 
         Examples:
-
-        - Point without height:  `[(1.0, 1.0)]`  # longitude, latitude
-        - Point with height:     `[(1.0, 1.0, 1.0)]`  # longitude, latitude, height
-        - No height:             `[(1.0, 1.0), (2.0, 1.0)]`  # used with LineStrings, etc.
-        - Height:                `[(1.0, 1.0, 50.0), (2.0, 1.0, 10.0)]`
+        No height: `[(1.0, 1.0), (2.0, 1.0)]`
+        Height:    `[(1.0, 1.0, 50.0), (2.0, 1.0, 10.0)]`
+        Point:     `[(1.0, 1.0)]`
         """
         return self._kml['coordinates']
 

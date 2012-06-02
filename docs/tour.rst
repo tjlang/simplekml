@@ -8,10 +8,10 @@ GxAnimatedUpdate
     :members:
     :inherited-members:
     
-GxFlyToMode
+GxFlyTo
 -----------
 
-.. autoclass:: simplekml.GxFlyToMode
+.. autoclass:: simplekml.GxFlyTo
     :members:
     :inherited-members:
     :undoc-members:
@@ -19,7 +19,7 @@ GxFlyToMode
 GxPlaylist
 ----------
 
-.. autoclass:: simplekml.GxSoundCue
+.. autoclass:: simplekml.GxPlaylist
     :members:
     :undoc-members:
 

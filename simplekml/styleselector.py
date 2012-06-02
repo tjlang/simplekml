@@ -51,10 +51,10 @@ class Style(StyleSelector):
                  balloonstyle=None,
                  liststyle=None):
         super(Style, self).__init__()
-        self._kml["IconStyle"] = iconstyle
-        self._kml["LabelStyle"] = labelstyle
-        self._kml["LineStyle"] = linestyle
-        self._kml["PolyStyle"] = polystyle
+        self._kml["IconStyle_"] = iconstyle
+        self._kml["LabelStyle_"] = labelstyle
+        self._kml["LineStyle_"] = linestyle
+        self._kml["PolyStyle_"] = polystyle
         self._kml["BalloonStyle"] = balloonstyle
         self._kml["ListStyle"] = liststyle
 
@@ -64,46 +64,46 @@ class Style(StyleSelector):
     @property
     def iconstyle(self):
         """The iconstyle, accepts :class:`simplekml.IconStyle`."""
-        if self._kml["IconStyle"] is None:
-            self._kml["IconStyle"] = IconStyle()
-        return self._kml["IconStyle"]
+        if self._kml["IconStyle_"] is None:
+            self._kml["IconStyle_"] = IconStyle()
+        return self._kml["IconStyle_"]
         
     @iconstyle.setter
     def iconstyle(self, iconstyle):
-        self._kml["IconStyle"] = iconstyle
+        self._kml["IconStyle_"] = iconstyle
         
     @property
     def labelstyle(self):
         """The labelstyle, accepts :class:`simplekml.LabelStyle`."""
-        if self._kml["LabelStyle"] is None:
-            self._kml["LabelStyle"] = LabelStyle()
-        return self._kml["LabelStyle"]
+        if self._kml["LabelStyle_"] is None:
+            self._kml["LabelStyle_"] = LabelStyle()
+        return self._kml["LabelStyle_"]
 
     @labelstyle.setter
     def labelstyle(self, labelstyle):
-        self._kml["LabelStyle"] = labelstyle
+        self._kml["LabelStyle_"] = labelstyle
         
     @property
     def linestyle(self):
         """The linestyle, accepts :class:`simplekml.LineStyle`."""
-        if self._kml["LineStyle"] is None:
-            self._kml["LineStyle"] = LineStyle()
-        return self._kml["LineStyle"]
+        if self._kml["LineStyle_"] is None:
+            self._kml["LineStyle_"] = LineStyle()
+        return self._kml["LineStyle_"]
         
     @linestyle.setter
     def linestyle(self, linestyle):
-        self._kml["LineStyle"] = linestyle
+        self._kml["LineStyle_"] = linestyle
 
     @property
     def polystyle(self):
         """The polystyle, accepts :class:`simplekml.PolyStyle`."""
-        if self._kml["PolyStyle"] is None:
-            self._kml["PolyStyle"] = PolyStyle()
-        return self._kml["PolyStyle"]
+        if self._kml["PolyStyle_"] is None:
+            self._kml["PolyStyle_"] = PolyStyle()
+        return self._kml["PolyStyle_"]
         
     @polystyle.setter
     def polystyle(self, polystyle):
-        self._kml["PolyStyle"] = polystyle
+        self._kml["PolyStyle_"] = polystyle
         
     @property
     def balloonstyle(self):

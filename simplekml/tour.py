@@ -122,7 +122,7 @@ class GxWait(GxTourPrimitive):
         return "".join(buf)
 
 
-class GxFlyToMode(GxTourPrimitive):
+class GxFlyTo(GxTourPrimitive):
     """Allows unbroken flight from point to point.
 
     The arguments are the same as the properties.
@@ -136,7 +136,7 @@ class GxFlyToMode(GxTourPrimitive):
                  gxflytomode=None,
                  camera=None,
                  lookat=None):
-        super(GxFlyToMode, self).__init__()
+        super(GxFlyTo, self).__init__()
         self._kml['gx:duration'] = gxduration
         self._kml['gx:flyToMode'] = gxflytomode
         self._abstractview = None
@@ -187,7 +187,7 @@ class GxFlyToMode(GxTourPrimitive):
 
     def __str__(self):
         buf = ['<gx:FlyTo id="{0}">'.format(self._id),
-               super(GxFlyToMode, self).__str__(),
+               super(GxFlyTo, self).__str__(),
                '</gx:FlyTo>'.format(self._id)]
         return "".join(buf)
 
@@ -205,7 +205,7 @@ class GxAnimatedUpdate(GxTourPrimitive):
         super(GxAnimatedUpdate, self).__init__()
         self._kml['gx:duration'] = gxduration
         self._kml['gx:delayedStart'] = gxdelayedstart
-        self._update = update
+        self._kml['Update'] = update
 
     @property
     def gxduration(self):
@@ -228,11 +228,13 @@ class GxAnimatedUpdate(GxTourPrimitive):
     @property
     def update(self):
         """Instance of :class:`simplekml.Update`"""
-        return self._update
+        if self._kml['Update'] is None:
+            self._kml['Update'] = Update()
+        return self._kml['Update']
 
     @update.setter
     def update(self, update):
-        self._update = update
+        self._kml['Update'] = update
 
     def __str__(self):
         buf = ['<gx:AnimatedUpdate id="{0}">'.format(self._id),
@@ -247,25 +249,27 @@ class Update(Kmlable):
     The arguments are the same as the properties.
     """
     def __init__(self,
-                 href=None,
+                 targethref=None,
                  change=None,
                  create=None,
                  delete=None):
         super(Update, self).__init__()
-        self._kml['href'] = href
+        if targethref is None:
+            targethref = ""
+        self._kml['targetHref'] = targethref
         self._kml['Change'] = change
         self._kml['Create'] = create
         self._kml['Delete'] = delete
 
 
     @property
-    def href(self):
+    def targethref(self):
         """A string reference to a sound file to play."""
-        return self._kml['href']
+        return self._kml['targetHref']
 
-    @href.setter
-    def href(self, href):
-        self._kml['href'] = href
+    @targethref.setter
+    def targethref(self, targethref):
+        self._kml['targetHref'] = targethref
 
     @property
     def change(self):
@@ -309,6 +313,56 @@ class GxPlaylist(Kmlable):
     def addgxtourprimitive(self, gxtourprimitive):
         """Adds a :class:`simplekml.GxTourPrimitive` sub-class."""
         self.gxtourprimitives.append(gxtourprimitive)
+
+    def newgxanimatedupdate(self, **kwargs):
+        """Creates a new :class:`simplekml.GxAnimatedUpdate` and adds it to the playlist.
+
+        Accepts the same agruments as :class:`simplekml.GxAnimatedUpdate` and returns an instance
+        of :class:`simplekml.GxAnimatedUpdate`
+        """
+        gxanimatedupdate = GxAnimatedUpdate(**kwargs)
+        self.addgxtourprimitive(gxanimatedupdate)
+        return gxanimatedupdate
+
+    def newgxflyto(self, **kwargs):
+        """Creates a new :class:`simplekml.GxFlyTo` and adds it to the playlist.
+
+        Accepts the same agruments as :class:`simplekml.GxFlyTo` and returns an instance
+        of :class:`simplekml.GxFlyTo`
+        """
+        gxflyto = GxFlyTo(**kwargs)
+        self.addgxtourprimitive(gxflyto)
+        return gxflyto
+
+    def newgxsoundcue(self, **kwargs):
+        """Creates a new :class:`simplekml.GxSoundCue` and adds it to the playlist.
+
+        Accepts the same agruments as :class:`simplekml.GxSoundCue` and returns an instance
+        of :class:`simplekml.GxSoundCue`
+        """
+        gxsoundcue = GxSoundCue(**kwargs)
+        self.addgxtourprimitive(gxsoundcue)
+        return gxsoundcue
+
+    def newgxtourcontrol(self, **kwargs):
+        """Creates a new :class:`simplekml.GxTourControl` and adds it to the playlist.
+
+        Accepts the same agruments as :class:`simplekml.GxTourControl` and returns an instance
+        of :class:`simplekml.GxTourControl`
+        """
+        gxtourcontrol = GxTourControl(**kwargs)
+        self.addgxtourprimitive(gxtourcontrol)
+        return gxtourcontrol
+
+    def newgxwait(self, **kwargs):
+        """Creates a new :class:`simplekml.GxWait` and adds it to the playlist.
+
+        Accepts the same agruments as :class:`simplekml.GxWait` and returns an instance
+        of :class:`simplekml.GxWait`
+        """
+        gxwait = GxWait(**kwargs)
+        self.addgxtourprimitive(gxwait)
+        return gxwait
 
     def __str__(self):
         buf = ["<gx:Playlist>"]

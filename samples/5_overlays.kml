@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:xal="urn:oasis:names:tc:ciq:xsdschema:xAL:2.0">
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2">
     <Document id="feat_1">
         <name>5_overlays</name>
         <GroundOverlay id="feat_2">
@@ -22,7 +22,7 @@
         </ScreenOverlay>
         <PhotoOverlay id="feat_4">
             <Style id="stylesel_0">
-                <IconStyle>
+                <IconStyle id="substyle_0">
                     <scale>1</scale>
                     <colorMode>normal</colorMode>
                     <heading>0</heading>

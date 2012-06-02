@@ -70,7 +70,7 @@ class Kml(object):
 
     def _genkml(self, format=True):
         """Returns the kml as a string or "prettyprinted" if format = True."""
-        kml_tag = 'xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:xal="urn:oasis:names:tc:ciq:xsdschema:xAL:2.0"'
+        kml_tag = 'xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom"'
         xmlstr = u("<kml {0}>{1}</kml>").format(kml_tag, self._feature.__str__())
         if format:
            KmlElement.patch()

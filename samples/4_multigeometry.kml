@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:xal="urn:oasis:names:tc:ciq:xsdschema:xAL:2.0">
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2">
     <Document id="feat_1">
         <Style id="stylesel_9">
-            <LabelStyle>
-                <colorMode>normal</colorMode>
-                <scale>0.0</scale>
-            </LabelStyle>
-            <IconStyle>
+            <IconStyle id="substyle_10">
                 <scale>1</scale>
                 <colorMode>normal</colorMode>
                 <heading>0</heading>
@@ -14,34 +10,38 @@
                     <href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href>
                 </Icon>
             </IconStyle>
+            <LabelStyle id="substyle_9">
+                <colorMode>normal</colorMode>
+                <scale>0.0</scale>
+            </LabelStyle>
         </Style>
         <Style id="stylesel_10">
-            <LineStyle>
+            <LineStyle id="substyle_11">
                 <color>ff000000</color>
                 <colorMode>normal</colorMode>
                 <width>5</width>
             </LineStyle>
         </Style>
         <Style id="stylesel_11">
-            <PolyStyle>
+            <PolyStyle id="substyle_12">
                 <color>7700a5ff</color>
                 <colorMode>normal</colorMode>
                 <outline>1</outline>
                 <fill>1</fill>
             </PolyStyle>
-            <LineStyle>
+            <LineStyle id="substyle_13">
                 <color>7700a5ff</color>
                 <colorMode>normal</colorMode>
             </LineStyle>
         </Style>
         <Style id="stylesel_12">
-            <PolyStyle>
+            <PolyStyle id="substyle_14">
                 <color>77e6d8ad</color>
                 <colorMode>normal</colorMode>
                 <outline>1</outline>
                 <fill>1</fill>
             </PolyStyle>
-            <LineStyle>
+            <LineStyle id="substyle_15">
                 <color>77e6d8ad</color>
                 <colorMode>normal</colorMode>
             </LineStyle>
@@ -406,7 +406,7 @@
         </Placemark>
         <Folder id="feat_6">
             <Style id="stylesel_0">
-                <IconStyle>
+                <IconStyle id="substyle_0">
                     <scale>1</scale>
                     <colorMode>normal</colorMode>
                     <heading>0</heading>
@@ -414,7 +414,7 @@
                 </IconStyle>
             </Style>
             <Style id="stylesel_1">
-                <IconStyle>
+                <IconStyle id="substyle_1">
                     <scale>1</scale>
                     <colorMode>normal</colorMode>
                     <heading>0</heading>
@@ -422,7 +422,7 @@
                 </IconStyle>
             </Style>
             <Style id="stylesel_2">
-                <IconStyle>
+                <IconStyle id="substyle_2">
                     <scale>1</scale>
                     <colorMode>normal</colorMode>
                     <heading>0</heading>
@@ -430,7 +430,7 @@
                 </IconStyle>
             </Style>
             <Style id="stylesel_3">
-                <IconStyle>
+                <IconStyle id="substyle_3">
                     <scale>1</scale>
                     <colorMode>normal</colorMode>
                     <heading>0</heading>
@@ -438,7 +438,7 @@
                 </IconStyle>
             </Style>
             <Style id="stylesel_4">
-                <IconStyle>
+                <IconStyle id="substyle_4">
                     <scale>1</scale>
                     <colorMode>normal</colorMode>
                     <heading>0</heading>
@@ -446,7 +446,7 @@
                 </IconStyle>
             </Style>
             <Style id="stylesel_5">
-                <IconStyle>
+                <IconStyle id="substyle_5">
                     <scale>1</scale>
                     <colorMode>normal</colorMode>
                     <heading>0</heading>
@@ -454,7 +454,7 @@
                 </IconStyle>
             </Style>
             <Style id="stylesel_6">
-                <IconStyle>
+                <IconStyle id="substyle_6">
                     <scale>1</scale>
                     <colorMode>normal</colorMode>
                     <heading>0</heading>
@@ -462,7 +462,7 @@
                 </IconStyle>
             </Style>
             <Style id="stylesel_7">
-                <IconStyle>
+                <IconStyle id="substyle_7">
                     <scale>1</scale>
                     <colorMode>normal</colorMode>
                     <heading>0</heading>
@@ -470,7 +470,7 @@
                 </IconStyle>
             </Style>
             <Style id="stylesel_8">
-                <IconStyle>
+                <IconStyle id="substyle_8">
                     <scale>1</scale>
                     <colorMode>normal</colorMode>
                     <heading>0</heading>

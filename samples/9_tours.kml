@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2">
+    <Document id="feat_1">
+        <Style id="stylesel_0">
+            <IconStyle id="substyle_0">
+                <scale>1.0</scale>
+                <colorMode>normal</colorMode>
+                <heading>0</heading>
+                <Icon>
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <name>9_tours</name>
+        <open>1</open>
+        <Placemark id="feat_2">
+            <name>New Zealand's Southern Alps</name>
+            <styleUrl>#stylesel_0</styleUrl>
+            <Point id="geom_0">
+                <coordinates>170.144,-43.605,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <gx:Tour>
+            <name>Play me!</name>
+            <gx:Playlist>
+                <gx:AnimatedUpdate id="tour_0">
+                    <gx:duration>6.5</gx:duration>
+                    <Update>
+                        <Change>
+                            <IconStyle targetId="substyle_0">
+                                <scale>10.0</scale>
+                            </IconStyle>
+                        </Change>
+                        <targetHref/>
+                    </Update>
+                </gx:AnimatedUpdate>
+                <gx:FlyTo id="tour_1">
+                    <gx:duration>4.1</gx:duration>
+                </gx:FlyTo>
+                <gx:Wait id="tour_2">
+                    <gx:duration>2.4</gx:duration>
+                </gx:Wait>
+            </gx:Playlist>
+        </gx:Tour>
+    </Document>
+</kml>

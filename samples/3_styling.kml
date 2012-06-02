@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:xal="urn:oasis:names:tc:ciq:xsdschema:xAL:2.0">
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2">
     <Document id="feat_1">
         <Style id="stylesel_0">
             <ListStyle>
@@ -10,12 +10,7 @@
             </ListStyle>
         </Style>
         <Style id="stylesel_1">
-            <LabelStyle>
-                <color>ffff0000</color>
-                <colorMode>normal</colorMode>
-                <scale>2</scale>
-            </LabelStyle>
-            <IconStyle>
+            <IconStyle id="substyle_1">
                 <scale>3</scale>
                 <color>ffff0000</color>
                 <colorMode>normal</colorMode>
@@ -24,16 +19,21 @@
                     <href>http://maps.google.com/mapfiles/kml/shapes/info-i.png</href>
                 </Icon>
             </IconStyle>
+            <LabelStyle id="substyle_0">
+                <color>ffff0000</color>
+                <colorMode>normal</colorMode>
+                <scale>2</scale>
+            </LabelStyle>
         </Style>
         <Style id="stylesel_5">
-            <LineStyle>
+            <LineStyle id="substyle_4">
                 <color>ff0000ff</color>
                 <colorMode>normal</colorMode>
                 <width>10</width>
             </LineStyle>
         </Style>
         <Style id="stylesel_6">
-            <PolyStyle>
+            <PolyStyle id="substyle_5">
                 <color>990000ff</color>
                 <colorMode>normal</colorMode>
                 <outline>0</outline>
@@ -49,14 +49,14 @@
             </BalloonStyle>
         </Style>
         <Style id="stylesel_3">
-            <LabelStyle>
+            <LabelStyle id="substyle_2">
                 <color>ffff0000</color>
                 <colorMode>normal</colorMode>
                 <scale>1</scale>
             </LabelStyle>
         </Style>
         <Style id="stylesel_4">
-            <LabelStyle>
+            <LabelStyle id="substyle_3">
                 <color>ff0000ff</color>
                 <colorMode>normal</colorMode>
                 <scale>1</scale>

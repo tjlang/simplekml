@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:xal="urn:oasis:names:tc:ciq:xsdschema:xAL:2.0">
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2">
     <Document id="feat_1">
         <name>8_tracks</name>
         <Document id="feat_2">
@@ -16,7 +16,7 @@
             </LookAt>
             <Folder id="feat_3">
                 <Style id="stylesel_1">
-                    <IconStyle>
+                    <IconStyle id="substyle_0">
                         <scale>1</scale>
                         <colorMode>normal</colorMode>
                         <heading>0</heading>
@@ -24,14 +24,14 @@
                             <href>http://earth.google.com/images/kml-icons/track-directional/track-0.png</href>
                         </Icon>
                     </IconStyle>
-                    <LineStyle>
+                    <LineStyle id="substyle_1">
                         <color>99ffac59</color>
                         <colorMode>normal</colorMode>
                         <width>6</width>
                     </LineStyle>
                 </Style>
                 <Style id="stylesel_2">
-                    <IconStyle>
+                    <IconStyle id="substyle_2">
                         <scale>1.2</scale>
                         <colorMode>normal</colorMode>
                         <heading>0</heading>
@@ -39,7 +39,7 @@
                             <href>http://earth.google.com/images/kml-icons/track-directional/track-0.png</href>
                         </Icon>
                     </IconStyle>
-                    <LineStyle>
+                    <LineStyle id="substyle_3">
                         <color>99ffac59</color>
                         <colorMode>normal</colorMode>
                         <width>8</width>

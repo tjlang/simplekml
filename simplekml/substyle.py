@@ -27,11 +27,20 @@ class ColorStyle(Kmlable):
 
     The arguments are the same as the properties.
     """
+    
+    _id = 0
 
     def __init__(self, color=None, colormode=ColorMode.normal):
         super(ColorStyle, self).__init__()
+        self._id = "substyle_{0}".format(ColorStyle._id)
+        ColorStyle._id += 1
         self._kml["color"] = color
         self._kml["colorMode"] = colormode
+        
+    @property
+    def id(self):
+        """The unique id of the substyle."""
+        return self._id
 
     @property
     def color(self):
@@ -50,6 +59,13 @@ class ColorStyle(Kmlable):
     @colormode.setter
     def colormode(self, colormode):
         self._kml["colorMode"] = colormode
+        
+    def __str__(self):
+        buf = []
+        buf.append('<{0} id="{1}">'.format(self.__class__.__name__, self._id))
+        buf.append(super(ColorStyle, self).__str__())
+        buf.append("</{0}>".format(self.__class__.__name__))
+        return "".join(buf)
 
 
 class LineStyle(ColorStyle):
@@ -216,17 +232,25 @@ class BalloonStyle(Kmlable):
 
     The arguments are the same as the properties.
     """
-
+    
+    _id = 0
     def __init__(self,
                  bgcolor=None,
                  textcolor=None,
                  text=None,
                  displaymode=DisplayMode.default):
         super(BalloonStyle, self).__init__()
+        self._id = "balloonstyle_{0}".format(BalloonStyle._id)
+        BalloonStyle._id += 1
         self._kml["bgColor"] = bgcolor
         self._kml["textColor"] = textcolor
         self._kml["text"] = text
         self._kml["displayMode"] = displaymode
+        
+    @property
+    def id(self):
+        """The unique id of the substyle."""
+        return self._id
 
     @property
     def bgcolor(self):
@@ -272,14 +296,22 @@ class ListStyle(Kmlable):
     The arguments are the same as the properties.
     """
 
+    _id = 0
     def __init__(self,
                  listitemtype=ListItemType.check,
                  bgcolor=None,
                  itemicon=None):
         super(ListStyle, self).__init__()
+        self._id = "liststyle_{0}".format(ListStyle._id)
+        ListStyle._id += 1
         self._kml["listItemType"] = listitemtype
         self._kml["bgColor"] = bgcolor
         self._kml["ItemIcon"] = itemicon
+
+    @property
+    def id(self):
+        """The unique id of the substyle."""
+        return self._id
 
     @property
     def itemicon(self):

@@ -151,6 +151,3 @@ Here is the complete code::
     multipolodd.style.linestyle.color = Color.changealpha("77", Color.lightblue)
 
     kml.save("Tut_MultiGeometry.kml")
-
-End of MultiGeometry Tutorial
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
