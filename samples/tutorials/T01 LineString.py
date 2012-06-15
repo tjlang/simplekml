@@ -5,7 +5,7 @@ import os
 import simplekml
 
 # Create an instance of Kml
-kml = simplekml.Kml(open=1)
+kml = simplekml.Kml(name="LineString", open=1)
 
 # Create a linestring with two points (ie. a line)
 linestring = kml.newlinestring(name="A Line")

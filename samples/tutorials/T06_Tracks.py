@@ -27,7 +27,7 @@ heartrate = [181, 177, 175, 173, 173, 173, 173]
 power = [327.0, 177.0, 179.0, 162.0, 166.0, 177.0, 183.0]
 
 # Create the KML document
-kml = Kml(open=1)
+kml = Kml(name="Tracks", open=1)
 doc = kml.newdocument(name='GPS device', snippet=Snippet('Created Wed Jun 2 15:33:39 2010'))
 doc.lookat.gxtimespan.begin = '2010-05-28T02:02:09Z'
 doc.lookat.gxtimespan.end = '2010-05-28T02:02:56Z'

@@ -130,7 +130,7 @@ cities = [
 ]
 
 # Create an instance of Kml
-kml = simplekml.Kml(open=1)
+kml = simplekml.Kml(name="Point", open=1)
 
 # Create a point named "The World" attached to the KML document with its coordinate at 0 degrees latitude and longitude.
 # All the point's properties are given when it is constructed.

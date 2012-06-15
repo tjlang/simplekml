@@ -54,6 +54,7 @@
                 </ItemIcon>
             </ListStyle>
         </Style>
+        <name>ExtendedData</name>
         <open>1</open>
         <Placemark id="feat_2">
             <ExtendedData>

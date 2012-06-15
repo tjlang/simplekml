@@ -7,7 +7,7 @@ import os
 from simplekml import Kml, ColorMode, AltitudeMode, Style
 
 # Create an instance of Kml
-kml = Kml(open=1)
+kml = Kml(name="Basics", open=1)
 
 # Create a new document
 doc = kml.newdocument(name="A Document")

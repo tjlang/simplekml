@@ -5,7 +5,7 @@ Demonstrates the basics of overlays (ground screen and photo overlay).
 import os
 from simplekml import Kml, OverlayXY, ScreenXY, Units, Camera, AltitudeMode, ViewVolume
 
-kml = Kml(open=1)
+kml = Kml(name="Overlays", open=1)
 
 # GroundOverlay
 ground = kml.newgroundoverlay(name='GroundOverlay Test')

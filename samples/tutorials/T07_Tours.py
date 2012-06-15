@@ -6,7 +6,7 @@ import os
 import simplekml
 
 # Create an instance of kml
-kml = simplekml.Kml(open=1)
+kml = simplekml.Kml(name="Tours", open=1)
 
 # Create a new point and style it
 pnt = kml.newpoint(name="New Zealand's Southern Alps", coords=[(170.144,-43.605)])

@@ -6,7 +6,7 @@ import os
 from simplekml import Kml, Types, Snippet, Color
 
 # The KML
-kml = Kml(open=1)
+kml = Kml(name="ExtendedData", open=1)
 
 # Data Example---------------------------------------------------------------------------------------------------------
 # Create and style a point

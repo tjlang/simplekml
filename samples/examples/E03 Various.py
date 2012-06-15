@@ -6,10 +6,10 @@ import os
 from simplekml import *
 
 # Create an instance of Kml
-kml = Kml()
+kml = Kml(name="Various")
 
 # Change the top level feature from a document to a folder
-kml.document = Folder(open=1)
+kml.document = Folder(name="Various", open=1)
 
 #A NetworkLink
 netlink = kml.newnetworklink(name="Broken NetworkLink")

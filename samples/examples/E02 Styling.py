@@ -5,7 +5,7 @@ Styling points, linestrings, polygons and TOC items.
 import os
 from simplekml import Kml, ListItemType, Color
 
-kml = Kml(open=1)
+kml = Kml(name="Styling", open=1)
 
 # Make all the items into radio buttons
 kml.document.liststyle.listitemtype = ListItemType.radiofolder

@@ -15,6 +15,7 @@
                 </Icon>
             </IconStyle>
         </Style>
+        <name>Tours</name>
         <open>1</open>
         <Placemark id="feat_2">
             <name>New Zealand's Southern Alps</name>

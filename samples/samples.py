@@ -27,6 +27,7 @@ for folder in folders:
             netlink = kml_folder.newnetworklink(name=name)
             netlink.description = ""
             netlink.snippet.maxlines = 1
+            netlink.visibility = 0
             lines = ""
             with open(py, 'r') as py_file:
                 comment = 0
@@ -43,9 +44,9 @@ for folder in folders:
                         lines += line
             html = highlight(lines, PythonLexer(), formatter)
             netlink.description += html
-            netlink.link.href = "http://simplekml.googlecode.com/hg/samples/{1}/{0}.kml".format(name, folder)
+            netlink.link.href = "http://simplekml.googlecode.com/hg/samples/{1}/{0}.kml".format(name.replace(" ", "%20"), folder.lower())
 
-kml.savekmz(os.path.splitext(__file__)[0] + ".kml")
+kml.save(os.path.splitext(__file__)[0] + ".kml")
 
 
 

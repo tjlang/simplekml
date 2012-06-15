@@ -50,6 +50,7 @@
                 <colorMode>normal</colorMode>
             </LineStyle>
         </Style>
+        <name>MultiGeometry</name>
         <open>1</open>
         <Placemark id="feat_2">
             <name>MultiPoint</name>

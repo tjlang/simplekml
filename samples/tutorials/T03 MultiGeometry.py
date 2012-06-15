@@ -5,7 +5,7 @@ Demonstrates three types of MultiGeometry (point, linestring and polygon) using 
 import os
 from simplekml import Kml, Color
 
-kml = Kml(open=1)
+kml = Kml(name="MultiGeometry", open=1)
 
 # Creating MultiGeometry
 multipnt = kml.newmultigeometry(name="MultiPoint") # SA (Hartebeeshoek94) Grid Intersections

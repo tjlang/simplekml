@@ -5,7 +5,7 @@ How to use simplekml.
 import os
 from simplekml import Kml
 
-kml = Kml(open=1) # open=1 just opens the document in the TOC (table of contents). Not a necessary step.
+kml = Kml(name="Usage", open=1) # open=1 just opens the document in the TOC (table of contents). Not a necessary step.
 
 # A simple Point
 kml.newpoint(name="Kirstenbosch", coords=[(18.432314,-33.988862)])

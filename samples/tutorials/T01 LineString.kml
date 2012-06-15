@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
     <Document id="feat_1">
+        <name>LineString</name>
         <open>1</open>
         <Placemark id="feat_2">
             <name>A Line</name>
@@ -16,7 +17,7 @@
             </LineString>
         </Placemark>
         <Placemark id="feat_4">
-            <name>A Extended Line</name>
+            <name>An Extended Line</name>
             <LineString id="geom_2">
                 <extrude>1</extrude>
                 <altitudeMode>relativeToGround</altitudeMode>
@@ -24,7 +25,7 @@
             </LineString>
         </Placemark>
         <Placemark id="feat_5">
-            <name>A Extended Line</name>
+            <name>A Sloped Line</name>
             <LineString id="geom_3">
                 <extrude>1</extrude>
                 <altitudeMode>relativeToGround</altitudeMode>
