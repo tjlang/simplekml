@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2">
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
     <Document id="feat_1">
         <Style id="stylesel_9">
             <IconStyle id="substyle_10">
@@ -7,7 +7,11 @@
                 <colorMode>normal</colorMode>
                 <heading>0</heading>
                 <Icon>
-                    <href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href>
+                    <Icon id="feat_9">
+                        <Link id="feat_9">
+                            <href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href>
+                        </Link>
+                    </Icon>
                 </Icon>
             </IconStyle>
             <LabelStyle id="substyle_9">
@@ -46,7 +50,7 @@
                 <colorMode>normal</colorMode>
             </LineStyle>
         </Style>
-        <name>4_multigeometry</name>
+        <open>1</open>
         <Placemark id="feat_2">
             <name>MultiPoint</name>
             <styleUrl>#stylesel_9</styleUrl>
@@ -335,35 +339,35 @@
             <MultiGeometry id="geom_2">
                 <Polygon id="geom_24">
                     <outerBoundaryIs>
-                        <LinearRing>
+                        <LinearRing id="geom_25">
                             <coordinates>16,-35,0.0 16,-33,0.0 16,-31,0.0 16,-29,0.0 16,-27,0.0 16,-25,0.0 16,-23,0.0 16,-21,0.0 18,-21,0.0 18,-23,0.0 18,-25,0.0 18,-27,0.0 18,-29,0.0 18,-31,0.0 18,-33,0.0 18,-35,0.0</coordinates>
                         </LinearRing>
                     </outerBoundaryIs>
                 </Polygon>
                 <Polygon id="geom_48">
                     <outerBoundaryIs>
-                        <LinearRing>
+                        <LinearRing id="geom_49">
                             <coordinates>20,-35,0.0 20,-33,0.0 20,-31,0.0 20,-29,0.0 20,-27,0.0 20,-25,0.0 20,-23,0.0 20,-21,0.0 22,-21,0.0 22,-23,0.0 22,-25,0.0 22,-27,0.0 22,-29,0.0 22,-31,0.0 22,-33,0.0 22,-35,0.0</coordinates>
                         </LinearRing>
                     </outerBoundaryIs>
                 </Polygon>
                 <Polygon id="geom_72">
                     <outerBoundaryIs>
-                        <LinearRing>
+                        <LinearRing id="geom_73">
                             <coordinates>24,-35,0.0 24,-33,0.0 24,-31,0.0 24,-29,0.0 24,-27,0.0 24,-25,0.0 24,-23,0.0 24,-21,0.0 26,-21,0.0 26,-23,0.0 26,-25,0.0 26,-27,0.0 26,-29,0.0 26,-31,0.0 26,-33,0.0 26,-35,0.0</coordinates>
                         </LinearRing>
                     </outerBoundaryIs>
                 </Polygon>
                 <Polygon id="geom_96">
                     <outerBoundaryIs>
-                        <LinearRing>
+                        <LinearRing id="geom_97">
                             <coordinates>28,-35,0.0 28,-33,0.0 28,-31,0.0 28,-29,0.0 28,-27,0.0 28,-25,0.0 28,-23,0.0 28,-21,0.0 30,-21,0.0 30,-23,0.0 30,-25,0.0 30,-27,0.0 30,-29,0.0 30,-31,0.0 30,-33,0.0 30,-35,0.0</coordinates>
                         </LinearRing>
                     </outerBoundaryIs>
                 </Polygon>
                 <Polygon id="geom_119">
                     <outerBoundaryIs>
-                        <LinearRing>
+                        <LinearRing id="geom_120">
                             <coordinates>32,-35,0.0 32,-33,0.0 32,-31,0.0 32,-29,0.0 32,-27,0.0 32,-25,0.0 32,-23,0.0 32,-21,0.0 34,-21,0.0 34,-23,0.0 34,-25,0.0 34,-27,0.0 34,-29,0.0 34,-31,0.0 34,-33,0.0 34,-35,0.0</coordinates>
                         </LinearRing>
                     </outerBoundaryIs>
@@ -376,28 +380,28 @@
             <MultiGeometry id="geom_3">
                 <Polygon id="geom_36">
                     <outerBoundaryIs>
-                        <LinearRing>
+                        <LinearRing id="geom_37">
                             <coordinates>18,-35,0.0 18,-33,0.0 18,-31,0.0 18,-29,0.0 18,-27,0.0 18,-25,0.0 18,-23,0.0 18,-21,0.0 20,-21,0.0 20,-23,0.0 20,-25,0.0 20,-27,0.0 20,-29,0.0 20,-31,0.0 20,-33,0.0 20,-35,0.0</coordinates>
                         </LinearRing>
                     </outerBoundaryIs>
                 </Polygon>
                 <Polygon id="geom_60">
                     <outerBoundaryIs>
-                        <LinearRing>
+                        <LinearRing id="geom_61">
                             <coordinates>22,-35,0.0 22,-33,0.0 22,-31,0.0 22,-29,0.0 22,-27,0.0 22,-25,0.0 22,-23,0.0 22,-21,0.0 24,-21,0.0 24,-23,0.0 24,-25,0.0 24,-27,0.0 24,-29,0.0 24,-31,0.0 24,-33,0.0 24,-35,0.0</coordinates>
                         </LinearRing>
                     </outerBoundaryIs>
                 </Polygon>
                 <Polygon id="geom_84">
                     <outerBoundaryIs>
-                        <LinearRing>
+                        <LinearRing id="geom_85">
                             <coordinates>26,-35,0.0 26,-33,0.0 26,-31,0.0 26,-29,0.0 26,-27,0.0 26,-25,0.0 26,-23,0.0 26,-21,0.0 28,-21,0.0 28,-23,0.0 28,-25,0.0 28,-27,0.0 28,-29,0.0 28,-31,0.0 28,-33,0.0 28,-35,0.0</coordinates>
                         </LinearRing>
                     </outerBoundaryIs>
                 </Polygon>
                 <Polygon id="geom_108">
                     <outerBoundaryIs>
-                        <LinearRing>
+                        <LinearRing id="geom_109">
                             <coordinates>30,-35,0.0 30,-33,0.0 30,-31,0.0 30,-29,0.0 30,-27,0.0 30,-25,0.0 30,-23,0.0 30,-21,0.0 32,-21,0.0 32,-23,0.0 32,-25,0.0 32,-27,0.0 32,-29,0.0 32,-31,0.0 32,-33,0.0 32,-35,0.0</coordinates>
                         </LinearRing>
                     </outerBoundaryIs>

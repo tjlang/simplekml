@@ -1,6 +1,5 @@
 """
-simplekml
-Copyright 2011 Kyle Lancaster
+Copyright 2011-2012 Kyle Lancaster
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -24,17 +23,18 @@ import xml.dom.minidom
 from simplekml.makeunicode import u
 
 class Kmlable(object):
-
-    """_Enables a subclass to be converted into KML."""
+    """Enables a subclass to be converted into KML."""
 
     _images = []
     _kmz = False
     _parse = True
+    _namespaces = ['xmlns="http://www.opengis.net/kml/2.2"', 'xmlns:gx="http://www.google.com/kml/ext/2.2"']
 
     def __init__(self):
         self._kml = {}
 
     def __str__(self):
+        """This is where the magic happens."""
         buf = []
         for var, val in self._kml.items():
             if val is not None:  # Exclude all variables that are None
@@ -48,6 +48,11 @@ class Kmlable(object):
                         Kmlable._addimage(val)
                         val = os.path.join('files', os.path.split(val)[1])
                     buf.append(u("<{0}>{1}</{0}>").format(var, val))  # Enclose the variable's __str__ with the variables name
+                    # Add namespaces
+                    if var.startswith("atom:") and 'xmlns:atom="http://www.w3.org/2005/Atom"' not in Kmlable._namespaces:
+                        Kmlable._namespaces.append('xmlns:atom="http://www.w3.org/2005/Atom"')
+                    elif var.startswith("xal:") and 'xmlns:xal="urn:oasis:names:tc:ciq:xsdschema:xAL:2.0"' not in Kmlable._namespaces:
+                        Kmlable._namespaces.append('xmlns:xal="urn:oasis:names:tc:ciq:xsdschema:xAL:2.0"')
         return "".join(buf)
 
     @classmethod
@@ -74,6 +79,11 @@ class Kmlable(object):
     @classmethod
     def _setkmz(cls, kmz=True):
         Kmlable._kmz = kmz
+
+    @classmethod
+    def _getnamespaces(cls):
+        """Return the namespaces as a string."""
+        return " ".join(Kmlable._namespaces)
 
 
 class Vector2(object):

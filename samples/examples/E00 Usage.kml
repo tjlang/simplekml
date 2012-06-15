@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2">
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
     <Document id="feat_1">
-        <name>1_usage</name>
+        <open>1</open>
         <Placemark id="feat_2">
             <name>Kirstenbosch</name>
             <Point id="geom_0">
@@ -19,12 +19,12 @@
             <name>Atrium Garden</name>
             <Polygon id="geom_2">
                 <innerBoundaryIs>
-                    <LinearRing>
+                    <LinearRing id="geom_4">
                         <coordinates>18.4336,-33.98982,0.0 18.43386,-33.98995,0.0 18.43401,-33.98974,0.0 18.43376,-33.98962,0.0 18.4336,-33.98982,0.0</coordinates>
                     </LinearRing>
                 </innerBoundaryIs>
                 <outerBoundaryIs>
-                    <LinearRing>
+                    <LinearRing id="geom_3">
                         <coordinates>18.43348,-33.98985,0.0 18.43387,-33.9900426222,0.0 18.4341,-33.98972,0.0 18.43371,-33.98952,0.0 18.43348,-33.98985,0.0</coordinates>
                     </LinearRing>
                 </outerBoundaryIs>

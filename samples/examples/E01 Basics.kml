@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2">
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
     <Document id="feat_1">
-        <name>2_basic</name>
+        <open>1</open>
         <Document id="feat_2">
             <name>A Document</name>
             <Document id="feat_3">
@@ -25,7 +25,11 @@
                     <colorMode>normal</colorMode>
                     <heading>45</heading>
                     <Icon>
-                        <href>http://maps.google.com/mapfiles/kml/shapes/arrow.png</href>
+                        <Icon id="feat_0">
+                            <Link id="feat_0">
+                                <href>http://maps.google.com/mapfiles/kml/shapes/arrow.png</href>
+                            </Link>
+                        </Icon>
                     </Icon>
                 </IconStyle>
                 <LabelStyle id="substyle_0">
@@ -122,7 +126,7 @@
                 <name>Two Oceans Aquarium</name>
                 <Polygon id="geom_6">
                     <outerBoundaryIs>
-                        <LinearRing>
+                        <LinearRing id="geom_7">
                             <coordinates>18.4175465934,-33.9083517226,0 18.4181239016,-33.9080972302,0 18.4179403811,-33.9078222853,0 18.4177006865,-33.9079343654,0 18.4174740182,-33.9077180893,0 18.4171932854,-33.9079095417,0 18.4173415632,-33.9080782974,0 18.4171706094,-33.9081946647,0 18.417319506,-33.9083516631,0 18.4174525684,-33.9082668015,0 18.4175465934,-33.9083517226,0</coordinates>
                         </LinearRing>
                     </outerBoundaryIs>
@@ -134,12 +138,12 @@
                 <styleUrl>#stylesel_3</styleUrl>
                 <Polygon id="geom_8">
                     <innerBoundaryIs>
-                        <LinearRing>
+                        <LinearRing id="geom_11">
                             <coordinates>18.4154466438,-33.9079775784,0 18.4156687724,-33.9078264617,0 18.4155701281,-33.9077242906,0 18.4153486707,-33.9078706793,0 18.4154466438,-33.9079775784,0</coordinates>
                         </LinearRing>
                     </innerBoundaryIs>
                     <outerBoundaryIs>
-                        <LinearRing>
+                        <LinearRing id="geom_10">
                             <coordinates>18.4154335422,-33.9081504278,0 18.4158847532,-33.9078521537,0 18.4155906723,-33.9075504151,0 18.4151403782,-33.9078496688,0 18.4154335422,-33.9081504278,0</coordinates>
                         </LinearRing>
                     </outerBoundaryIs>
@@ -150,7 +154,7 @@
                 <name>Two Oceans Aquarium2</name>
                 <Polygon id="geom_13">
                     <outerBoundaryIs>
-                        <LinearRing>
+                        <LinearRing id="geom_14">
                             <coordinates>18.4175465934,-33.9083517226,0 18.4181239016,-33.9080972302,0 18.4179403811,-33.9078222853,0 18.4177006865,-33.9079343654,0 18.4174740182,-33.9077180893,0 18.4171932854,-33.9079095417,0 18.4173415632,-33.9080782974,0 18.4171706094,-33.9081946647,0 18.417319506,-33.9083516631,0 18.4174525684,-33.9082668015,0 18.4175465934,-33.9083517226,0</coordinates>
                         </LinearRing>
                     </outerBoundaryIs>

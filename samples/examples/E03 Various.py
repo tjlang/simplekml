@@ -1,13 +1,19 @@
+"""
+A collection of various features and stylings.
+"""
 import os
 
 from simplekml import *
 
-#The KML
-kml = Kml(name="6_various", open=1)
+# Create an instance of Kml
+kml = Kml()
+
+# Change the top level feature from a document to a folder
+kml.document = Folder(open=1)
 
 #A NetworkLink
 netlink = kml.newnetworklink(name="Broken NetworkLink")
-netlink.link.href = "http://fakelink.com/fakedata"
+netlink.link.href = "http://www.foobar.com/foo/bar.kml"
 
 #A Document
 doc = kml.newdocument()

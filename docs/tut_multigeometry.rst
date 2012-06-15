@@ -15,8 +15,8 @@ Creating the Code
 
 First import simplekml and create a KML object::
 
-    from simplekml import Kml
-    kml = Kml()
+    from simplekml import Kml, Color
+    kml = Kml(open=1)
 
 Next create a variable for each of the MultiGeometry elemnts and folder::
 
@@ -100,9 +100,10 @@ Complete Code Example
 
 Here is the complete code::
 
-    from simplekml import Kml
+    from simplekml import Kml, Color
+    kml = Kml(open=1)
 
-    kml = Kml()
+    kml = simplekml.Kml(open=1)
 
     # Creating MultiGeometry
     multipnt = kml.newmultigeometry(name="MultiPoint") # SA (Hartebeeshoek94) Grid Intersections

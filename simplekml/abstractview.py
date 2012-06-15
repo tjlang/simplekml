@@ -50,8 +50,8 @@ class AbstractView(Kmlable):
         self._kml["tilt"] = tilt
         self._kml["altitudeMode"] = altitudemode
         self._kml["gx:AltitudeMode"] = gxaltitudemode
-        self._kml["gx:TimeSpan"] = gxtimespan
-        self._kml["gx:TimeStamp"] = gxtimestamp
+        self._kml["gx:TimeSpan_"] = gxtimespan
+        self._kml["gx:TimeStamp_"] = gxtimestamp
         self._kml['gx:horizFov'] = gxhorizfov
 
     @property
@@ -129,24 +129,24 @@ class AbstractView(Kmlable):
     @property
     def gxtimestamp(self):
         """Represents a single moment in time, accepts :class:`simplekml.GxTimeStamp`"""
-        if self._kml['gx:TimeStamp'] is None:
-            self._kml['gx:TimeStamp'] = GxTimeStamp()
-        return self._kml['gx:TimeStamp']
+        if self._kml['gx:TimeStamp_'] is None:
+            self._kml['gx:TimeStamp_'] = GxTimeStamp()
+        return self._kml['gx:TimeStamp_']
 
     @gxtimestamp.setter
     def gxtimestamp(self, gxtimestamp):
-        self._kml['gx:TimeStamp'] = gxtimestamp
+        self._kml['gx:TimeStamp_'] = gxtimestamp
 
     @property
     def gxtimespan(self):
         """Period of time, accepts :class:`simplekml.GxTimeSpan`"""
-        if self._kml['gx:TimeSpan'] is None:
-            self._kml['gx:TimeSpan'] = GxTimeSpan()
-        return self._kml['gx:TimeSpan']
+        if self._kml['gx:TimeSpan_'] is None:
+            self._kml['gx:TimeSpan_'] = GxTimeSpan()
+        return self._kml['gx:TimeSpan_']
 
     @gxtimespan.setter
     def gxtimespan(self, gxtimespan):
-        self._kml['gx:TimeSpan'] = gxtimespan
+        self._kml['gx:TimeSpan_'] = gxtimespan
 
     @property
     def gxhorizfov(self):

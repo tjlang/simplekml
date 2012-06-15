@@ -1,9 +1,16 @@
+"""
+Styling points, linestrings, polygons and TOC items.
+"""
+
 import os
+from simplekml import Kml, ListItemType, Color
 
-from simplekml import *
+kml = Kml(open=1)
 
-kml = Kml(name='3_styling')
+# Make all the items into radio buttons
 kml.document.liststyle.listitemtype = ListItemType.radiofolder
+
+# Change the icon of the document in the TOC
 kml.document.liststyle.itemicon.href = "http://maps.google.com/mapfiles/kml/shapes/parks.png"
 
 # A normal Point with both a LabelStyle and IconStyle

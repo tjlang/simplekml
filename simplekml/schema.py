@@ -280,7 +280,6 @@ class SchemaData(Kmlable):
     The arguments are the same as the properties.
     """
 
-    _id = 0
     def __init__(self, schemaurl=None):
         super(SchemaData, self).__init__()
         self.simpledatas = []

@@ -1,15 +1,12 @@
 """
-This shows the use of the 3 different types of extended data: Data, Simple Data and Simple Array Data, as well as
-prettying up the data.
-
+This shows the use of the 3 different types of extended data: Data, Simple Data and Simple Array Data, as well as prettying up the data.
 """
 
 import os
-
-from simplekml import *
+from simplekml import Kml, Types, Snippet, Color
 
 # The KML
-kml = Kml(name="7_extendeddata")
+kml = Kml(open=1)
 
 # Data Example---------------------------------------------------------------------------------------------------------
 # Create and style a point

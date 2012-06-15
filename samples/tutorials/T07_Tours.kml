@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2">
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
     <Document id="feat_1">
         <Style id="stylesel_0">
             <IconStyle id="substyle_0">
@@ -7,11 +7,14 @@
                 <colorMode>normal</colorMode>
                 <heading>0</heading>
                 <Icon>
-                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                    <Icon id="feat_0">
+                        <Link id="feat_0">
+                            <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                        </Link>
+                    </Icon>
                 </Icon>
             </IconStyle>
         </Style>
-        <name>9_tours</name>
         <open>1</open>
         <Placemark id="feat_2">
             <name>New Zealand's Southern Alps</name>
@@ -23,7 +26,11 @@
         <gx:Tour>
             <name>Play me!</name>
             <gx:Playlist>
-                <gx:AnimatedUpdate id="tour_0">
+                <gx:SoundCue id="tour_0">
+                    <gx:delayedStart>2</gx:delayedStart>
+                    <href>http://simplekml.googlecode.com/hg/samples/resources/drum_roll_1.wav</href>
+                </gx:SoundCue>
+                <gx:AnimatedUpdate id="tour_1">
                     <gx:duration>6.5</gx:duration>
                     <Update>
                         <Change>
@@ -34,10 +41,10 @@
                         <targetHref/>
                     </Update>
                 </gx:AnimatedUpdate>
-                <gx:FlyTo id="tour_1">
+                <gx:FlyTo id="tour_2">
                     <gx:duration>4.1</gx:duration>
                 </gx:FlyTo>
-                <gx:Wait id="tour_2">
+                <gx:Wait id="tour_3">
                     <gx:duration>2.4</gx:duration>
                 </gx:Wait>
             </gx:Playlist>

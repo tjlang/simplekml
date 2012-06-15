@@ -70,15 +70,15 @@ class Kml(object):
 
     def _genkml(self, format=True):
         """Returns the kml as a string or "prettyprinted" if format = True."""
-        kml_tag = 'xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom"'
-        xmlstr = u("<kml {0}>{1}</kml>").format(kml_tag, self._feature.__str__())
+        kml_str = self._feature.__str__()
+        xml_str = u("<kml {0}>{1}</kml>").format(Kmlable._getnamespaces(), kml_str)
         if format:
            KmlElement.patch()
-           kmlstr = xml.dom.minidom.parseString(xmlstr.encode("utf-8"))
+           kml_str = xml.dom.minidom.parseString(xml_str.encode("utf-8"))
            KmlElement.unpatch()
-           return kmlstr.toprettyxml(indent="    ", newl="\n", encoding="UTF-8").decode("utf-8")
+           return kml_str.toprettyxml(indent="    ", newl="\n", encoding="UTF-8").decode("utf-8")
         else:
-            return xmlstr
+            return xml_str
 
     def parsetext(self, parse=True):
         """Sets the behavior of how text tags are parsed.
@@ -283,7 +283,3 @@ class Kml(object):
         same as those for :class:`simplekml.GxTour`
         """
         return self.document.newgxtour(**kwargs)
-
-
-if __name__ == "__main__":
-    pass

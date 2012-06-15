@@ -24,6 +24,7 @@ class Link(Kmlable):
 
     The arguments are the same as the properties.
     """
+    _id = 0
 
     def __init__(self,
                  href=" ",
@@ -43,7 +44,14 @@ class Link(Kmlable):
         self._kml["viewBoundScale"] = viewboundscale
         self._kml["viewFormat"] = viewformat
         self._kml["httpQuery"] = httpquery
-        
+        self._id = "feat_{0}".format(Link._id)
+        Link._id += 1
+
+    @property
+    def id(self):
+        """The id string."""
+        return self._id
+
     @property
     def href(self):
         """Target url, accepts string."""
@@ -116,6 +124,12 @@ class Link(Kmlable):
     def httpquery(self, httpquery):
         self._kml['httpQuery'] = httpquery
 
+    def __str__(self):
+        buf = ['<Link id="{0}">'.format(self._id),
+               super(Link, self).__str__(),
+               '</Link>'.format(self._id)]
+        return "".join(buf)
+
 
 class Icon(Link):
     """Defines an image associated with an Icon style or overlay.
@@ -172,6 +186,12 @@ class Icon(Link):
     @gxh.setter
     def gxh(self, gxh):
         self._kml['gx:h'] = gxh
+
+    def __str__(self):
+        buf = ['<Icon id="{0}">'.format(self._id),
+               super(Icon, self).__str__(),
+               '</Icon>'.format(self._id)]
+        return "".join(buf)
 
 
 

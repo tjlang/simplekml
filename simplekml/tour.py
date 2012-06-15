@@ -33,6 +33,11 @@ class GxTourPrimitive(Kmlable):
         self._id = "tour_{0}".format(GxTourPrimitive._id)
         GxTourPrimitive._id += 1
 
+    @property
+    def id(self):
+        """The id string."""
+        return self._id
+
 
 class GxSoundCue(GxTourPrimitive):
     """Specifies a sound to be played in a tour.

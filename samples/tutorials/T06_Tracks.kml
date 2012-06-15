@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2">
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
     <Document id="feat_1">
-        <name>8_tracks</name>
+        <open>1</open>
         <Document id="feat_2">
             <name>GPS device</name>
             <Snippet>Created Wed Jun 2 15:33:39 2010</Snippet>
             <LookAt>
-                <gx:TimeSpan>
+                <gx:TimeSpan id="time_0">
                     <begin>2010-05-28T02:02:09Z</begin>
                     <end>2010-05-28T02:02:56Z</end>
                 </gx:TimeSpan>
@@ -21,7 +21,11 @@
                         <colorMode>normal</colorMode>
                         <heading>0</heading>
                         <Icon>
-                            <href>http://earth.google.com/images/kml-icons/track-directional/track-0.png</href>
+                            <Icon id="feat_0">
+                                <Link id="feat_0">
+                                    <href>http://earth.google.com/images/kml-icons/track-directional/track-0.png</href>
+                                </Link>
+                            </Icon>
                         </Icon>
                     </IconStyle>
                     <LineStyle id="substyle_1">
@@ -36,7 +40,11 @@
                         <colorMode>normal</colorMode>
                         <heading>0</heading>
                         <Icon>
-                            <href>http://earth.google.com/images/kml-icons/track-directional/track-0.png</href>
+                            <Icon id="feat_1">
+                                <Link id="feat_1">
+                                    <href>http://earth.google.com/images/kml-icons/track-directional/track-0.png</href>
+                                </Link>
+                            </Icon>
                         </Icon>
                     </IconStyle>
                     <LineStyle id="substyle_3">

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2">
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
     <Document id="feat_1">
         <Style id="stylesel_0">
             <IconStyle id="substyle_0">
@@ -7,7 +7,11 @@
                 <colorMode>normal</colorMode>
                 <heading>0</heading>
                 <Icon>
-                    <href>http://maps.google.com/mapfiles/kml/paddle/1.png</href>
+                    <Icon id="feat_0">
+                        <Link id="feat_0">
+                            <href>http://maps.google.com/mapfiles/kml/paddle/1.png</href>
+                        </Link>
+                    </Icon>
                 </Icon>
             </IconStyle>
         </Style>
@@ -17,7 +21,11 @@
                 <colorMode>normal</colorMode>
                 <heading>0</heading>
                 <Icon>
-                    <href>http://maps.google.com/mapfiles/kml/paddle/2.png</href>
+                    <Icon id="feat_1">
+                        <Link id="feat_1">
+                            <href>http://maps.google.com/mapfiles/kml/paddle/2.png</href>
+                        </Link>
+                    </Icon>
                 </Icon>
             </IconStyle>
         </Style>
@@ -27,7 +35,11 @@
                 <colorMode>normal</colorMode>
                 <heading>0</heading>
                 <Icon>
-                    <href>http://maps.google.com/mapfiles/kml/paddle/3.png</href>
+                    <Icon id="feat_2">
+                        <Link id="feat_2">
+                            <href>http://maps.google.com/mapfiles/kml/paddle/3.png</href>
+                        </Link>
+                    </Icon>
                 </Icon>
             </IconStyle>
             <LineStyle id="substyle_3">
@@ -42,7 +54,7 @@
                 </ItemIcon>
             </ListStyle>
         </Style>
-        <name>7_extendeddata</name>
+        <open>1</open>
         <Placemark id="feat_2">
             <ExtendedData>
                 <Data name="birds">

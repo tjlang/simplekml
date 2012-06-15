@@ -85,6 +85,11 @@ class Feature(Kmlable):
         self._folders = []
 
     @property
+    def id(self):
+        """The id string."""
+        return self._id
+
+    @property
     def name(self):
         """Name of placemark, accepts string."""
         return self._kml['name']
@@ -140,7 +145,14 @@ class Feature(Kmlable):
 
     @property
     def xaladdressdetails(self):
-        """Address in xAL format, accepts string."""
+        """Address in xAL format, accepts string.
+
+        .. note::
+            There seems to be a bug in Google Earth where the inclusion of the namespace
+            xmlns:xal="urn:oasis:names:tc:ciq:xsdschema:xAL:2.0" seems to break some other elements of the KML such
+            as touring (a tour will not play). If xaladdressdetails is used the above namespace will be added to the
+            KML and will possibly break other elements. Use with caution.
+        """
         return self._kml['xal:AddressDetails']
 
     @xaladdressdetails.setter
@@ -618,6 +630,12 @@ class Geometry(Kmlable):
         self._style = None
         self._stylemap = None
 
+
+    @property
+    def id(self):
+        """The id string."""
+        return self._id
+
     @property
     def name(self):
         """Name of placemark, accepts string."""
@@ -908,9 +926,6 @@ class LinearRing(PointGeometry):
         self._kml['gx:altitudeMode'] = gxaltitudemode
         self._kml['gx:altitudeOffset'] = gxaltitudeoffset
 
-    def __str__(self):
-        return '<LinearRing>{0}</LinearRing>'.format(super(LinearRing, self).__str__())
-
     @property
     def extrude(self):
         """Connect the LinearRing to the ground, accepts int (0 or 1)."""
@@ -962,6 +977,9 @@ class LinearRing(PointGeometry):
     @gxaltitudeoffset.setter
     def gxaltitudeoffset(self, offset):
         self._kml['gx:altitudeOffset'] = offset
+
+    def __str__(self):
+        return '<LinearRing id="{0}">{1}</LinearRing>'.format(self._id, super(LinearRing, self).__str__())
 
 
 class Point(PointGeometry):
@@ -1315,7 +1333,7 @@ class Overlay(Feature):
         super(Overlay, self).__init__(**kwargs)
         self._kml['color'] = color
         self._kml['drawOrder'] = draworder
-        self._kml['Icon'] = icon
+        self._kml['Icon_'] = icon
 
     @property
     def color(self):
@@ -1338,13 +1356,13 @@ class Overlay(Feature):
     @property
     def icon(self):
         """The icon to use for the overlay, accepts :class:`simplekml.Icon]`"""
-        if self._kml['Icon'] is None:
-            self._kml['Icon'] = Icon()
-        return self._kml['Icon']
+        if self._kml['Icon_'] is None:
+            self._kml['Icon_'] = Icon()
+        return self._kml['Icon_']
 
     @icon.setter
     def icon(self, icon):
-        self._kml['Icon'] = icon
+        self._kml['Icon_'] = icon
 
 
 class GroundOverlay(Overlay):
@@ -1597,7 +1615,7 @@ class NetworkLink(Feature):
         super(NetworkLink, self).__init__(**kwargs)
         self._kml['refreshVisibility'] = refreshvisibility
         self._kml['flyToView'] = flytoview
-        self._kml['Link'] = link
+        self._kml['Link_'] = link
 
     @property
     def refreshvisibility(self):
@@ -1629,13 +1647,13 @@ class NetworkLink(Feature):
     @property
     def link(self):
         """A :class:`simplekml.Link` class instance, accepts :class:`simplekml.Link`"""
-        if self._kml['Link'] is None:
-            self._kml['Link'] = Link()
-        return self._kml['Link']
+        if self._kml['Link_'] is None:
+            self._kml['Link_'] = Link()
+        return self._kml['Link_']
 
     @link.setter
     def link(self, link):
-        self._kml['Link'] = link
+        self._kml['Link_'] = link
 
 
 class Model(Geometry):
@@ -1659,7 +1677,7 @@ class Model(Geometry):
         self._kml['Location'] = location
         self._kml['Orientation'] = orientation
         self._kml['Scale'] = scale
-        self._kml['Link'] = link
+        self._kml['Link_'] = link
         self._kml['ResourceMap'] = resourcemap
 
     @property
@@ -1723,13 +1741,13 @@ class Model(Geometry):
     @property
     def link(self):
         """"A :class:`simplekml.Link` class instance, accepts :class:`simplekml.Link`"""
-        if self._kml['Link'] is None:
-            self._kml['Link'] = Link()
-        return self._kml['Link']
+        if self._kml['Link_'] is None:
+            self._kml['Link_'] = Link()
+        return self._kml['Link_']
 
     @link.setter
     def link(self, link):
-        self._kml['Link'] = link
+        self._kml['Link_'] = link
 
     @property
     def resourcemap(self):

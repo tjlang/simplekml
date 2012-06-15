@@ -1,8 +1,11 @@
+"""
+Demonstrates three types of MultiGeometry (point, linestring and polygon) using the South Africa coordinate system as a basis.
+"""
+
 import os
+from simplekml import Kml, Color
 
-from simplekml import *
-
-kml = Kml(name='4_multigeometry')
+kml = Kml(open=1)
 
 # Creating MultiGeometry
 multipnt = kml.newmultigeometry(name="MultiPoint") # SA (Hartebeeshoek94) Grid Intersections

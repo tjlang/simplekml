@@ -1,8 +1,11 @@
+"""
+How to use simplekml.
+"""
+
 import os
+from simplekml import Kml
 
-from simplekml import *
-
-kml = Kml(name='1_usage')
+kml = Kml(open=1) # open=1 just opens the document in the TOC (table of contents). Not a necessary step.
 
 # A simple Point
 kml.newpoint(name="Kirstenbosch", coords=[(18.432314,-33.988862)])
@@ -18,6 +21,5 @@ pol = kml.newpolygon(name="Atrium Garden",
 
 # Saving
 kml.save(os.path.splitext(__file__)[0] + ".kml")
-
-# Saving as KMZ
-kml.savekmz(os.path.splitext(__file__)[0] + ".kmz")
+#kml.savekmz(os.path.splitext(__file__)[0] + ".kmz") # uncomment to save to kmz
+#print kml.kml() # uncomment to see the kml printed to screen

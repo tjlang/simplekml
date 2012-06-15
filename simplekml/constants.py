@@ -140,7 +140,7 @@ class Color(object):
         Args:
           * hstr: hex string without alpha value
         """
-        return "ff{0}".format(hstr[::-1])
+        return "ff{2}{1}{0}".format(hstr[:2], hstr[2:4], hstr[4:])
 
 
     @classmethod
@@ -148,19 +148,29 @@ class Color(object):
         """Convert hex (with alpha) to GE hex value.
 
         Args:
-          * hstr: hex string without alpha value
+          * hstr: hex string with alpha value
         """
-        return hstr[::-1]
+        return "{3}{2}{1}{0}".format(hstr[:2], hstr[2:4], hstr[4:6], hstr[6:])
 
     @classmethod
     def changealpha(cls, alpha, gehex):
-        """Changes the alpha value of the given Google Earth hex value.
+        """Changes the alpha value of the given Google Earth hex value to the given aplha hex value.
 
         Args:
           * alpha: aplha hex string
           * gehex: Google Earth hex string
         """
         return alpha + gehex[2:]
+
+    @classmethod
+    def changealphaint(cls, alpha, gehex):
+        """Changes the alpha value of the given Google Earth hex value to the given alpha integer value.
+
+        Args:
+          * alpha: aplha integer (0 - 255)
+          * gehex: Google Earth hex string
+        """
+        return '%0.2x' % alpha + gehex[2:]
 
     aliceblue = 'fffff8f0'
     antiquewhite = 'ffd7ebfa'
