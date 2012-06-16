@@ -11,7 +11,6 @@
             </Style>
             <name>Examples</name>
             <styleUrl>#stylesel_0</styleUrl>
-            <open>1</open>
             <NetworkLink id="feat_4">
                 <Link id="feat_0">
                     <href>http://simplekml.googlecode.com/hg/samples/examples/E00%20Usage.kml</href>
@@ -42,7 +41,7 @@
 21&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot; style=&quot;background: #f8f8f8&quot;&gt;&lt;pre style=&quot;line-height: 125%&quot;&gt;&lt;span style=&quot;color: #008000; font-weight: bold&quot;&gt;import&lt;/span&gt; &lt;span style=&quot;color: #0000FF; font-weight: bold&quot;&gt;os&lt;/span&gt;
 &lt;span style=&quot;color: #008000; font-weight: bold&quot;&gt;from&lt;/span&gt; &lt;span style=&quot;color: #0000FF; font-weight: bold&quot;&gt;simplekml&lt;/span&gt; &lt;span style=&quot;color: #008000; font-weight: bold&quot;&gt;import&lt;/span&gt; Kml
 
-kml &lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt; Kml(&lt;span style=&quot;color: #008000&quot;&gt;open&lt;/span&gt;&lt;span style=&quot;color: #666666&quot;&gt;=1&lt;/span&gt;) &lt;span style=&quot;color: #408080; font-style: italic&quot;&gt;# open=1 just opens the document in the TOC (table of contents). Not a necessary step.&lt;/span&gt;
+kml &lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt; Kml(name&lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt;&lt;span style=&quot;color: #BA2121&quot;&gt;&amp;quot;Usage&amp;quot;&lt;/span&gt;, &lt;span style=&quot;color: #008000&quot;&gt;open&lt;/span&gt;&lt;span style=&quot;color: #666666&quot;&gt;=1&lt;/span&gt;) &lt;span style=&quot;color: #408080; font-style: italic&quot;&gt;# open=1 just opens the document in the TOC (table of contents). Not a necessary step.&lt;/span&gt;
 
 &lt;span style=&quot;color: #408080; font-style: italic&quot;&gt;# A simple Point&lt;/span&gt;
 kml&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;newpoint(name&lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt;&lt;span style=&quot;color: #BA2121&quot;&gt;&amp;quot;Kirstenbosch&amp;quot;&lt;/span&gt;, coords&lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt;[(&lt;span style=&quot;color: #666666&quot;&gt;18.432314&lt;/span&gt;,&lt;span style=&quot;color: #666666&quot;&gt;-33.988862&lt;/span&gt;)])
@@ -146,7 +145,7 @@ kml&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;save(os&lt;span st
 &lt;span style=&quot;color: #008000; font-weight: bold&quot;&gt;from&lt;/span&gt; &lt;span style=&quot;color: #0000FF; font-weight: bold&quot;&gt;simplekml&lt;/span&gt; &lt;span style=&quot;color: #008000; font-weight: bold&quot;&gt;import&lt;/span&gt; Kml, ColorMode, AltitudeMode, Style
 
 &lt;span style=&quot;color: #408080; font-style: italic&quot;&gt;# Create an instance of Kml&lt;/span&gt;
-kml &lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt; Kml(&lt;span style=&quot;color: #008000&quot;&gt;open&lt;/span&gt;&lt;span style=&quot;color: #666666&quot;&gt;=1&lt;/span&gt;)
+kml &lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt; Kml(name&lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt;&lt;span style=&quot;color: #BA2121&quot;&gt;&amp;quot;Basics&amp;quot;&lt;/span&gt;, &lt;span style=&quot;color: #008000&quot;&gt;open&lt;/span&gt;&lt;span style=&quot;color: #666666&quot;&gt;=1&lt;/span&gt;)
 
 &lt;span style=&quot;color: #408080; font-style: italic&quot;&gt;# Create a new document&lt;/span&gt;
 doc &lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt; kml&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;newdocument(name&lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt;&lt;span style=&quot;color: #BA2121&quot;&gt;&amp;quot;A Document&amp;quot;&lt;/span&gt;)
@@ -271,7 +270,7 @@ kml&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;save(os&lt;span st
 46&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot; style=&quot;background: #f8f8f8&quot;&gt;&lt;pre style=&quot;line-height: 125%&quot;&gt;&lt;span style=&quot;color: #008000; font-weight: bold&quot;&gt;import&lt;/span&gt; &lt;span style=&quot;color: #0000FF; font-weight: bold&quot;&gt;os&lt;/span&gt;
 &lt;span style=&quot;color: #008000; font-weight: bold&quot;&gt;from&lt;/span&gt; &lt;span style=&quot;color: #0000FF; font-weight: bold&quot;&gt;simplekml&lt;/span&gt; &lt;span style=&quot;color: #008000; font-weight: bold&quot;&gt;import&lt;/span&gt; Kml, ListItemType, Color
 
-kml &lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt; Kml(&lt;span style=&quot;color: #008000&quot;&gt;open&lt;/span&gt;&lt;span style=&quot;color: #666666&quot;&gt;=1&lt;/span&gt;)
+kml &lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt; Kml(name&lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt;&lt;span style=&quot;color: #BA2121&quot;&gt;&amp;quot;Styling&amp;quot;&lt;/span&gt;, &lt;span style=&quot;color: #008000&quot;&gt;open&lt;/span&gt;&lt;span style=&quot;color: #666666&quot;&gt;=1&lt;/span&gt;)
 
 &lt;span style=&quot;color: #408080; font-style: italic&quot;&gt;# Make all the items into radio buttons&lt;/span&gt;
 kml&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;document&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;liststyle&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;listitemtype &lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt; ListItemType&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;radiofolder
@@ -383,10 +382,10 @@ kml&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;save(os&lt;span st
 &lt;span style=&quot;color: #008000; font-weight: bold&quot;&gt;from&lt;/span&gt; &lt;span style=&quot;color: #0000FF; font-weight: bold&quot;&gt;simplekml&lt;/span&gt; &lt;span style=&quot;color: #008000; font-weight: bold&quot;&gt;import&lt;/span&gt; &lt;span style=&quot;color: #666666&quot;&gt;*&lt;/span&gt;
 
 &lt;span style=&quot;color: #408080; font-style: italic&quot;&gt;# Create an instance of Kml&lt;/span&gt;
-kml &lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt; Kml()
+kml &lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt; Kml(name&lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt;&lt;span style=&quot;color: #BA2121&quot;&gt;&amp;quot;Various&amp;quot;&lt;/span&gt;)
 
 &lt;span style=&quot;color: #408080; font-style: italic&quot;&gt;# Change the top level feature from a document to a folder&lt;/span&gt;
-kml&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;document &lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt; Folder(&lt;span style=&quot;color: #008000&quot;&gt;open&lt;/span&gt;&lt;span style=&quot;color: #666666&quot;&gt;=1&lt;/span&gt;)
+kml&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;document &lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt; Folder(name&lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt;&lt;span style=&quot;color: #BA2121&quot;&gt;&amp;quot;Various&amp;quot;&lt;/span&gt;, &lt;span style=&quot;color: #008000&quot;&gt;open&lt;/span&gt;&lt;span style=&quot;color: #666666&quot;&gt;=1&lt;/span&gt;)
 
 &lt;span style=&quot;color: #408080; font-style: italic&quot;&gt;#A NetworkLink&lt;/span&gt;
 netlink &lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt; kml&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;newnetworklink(name&lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt;&lt;span style=&quot;color: #BA2121&quot;&gt;&amp;quot;Broken NetworkLink&amp;quot;&lt;/span&gt;)
@@ -445,7 +444,6 @@ kml&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;save(os&lt;span st
             </Style>
             <name>Tutorials</name>
             <styleUrl>#stylesel_1</styleUrl>
-            <open>1</open>
             <NetworkLink id="feat_9">
                 <Link id="feat_4">
                     <href>http://simplekml.googlecode.com/hg/samples/tutorials/T00%20Point.kml</href>
@@ -725,7 +723,7 @@ cities &lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt; [
 ]
 
 &lt;span style=&quot;color: #408080; font-style: italic&quot;&gt;# Create an instance of Kml&lt;/span&gt;
-kml &lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt; simplekml&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;Kml(&lt;span style=&quot;color: #008000&quot;&gt;open&lt;/span&gt;&lt;span style=&quot;color: #666666&quot;&gt;=1&lt;/span&gt;)
+kml &lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt; simplekml&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;Kml(name&lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt;&lt;span style=&quot;color: #BA2121&quot;&gt;&amp;quot;Point&amp;quot;&lt;/span&gt;, &lt;span style=&quot;color: #008000&quot;&gt;open&lt;/span&gt;&lt;span style=&quot;color: #666666&quot;&gt;=1&lt;/span&gt;)
 
 &lt;span style=&quot;color: #408080; font-style: italic&quot;&gt;# Create a point named &amp;quot;The World&amp;quot; attached to the KML document with its coordinate at 0 degrees latitude and longitude.&lt;/span&gt;
 &lt;span style=&quot;color: #408080; font-style: italic&quot;&gt;# All the point&amp;#39;s properties are given when it is constructed.&lt;/span&gt;
@@ -782,7 +780,7 @@ kml&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;save(os&lt;span st
 &lt;span style=&quot;color: #008000; font-weight: bold&quot;&gt;import&lt;/span&gt; &lt;span style=&quot;color: #0000FF; font-weight: bold&quot;&gt;simplekml&lt;/span&gt;
 
 &lt;span style=&quot;color: #408080; font-style: italic&quot;&gt;# Create an instance of Kml&lt;/span&gt;
-kml &lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt; simplekml&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;Kml(&lt;span style=&quot;color: #008000&quot;&gt;open&lt;/span&gt;&lt;span style=&quot;color: #666666&quot;&gt;=1&lt;/span&gt;)
+kml &lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt; simplekml&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;Kml(name&lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt;&lt;span style=&quot;color: #BA2121&quot;&gt;&amp;quot;LineString&amp;quot;&lt;/span&gt;, &lt;span style=&quot;color: #008000&quot;&gt;open&lt;/span&gt;&lt;span style=&quot;color: #666666&quot;&gt;=1&lt;/span&gt;)
 
 &lt;span style=&quot;color: #408080; font-style: italic&quot;&gt;# Create a linestring with two points (ie. a line)&lt;/span&gt;
 linestring &lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt; kml&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;newlinestring(name&lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt;&lt;span style=&quot;color: #BA2121&quot;&gt;&amp;quot;A Line&amp;quot;&lt;/span&gt;)
@@ -871,7 +869,7 @@ kml&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;save(os&lt;span st
 52&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot; style=&quot;background: #f8f8f8&quot;&gt;&lt;pre style=&quot;line-height: 125%&quot;&gt;&lt;span style=&quot;color: #008000; font-weight: bold&quot;&gt;import&lt;/span&gt; &lt;span style=&quot;color: #0000FF; font-weight: bold&quot;&gt;os&lt;/span&gt;
 &lt;span style=&quot;color: #008000; font-weight: bold&quot;&gt;from&lt;/span&gt; &lt;span style=&quot;color: #0000FF; font-weight: bold&quot;&gt;simplekml&lt;/span&gt; &lt;span style=&quot;color: #008000; font-weight: bold&quot;&gt;import&lt;/span&gt; Kml, Color
 
-kml &lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt; Kml(&lt;span style=&quot;color: #008000&quot;&gt;open&lt;/span&gt;&lt;span style=&quot;color: #666666&quot;&gt;=1&lt;/span&gt;)
+kml &lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt; Kml(name&lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt;&lt;span style=&quot;color: #BA2121&quot;&gt;&amp;quot;MultiGeometry&amp;quot;&lt;/span&gt;, &lt;span style=&quot;color: #008000&quot;&gt;open&lt;/span&gt;&lt;span style=&quot;color: #666666&quot;&gt;=1&lt;/span&gt;)
 
 &lt;span style=&quot;color: #408080; font-style: italic&quot;&gt;# Creating MultiGeometry&lt;/span&gt;
 multipnt &lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt; kml&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;newmultigeometry(name&lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt;&lt;span style=&quot;color: #BA2121&quot;&gt;&amp;quot;MultiPoint&amp;quot;&lt;/span&gt;) &lt;span style=&quot;color: #408080; font-style: italic&quot;&gt;# SA (Hartebeeshoek94) Grid Intersections&lt;/span&gt;
@@ -967,7 +965,7 @@ kml&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;save(os&lt;span st
 35&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot; style=&quot;background: #f8f8f8&quot;&gt;&lt;pre style=&quot;line-height: 125%&quot;&gt;&lt;span style=&quot;color: #008000; font-weight: bold&quot;&gt;import&lt;/span&gt; &lt;span style=&quot;color: #0000FF; font-weight: bold&quot;&gt;os&lt;/span&gt;
 &lt;span style=&quot;color: #008000; font-weight: bold&quot;&gt;from&lt;/span&gt; &lt;span style=&quot;color: #0000FF; font-weight: bold&quot;&gt;simplekml&lt;/span&gt; &lt;span style=&quot;color: #008000; font-weight: bold&quot;&gt;import&lt;/span&gt; Kml, OverlayXY, ScreenXY, Units, Camera, AltitudeMode, ViewVolume
 
-kml &lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt; Kml(&lt;span style=&quot;color: #008000&quot;&gt;open&lt;/span&gt;&lt;span style=&quot;color: #666666&quot;&gt;=1&lt;/span&gt;)
+kml &lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt; Kml(name&lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt;&lt;span style=&quot;color: #BA2121&quot;&gt;&amp;quot;Overlays&amp;quot;&lt;/span&gt;, &lt;span style=&quot;color: #008000&quot;&gt;open&lt;/span&gt;&lt;span style=&quot;color: #666666&quot;&gt;=1&lt;/span&gt;)
 
 &lt;span style=&quot;color: #408080; font-style: italic&quot;&gt;# GroundOverlay&lt;/span&gt;
 ground &lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt; kml&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;newgroundoverlay(name&lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt;&lt;span style=&quot;color: #BA2121&quot;&gt;&amp;#39;GroundOverlay Test&amp;#39;&lt;/span&gt;)
@@ -1089,7 +1087,7 @@ kml&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;save(os&lt;span st
 &lt;span style=&quot;color: #008000; font-weight: bold&quot;&gt;from&lt;/span&gt; &lt;span style=&quot;color: #0000FF; font-weight: bold&quot;&gt;simplekml&lt;/span&gt; &lt;span style=&quot;color: #008000; font-weight: bold&quot;&gt;import&lt;/span&gt; Kml, Types, Snippet, Color
 
 &lt;span style=&quot;color: #408080; font-style: italic&quot;&gt;# The KML&lt;/span&gt;
-kml &lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt; Kml(&lt;span style=&quot;color: #008000&quot;&gt;open&lt;/span&gt;&lt;span style=&quot;color: #666666&quot;&gt;=1&lt;/span&gt;)
+kml &lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt; Kml(name&lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt;&lt;span style=&quot;color: #BA2121&quot;&gt;&amp;quot;ExtendedData&amp;quot;&lt;/span&gt;, &lt;span style=&quot;color: #008000&quot;&gt;open&lt;/span&gt;&lt;span style=&quot;color: #666666&quot;&gt;=1&lt;/span&gt;)
 
 &lt;span style=&quot;color: #408080; font-style: italic&quot;&gt;# Data Example---------------------------------------------------------------------------------------------------------&lt;/span&gt;
 &lt;span style=&quot;color: #408080; font-style: italic&quot;&gt;# Create and style a point&lt;/span&gt;
@@ -1262,7 +1260,7 @@ heartrate &lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt; [&lt;span 
 power &lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt; [&lt;span style=&quot;color: #666666&quot;&gt;327.0&lt;/span&gt;, &lt;span style=&quot;color: #666666&quot;&gt;177.0&lt;/span&gt;, &lt;span style=&quot;color: #666666&quot;&gt;179.0&lt;/span&gt;, &lt;span style=&quot;color: #666666&quot;&gt;162.0&lt;/span&gt;, &lt;span style=&quot;color: #666666&quot;&gt;166.0&lt;/span&gt;, &lt;span style=&quot;color: #666666&quot;&gt;177.0&lt;/span&gt;, &lt;span style=&quot;color: #666666&quot;&gt;183.0&lt;/span&gt;]
 
 &lt;span style=&quot;color: #408080; font-style: italic&quot;&gt;# Create the KML document&lt;/span&gt;
-kml &lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt; Kml(&lt;span style=&quot;color: #008000&quot;&gt;open&lt;/span&gt;&lt;span style=&quot;color: #666666&quot;&gt;=1&lt;/span&gt;)
+kml &lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt; Kml(name&lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt;&lt;span style=&quot;color: #BA2121&quot;&gt;&amp;quot;Tracks&amp;quot;&lt;/span&gt;, &lt;span style=&quot;color: #008000&quot;&gt;open&lt;/span&gt;&lt;span style=&quot;color: #666666&quot;&gt;=1&lt;/span&gt;)
 doc &lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt; kml&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;newdocument(name&lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt;&lt;span style=&quot;color: #BA2121&quot;&gt;&amp;#39;GPS device&amp;#39;&lt;/span&gt;, snippet&lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt;Snippet(&lt;span style=&quot;color: #BA2121&quot;&gt;&amp;#39;Created Wed Jun 2 15:33:39 2010&amp;#39;&lt;/span&gt;))
 doc&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;lookat&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;gxtimespan&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;begin &lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt; &lt;span style=&quot;color: #BA2121&quot;&gt;&amp;#39;2010-05-28T02:02:09Z&amp;#39;&lt;/span&gt;
 doc&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;lookat&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;gxtimespan&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;end &lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt; &lt;span style=&quot;color: #BA2121&quot;&gt;&amp;#39;2010-05-28T02:02:56Z&amp;#39;&lt;/span&gt;
@@ -1353,7 +1351,7 @@ kml&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;save(os&lt;span st
 &lt;span style=&quot;color: #008000; font-weight: bold&quot;&gt;import&lt;/span&gt; &lt;span style=&quot;color: #0000FF; font-weight: bold&quot;&gt;simplekml&lt;/span&gt;
 
 &lt;span style=&quot;color: #408080; font-style: italic&quot;&gt;# Create an instance of kml&lt;/span&gt;
-kml &lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt; simplekml&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;Kml(&lt;span style=&quot;color: #008000&quot;&gt;open&lt;/span&gt;&lt;span style=&quot;color: #666666&quot;&gt;=1&lt;/span&gt;)
+kml &lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt; simplekml&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;Kml(name&lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt;&lt;span style=&quot;color: #BA2121&quot;&gt;&amp;quot;Tours&amp;quot;&lt;/span&gt;, &lt;span style=&quot;color: #008000&quot;&gt;open&lt;/span&gt;&lt;span style=&quot;color: #666666&quot;&gt;=1&lt;/span&gt;)
 
 &lt;span style=&quot;color: #408080; font-style: italic&quot;&gt;# Create a new point and style it&lt;/span&gt;
 pnt &lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt; kml&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;newpoint(name&lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt;&lt;span style=&quot;color: #BA2121&quot;&gt;&amp;quot;New Zealand&amp;#39;s Southern Alps&amp;quot;&lt;/span&gt;, coords&lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt;[(&lt;span style=&quot;color: #666666&quot;&gt;170.144&lt;/span&gt;,&lt;span style=&quot;color: #666666&quot;&gt;-43.605&lt;/span&gt;)])
