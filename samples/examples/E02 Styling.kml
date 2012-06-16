@@ -14,14 +14,10 @@
                 <scale>3</scale>
                 <color>ffff0000</color>
                 <colorMode>normal</colorMode>
-                <heading>0</heading>
-                <Icon>
-                    <Icon id="feat_0">
-                        <Link id="feat_0">
-                            <href>http://maps.google.com/mapfiles/kml/shapes/info-i.png</href>
-                        </Link>
-                    </Icon>
+                <Icon id="link_0">
+                    <href>http://maps.google.com/mapfiles/kml/shapes/info-i.png</href>
                 </Icon>
+                <heading>0</heading>
             </IconStyle>
             <LabelStyle id="substyle_0">
                 <color>ffff0000</color>

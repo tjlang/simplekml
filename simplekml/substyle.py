@@ -165,7 +165,7 @@ class IconStyle(ColorStyle):
             icon = Icon(href="http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png")
         self._kml["scale"] = scale
         self._kml["heading"] = heading
-        self._kml["Icon"] = icon
+        self._kml["Icon_"] = icon
         self._kml["hotspot_"] = hotspot
 
     @property
@@ -189,11 +189,11 @@ class IconStyle(ColorStyle):
     @property
     def icon(self):
         """The actual :class:`simplekml.Icon` to be displayed, accepts [Icon]."""
-        return self._kml["Icon"]
+        return self._kml["Icon_"]
 
     @icon.setter
     def icon(self, icon):
-        self._kml["Icon"] = icon
+        self._kml["Icon_"] = icon
 
     @property
     def hotspot(self):

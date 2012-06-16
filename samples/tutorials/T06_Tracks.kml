@@ -20,14 +20,10 @@
                     <IconStyle id="substyle_0">
                         <scale>1</scale>
                         <colorMode>normal</colorMode>
-                        <heading>0</heading>
-                        <Icon>
-                            <Icon id="feat_0">
-                                <Link id="feat_0">
-                                    <href>http://earth.google.com/images/kml-icons/track-directional/track-0.png</href>
-                                </Link>
-                            </Icon>
+                        <Icon id="link_0">
+                            <href>http://earth.google.com/images/kml-icons/track-directional/track-0.png</href>
                         </Icon>
+                        <heading>0</heading>
                     </IconStyle>
                     <LineStyle id="substyle_1">
                         <color>99ffac59</color>
@@ -39,14 +35,10 @@
                     <IconStyle id="substyle_2">
                         <scale>1.2</scale>
                         <colorMode>normal</colorMode>
-                        <heading>0</heading>
-                        <Icon>
-                            <Icon id="feat_1">
-                                <Link id="feat_1">
-                                    <href>http://earth.google.com/images/kml-icons/track-directional/track-0.png</href>
-                                </Link>
-                            </Icon>
+                        <Icon id="link_1">
+                            <href>http://earth.google.com/images/kml-icons/track-directional/track-0.png</href>
                         </Icon>
+                        <heading>0</heading>
                     </IconStyle>
                     <LineStyle id="substyle_3">
                         <color>99ffac59</color>

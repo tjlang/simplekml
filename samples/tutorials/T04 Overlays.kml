@@ -7,18 +7,14 @@
             <gx:LatLonQuad>
                 <coordinates>18.410524,-33.903972 18.411429,-33.904171 18.411757,-33.902944 18.41085,-33.902767</coordinates>
             </gx:LatLonQuad>
-            <Icon id="feat_0">
-                <Link id="feat_0">
-                    <href>http://simplekml.googlecode.com/hg/samples/resources/smile.png</href>
-                </Link>
+            <Icon id="link_0">
+                <href>http://simplekml.googlecode.com/hg/samples/resources/smile.png</href>
             </Icon>
             <name>GroundOverlay Test</name>
         </GroundOverlay>
         <ScreenOverlay id="feat_3">
-            <Icon id="feat_1">
-                <Link id="feat_1">
-                    <href>http://simplekml.googlecode.com/hg/samples/resources/simplekml-logo.png</href>
-                </Link>
+            <Icon id="link_1">
+                <href>http://simplekml.googlecode.com/hg/samples/resources/simplekml-logo.png</href>
             </Icon>
             <overlayXY x="0" xunits="fraction" y="1" yunits="fraction"/>
             <size x="-1" xunits="fraction" y="-1" yunits="fraction"/>
@@ -30,14 +26,10 @@
                 <IconStyle id="substyle_0">
                     <scale>1</scale>
                     <colorMode>normal</colorMode>
-                    <heading>0</heading>
-                    <Icon>
-                        <Icon id="feat_2">
-                            <Link id="feat_2">
-                                <href>http://maps.google.com/mapfiles/kml/shapes/camera.png</href>
-                            </Link>
-                        </Icon>
+                    <Icon id="link_2">
+                        <href>http://maps.google.com/mapfiles/kml/shapes/camera.png</href>
                     </Icon>
+                    <heading>0</heading>
                 </IconStyle>
             </Style>
             <styleUrl>#stylesel_0</styleUrl>
@@ -47,10 +39,8 @@
                 <longitude>18.410858</longitude>
                 <latitude>-33.904446</latitude>
             </Camera>
-            <Icon id="feat_3">
-                <Link id="feat_3">
-                    <href>http://simplekml.googlecode.com/hg/samples/resources/stadium.jpg</href>
-                </Link>
+            <Icon id="link_3">
+                <href>http://simplekml.googlecode.com/hg/samples/resources/stadium.jpg</href>
             </Icon>
             <Point id="geom_0">
                 <coordinates>18.410858,-33.90444,0.0</coordinates>

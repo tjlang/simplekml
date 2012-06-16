@@ -44,7 +44,7 @@ class Link(Kmlable):
         self._kml["viewBoundScale"] = viewboundscale
         self._kml["viewFormat"] = viewformat
         self._kml["httpQuery"] = httpquery
-        self._id = "feat_{0}".format(Link._id)
+        self._id = "link_{0}".format(Link._id)
         Link._id += 1
 
     @property
@@ -189,7 +189,7 @@ class Icon(Link):
 
     def __str__(self):
         buf = ['<Icon id="{0}">'.format(self._id),
-               super(Icon, self).__str__(),
+               super(Link, self).__str__(),
                '</Icon>'.format(self._id)]
         return "".join(buf)
 

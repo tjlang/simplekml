@@ -5,14 +5,10 @@
             <IconStyle id="substyle_0">
                 <scale>1.0</scale>
                 <colorMode>normal</colorMode>
-                <heading>0</heading>
-                <Icon>
-                    <Icon id="feat_0">
-                        <Link id="feat_0">
-                            <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
-                        </Link>
-                    </Icon>
+                <Icon id="link_0">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
                 </Icon>
+                <heading>0</heading>
             </IconStyle>
         </Style>
         <name>Tours</name>

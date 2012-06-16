@@ -4,7 +4,7 @@
         <name>Various</name>
         <open>1</open>
         <NetworkLink id="feat_3">
-            <Link id="feat_0">
+            <Link id="link_0">
                 <href>http://www.foobar.com/foo/bar.kml</href>
             </Link>
             <name>Broken NetworkLink</name>
@@ -36,15 +36,11 @@
                 <IconStyle id="substyle_0">
                     <scale>1</scale>
                     <colorMode>normal</colorMode>
+                    <Icon id="link_1">
+                        <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                    </Icon>
                     <hotSpot x="0.5" xunits="fraction" y="0.5" yunits="fraction"/>
                     <heading>0</heading>
-                    <Icon>
-                        <Icon id="feat_1">
-                            <Link id="feat_1">
-                                <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
-                            </Link>
-                        </Icon>
-                    </Icon>
                 </IconStyle>
             </Style>
             <name>Geometry</name>

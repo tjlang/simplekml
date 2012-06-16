@@ -5,14 +5,10 @@
             <IconStyle id="substyle_10">
                 <scale>1</scale>
                 <colorMode>normal</colorMode>
-                <heading>0</heading>
-                <Icon>
-                    <Icon id="feat_9">
-                        <Link id="feat_9">
-                            <href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href>
-                        </Link>
-                    </Icon>
+                <Icon id="link_9">
+                    <href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href>
                 </Icon>
+                <heading>0</heading>
             </IconStyle>
             <LabelStyle id="substyle_9">
                 <colorMode>normal</colorMode>
@@ -415,7 +411,6 @@
                     <scale>1</scale>
                     <colorMode>normal</colorMode>
                     <heading>0</heading>
-                    <Icon/>
                 </IconStyle>
             </Style>
             <Style id="stylesel_1">
@@ -423,7 +418,6 @@
                     <scale>1</scale>
                     <colorMode>normal</colorMode>
                     <heading>0</heading>
-                    <Icon/>
                 </IconStyle>
             </Style>
             <Style id="stylesel_2">
@@ -431,7 +425,6 @@
                     <scale>1</scale>
                     <colorMode>normal</colorMode>
                     <heading>0</heading>
-                    <Icon/>
                 </IconStyle>
             </Style>
             <Style id="stylesel_3">
@@ -439,7 +432,6 @@
                     <scale>1</scale>
                     <colorMode>normal</colorMode>
                     <heading>0</heading>
-                    <Icon/>
                 </IconStyle>
             </Style>
             <Style id="stylesel_4">
@@ -447,7 +439,6 @@
                     <scale>1</scale>
                     <colorMode>normal</colorMode>
                     <heading>0</heading>
-                    <Icon/>
                 </IconStyle>
             </Style>
             <Style id="stylesel_5">
@@ -455,7 +446,6 @@
                     <scale>1</scale>
                     <colorMode>normal</colorMode>
                     <heading>0</heading>
-                    <Icon/>
                 </IconStyle>
             </Style>
             <Style id="stylesel_6">
@@ -463,7 +453,6 @@
                     <scale>1</scale>
                     <colorMode>normal</colorMode>
                     <heading>0</heading>
-                    <Icon/>
                 </IconStyle>
             </Style>
             <Style id="stylesel_7">
@@ -471,7 +460,6 @@
                     <scale>1</scale>
                     <colorMode>normal</colorMode>
                     <heading>0</heading>
-                    <Icon/>
                 </IconStyle>
             </Style>
             <Style id="stylesel_8">
@@ -479,7 +467,6 @@
                     <scale>1</scale>
                     <colorMode>normal</colorMode>
                     <heading>0</heading>
-                    <Icon/>
                 </IconStyle>
             </Style>
             <name>Lo. Regions</name>

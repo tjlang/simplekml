@@ -24,14 +24,10 @@
                     <scale>1</scale>
                     <color>ffff00ff</color>
                     <colorMode>normal</colorMode>
-                    <heading>45</heading>
-                    <Icon>
-                        <Icon id="feat_0">
-                            <Link id="feat_0">
-                                <href>http://maps.google.com/mapfiles/kml/shapes/arrow.png</href>
-                            </Link>
-                        </Icon>
+                    <Icon id="link_0">
+                        <href>http://maps.google.com/mapfiles/kml/shapes/arrow.png</href>
                     </Icon>
+                    <heading>45</heading>
                 </IconStyle>
                 <LabelStyle id="substyle_0">
                     <color>ff0000ff</color>
