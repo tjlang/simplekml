@@ -3,7 +3,7 @@ from distutils.core import setup
 setup(
     name = 'simplekml',
     packages = ['simplekml'],
-    version = '0.9.2',
+    version = '0.9.3',
     description = 'A Simple KML creator',
     author='Kyle Lancaster',
     author_email='kyle.lan@gmail.com',

@@ -12,7 +12,7 @@
             <name>Examples</name>
             <styleUrl>#stylesel_0</styleUrl>
             <NetworkLink id="feat_4">
-                <Link id="feat_0">
+                <Link id="link_0">
                     <href>http://simplekml.googlecode.com/hg/samples/examples/E00%20Usage.kml</href>
                 </Link>
                 <name>E00 Usage</name>
@@ -63,7 +63,7 @@ kml&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;save(os&lt;span st
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</description>
             </NetworkLink>
             <NetworkLink id="feat_5">
-                <Link id="feat_1">
+                <Link id="link_1">
                     <href>http://simplekml.googlecode.com/hg/samples/examples/E01%20Basics.kml</href>
                 </Link>
                 <name>E01 Basics</name>
@@ -216,7 +216,7 @@ kml&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;save(os&lt;span st
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</description>
             </NetworkLink>
             <NetworkLink id="feat_6">
-                <Link id="feat_2">
+                <Link id="link_2">
                     <href>http://simplekml.googlecode.com/hg/samples/examples/E02%20Styling.kml</href>
                 </Link>
                 <name>E02 Styling</name>
@@ -317,7 +317,7 @@ kml&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;save(os&lt;span st
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</description>
             </NetworkLink>
             <NetworkLink id="feat_7">
-                <Link id="feat_3">
+                <Link id="link_3">
                     <href>http://simplekml.googlecode.com/hg/samples/examples/E03%20Various.kml</href>
                 </Link>
                 <name>E03 Various</name>
@@ -445,7 +445,7 @@ kml&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;save(os&lt;span st
             <name>Tutorials</name>
             <styleUrl>#stylesel_1</styleUrl>
             <NetworkLink id="feat_9">
-                <Link id="feat_4">
+                <Link id="link_4">
                     <href>http://simplekml.googlecode.com/hg/samples/tutorials/T00%20Point.kml</href>
                 </Link>
                 <name>T00 Point</name>
@@ -742,7 +742,7 @@ kml&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;save(os&lt;span st
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</description>
             </NetworkLink>
             <NetworkLink id="feat_10">
-                <Link id="feat_5">
+                <Link id="link_5">
                     <href>http://simplekml.googlecode.com/hg/samples/tutorials/T01%20LineString.kml</href>
                 </Link>
                 <name>T01 LineString</name>
@@ -809,7 +809,7 @@ kml&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;save(os&lt;span st
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</description>
             </NetworkLink>
             <NetworkLink id="feat_11">
-                <Link id="feat_6">
+                <Link id="link_6">
                     <href>http://simplekml.googlecode.com/hg/samples/tutorials/T03%20MultiGeometry.kml</href>
                 </Link>
                 <name>T03 MultiGeometry</name>
@@ -922,7 +922,7 @@ kml&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;save(os&lt;span st
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</description>
             </NetworkLink>
             <NetworkLink id="feat_12">
-                <Link id="feat_7">
+                <Link id="link_7">
                     <href>http://simplekml.googlecode.com/hg/samples/tutorials/T04%20Overlays.kml</href>
                 </Link>
                 <name>T04 Overlays</name>
@@ -1001,7 +1001,7 @@ kml&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;save(os&lt;span st
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</description>
             </NetworkLink>
             <NetworkLink id="feat_13">
-                <Link id="feat_8">
+                <Link id="link_8">
                     <href>http://simplekml.googlecode.com/hg/samples/tutorials/T05_ExtendedData.kml</href>
                 </Link>
                 <name>T05_ExtendedData</name>
@@ -1164,7 +1164,7 @@ kml&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;save(os&lt;span st
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</description>
             </NetworkLink>
             <NetworkLink id="feat_14">
-                <Link id="feat_9">
+                <Link id="link_9">
                     <href>http://simplekml.googlecode.com/hg/samples/tutorials/T06_Tracks.kml</href>
                 </Link>
                 <name>T06_Tracks</name>
@@ -1305,7 +1305,7 @@ kml&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;save(os&lt;span st
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</description>
             </NetworkLink>
             <NetworkLink id="feat_15">
-                <Link id="feat_10">
+                <Link id="link_10">
                     <href>http://simplekml.googlecode.com/hg/samples/tutorials/T07_Tours.kml</href>
                 </Link>
                 <name>T07_Tours</name>

@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Contact me at kyle.lan@gmail.com
 """
 
-from abstractview import Camera, LookAt
+from simplekml.abstractview import Camera, LookAt
 from simplekml.base import Kmlable, Snippet, OverlayXY, ScreenXY, RotationXY, Size
 from simplekml.coordinates import Coordinates
 from simplekml.icon import Icon, Link
@@ -375,7 +375,7 @@ class Feature(Kmlable):
             self._addstyle(stylemap.normalstyle)
             self._addstyle(stylemap.highlightstyle)
         str = '<{0} id="{1}">'.format(self.__class__.__name__, self._id)
-        buf.append(str.encode('utf-8'))
+        buf.append(str)
         for style in self._styles:
             buf.append(style.__str__())
         for stylemap in self._stylemaps:
