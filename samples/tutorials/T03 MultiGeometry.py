@@ -22,7 +22,7 @@ for x in range(16, 36, 2):
     linecoords = []
     if x < 34: # Label region
         lo = lolabels.newpoint(name=str(x+1), coords=[(x+1, -29)])
-        lo.iconstyle.icon = "" # Remove the icons
+        lo.iconstyle.icon.href = "" # Remove the icons
     for y in range(-35, -19, 2):
         multipnt.newpoint(coords=[(x, y)])
         linecoords.append((x,y))

@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Contact me at kyle.lan@gmail.com
 """
 
-from simplekml.base import Kmlable
+from simplekml.base import Kmlable, check
 from simplekml.abstractview import Camera, LookAt
 
 class GxTourPrimitive(Kmlable):
@@ -42,7 +42,7 @@ class GxTourPrimitive(Kmlable):
 class GxSoundCue(GxTourPrimitive):
     """Specifies a sound to be played in a tour.
 
-    The arguments are the same as the properties.
+    The arguments are the same as the properties. See :class:`simplekml.GxTour` for usage.
     """
     def __init__(self,
                  href=None,
@@ -88,7 +88,7 @@ class GxTourControl(GxTourPrimitive):
 
     @property
     def gxplaymode(self):
-        """String to pause the tour."""
+        """String to pause the tour, accepts :class:`simplekml.GxPlayMode` constants."""
         return self._kml['gx:playMode']
 
     @gxplaymode.setter
@@ -105,7 +105,7 @@ class GxTourControl(GxTourPrimitive):
 class GxWait(GxTourPrimitive):
     """Allows a tour to be paused.
 
-    The arguments are the same as the properties.
+    The arguments are the same as the properties. See :class:`simplekml.GxTour` for usage.
     """
     def __init__(self,
                  gxduration=None):
@@ -130,7 +130,7 @@ class GxWait(GxTourPrimitive):
 class GxFlyTo(GxTourPrimitive):
     """Allows unbroken flight from point to point.
 
-    The arguments are the same as the properties.
+    The arguments are the same as the properties. See :class:`simplekml.GxTour` for usage.
     """
 
     bounce = "bounce"
@@ -161,7 +161,7 @@ class GxFlyTo(GxTourPrimitive):
 
     @property
     def gxflytomode(self):
-        """How the caera behaves, smooth or bounce string."""
+        """How the camera behaves, accepts :class:`simplekml.GxFlyToMode` constants."""
         return self._kml['gx:flyToMode']
 
     @gxflytomode.setter
@@ -176,6 +176,7 @@ class GxFlyTo(GxTourPrimitive):
         return self._abstractview
 
     @camera.setter
+    @check(Camera)
     def camera(self, camera):
         self._abstractview = camera
 
@@ -187,6 +188,7 @@ class GxFlyTo(GxTourPrimitive):
         return self._abstractview
 
     @lookat.setter
+    @check(LookAt)
     def lookat(self, lookat):
         self._abstractview = lookat
 
@@ -197,61 +199,10 @@ class GxFlyTo(GxTourPrimitive):
         return "".join(buf)
 
 
-class GxAnimatedUpdate(GxTourPrimitive):
-    """Controls changes during a tour to KML features.
-
-    The arguments are the same as the properties.
-    """
-
-    def __init__(self,
-                 gxduration=None,
-                 gxdelayedstart=None,
-                 update=None):
-        super(GxAnimatedUpdate, self).__init__()
-        self._kml['gx:duration'] = gxduration
-        self._kml['gx:delayedStart'] = gxdelayedstart
-        self._kml['Update'] = update
-
-    @property
-    def gxduration(self):
-        """Double indicating how long the camera remains still."""
-        return self._kml['gx:duration']
-
-    @gxduration.setter
-    def gxduration(self, gxduration):
-        self._kml['gx:duration'] = gxduration
-
-    @property
-    def gxdelayedstart(self):
-        """Double of number of seconds to wait before starting."""
-        return self._kml['gx:delayedStart']
-
-    @gxdelayedstart.setter
-    def gxdelayedstart(self, gxdelayedstart):
-        self._kml['gx:delayedStart'] = gxdelayedstart
-
-    @property
-    def update(self):
-        """Instance of :class:`simplekml.Update`"""
-        if self._kml['Update'] is None:
-            self._kml['Update'] = Update()
-        return self._kml['Update']
-
-    @update.setter
-    def update(self, update):
-        self._kml['Update'] = update
-
-    def __str__(self):
-        buf = ['<gx:AnimatedUpdate id="{0}">'.format(self._id),
-               super(GxAnimatedUpdate, self).__str__(),
-               '</gx:AnimatedUpdate>'.format(self._id)]
-        return "".join(buf)
-
-
 class Update(Kmlable):
     """Action to take when animation updates.
 
-    The arguments are the same as the properties.
+    The arguments are the same as the properties. See :class:`simplekml.GxTour` for usage.
     """
     def __init__(self,
                  targethref=None,
@@ -304,10 +255,62 @@ class Update(Kmlable):
         self._kml['Delete'] = delete
 
 
+class GxAnimatedUpdate(GxTourPrimitive):
+    """Controls changes during a tour to KML features.
+
+    The arguments are the same as the properties. See :class:`simplekml.GxTour` for usage.
+    """
+
+    def __init__(self,
+                 gxduration=None,
+                 gxdelayedstart=None,
+                 update=None):
+        super(GxAnimatedUpdate, self).__init__()
+        self._kml['gx:duration'] = gxduration
+        self._kml['gx:delayedStart'] = gxdelayedstart
+        self._kml['Update'] = update
+
+    @property
+    def gxduration(self):
+        """Double indicating how long the camera remains still."""
+        return self._kml['gx:duration']
+
+    @gxduration.setter
+    def gxduration(self, gxduration):
+        self._kml['gx:duration'] = gxduration
+
+    @property
+    def gxdelayedstart(self):
+        """Double of number of seconds to wait before starting."""
+        return self._kml['gx:delayedStart']
+
+    @gxdelayedstart.setter
+    def gxdelayedstart(self, gxdelayedstart):
+        self._kml['gx:delayedStart'] = gxdelayedstart
+
+    @property
+    def update(self):
+        """Instance of :class:`simplekml.Update`"""
+        if self._kml['Update'] is None:
+            self._kml['Update'] = Update()
+        return self._kml['Update']
+
+    @update.setter
+    @check(Update)
+    def update(self, update):
+        self._kml['Update'] = update
+
+    def __str__(self):
+        buf = ['<gx:AnimatedUpdate id="{0}">'.format(self._id),
+               super(GxAnimatedUpdate, self).__str__(),
+               '</gx:AnimatedUpdate>'.format(self._id)]
+        return "".join(buf)
+
+
 class GxPlaylist(Kmlable):
     """Defines a part of a tour.
 
-    The arguments are the same as the properties.
+    The arguments are the same as the properties. See :class:`simplekml.GxTour` for usage.
     """
     def __init__(self, gxtourprimitives=None):
         super(GxPlaylist, self).__init__()
@@ -315,6 +318,7 @@ class GxPlaylist(Kmlable):
         if gxtourprimitives is not None:
             self.gxtourprimitives += gxtourprimitives
 
+    @check(GxTourPrimitive, True)
     def addgxtourprimitive(self, gxtourprimitive):
         """Adds a :class:`simplekml.GxTourPrimitive` sub-class."""
         self.gxtourprimitives.append(gxtourprimitive)
@@ -381,6 +385,49 @@ class GxTour(GxTourPrimitive):
     """Defines a tour.
 
     The arguments are the same as the properties.
+
+    Usage::
+
+        # Demonstrates touring with the reproduction of the tour sample in the KML Reference
+        # https://developers.google.com/kml/documentation/kmlreference#gxtour with the addition of GxSoundCue
+
+        import os
+        import simplekml
+
+        # Create an instance of kml
+        kml = simplekml.Kml(name="Tours", open=1)
+
+        # Create a new point and style it
+        pnt = kml.newpoint(name="New Zealand's Southern Alps", coords=[(170.144,-43.605)])
+        pnt.style.iconstyle.scale = 1.0
+
+        # Create a tour and attach a playlist to it
+        tour = kml.newgxtour(name="Play me!")
+        playlist = tour.newgxplaylist()
+
+        # Attach a gx:SoundCue to the playlist and delay playing by 2 second (sound clip is about 4 seconds long)
+        soundcue = playlist.newgxsoundcue()
+        soundcue.href = "http://simplekml.googlecode.com/hg/samples/resources/drum_roll_1.wav"
+        soundcue.gxdelayedstart = 2
+
+        # Attach a gx:AnimatedUpdate to the playlist
+        animatedupdate = playlist.newgxanimatedupdate(gxduration=6.5)
+        animatedupdate.update.change = '<IconStyle targetId="{0}"><scale>10.0</scale></IconStyle>'.format(pnt.style.iconstyle.id)
+
+        # Attach a gx:FlyTo to the playlist
+        flyto = playlist.newgxflyto(gxduration=4.1)
+        flyto.camera.longitude = 170.157
+        flyto.camera.latitude = -43.671
+        flyto.camera.altitude = 9700
+        flyto.camera.heading = -6.333
+        flyto.camera.tilt = 33.5
+        flyto.camera.roll = 0
+
+        # Attach a gx:Wait to the playlist to give the gx:AnimatedUpdate time to finish
+        wait = playlist.newgxwait(gxduration=2.4)
+
+        # Save to file
+        kml.save(os.path.splitext(__file__)[0] + ".kml")
     """
     def __init__(self,
                  name=None,

@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Contact me at kyle.lan@gmail.com
 """
 
-from simplekml.base import Kmlable
+from simplekml.base import Kmlable, check
 
 class SimpleField(Kmlable):
     """Custom field, forms part of a schema.
@@ -347,12 +347,13 @@ class ExtendedData(Kmlable):
 
     @property
     def schemadata(self):
-        """Extra data for the feature."""
+        """Extra data for the feature, accepts :class:`simplekml.SchemaData`."""
         if self._kml['schemaData_'] is None:
             self._kml['schemaData_'] = SchemaData()
         return self._kml['schemaData_']
 
     @schemadata.setter
+    @check(SchemaData)
     def schemadata(self, schemadata):
         self._kml['schemaData_'] = schemadata
 

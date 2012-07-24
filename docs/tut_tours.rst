@@ -4,7 +4,7 @@ Tour Tutorial
 About
 ^^^^^
 
-How to create a tour. We will create a KML that will reproduce the tour sample in the `KML Reference <https://developers.google.com/kml/documentation/kmlreference#gxtour>`_ with the edition of :class:`simplkml.GxSoundCue`.
+How to create a tour. We will create a KML that will reproduce the tour sample in the `KML Reference <https://developers.google.com/kml/documentation/kmlreference#gxtour>`_ with the edition of :class:`simplekml.GxSoundCue`.
 
 Creating the Code
 ^^^^^^^^^^^^^^^^^

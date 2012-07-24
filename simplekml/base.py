@@ -31,7 +31,11 @@ class Kmlable(object):
     _namespaces = ['xmlns="http://www.opengis.net/kml/2.2"', 'xmlns:gx="http://www.google.com/kml/ext/2.2"']
 
     def __init__(self):
-        self._kml = {}
+        try:
+            from collections import OrderedDict
+            self._kml = OrderedDict()
+        except ImportError:
+            self._kml = {}
 
     def __str__(self):
         """This is where the magic happens."""
@@ -44,10 +48,10 @@ class Kmlable(object):
                     if var in ['name', 'description', 'text'] and Kmlable._parse: # Parse value for HTML and convert
                         val = Kmlable._chrconvert(val)
                     elif (var == 'href' and os.path.exists(val) and Kmlable._kmz == True)\
-                            or (var == 'targetHref' and os.path.exists(val) and Kmlable._kmz == True): # Check for local images
+                            or (var == 'targetHref' and os.path.exists(val) and Kmlable._kmz == True): # Check for images
                         Kmlable._addimage(val)
                         val = os.path.join('files', os.path.split(val)[1])
-                    buf.append(u("<{0}>{1}</{0}>").format(var, val))  # Enclose the variable's __str__ with the variables name
+                    buf.append(u("<{0}>{1}</{0}>").format(var, val))  # Enclose the variable's __str__ with its name
                     # Add namespaces
                     if var.startswith("atom:") and 'xmlns:atom="http://www.w3.org/2005/Atom"' not in Kmlable._namespaces:
                         Kmlable._namespaces.append('xmlns:atom="http://www.w3.org/2005/Atom"')
@@ -147,11 +151,10 @@ class Vector2(object):
     def yunits(self, yunits):
         self._kml['yunits'] = yunits
 
-
-
     def __str__(self):
         cname = self.__class__.__name__[0].lower() + self.__class__.__name__[1:]
-        return '<{0} x="{1}" y="{2}" xunits="{3}" yunits="{4}" />'.format(cname, self._kml['x'], self._kml['y'], self._kml['xunits'], self._kml['yunits'])
+        return '<{0} x="{1}" y="{2}" xunits="{3}" yunits="{4}" />'.format(cname, self._kml['x'], self._kml['y'],
+                                                                          self._kml['xunits'], self._kml['yunits'])
 
 
 class OverlayXY(Vector2):
@@ -238,8 +241,7 @@ class Snippet(object):
         
     def __str__(self):
         if self._kml['maxlines'] is not None:
-            return '<Snippet maxLines="{0}">{1}</Snippet>'.format(self._kml['maxlines'],
-                                                                  self._kml['content'])
+            return '<Snippet maxLines="{0}">{1}</Snippet>'.format(self._kml['maxlines'],self._kml['content'])
         else:
             return '<Snippet>{0}</Snippet>'.format(self._kml['content'])
 
@@ -270,3 +272,20 @@ class KmlElement(xml.dom.minidom.Element):
             writer.write(newl)
         else:
             KmlElement._original_element.writexml(self, writer, indent, addindent, newl)
+
+
+def check(classtype, subclass=False):
+    def _second(f):
+        def _inner(self, value):
+            if value is not None:
+                if subclass:
+                    if not isinstance(value, classtype):
+                        raise TypeError("{0} is an invalid type. Accepts an instance of a subclass of " \
+                                        "simplekml.{1}".format(value.__class__.__name__, classtype.__name__))
+                else:
+                    if not type(value) is classtype:
+                        raise TypeError("{0} is an invalid type. Accepts an instance of " \
+                                        "simplekml.{1}".format(value.__class__.__name__, classtype.__name__))
+            return f(self, value)
+        return _inner
+    return _second

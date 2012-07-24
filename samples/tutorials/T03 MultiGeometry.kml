@@ -3,12 +3,12 @@
     <Document id="feat_1">
         <Style id="stylesel_9">
             <IconStyle id="substyle_10">
-                <scale>1</scale>
                 <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
                 <Icon id="link_9">
                     <href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href>
                 </Icon>
-                <heading>0</heading>
             </IconStyle>
             <LabelStyle id="substyle_9">
                 <colorMode>normal</colorMode>
@@ -23,28 +23,28 @@
             </LineStyle>
         </Style>
         <Style id="stylesel_11">
-            <PolyStyle id="substyle_12">
-                <color>7700a5ff</color>
-                <colorMode>normal</colorMode>
-                <outline>1</outline>
-                <fill>1</fill>
-            </PolyStyle>
             <LineStyle id="substyle_13">
                 <color>7700a5ff</color>
                 <colorMode>normal</colorMode>
             </LineStyle>
+            <PolyStyle id="substyle_12">
+                <color>7700a5ff</color>
+                <colorMode>normal</colorMode>
+                <fill>1</fill>
+                <outline>1</outline>
+            </PolyStyle>
         </Style>
         <Style id="stylesel_12">
-            <PolyStyle id="substyle_14">
-                <color>77e6d8ad</color>
-                <colorMode>normal</colorMode>
-                <outline>1</outline>
-                <fill>1</fill>
-            </PolyStyle>
             <LineStyle id="substyle_15">
                 <color>77e6d8ad</color>
                 <colorMode>normal</colorMode>
             </LineStyle>
+            <PolyStyle id="substyle_14">
+                <color>77e6d8ad</color>
+                <colorMode>normal</colorMode>
+                <fill>1</fill>
+                <outline>1</outline>
+            </PolyStyle>
         </Style>
         <name>MultiGeometry</name>
         <open>1</open>
@@ -408,65 +408,92 @@
         <Folder id="feat_6">
             <Style id="stylesel_0">
                 <IconStyle id="substyle_0">
-                    <scale>1</scale>
                     <colorMode>normal</colorMode>
+                    <scale>1</scale>
                     <heading>0</heading>
+                    <Icon id="link_0">
+                        <href/>
+                    </Icon>
                 </IconStyle>
             </Style>
             <Style id="stylesel_1">
                 <IconStyle id="substyle_1">
-                    <scale>1</scale>
                     <colorMode>normal</colorMode>
+                    <scale>1</scale>
                     <heading>0</heading>
+                    <Icon id="link_1">
+                        <href/>
+                    </Icon>
                 </IconStyle>
             </Style>
             <Style id="stylesel_2">
                 <IconStyle id="substyle_2">
-                    <scale>1</scale>
                     <colorMode>normal</colorMode>
+                    <scale>1</scale>
                     <heading>0</heading>
+                    <Icon id="link_2">
+                        <href/>
+                    </Icon>
                 </IconStyle>
             </Style>
             <Style id="stylesel_3">
                 <IconStyle id="substyle_3">
-                    <scale>1</scale>
                     <colorMode>normal</colorMode>
+                    <scale>1</scale>
                     <heading>0</heading>
+                    <Icon id="link_3">
+                        <href/>
+                    </Icon>
                 </IconStyle>
             </Style>
             <Style id="stylesel_4">
                 <IconStyle id="substyle_4">
-                    <scale>1</scale>
                     <colorMode>normal</colorMode>
+                    <scale>1</scale>
                     <heading>0</heading>
+                    <Icon id="link_4">
+                        <href/>
+                    </Icon>
                 </IconStyle>
             </Style>
             <Style id="stylesel_5">
                 <IconStyle id="substyle_5">
-                    <scale>1</scale>
                     <colorMode>normal</colorMode>
+                    <scale>1</scale>
                     <heading>0</heading>
+                    <Icon id="link_5">
+                        <href/>
+                    </Icon>
                 </IconStyle>
             </Style>
             <Style id="stylesel_6">
                 <IconStyle id="substyle_6">
-                    <scale>1</scale>
                     <colorMode>normal</colorMode>
+                    <scale>1</scale>
                     <heading>0</heading>
+                    <Icon id="link_6">
+                        <href/>
+                    </Icon>
                 </IconStyle>
             </Style>
             <Style id="stylesel_7">
                 <IconStyle id="substyle_7">
-                    <scale>1</scale>
                     <colorMode>normal</colorMode>
+                    <scale>1</scale>
                     <heading>0</heading>
+                    <Icon id="link_7">
+                        <href/>
+                    </Icon>
                 </IconStyle>
             </Style>
             <Style id="stylesel_8">
                 <IconStyle id="substyle_8">
-                    <scale>1</scale>
                     <colorMode>normal</colorMode>
+                    <scale>1</scale>
                     <heading>0</heading>
+                    <Icon id="link_8">
+                        <href/>
+                    </Icon>
                 </IconStyle>
             </Style>
             <name>Lo. Regions</name>

@@ -3,32 +3,32 @@
     <Document id="feat_1">
         <Style id="stylesel_0">
             <IconStyle id="substyle_0">
-                <scale>1</scale>
                 <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
                 <Icon id="link_0">
                     <href>http://maps.google.com/mapfiles/kml/paddle/1.png</href>
                 </Icon>
-                <heading>0</heading>
             </IconStyle>
         </Style>
         <Style id="stylesel_1">
             <IconStyle id="substyle_1">
-                <scale>1</scale>
                 <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
                 <Icon id="link_1">
                     <href>http://maps.google.com/mapfiles/kml/paddle/2.png</href>
                 </Icon>
-                <heading>0</heading>
             </IconStyle>
         </Style>
         <Style id="stylesel_2">
             <IconStyle id="substyle_2">
-                <scale>1</scale>
                 <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
                 <Icon id="link_2">
                     <href>http://maps.google.com/mapfiles/kml/paddle/3.png</href>
                 </Icon>
-                <heading>0</heading>
             </IconStyle>
             <LineStyle id="substyle_3">
                 <color>ff0000ff</color>
@@ -45,6 +45,8 @@
         <name>ExtendedData</name>
         <open>1</open>
         <Placemark id="feat_2">
+            <name>1. World of Birds (Data)</name>
+            <styleUrl>#stylesel_0</styleUrl>
             <ExtendedData>
                 <Data name="birds">
                     <value>400</value>
@@ -59,8 +61,6 @@
                     <displayName>Annual Visitors</displayName>
                 </Data>
             </ExtendedData>
-            <name>1. World of Birds (Data)</name>
-            <styleUrl>#stylesel_0</styleUrl>
             <Point id="geom_0">
                 <coordinates>18.36196,-34.016543,0.0</coordinates>
             </Point>
@@ -77,6 +77,8 @@
             </SimpleField>
         </Schema>
         <Placemark id="feat_3">
+            <name>2. World of Birds (Simple Data)</name>
+            <styleUrl>#stylesel_1</styleUrl>
             <ExtendedData>
                 <SchemaData schemaUrl="#schema_1">
                     <SimpleData name="birds">400</SimpleData>
@@ -84,8 +86,6 @@
                     <SimpleData name="visitors">10000</SimpleData>
                 </SchemaData>
             </ExtendedData>
-            <name>2. World of Birds (Simple Data)</name>
-            <styleUrl>#stylesel_1</styleUrl>
             <Point id="geom_1">
                 <coordinates>18.36196,-34.017224,0.0</coordinates>
             </Point>
@@ -97,8 +97,8 @@
         </Schema>
         <Placemark id="feat_4">
             <name>3. World of Birds (Simple Array Data)</name>
-            <styleUrl>#stylesel_2</styleUrl>
             <Snippet maxLines="4">Click anywhere on the line or open the elevation profile to view the extended data.</Snippet>
+            <styleUrl>#stylesel_2</styleUrl>
             <gx:Track>
                 <when>2010-05-28T02:00:00Z</when>
                 <when>2010-05-28T02:10:00Z</when>

@@ -3,14 +3,14 @@ from distutils.core import setup
 setup(
     name = 'simplekml',
     packages = ['simplekml'],
-    version = '0.9.3',
+    version = '1.0.0',
     description = 'A Simple KML creator',
     author='Kyle Lancaster',
     author_email='kyle.lan@gmail.com',
     url='http://code.google.com/p/simplekml/',
     license='GNU General Public License',
     classifiers=[
-            'Development Status :: 4 - Beta',
+            'Development Status :: 5 - Production/Stable',
             'Programming Language :: Python',
             'Programming Language :: Python :: 2.6',
             'Programming Language :: Python :: 2.7',

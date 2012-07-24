@@ -17,8 +17,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Contact me at kyle.lan@gmail.com
 """
 
-from simplekml.base import Kmlable
+from simplekml.base import Kmlable, check
 from simplekml.constants import AltitudeMode
+from simplekml.coordinates import Coordinates
 
 
 class Box(Kmlable):
@@ -211,24 +212,26 @@ class GxLatLonQuad(Kmlable):
     """
     def __init__(self, coords=None):
         super(GxLatLonQuad, self).__init__()
-        self._coords = None
-        self._kml["coordinates"] = coords
+        self._kml['coordinates'] = Coordinates()
+        self.coords = coords
 
     @property
     def coords(self):
-        """Four corners of quad coordinates, accepts list of four tuples.
+        """Four corners of quad coordinates, accepts list of four tuples in the order lon, lat.
 
-        eg. [(0, 1), (1,1), (1,0), (0,0)]
+        The coordinates must be specified in counter-clockwise order with the first coordinate corresponding to the
+        lower-left corner of the overlayed image. eg. [(0, 1), (1,1), (1,0), (0,0)]
         """
-        return self._coords
+        return self._kml['coordinates']
 
     @coords.setter
     def coords(self, coords):
-        self._kml["coordinates"] = ''
-        self._coords = coords
-        for coord in coords:
-            self._kml["coordinates"] += "{0},{1} ".format(coord[0], coord[1])
-        self._kml["coordinates"] = self._kml["coordinates"][:-1]
+        if coords is None:
+            coords = []
+        elif len(coords) < 4:
+            raise ValueError("Invalid list length. List should contain 4 tuples.")
+        self._kml['coordinates'] = Coordinates()
+        self._kml['coordinates'].addcoordinates(coords)
 
 
 class Region(Kmlable):
@@ -251,6 +254,7 @@ class Region(Kmlable):
         return self._kml["LatLonAltBox"]
 
     @latlonaltbox.setter
+    @check(LatLonAltBox)
     def latlonaltbox(self, latlonaltbox):
         self._kml["LatLonAltBox"] = latlonaltbox
 
@@ -260,5 +264,6 @@ class Region(Kmlable):
         return self._kml["Lod"]
 
     @lod.setter
+    @check(Lod)
     def lod(self, lod):
         self._kml["Lod"] = lod

@@ -1,13 +1,6 @@
 Containers
 ==========
 
-Container
----------
-
-.. autoclass:: simplekml.Container
-    :members:
-    :inherited-members:
-
 Document
 --------
 

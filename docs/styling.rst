@@ -6,7 +6,7 @@ A style tells Google Earth how to render a feature. For more information on styl
 Concept
 -------
 
-Every feature can have a :class:`simplekml.Style` that tells Google Earth how to render it. A :class:`simplekml.Style` can have different 'substyles':  :class:`simplekml.IconStyle`, :class:`simplekml.IconStyle`, :class:`simplekml.LineStyle` and :class:`simplekml.PolyStyle`. 
+Every feature can have a :class:`simplekml.Style` that tells Google Earth how to render it. A :class:`simplekml.Style` can have different 'substyles':  :class:`simplekml.IconStyle`, :class:`simplekml.IconStyle`, :class:`simplekml.LineStyle`, :class:`simplekml.PolyStyle`, :class:`simplekml.BalloonStyle` and :class:`simplekml.ListStyle`.
 
 In simplekml a feature, by default, has no style, but as soon as you assign a value to one of the feature's :class:`simplekml.Style`'s properties the style is automatically created. In the generated KML the style becomes a child of the containing element (:class:`simplekml.Document`, :class:`simplekml.Folder`, etc). Here is an example::
 
@@ -16,8 +16,7 @@ In simplekml a feature, by default, has no style, but as soon as you assign a va
     fol = kml.newfolder("A Folder")
     pnt = fol.newpoint(name="Kirstenbosch", coords=[(18.432314,-33.988862)])
     pnt.style.labelstyle.color = 'ff0000ff'  # Red
-    
-    print kml
+    kml.save("singlestyle.kml")
 
 With the resulting generated KML:
 
@@ -99,7 +98,7 @@ And the generated KML:
 
 The above was abbreviated a bit because the KML contains (2*180/10)^2 styles (one for each of the points we created, which is 1296 styles). As you can imagine, the resulting KML file will be quite huge! 
 
-To make the KML much smaller we can create a 'global' style and associate it with each feature::
+To make the KML much smaller we can create a 'shared' style and associate it with each feature::
 
 
     from simplekml import Kml, Style
@@ -108,16 +107,16 @@ To make the KML much smaller we can create a 'global' style and associate it wit
 
     fol = kml.newfolder(name="A Folder")
 
-    globalstyle = Style()
-    globalstyle.labelstyle.color = 'ff0000ff'  # Red
+    sharedstyle = Style()
+    sharedstyle.labelstyle.color = 'ff0000ff'  # Red
 
     for lon in range(-180, 180, 10):
         for lat in range(-180, 180, 10):  # 10 Degree grid of points
             pnt = fol.newpoint(name="{0},{1}".format(lon, lat), coords=[(lon,lat)])
         # pnt.style.labelstyle.color = 'ff0000ff'  # (Bad!) This results in (2*180/10)^2 styles
-            pnt.style = globalstyle  		   # (Much better!) This results in a single styles
+            pnt.style = sharedstyle  		   # (Much better!) This results in a single styles
 
-    kml.save("globalstyle.kml")
+    kml.save("sharedstyle.kml")
 
 And the KML:
 
@@ -157,13 +156,13 @@ And the KML:
     </kml>
 
 
-Now this is much better! We only have one style at the beginning of the KML followed by all the points. What happened here is that a 'global' style was created by creating an instance of the :class:`simplekml.Style` class `globalstyle = Style()`, then the style's properties were changed and finally the `globalstyle` was assigned to each point's style's property.
+Now this is much better! We only have one style at the beginning of the KML followed by all the points. What happened here is that a 'shared' style was created by creating an instance of the :class:`simplekml.Style` class `sharedstyle = Style()`, then the style's properties were changed and finally the `sharedstyle` was assigned to each point's style property.
 
-In summary, there are two ways to style: changing the properties of an individual feature and creating a 'global' style and assigning it to all the relevant features.
+In summary, there are two ways to style: changing the properties of an individual feature and creating a 'shared' style and assigning it to all the relevant features.
 
 .. note::
 
-    There is a 'shorthand' methodwhen dealing with changing the properties of an individual feature. The following 'longhand' line of code::
+    There is a 'shorthand' method when dealing with changing the properties of an individual feature. The following 'longhand' line of code::
 
       pnt.style.labelstyle.color = 'ff0000ff'  # Red
 
@@ -181,7 +180,7 @@ A :class:`simplekml.Point` has two 'substyles' that can be altered to render it:
     pnt = kml.newpoint(name="Kirstenbosch", coords=[(18.432314,-33.988862)])
     pnt.style.labelstyle.color = 'ff0000ff'  # Red
 
-That changed the text "Kirestenbosch" to red. See `KML Reference <http://code.google.com/apis/kml/documentation/kmlreference.html#color KML Reference>`_ for the format of the color string. Now lets edit some more of the style::
+That changed the text "Kirstenbosch" to red. See `KML Reference <http://code.google.com/apis/kml/documentation/kmlreference.html#color KML Reference>`_ for the format of the color string (you could also use the :class:`simplekml.Color` class). Now lets edit some more of the style::
 
     pnt.style.labelstyle.scale = 2  # Text twice as big
     pnt.style.iconstyle.color = 'ffff0000'  # Blue
@@ -218,4 +217,15 @@ A :class:`simplekml.Polygon` has two 'substyles' that can be altered to render i
     
 Styling MultiGeometry
 ---------------------
-Applying a style to M
+
+Applying a style to MultiGeometry applies the style to all the individual geometries in that MultiGeometry collection. Therefore, styling multigeometry is the same as styling normal geometry::
+
+    from simplekml import Kml
+    kml = Kml()
+    multipnt = kml.newmultigeometry(name="Points")
+    for lon in range(4):
+        for lat in range(4):
+            multipnt.newpoint(coords=[(lon,lat)])
+    multipnt.style.labelstyle.color = 'ff0000ff'  # Red
+
+

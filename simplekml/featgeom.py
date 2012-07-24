@@ -18,7 +18,7 @@ Contact me at kyle.lan@gmail.com
 """
 
 from simplekml.abstractview import Camera, LookAt
-from simplekml.base import Kmlable, Snippet, OverlayXY, ScreenXY, RotationXY, Size
+from simplekml.base import Kmlable, Snippet, OverlayXY, ScreenXY, RotationXY, Size, check
 from simplekml.coordinates import Coordinates
 from simplekml.icon import Icon, Link
 from simplekml.model import Location, Orientation, Scale, ResourceMap
@@ -26,6 +26,7 @@ from simplekml.overlay import ViewVolume, ImagePyramid
 from simplekml.region import LatLonBox, GxLatLonQuad, Region
 from simplekml.schema import ExtendedData, Schema
 from simplekml.styleselector import Style, StyleMap
+from simplekml.substyle import IconStyle, LabelStyle, BalloonStyle, LineStyle, ListStyle, PolyStyle
 from simplekml.timeprimitive import TimeSpan, TimeStamp
 from simplekml.tour import GxTour
 
@@ -71,8 +72,8 @@ class Feature(Kmlable):
         self._kml['Camera'] = camera
         self._kml['LookAt'] = lookat
         self._kml['snippet_'] = snippet
-        self._kml['TimeStamp'] = timestamp
-        self._kml['TimeSpan'] = timespan
+        self._kml['TimeStamp_'] = timestamp
+        self._kml['TimeSpan_'] = timespan
         self._kml['Region'] = region
         self._kml['styleUrl'] = None
         self._kml['ExtendedData'] = extendeddata
@@ -186,6 +187,7 @@ class Feature(Kmlable):
         return self._kml['Camera']
 
     @camera.setter
+    @check(Camera)
     def camera(self, camera):
         self._kml['Camera'] = camera
         self._kml['LookAt'] = None
@@ -199,6 +201,7 @@ class Feature(Kmlable):
         return self._kml['LookAt']
 
     @lookat.setter
+    @check(LookAt)
     def lookat(self, lookat):
         self._kml['Camera'] = None
         self._kml['LookAt'] = lookat
@@ -211,6 +214,7 @@ class Feature(Kmlable):
         return self._kml['snippet_']
 
     @snippet.setter
+    @check(Snippet)
     def snippet(self, snippet):
         self._kml['snippet_'] = snippet
 
@@ -222,30 +226,33 @@ class Feature(Kmlable):
         return self._kml['ExtendedData']
 
     @extendeddata.setter
+    @check(ExtendedData)
     def extendeddata(self, extendeddata):
         self._kml['ExtendedData'] = extendeddata
 
     @property
     def timestamp(self):
         """Single moment in time, accepts :class:`simplekml.TimeStamp`"""
-        if self._kml['TimeStamp'] is None:
-            self._kml['TimeStamp'] = TimeStamp()
-        return self._kml['TimeStamp']
+        if self._kml['TimeStamp_'] is None:
+            self._kml['TimeStamp_'] = TimeStamp()
+        return self._kml['TimeStamp_']
 
     @timestamp.setter
+    @check(TimeStamp)
     def timestamp(self, timestamp):
-        self._kml['TimeStamp'] = timestamp
+        self._kml['TimeStamp_'] = timestamp
 
     @property
     def timespan(self):
         """Period of time, accepts :class:`simplekml.TimeSpan`"""
-        if self._kml['TimeSpan'] is None:
-            self._kml['TimeSpan'] = TimeSpan()
-        return self._kml['TimeSpan']
+        if self._kml['TimeSpan_'] is None:
+            self._kml['TimeSpan_'] = TimeSpan()
+        return self._kml['TimeSpan_']
 
     @timespan.setter
+    @check(TimeSpan)
     def timespan(self, timespan):
-        self._kml['TimeSpan'] = timespan
+        self._kml['TimeSpan_'] = timespan
 
     @property
     def region(self):
@@ -255,6 +262,7 @@ class Feature(Kmlable):
         return self._kml['Region']
 
     @region.setter
+    @check(Region)
     def region(self, region):
         self._kml['Region'] = region
 
@@ -273,6 +281,7 @@ class Feature(Kmlable):
         return self._style
 
     @style.setter
+    @check(Style)
     def style(self, style):
         self._setstyle(style)
         self._addstyle(style)
@@ -288,6 +297,7 @@ class Feature(Kmlable):
         return self._stylemap
 
     @stylemap.setter
+    @check(StyleMap)
     def stylemap(self, stylemap):
         self._setstyle(stylemap)
         self._addstylemap(stylemap)
@@ -308,6 +318,7 @@ class Feature(Kmlable):
         return self.style.iconstyle
 
     @iconstyle.setter
+    @check(IconStyle)
     def iconstyle(self, iconstyle):
         self.style.iconstyle = iconstyle
 
@@ -317,6 +328,7 @@ class Feature(Kmlable):
         return self.style.labelstyle
 
     @labelstyle.setter
+    @check(LabelStyle)
     def labelstyle(self, labelstyle):
         self.style.labelstyle = labelstyle
 
@@ -326,6 +338,7 @@ class Feature(Kmlable):
         return self.style.linestyle
 
     @linestyle.setter
+    @check(LineStyle)
     def linestyle(self, linestyle):
         self.style.linestyle = linestyle
 
@@ -335,6 +348,7 @@ class Feature(Kmlable):
         return self.style.polystyle
 
     @polystyle.setter
+    @check(PolyStyle)
     def polystyle(self, polystyle):
         self.style.polystyle = polystyle
 
@@ -344,6 +358,7 @@ class Feature(Kmlable):
         return self.style.balloonstyle
 
     @balloonstyle.setter
+    @check(BalloonStyle)
     def balloonstyle(self, balloonstyle):
         self.style.balloonstyle = balloonstyle
 
@@ -353,6 +368,7 @@ class Feature(Kmlable):
         return self.style.liststyle
 
     @liststyle.setter
+    @check(ListStyle)
     def liststyle(self, liststyle):
         self.style.liststyle = liststyle
 
@@ -387,6 +403,18 @@ class Feature(Kmlable):
             buf.append(feat.__str__())
         buf.append("</{0}>".format(self.__class__.__name__))
         return "".join(buf)
+
+
+class Container(Feature):
+    """Abstract class, extended by :class:`simplekml.Document` and :class:`simplekml.Folder`
+
+    Arguments are the same as :class:`simplekml.Feature`
+
+    .. note::
+       Not to be used directly.
+    """
+    def __init__(self, **kwargs):
+        super(Container, self).__init__(**kwargs)
 
     def _newfeature(self, cls, **kwargs):
         """Creates a new feature from the given class and attaches it to this
@@ -503,18 +531,6 @@ class Feature(Kmlable):
         """
         return self._newfeature(GxMultiTrack, **kwargs)
 
-
-class Container(Feature):
-    """Abstract class, extended by :class:`simplekml.Document` and :class:`simplekml.Folder`
-
-    Arguments are the same as :class:`simplekml.Feature`
-
-    .. note::
-       Not to be used directly.
-    """
-    def __init__(self, **kwargs):
-        super(Container, self).__init__(**kwargs)
-
     def newfolder(self, **kwargs):
         """Creates a new :class:`simplekml.Folder` and attaches it to this KML document.
 
@@ -560,6 +576,14 @@ class Document(Container):
     """A container for features and styles.
 
     Arguments are the same as the properties.
+
+    Usage::
+
+        import simplekml
+        kml = simplekml.Kml()
+        doc = kml.newdocument(name='A Document')
+        pnt = doc.newpoint()
+        kml.save("Document.kml")
     """
 
     def __init__(self, **kwargs):
@@ -580,35 +604,18 @@ class Folder(Container):
     """A container for features that act like a folder.
 
     Arguments are the same as the properties.
+
+    Usage::
+
+        import simplekml
+        kml = simplekml.Kml()
+        pnt = fol = kml.newfolder(name='A Folder')
+        pnt = fol.newpoint()
+        kml.save("Folder.kml")
     """
 
     def __init__(self, **kwargs):
         super(Folder, self).__init__(**kwargs)
-
-
-class Placemark(Feature):
-    """A Placemark is a Feature with associated Geometry.
-
-    Args:
-      * geometry: any class that inherits from :class:`simplekml.Geometry`
-      * *all other args same as* :class:`simplekml.Feature`
-
-    .. note::
-       Not to be used directly.
-    """
-
-    def __init__(self, geometry=None, **kwargs):
-        super(Placemark, self).__init__(**kwargs)
-        self._kml['Geometry_'] = geometry
-
-    @property
-    def geometry(self):
-        """A class that inherits from :class:`simplekml.Geometry`"""
-        return self._kml['Geometry_']
-
-    @geometry.setter
-    def geometry(self, geom):
-        self._kml['Geometry_'] = geom
 
 
 class Geometry(Kmlable):
@@ -716,6 +723,7 @@ class Geometry(Kmlable):
         return self._placemark.camera
 
     @camera.setter
+    @check(Camera)
     def camera(self, camera):
         self._placemark.camera = camera
 
@@ -727,6 +735,7 @@ class Geometry(Kmlable):
         return self._placemark.lookat
 
     @lookat.setter
+    @check(LookAt)
     def lookat(self, lookat):
         self._placemark.lookat = lookat
 
@@ -736,6 +745,7 @@ class Geometry(Kmlable):
         return self._placemark.snippet
 
     @snippet.setter
+    @check(Snippet)
     def snippet(self, snippet):
         self._placemark.snippet = snippet
 
@@ -745,6 +755,7 @@ class Geometry(Kmlable):
         return self._placemark.extendeddata
 
     @extendeddata.setter
+    @check(ExtendedData)
     def extendeddata(self, extendeddata):
         self._placemark.extendeddata = extendeddata
 
@@ -754,6 +765,7 @@ class Geometry(Kmlable):
         return self._placemark.timespan
 
     @timespan.setter
+    @check(TimeSpan)
     def timespan(self, timespan):
         self._placemark.timespan = timespan
 
@@ -763,6 +775,7 @@ class Geometry(Kmlable):
         return self._placemark.timestamp
 
     @timestamp.setter
+    @check(TimeStamp)
     def timestamp(self, timestamp):
         self._placemark.timestamp = timestamp
 
@@ -772,6 +785,7 @@ class Geometry(Kmlable):
         return self._placemark.region
 
     @region.setter
+    @check(Region)
     def region(self, region):
         self._placemark.region = region
 
@@ -786,6 +800,7 @@ class Geometry(Kmlable):
         return self._style
 
     @style.setter
+    @check(Style)
     def style(self, style):
         self._placemark._setstyle(style)
         if self._parent is not None:
@@ -803,6 +818,7 @@ class Geometry(Kmlable):
         return self._stylemap
 
     @stylemap.setter
+    @check(StyleMap)
     def stylemap(self, stylemap):
         self._placemark._setstyle(stylemap)
         if self._parent is not None:
@@ -815,6 +831,7 @@ class Geometry(Kmlable):
         return self.style.iconstyle
 
     @iconstyle.setter
+    @check(IconStyle)
     def iconstyle(self, iconstyle):
         self.style.iconstyle = iconstyle
 
@@ -824,6 +841,7 @@ class Geometry(Kmlable):
         return self.style.labelstyle
 
     @labelstyle.setter
+    @check(LabelStyle)
     def labelstyle(self, labelstyle):
         self.style.labelstyle = labelstyle
 
@@ -833,6 +851,7 @@ class Geometry(Kmlable):
         return self.style.linestyle
 
     @linestyle.setter
+    @check(LineStyle)
     def linestyle(self, linestyle):
         self.style.linestyle = linestyle
 
@@ -842,6 +861,7 @@ class Geometry(Kmlable):
         return self.style.polystyle
 
     @polystyle.setter
+    @check(PolyStyle)
     def polystyle(self, polystyle):
         self.style.polystyle = polystyle
 
@@ -851,6 +871,7 @@ class Geometry(Kmlable):
         return self.style.balloonstyle
 
     @balloonstyle.setter
+    @check(BalloonStyle)
     def balloonstyle(self, balloonstyle):
         self.style.balloonstyle = balloonstyle
 
@@ -860,6 +881,7 @@ class Geometry(Kmlable):
         return self.style.liststyle
 
     @liststyle.setter
+    @check(ListStyle)
     def liststyle(self, liststyle):
         self.style.liststyle = liststyle
     
@@ -867,6 +889,32 @@ class Geometry(Kmlable):
     def placemark(self):
         """The placemark that contains this feature, read-only."""
         return self._placemark
+
+
+class Placemark(Feature):
+    """A Placemark is a Feature with associated Geometry.
+
+    Args:
+      * geometry: any class that inherits from :class:`simplekml.Geometry`
+      * *all other args same as* :class:`simplekml.Feature`
+
+    .. note::
+       Not to be used directly.
+    """
+
+    def __init__(self, geometry=None, **kwargs):
+        super(Placemark, self).__init__(**kwargs)
+        self._kml['Geometry_'] = geometry
+
+    @property
+    def geometry(self):
+        """Accepts a class that inherits from :class:`simplekml.Geometry`"""
+        return self._kml['Geometry_']
+
+    @geometry.setter
+    @check(Geometry, True)
+    def geometry(self, geom):
+        self._kml['Geometry_'] = geom
 
 
 class PointGeometry(Geometry):
@@ -895,9 +943,9 @@ class PointGeometry(Geometry):
         is given.
 
         Examples:
-        No height: `[(1.0, 1.0), (2.0, 1.0)]`
-        Height:    `[(1.0, 1.0, 50.0), (2.0, 1.0, 10.0)]`
-        Point:     `[(1.0, 1.0)]`
+          * No height: `[(1.0, 1.0), (2.0, 1.0)]`
+          * Height:    `[(1.0, 1.0, 50.0), (2.0, 1.0, 10.0)]`
+          * Point:     `[(1.0, 1.0)]`
         """
         return self._kml['coordinates']
 
@@ -911,6 +959,15 @@ class LinearRing(PointGeometry):
     """A closed line string, typically the outer boundary of a :class:`simplekml.Polygon`
 
     Arguments are the same as the properties.
+
+    Usage::
+
+        import simplekml
+        kml = simplekml.Kml()
+        pol = kml.newpolygon()
+        print pol.outerboundaryis # Shows that the outer boundary of a polygon is a linear ring
+        pol.outerboundaryis.coords = [(0.0,0.0), (1.0,1.0), (2.0,2.0)]
+        kml.save("LinearRing.kml")
     """
     def __init__(self, coords=(),
                  extrude=None,
@@ -986,6 +1043,39 @@ class Point(PointGeometry):
     """A geographic location defined by lon, lat, and altitude.
 
     Arguments are the same as the properties.
+
+    Usage::
+
+        import simplekml
+        kml = simplekml.Kml()
+        pnt = kml.newpoint(name='A Point')
+        pnt.coords = [(1.0, 2.0)]
+        kml.save("Point.kml")
+
+    Styling a Single Point:
+
+        import simplekml
+        kml = simplekml.Kml()
+        pnt = kml.newpoint(name='A Point')
+        pnt.coords = [(1.0, 2.0)]
+        pnt.style.labelstyle.color = simplekml.Color.red  # Make the text red
+        pnt.style.labelstyle.scale = 2  # Make the text twice as big
+        pnt.style.iconstyle.icon.href = 'http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png'
+        kml.save("Point Styling.kml")
+
+    Sharing a Style with many Points (Shared Style)::
+
+        import simplekml
+        kml = simplekml.Kml()
+        style = simplekml.Style()
+        style.labelstyle.color = simplekml.Color.red  # Make the text red
+        style.labelstyle.scale = 2  # Make the text twice as big
+        style.iconstyle.icon.href = 'http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png'
+        for lon in range(2):  # Generate longitude values
+            for lat in range(2): # Generate latitude values
+               pnt = kml.newpoint(name='Point: {0}{0}'.format(lon,lat))
+               pnt.style = style
+        kml.save("Point Shared Style.kml")
     """
 
     def __init__(self,
@@ -1040,6 +1130,28 @@ class LineString(PointGeometry):
     """A connected set of line segments.
 
     Arguments are the same as the properties.
+
+    Usage::
+
+        import simplekml
+        kml = simplekml.Kml()
+        ls = kml.newlinestring(name='A LineString')
+        ls.coords = [(18.333868,-34.038274,10.0), (18.370618,-34.034421,10.0)]
+        ls.extrude = 1
+        ls.altitudemode = simplekml.AltitudeMode.relativetoground
+        kml.save("LineString.kml")
+
+    Styling::
+
+        import simplekml
+        kml = simplekml.Kml()
+        ls = kml.newlinestring(name='A LineString')
+        ls.coords = [(18.333868,-34.038274,10.0), (18.370618,-34.034421,10.0)]
+        ls.extrude = 1
+        ls.altitudemode = simplekml.AltitudeMode.relativetoground
+        ls.style.linestyle.width = 5
+        ls.style.linestyle.color = simplekml.Color.blue
+        kml.save("LineString Styling.kml")
     """
     def __init__(self,
                  extrude=None,
@@ -1126,6 +1238,31 @@ class Polygon(Geometry):
     """A Polygon is defined by an outer boundary and/or an inner boundary.
 
     Arguments are the same as the properties.
+
+    Usage::
+
+        import simplekml
+        kml = simplekml.Kml()
+        pol = kml.newpolygon(name='A Polygon')
+        pol.outerboundaryis = [(18.333868,-34.038274), (18.370618,-34.034421),
+                               (18.350616,-34.051677),(18.333868,-34.038274)]
+        pol.innerboundaryis = [(18.347171,-34.040177), (18.355741,-34.039730),
+                               (18.350467,-34.048388),(18.347171,-34.040177)]
+        kml.save("Polygon.kml")
+        
+    Styling::
+
+        import simplekml
+        kml = simplekml.Kml()
+        pol = kml.newpolygon(name='A Polygon')
+        pol.outerboundaryis = [(18.333868,-34.038274), (18.370618,-34.034421),
+                               (18.350616,-34.051677),(18.333868,-34.038274)]
+        pol.innerboundaryis = [(18.347171,-34.040177), (18.355741,-34.039730),
+                               (18.350467,-34.048388),(18.347171,-34.040177)]
+        pol.style.linestyle.color = simplekml.Color.green
+        pol.style.linestyle.width = 5
+        pol.style.polystyle.color = simplekml.Color.changealphaint(100, simplekml.Color.green)
+        kml.save("Polygon Styling.kml")
     """
 
     def __init__(self,
@@ -1226,6 +1363,28 @@ class MultiGeometry(Geometry):
     """MultiGeometry is a collection of simple features (Points, LineStrings, etc).
 
     Arguments are the same as the properties.
+
+    Usage::
+
+        import simplekml
+        kml = simplekml.Kml()
+        multipnt = kml.newmultigeometry(name="MultiPoint")
+        for lon in range(2):  # Generate longitude values
+            for lat in range(2): # Generate latitude values
+                multipnt.newpoint(coords=[(lon, lat)])
+        kml.save("MultiGeometry.kml")
+        
+    Styling::
+
+        import simplekml
+        kml = simplekml.Kml()
+        multipnt = kml.newmultigeometry(name="MultiPoint")
+        multipnt.style.labelstyle.scale = 0  # Remove the labels from all the points
+        multipnt.style.iconstyle.color = simplekml.Color.red
+        for lon in range(2):  # Generate longitude values
+            for lat in range(2): # Generate latitude values
+                multipnt.newpoint(coords=[(lon, lat)])
+        kml.save("MultiGeometry Styling.kml")
     """
 
     def __init__(self,
@@ -1355,12 +1514,13 @@ class Overlay(Feature):
 
     @property
     def icon(self):
-        """The icon to use for the overlay, accepts :class:`simplekml.Icon]`"""
+        """The icon to use for the overlay, accepts :class:`simplekml.Icon`"""
         if self._kml['Icon_'] is None:
             self._kml['Icon_'] = Icon()
         return self._kml['Icon_']
 
     @icon.setter
+    @check(Icon)
     def icon(self, icon):
         self._kml['Icon_'] = icon
 
@@ -1369,6 +1529,22 @@ class GroundOverlay(Overlay):
     """Draws an image overlay draped onto the terrain.
 
     Arguments are the same as the properties.
+    
+    Usage::
+
+        import simplekml
+        kml = simplekml.Kml()
+        ground = kml.newgroundoverlay(name='GroundOverlay')
+        ground.icon.href = 'http://simplekml.googlecode.com/hg/samples/resources/smile.png'
+        ground.gxlatlonquad.coords = [(18.410524,-33.903972),(18.411429,-33.904171),
+                                      (18.411757,-33.902944),(18.410850,-33.902767)]
+        # or
+        #ground.latlonbox.north = -33.902828
+        #ground.latlonbox.south = -33.904104
+        #ground.latlonbox.east =  18.410684
+        #ground.latlonbox.west =  18.411633
+        #ground.latlonbox.rotation = -14
+        kml.save("GroundOverlay.kml")
     """
 
     def __init__(self, altitude=None,
@@ -1429,6 +1605,7 @@ class GroundOverlay(Overlay):
         return self._kml['LatLonBox']
 
     @latlonbox.setter
+    @check(LatLonBox)
     def latlonbox(self, latlonbox):
         self._kml['LatLonBox'] = latlonbox
 
@@ -1442,6 +1619,7 @@ class GroundOverlay(Overlay):
         return self._kml['gx:LatLonQuad']
 
     @gxlatlonquad.setter
+    @check(GxLatLonQuad)
     def gxlatlonquad(self, gxlatlonquad):
         self._kml['gx:LatLonQuad'] = gxlatlonquad
 
@@ -1450,6 +1628,22 @@ class ScreenOverlay(Overlay):
     """Draws an image overlay fixed to the screen.
 
     Arguments are the same as the properties.
+
+    Usage::
+
+        import simplekml
+        kml = simplekml.Kml()
+        screen = kml.newscreenoverlay(name='ScreenOverlay')
+        screen.icon.href = 'http://simplekml.googlecode.com/hg/samples/resources/simplekml-logo.png'
+        screen.overlayxy = simplekml.OverlayXY(x=0,y=1,xunits=simplekml.Units.fraction,
+                                               yunits=simplekml.Units.fraction)
+        screen.screenxy = simplekml.ScreenXY(x=15,y=15,xunits=simplekml.Units.pixel,
+                                             yunits=simplekml.Units.insetpixels)
+        screen.size.x = -1
+        screen.size.y = -1
+        screen.size.xunits = simplekml.Units.fraction
+        screen.size.yunits = simplekml.Units.fraction
+        kml.save("ScreenOverlay.kml")
     """
 
     def __init__(self, overlayxy=None,
@@ -1487,6 +1681,7 @@ class ScreenOverlay(Overlay):
         return self._kml['overlayXY_']
 
     @overlayxy.setter
+    @check(OverlayXY)
     def overlayxy(self, overlayxy):
         self._kml['overlayXY_'] = overlayxy
 
@@ -1502,6 +1697,7 @@ class ScreenOverlay(Overlay):
         return self._kml['screenXY_']
 
     @screenxy.setter
+    @check(ScreenXY)
     def screenxy(self, screenxy):
         self._kml['screenXY_'] = screenxy
 
@@ -1516,6 +1712,7 @@ class ScreenOverlay(Overlay):
         return self._kml['rotationXY_']
 
     @rotationxy.setter
+    @check(RotationXY)
     def rotationxy(self, rotationxy):
         self._kml['rotationXY_'] = rotationxy
 
@@ -1527,6 +1724,7 @@ class ScreenOverlay(Overlay):
         return self._kml['size_']
 
     @size.setter
+    @check(Size)
     def size(self, size):
         self._kml['size_'] = size
 
@@ -1535,6 +1733,19 @@ class PhotoOverlay(Overlay):
     """Geographically locate a photograph in Google Earth.
 
     Arguments are the same as the properties.
+
+    Usage::
+
+        import simplekml
+        kml = simplekml.Kml()
+        photo = kml.newphotooverlay(name='PhotoOverlay Test')
+        photo.camera = simplekml.Camera(longitude=18.410858, latitude=-33.904446, altitude=50,
+                                        altitudemode=simplekml.AltitudeMode.clamptoground)
+        photo.point.coords = [(18.410858,-33.90444)]
+        photo.style.iconstyle.icon.href = 'http://maps.google.com/mapfiles/kml/shapes/camera.png'
+        photo.icon.href = 'http://simplekml.googlecode.com/hg/samples/resources/stadium.jpg'
+        photo.viewvolume = simplekml.ViewVolume(-25,25,-15,15,1)
+        kml.save("PhotoOverlay.kml")
     """
 
     def __init__(self, rotation=None,
@@ -1567,6 +1778,7 @@ class PhotoOverlay(Overlay):
         return self._kml['ViewVolume']
 
     @viewvolume.setter
+    @check(ViewVolume)
     def viewvolume(self, viewvolume):
         self._kml['ViewVolume'] = viewvolume
 
@@ -1578,6 +1790,7 @@ class PhotoOverlay(Overlay):
         return self._kml['ImagePyramid']
 
     @imagepyramid.setter
+    @check(ImagePyramid)
     def imagepyramid(self, imagepyramid):
         self._kml['ImagePyramid'] = imagepyramid
 
@@ -1589,6 +1802,7 @@ class PhotoOverlay(Overlay):
         return self._kml['point_']
 
     @point.setter
+    @check(Point)
     def point(self, point):
         self._kml['point_'] = point
 
@@ -1606,6 +1820,15 @@ class NetworkLink(Feature):
     """References a KML file or KMZ archive on a local or remote network.
 
     Arguments are the same as the properties.
+
+    Usage::
+
+        import simplekml
+        kml = simplekml.Kml()
+        netlink = kml.newnetworklink(name="Network Link")
+        netlink.link.href = "http://simplekml.googlecode.com/hg/samples/samples.kml"
+        netlink.link.viewrefreshmode = simplekml.ViewRefreshMode.onrequest
+        kml.save("NetworkLink.kml")
     """
     
     def __init__(self, refreshvisibility=None,
@@ -1624,7 +1847,6 @@ class NetworkLink(Feature):
         A value of 0 leaves the visibility of features within the control of
         the Google Earth user. Set the value to 1 to reset the visibility of
         features each time the NetworkLink is refreshed, accepts int (0 or 1).
-         
         """
         return self._kml['refreshVisibility']
 
@@ -1652,6 +1874,7 @@ class NetworkLink(Feature):
         return self._kml['Link_']
 
     @link.setter
+    @check(Link)
     def link(self, link):
         self._kml['Link_'] = link
 
@@ -1713,6 +1936,7 @@ class Model(Geometry):
         return self._kml['Location']
 
     @location.setter
+    @check(Location)
     def location(self, location):
         self._kml['Location'] = location
 
@@ -1724,6 +1948,7 @@ class Model(Geometry):
         return self._kml['Orientation']
 
     @orientation.setter
+    @check(Orientation)
     def orientation(self, orientation):
         self._kml['Orientation'] = orientation
 
@@ -1735,6 +1960,7 @@ class Model(Geometry):
         return self._kml['Scale']
 
     @scale.setter
+    @check(Scale)
     def scale(self, scale):
         self._kml['Scale'] = scale
 
@@ -1746,6 +1972,7 @@ class Model(Geometry):
         return self._kml['Link_']
 
     @link.setter
+    @check(Link)
     def link(self, link):
         self._kml['Link_'] = link
 
@@ -1757,6 +1984,7 @@ class Model(Geometry):
         return self._kml['ResourceMap']
 
     @resourcemap.setter
+    @check(ResourceMap)
     def resourcemap(self, resourcemap):
         self._kml['ResourceMap'] = resourcemap
 
@@ -1768,6 +1996,78 @@ class GxTrack(Geometry):
     """A track describes how an object moves through the world over a given time period.
 
     Arguments are the same as the properties.
+
+    Usage::
+
+        # This is a recreation of the example found in the KML Reference:
+        # http://code.google.com/apis/kml/documentation/kmlreference.html#gxtrack
+
+        import os
+        from simplekml import Kml, Snippet, Types
+
+        # Data for the track
+        when = ["2010-05-28T02:02:09Z",
+            "2010-05-28T02:02:35Z",
+            "2010-05-28T02:02:44Z",
+            "2010-05-28T02:02:53Z",
+            "2010-05-28T02:02:54Z",
+            "2010-05-28T02:02:55Z",
+            "2010-05-28T02:02:56Z"]
+
+        coord = [(-122.207881,37.371915,156.000000),
+            (-122.205712,37.373288,152.000000),
+            (-122.204678,37.373939,147.000000),
+            (-122.203572,37.374630,142.199997),
+            (-122.203451,37.374706,141.800003),
+            (-122.203329,37.374780,141.199997),
+            (-122.203207,37.374857,140.199997)]
+
+        cadence = [86, 103, 108, 113, 113, 113, 113]
+        heartrate = [181, 177, 175, 173, 173, 173, 173]
+        power = [327.0, 177.0, 179.0, 162.0, 166.0, 177.0, 183.0]
+
+        # Create the KML document
+        kml = Kml(name="Tracks", open=1)
+        doc = kml.newdocument(name='GPS device', snippet=Snippet('Created Wed Jun 2 15:33:39 2010'))
+        doc.lookat.gxtimespan.begin = '2010-05-28T02:02:09Z'
+        doc.lookat.gxtimespan.end = '2010-05-28T02:02:56Z'
+        doc.lookat.longitude = -122.205544
+        doc.lookat.latitude = 37.373386
+        doc.lookat.range = 1300.000000
+
+        # Create a folder
+        fol = doc.newfolder(name='Tracks')
+
+        # Create a schema for extended data: heart rate, cadence and power
+        schema = kml.newschema()
+        schema.newgxsimplearrayfield(name='heartrate', type=Types.int, displayname='Heart Rate')
+        schema.newgxsimplearrayfield(name='cadence', type=Types.int, displayname='Cadence')
+        schema.newgxsimplearrayfield(name='power', type=Types.float, displayname='Power')
+
+        # Create a new track in the folder
+        trk = fol.newgxtrack(name='2010-05-28T01:16:35.000Z')
+
+        # Apply the above schema to this track
+        trk.extendeddata.schemadata.schemaurl = schema.id
+
+        # Add all the information to the track
+        trk.newwhen(when) # Each item in the give nlist will become a new <when> tag
+        trk.newgxcoord(coord) # Ditto
+        trk.extendeddata.schemadata.newgxsimplearraydata('heartrate', heartrate) # Ditto
+        trk.extendeddata.schemadata.newgxsimplearraydata('cadence', cadence) # Ditto
+        trk.extendeddata.schemadata.newgxsimplearraydata('power', power) # Ditto
+
+        # Styling
+        trk.stylemap.normalstyle.iconstyle.icon.href = 'http://earth.google.com/images/kml-icons/track-directional/track-0.png'
+        trk.stylemap.normalstyle.linestyle.color = '99ffac59'
+        trk.stylemap.normalstyle.linestyle.width = 6
+        trk.stylemap.highlightstyle.iconstyle.icon.href = 'http://earth.google.com/images/kml-icons/track-directional/track-0.png'
+        trk.stylemap.highlightstyle.iconstyle.scale = 1.2
+        trk.stylemap.highlightstyle.linestyle.color = '99ffac59'
+        trk.stylemap.highlightstyle.linestyle.width = 8
+
+        # Save the kml to file
+        kml.save("GxTrack.kml")
     """
 
     def __init__(self,
@@ -1875,6 +2175,7 @@ class GxTrack(Geometry):
         return self._kml['ExtendedData']
 
     @extendeddata.setter
+    @check(ExtendedData)
     def extendeddata(self, extendeddata):
         self._kml['ExtendedData'] = extendeddata
 
@@ -1895,6 +2196,15 @@ class GxMultiTrack(Geometry):
     """A container for grouping gx:tracks.
 
     Arguments are the same as the properties.
+
+    Usage::
+
+        import simplekml
+        kml = simplekml.Kml()
+        multitrack = kml.newgxmultitrack()
+        track1 = multitrack.newgxtrack(name="track1")
+        track2 = multitrack.newgxtrack(name="track2")
+        kml.save("GxMultiTrack.kml")
     """
 
     def __init__(self,
@@ -1909,7 +2219,8 @@ class GxMultiTrack(Geometry):
         Returns an instance of :class:`simplekml.GxTrack` class.
 
         Args:
-          * Same as :class:`simplekml.GxTrack`, except arguments that are not applicable in a multitrack grouping will be ignored, such as name, visibility, open, etc.
+          * Same as :class:`simplekml.GxTrack`, except arguments that are not applicable in a multitrack grouping
+            will be ignored, such as name, visibility, open, etc.
         """
         self.tracks.append(GxTrack(**kwargs))
         return self.tracks[-1]

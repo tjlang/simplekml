@@ -20,7 +20,7 @@ Contact me at kyle.lan@gmail.com
 
 from simplekml.abstractview import AbstractView,Camera,GxOption,GxTimeSpan,GxTimeStamp,GxViewerOptions,LookAt
 from simplekml.base import HotSpot,OverlayXY,RotationXY,ScreenXY,Size,Snippet
-from simplekml.constants import AltitudeMode,Color,ColorMode,DisplayMode,GridOrigin,GxAltitudeMode,ListItemType,RefreshMode,Shape,State,Types,Units,ViewRefreshMode
+from simplekml.constants import AltitudeMode,Color,ColorMode,DisplayMode,GridOrigin,GxAltitudeMode,ListItemType,RefreshMode,Shape,State,Types,Units,ViewRefreshMode,GxFlyToMode,GxPlayMode
 from simplekml.coordinates import Coordinates
 from simplekml.featgeom import Container,Document, Folder,GroundOverlay,GxMultiTrack,GxTrack,LinearRing,LineString,Model,MultiGeometry,NetworkLink,Point,Polygon,PhotoOverlay,ScreenOverlay
 from simplekml.icon import Icon,ItemIcon,Link

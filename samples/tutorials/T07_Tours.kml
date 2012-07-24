@@ -3,12 +3,12 @@
     <Document id="feat_1">
         <Style id="stylesel_0">
             <IconStyle id="substyle_0">
-                <scale>1.0</scale>
                 <colorMode>normal</colorMode>
+                <scale>1.0</scale>
+                <heading>0</heading>
                 <Icon id="link_0">
                     <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
                 </Icon>
-                <heading>0</heading>
             </IconStyle>
         </Style>
         <name>Tours</name>
@@ -24,18 +24,18 @@
             <name>Play me!</name>
             <gx:Playlist>
                 <gx:SoundCue id="tour_0">
-                    <gx:delayedStart>2</gx:delayedStart>
                     <href>http://simplekml.googlecode.com/hg/samples/resources/drum_roll_1.wav</href>
+                    <gx:delayedStart>2</gx:delayedStart>
                 </gx:SoundCue>
                 <gx:AnimatedUpdate id="tour_1">
                     <gx:duration>6.5</gx:duration>
                     <Update>
+                        <targetHref/>
                         <Change>
                             <IconStyle targetId="substyle_0">
                                 <scale>10.0</scale>
                             </IconStyle>
                         </Change>
-                        <targetHref/>
                     </Update>
                 </gx:AnimatedUpdate>
                 <gx:FlyTo id="tour_2">

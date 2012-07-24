@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Contact me at kyle.lan@gmail.com
 """
 
-from simplekml.base import Kmlable, HotSpot
+from simplekml.base import Kmlable, HotSpot, check
 from simplekml.constants import ColorMode, DisplayMode, ListItemType
 from simplekml.icon import Icon, ItemIcon
 
@@ -26,6 +26,9 @@ class ColorStyle(Kmlable):
     """Abstract base class for geometry styles.
 
     The arguments are the same as the properties.
+
+    .. note::
+      Not to be used directly.
     """
     
     _id = 0
@@ -72,6 +75,17 @@ class LineStyle(ColorStyle):
     """Specifies the drawing style for all line geometry.
 
     Arguments are the same as the properties.
+
+    Usage::
+
+        import simplekml
+        kml = simplekml.Kml()
+        lin = kml.newlinestring(name="Pathway", description="A pathway in Kirstenbosch",
+                        coords=[(18.43312,-33.98924), (18.43224,-33.98914),
+                                (18.43144,-33.98911), (18.43095,-33.98904)])
+        lin.style.linestyle.color = simplekml.Color.red  # Red
+        lin.style.linestyle.width = 10  # 10 pixels
+        kml.save("LineStyle.kml")
     """
 
     def __init__(self,
@@ -127,6 +141,19 @@ class PolyStyle(ColorStyle):
     """Specifies the drawing style for all polygons.
 
     Arguments are the same as the properties.
+
+    Usage::
+
+        import simplekml
+        kml = simplekml.Kml()
+        pol = kml.newpolygon(name="Atrium Garden",
+                     outerboundaryis=[(18.43348,-33.98985),(18.43387,-33.99004),(18.43410,-33.98972),
+                                      (18.43371,-33.98952),(18.43348,-33.98985)],
+                     innerboundaryis=[(18.43360,-33.98982),(18.43386,-33.98995),(18.43401,-33.98974),
+                                      (18.43376,-33.98962),(18.43360,-33.98982)])
+        pol.style.polystyle.color = simplekml.Color.red
+        pol.style.polystyle.outline = 0
+        kml.save("PolyStyle.kml")
     """
 
     def __init__(self, fill=1, outline=1, **kwargs):
@@ -157,6 +184,16 @@ class IconStyle(ColorStyle):
     """Specifies how icons for point Placemarks are drawn.
 
     Arguments are the same as the properties.
+
+    Usage::
+
+        import simplekml
+        kml = simplekml.Kml()
+        pnt = kml.newpoint(name='A Point')
+        pnt.coords = [(1.0, 2.0)]
+        pnt.style.iconstyle.scale = 3  # Icon thrice as big
+        pnt.style.iconstyle.icon.href = 'http://maps.google.com/mapfiles/kml/shapes/info-i.png'
+        kml.save("IconStyle.kml")
     """
 
     def __init__(self, scale=1, heading=0, icon=None, hotspot=None, **kwargs):
@@ -188,10 +225,11 @@ class IconStyle(ColorStyle):
 
     @property
     def icon(self):
-        """The actual :class:`simplekml.Icon` to be displayed, accepts [Icon]."""
+        """The actual :class:`simplekml.Icon` to be displayed, accepts :class:`simplekml.Icon`."""
         return self._kml["Icon_"]
 
     @icon.setter
+    @check(Icon)
     def icon(self, icon):
         self._kml["Icon_"] = icon
 
@@ -203,6 +241,7 @@ class IconStyle(ColorStyle):
         return self._kml["hotspot_"]
 
     @hotspot.setter
+    @check(HotSpot)
     def hotspot(self, hotspot):
         self._kml["hotspot_"] = hotspot
 
@@ -211,6 +250,17 @@ class LabelStyle(ColorStyle):
     """Specifies how the name of a Feature is drawn.
 
     Arguments are the same as the properties.
+
+    Usage::
+
+        import simplekml
+        kml = simplekml.Kml()
+        pnt = kml.newpoint(name='A Point')
+        pnt.coords = [(1.0, 2.0)]
+        pnt.style.labelstyle.color = simplekml.Color.red
+        pnt.style.labelstyle.scale = 2  # Text twice as big
+        pnt.style.labelstyle.color = simplekml.Color.blue
+        kml.save("LabelStyle.kml")
     """
 
     def __init__(self, scale=1, **kwargs):
@@ -231,6 +281,16 @@ class BalloonStyle(Kmlable):
     """Specifies the content and layout of the description balloon.
 
     The arguments are the same as the properties.
+
+    Usage::
+
+        import simplekml
+        kml = simplekml.Kml()
+        pnt = kml.newpoint(name="BallonStyle", coords=[(18.429191, -33.987286)])
+        pnt.style.balloonstyle.text = 'These are trees and this text is blue with a green background.'
+        pnt.style.balloonstyle.bgcolor = simplekml.Color.lightgreen
+        pnt.style.balloonstyle.textcolor = simplekml.Color.rgb(0, 0, 255)
+        kml.save("BalloomStyle.kml")
     """
     
     _id = 0
@@ -294,6 +354,15 @@ class ListStyle(Kmlable):
     """Specifies the display of the elements style in the navigation bar.
 
     The arguments are the same as the properties.
+
+    Usage::
+
+        import simplekml
+        kml = simplekml.Kml()
+        fol = kml.newfolder(name='Folder')
+        fol.style.liststyle.listitemtype = ListItemType.radiofolder
+        fol.style.liststyle.itemicon.href = 'http://maps.google.com/mapfiles/kml/shapes/info.png'
+        kml.save("ListStyle.kml")
     """
 
     _id = 0
@@ -321,6 +390,7 @@ class ListStyle(Kmlable):
         return self._kml["ItemIcon"]
 
     @itemicon.setter
+    @check(ItemIcon)
     def itemicon(self, itemicon):
         self._kml["ItemIcon"] = itemicon
 

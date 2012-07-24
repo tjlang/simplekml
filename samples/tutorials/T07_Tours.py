@@ -1,5 +1,5 @@
 """
-Demonstrates touring with the reproductionof the tour sample in the KML Reference https://developers.google.com/kml/documentation/kmlreference#gxtour with the edition of GxSoundCue
+Demonstrates touring with the reproduction of the tour sample in the KML Reference https://developers.google.com/kml/documentation/kmlreference#gxtour with the addition of GxSoundCue
 """
 
 import os

@@ -27,7 +27,7 @@ class AltitudeMode(object):
 class GxAltitudeMode(object):
     """gx:AltitudeMode constants."""
     clampToSeaFloor  = "clampToSeaFloor "
-    relativeToSeaFloor  = "relativeToSeaFloor "
+    relativetoseafloor  = "relativeToSeaFloor "
 
 
 class ColorMode(object):
@@ -89,10 +89,10 @@ class RefreshMode(object):
 
 class ViewRefreshMode(object):
     """ViewRefreshMode constants."""
-    never  = 'never '
-    onstop  = 'onStop '
-    onrequest  = 'onRequest '
-    onregion  = 'onRegion '
+    never  = 'never'
+    onstop  = 'onStop'
+    onrequest  = 'onRequest'
+    onregion  = 'onRegion'
 
 
 class Types(object):
@@ -107,6 +107,17 @@ class Types(object):
     bool = 'bool'
 
 
+class GxPlayMode(object):
+    """GxPlayMode constants."""
+    pause = 'pause'
+
+
+class GxFlyToMode(object):
+    """GxFlyToMode constants."""
+    smooth = 'smooth'
+    bounce = 'bounce'
+
+
 class Color(object):
     """Color constants (HTML and CSS) and converters.
 
@@ -114,15 +125,16 @@ class Color(object):
     Same as HTML and CSS standard colors. All constants are lowercase.
 
     Class methods:
-      * :func:`simplekml.Color.rgb`
-      * :func:`simplekml.Color.hex`
-      * :func:`simplekml.Color.hexa`
-      * :func:`simplekml.Color.changealpha`
+      * :func:`simplekml.Color.rgb` - convert RGB to KML HEX
+      * :func:`simplekml.Color.hex` - convert HEX to KML HEX
+      * :func:`simplekml.Color.hexa` - convert HEX (with alpha) to KML HEX
+      * :func:`simplekml.Color.changealpha` - change KML HEX alpha value with a HEX
+      * :func:`simplekml.Color.changealphaint` - change KML HEX alpha value with an int
     """
 
     @classmethod
     def rgb(cls, r, g, b, a=255):
-        """Convert rgba to GE hex value.
+        """Convert rgba to KML hex value.
 
         Args:
           * r: int between 0 - 255 representing red
@@ -135,7 +147,7 @@ class Color(object):
 
     @classmethod
     def hex(cls, hstr):
-        """Convert hex (without alpha) to GE hex value.
+        """Convert hex (without alpha) to KML hex value.
 
         Args:
           * hstr: hex string without alpha value
@@ -145,7 +157,7 @@ class Color(object):
 
     @classmethod
     def hexa(cls, hstr):
-        """Convert hex (with alpha) to GE hex value.
+        """Convert hex (with alpha) to KML hex value.
 
         Args:
           * hstr: hex string with alpha value

@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Contact me at kyle.lan@gmail.com
 """
 
-from simplekml.base import Kmlable
+from simplekml.base import Kmlable, check
 from simplekml.timeprimitive import GxTimeStamp, GxTimeSpan
 
 
@@ -134,6 +134,7 @@ class AbstractView(Kmlable):
         return self._kml['gx:TimeStamp_']
 
     @gxtimestamp.setter
+    @check(GxTimeStamp)
     def gxtimestamp(self, gxtimestamp):
         self._kml['gx:TimeStamp_'] = gxtimestamp
 
@@ -145,6 +146,7 @@ class AbstractView(Kmlable):
         return self._kml['gx:TimeSpan_']
 
     @gxtimespan.setter
+    @check(GxTimeSpan)
     def gxtimespan(self, gxtimespan):
         self._kml['gx:TimeSpan_'] = gxtimespan
 
@@ -161,8 +163,31 @@ class AbstractView(Kmlable):
 class Camera(AbstractView):
     """A virtual camera that views the scene.
 
-    The arguments are the same as the properties (most inherited from
-    :class:`simplekml.AbstractView`)
+    The arguments are the same as the properties.
+
+    Basic Usage::
+
+        import simplekml
+        kml = simplekml.Kml()
+        pnt = kml.newpoint()
+        pnt.camera.latitude = 0.02
+        pnt.camera.longitude = 0.012
+        pnt.camera.altitude = 10000
+        pnt.camera.tilt = 45
+        pnt.camera.heading = 0
+        pnt.camera.roll = 0
+        pnt.camera.altitudemode = simplekml.AltitudeMode.relativetoground
+        kml.save("Camera.kml")
+
+    Assignment Usage::
+
+        import simplekml
+        kml = simplekml.Kml()
+        pnt = kml.newpoint()
+        camera = simplekml.Camera(latitude=0.0, longitude=0.0, altitude=0.0, roll=0, tilt=45,
+                                  altitudemode=simplekml.AltitudeMode.relativetoground)
+        pnt.camera = camera
+        kml.save("Camera Alternative.kml")
     """
 
     def __init__(self, roll=None, **kwargs):
@@ -179,11 +204,27 @@ class Camera(AbstractView):
         self._kml['roll'] = roll
 
 
-class LookAt(AbstractView): # --Document--
+class LookAt(AbstractView):
     """Positions the camera in relation to the object that is being viewed.
 
     The arguments are the same as the properties (most inherited from
     :class:`simplekml.AbstractView`)
+
+    Usage::
+
+        import simplekml
+        kml = simplekml.Kml()
+        ls = kml.newlinestring(name='A LineString')
+        ls.coords = [(18.333868,-34.038274,10.0), (18.370618,-34.034421,10.0)]
+        ls.extrude = 1
+        ls.altitudemode = simplekml.AltitudeMode.relativetoground
+        ls.lookat.gxaltitudemode = simplekml.GxAltitudeMode.relativetoseafloor
+        ls.lookat.latitude = -34.028242
+        ls.lookat.longitude = 18.356852
+        ls.lookat.range = 3000
+        ls.lookat.heading = 56
+        ls.lookat.tilt = 78
+        kml.save("LookAt.kml")
     """
 
     def __init__(self, range=None, **kwargs):
@@ -252,7 +293,7 @@ class GxViewerOptions(Kmlable):
             self.gxoptions += gxoptions
 
     def newgxoption(self, name, enabled=True):
-        """Adds a :class:`simplekml.GxOption`."""
+        """Creates a :class:`simplekml.GxOption` with name `name` and sets it to `enabled`."""
         self.gxoptions.append(GxOption(name, enabled))
 
     def __str__(self):
@@ -261,3 +302,4 @@ class GxViewerOptions(Kmlable):
             buf.append(gxoption.__str__())
         buf.append("</gx:ViewerOptions>")
         return "".join(buf)
+

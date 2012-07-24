@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Contact me at kyle.lan@gmail.com
 """
 
-from simplekml.base import Kmlable
+from simplekml.base import Kmlable, check
 from simplekml.substyle import IconStyle, LabelStyle, LineStyle, PolyStyle, BalloonStyle, ListStyle
 
 
@@ -42,6 +42,17 @@ class Style(StyleSelector):
     """Styles affect how Geometry is presented.
 
     Arguments are the same as the properties.
+
+    Usage::
+
+        import simplekml
+        kml = simplekml.Kml()
+        pnt = kml.newpoint(name='A Point')
+        pnt.coords = [(1.0, 2.0)]
+        pnt.style.labelstyle.color = simplekml.Color.red  # Make the text red
+        pnt.style.labelstyle.scale = 2  # Make the text twice as big
+        pnt.style.iconstyle.icon.href = 'http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png'
+        kml.save("Style.kml")
     """
     def __init__(self,
                  iconstyle=None,
@@ -69,6 +80,7 @@ class Style(StyleSelector):
         return self._kml["IconStyle_"]
         
     @iconstyle.setter
+    @check(IconStyle)
     def iconstyle(self, iconstyle):
         self._kml["IconStyle_"] = iconstyle
         
@@ -80,6 +92,7 @@ class Style(StyleSelector):
         return self._kml["LabelStyle_"]
 
     @labelstyle.setter
+    @check(LabelStyle)
     def labelstyle(self, labelstyle):
         self._kml["LabelStyle_"] = labelstyle
         
@@ -91,6 +104,7 @@ class Style(StyleSelector):
         return self._kml["LineStyle_"]
         
     @linestyle.setter
+    @check(LineStyle)
     def linestyle(self, linestyle):
         self._kml["LineStyle_"] = linestyle
 
@@ -102,6 +116,7 @@ class Style(StyleSelector):
         return self._kml["PolyStyle_"]
         
     @polystyle.setter
+    @check(PolyStyle)
     def polystyle(self, polystyle):
         self._kml["PolyStyle_"] = polystyle
         
@@ -113,6 +128,7 @@ class Style(StyleSelector):
         return self._kml["BalloonStyle"]
 
     @balloonstyle.setter
+    @check(BalloonStyle)
     def balloonstyle(self, balloonstyle):
         self._kml["BalloonStyle"] = balloonstyle
 
@@ -124,6 +140,7 @@ class Style(StyleSelector):
         return self._kml["ListStyle"]
 
     @liststyle.setter
+    @check(ListStyle)
     def liststyle(self, liststyle):
         self._kml["ListStyle"] = liststyle
 
@@ -132,6 +149,15 @@ class StyleMap(StyleSelector):
     """Styles affect how Geometry is presented.
 
     Arguments are the same as the properties.
+
+    Usage::
+
+        import simplekml
+        kml = simplekml.Kml()
+        pnt = kml.newpoint(coords=[(18.432314,-33.988862)])
+        pnt.stylemap.normalstyle.labelstyle.color = simplekml.Color.blue
+        pnt.stylemap.highlightstyle.labelstyle.color = simplekml.Color.red
+        kml.save("StyleMap.kml")
     """
     def __init__(self,
                  normalstyle=None,
@@ -166,6 +192,7 @@ class StyleMap(StyleSelector):
         return self._pairnormal
 
     @normalstyle.setter
+    @check(Style)
     def normalstyle(self, normal):
         self._pairnormal = normal
 
@@ -177,5 +204,6 @@ class StyleMap(StyleSelector):
         return self._pairhighlight
 
     @highlightstyle.setter
+    @check(Style)
     def highlightstyle(self, highlighturl):
         self._pairhighlight = highlighturl

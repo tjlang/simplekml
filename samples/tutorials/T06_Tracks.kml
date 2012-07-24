@@ -5,25 +5,25 @@
         <open>1</open>
         <Document id="feat_2">
             <name>GPS device</name>
-            <Snippet>Created Wed Jun 2 15:33:39 2010</Snippet>
             <LookAt>
+                <longitude>-122.205544</longitude>
+                <latitude>37.373386</latitude>
                 <gx:TimeSpan id="time_0">
                     <begin>2010-05-28T02:02:09Z</begin>
                     <end>2010-05-28T02:02:56Z</end>
                 </gx:TimeSpan>
-                <longitude>-122.205544</longitude>
                 <range>1300.0</range>
-                <latitude>37.373386</latitude>
             </LookAt>
+            <Snippet>Created Wed Jun 2 15:33:39 2010</Snippet>
             <Folder id="feat_3">
                 <Style id="stylesel_1">
                     <IconStyle id="substyle_0">
-                        <scale>1</scale>
                         <colorMode>normal</colorMode>
+                        <scale>1</scale>
+                        <heading>0</heading>
                         <Icon id="link_0">
                             <href>http://earth.google.com/images/kml-icons/track-directional/track-0.png</href>
                         </Icon>
-                        <heading>0</heading>
                     </IconStyle>
                     <LineStyle id="substyle_1">
                         <color>99ffac59</color>
@@ -33,12 +33,12 @@
                 </Style>
                 <Style id="stylesel_2">
                     <IconStyle id="substyle_2">
-                        <scale>1.2</scale>
                         <colorMode>normal</colorMode>
+                        <scale>1.2</scale>
+                        <heading>0</heading>
                         <Icon id="link_1">
                             <href>http://earth.google.com/images/kml-icons/track-directional/track-0.png</href>
                         </Icon>
-                        <heading>0</heading>
                     </IconStyle>
                     <LineStyle id="substyle_3">
                         <color>99ffac59</color>

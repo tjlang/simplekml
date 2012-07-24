@@ -20,9 +20,21 @@ Contact me at kyle.lan@gmail.com
 from simplekml.base import Kmlable
 
 class Link(Kmlable):
-    """Defines an image associated with an Icon style or overlay.
+    """
+    Specifies the location of:
+      * KML files fetched by network links
+      * Model files
 
     The arguments are the same as the properties.
+
+    Usage::
+
+        import simplekml
+        kml = simplekml.Kml()
+        netlink = kml.newnetworklink(name="Network Link")
+        netlink.link.href = "http://simplekml.googlecode.com/hg/samples/samples.kml"
+        netlink.link.viewrefreshmode = simplekml.ViewRefreshMode.onrequest
+        kml.save("Link.kml")
     """
     _id = 0
 
@@ -134,9 +146,16 @@ class Link(Kmlable):
 class Icon(Link):
     """Defines an image associated with an Icon style or overlay.
 
-    Args:
-      * *same as properties*
-      * *all other args same as* :class:`simplekml.Link`
+    The arguments are the same as the properties.
+
+    Usage::
+
+        import simplekml
+        kml = simplekml.Kml()
+        pnt = kml.newpoint(name='A Point')
+        pnt.coords = [(1.0, 2.0)]
+        pnt.style.iconstyle.icon.href = 'http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png'
+        kml.save("Icon.kml")
     """
 
     def __init__(self,
@@ -196,9 +215,18 @@ class Icon(Link):
 
 
 class ItemIcon(Kmlable):
-    """Defines an image associated with an Icon style or overlay.
+    """con used in the List view that reflects the state of a Folder or Link fetch.
 
     The arguments are the same as the properties.
+
+    Usage::
+
+        import simplekml
+        kml = simplekml.Kml()
+        pnt = kml.newpoint(name='A Point')
+        pnt.coords = [(1.0, 2.0)]
+        pnt.style.liststyle.itemicon.href = 'http://maps.google.com/mapfiles/kml/shapes/info.png'
+        kml.save('ItemIcon.kml')
     """
 
     def __init__(self, state=None, href=None):

@@ -43,6 +43,15 @@ class TimeSpan(TimePrimitive):
     """Represents an extent in time bounded by begin and end dates.
 
     The arguments are the same as the properties.
+
+    Usage::
+
+        import simplekml
+        kml = simplekml.Kml()
+        pnt = kml.newpoint(name='A Point')
+        pnt.timespan.begin = "2011-02-20"
+        pnt.timespan.end = "2012-07-31"
+        kml.save("TimeStamp.kml")
     """
     def __init__(self, begin=None, end=None):
         super(TimeSpan, self).__init__()
@@ -80,6 +89,24 @@ class GxTimeSpan(TimeSpan):
     Args:
       * *same as properties*
       * *all other args same as* :class:`simplekml.TimeSpan`
+
+    Usage::
+
+        import simplekml
+        kml = simplekml.Kml()
+        ls = kml.newlinestring(name='A LineString')
+        ls.coords = [(18.333868,-34.038274,10.0), (18.370618,-34.034421,10.0)]
+        ls.extrude = 1
+        ls.altitudemode = simplekml.AltitudeMode.relativetoground
+        ls.lookat.gxaltitudemode = simplekml.GxAltitudeMode.relativetoseafloor
+        ls.lookat.latitude = -34.028242
+        ls.lookat.longitude = 18.356852
+        ls.lookat.range = 3000
+        ls.lookat.heading = 56
+        ls.lookat.tilt = 78
+        ls.lookat.gxtimespan.begin = "2011-02-20"
+        ls.lookat.gxtimespan.end = "2012-07-31"
+        kml.save("GxTimeSpan.kml")
     """
     def __init__(self, **kwargs):
         super(GxTimeSpan, self).__init__(**kwargs)
@@ -95,6 +122,14 @@ class TimeStamp(TimePrimitive):
     """Represents a single moment in time.
 
     The arguments are the same as the properties.
+
+    Usage::
+
+        import simplekml
+        kml = simplekml.Kml()
+        pnt = kml.newpoint(name='A Point')
+        pnt.timestamp.when = 2011
+        kml.save("TimeStamp.kml")
     """
 
     def __init__(self, when=None):
@@ -124,15 +159,26 @@ class GxTimeStamp(TimeStamp):
     Args:
       * *same as properties*
       * *all other args same as* :class:`simplekml.TimeStamp`
+
+    Usage::
+
+        import simplekml
+        kml = simplekml.Kml()
+        ls = kml.newlinestring(name='A LineString')
+        ls.coords = [(18.333868,-34.038274,10.0), (18.370618,-34.034421,10.0)]
+        ls.extrude = 1
+        ls.altitudemode = simplekml.AltitudeMode.relativetoground
+        ls.lookat.gxaltitudemode = simplekml.GxAltitudeMode.relativetoseafloor
+        ls.lookat.latitude = -34.028242
+        ls.lookat.longitude = 18.356852
+        ls.lookat.range = 3000
+        ls.lookat.heading = 56
+        ls.lookat.tilt = 78
+        ls.lookat.gxtimestamp.when = 2011
+        kml.save("GxTimeStamp.kml")
     """
+
     def __init__(self, **kwargs):
-        """
-        Creates a gx:timestamp element.
-
-        Keyword Arguments:
-        when (string) -- a moment in time (default None)
-
-        """
         super(GxTimeStamp, self).__init__(**kwargs)
 
     def __str__(self):

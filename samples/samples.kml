@@ -12,12 +12,8 @@
             <name>Examples</name>
             <styleUrl>#stylesel_0</styleUrl>
             <NetworkLink id="feat_4">
-                <Link id="link_0">
-                    <href>http://simplekml.googlecode.com/hg/samples/examples/E00%20Usage.kml</href>
-                </Link>
                 <name>E00 Usage</name>
                 <visibility>0</visibility>
-                <Snippet maxLines="1">How to use simplekml.</Snippet>
                 <description>&lt;i&gt;How to use simplekml.&lt;/i&gt;&lt;/br&gt;&lt;/br&gt;&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td&gt;&lt;div class=&quot;linenodiv&quot; style=&quot;background-color: #f0f0f0; padding-right: 10px&quot;&gt;&lt;pre style=&quot;line-height: 125%&quot;&gt; 1
  2
  3
@@ -61,14 +57,14 @@ kml&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;save(os&lt;span st
 &lt;span style=&quot;color: #408080; font-style: italic&quot;&gt;#print kml.kml() # uncomment to see the kml printed to screen&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</description>
+                <Snippet maxLines="1">How to use simplekml.</Snippet>
+                <Link id="link_0">
+                    <href>http://simplekml.googlecode.com/hg/samples/examples/E00%20Usage.kml</href>
+                </Link>
             </NetworkLink>
             <NetworkLink id="feat_5">
-                <Link id="link_1">
-                    <href>http://simplekml.googlecode.com/hg/samples/examples/E01%20Basics.kml</href>
-                </Link>
                 <name>E01 Basics</name>
                 <visibility>0</visibility>
-                <Snippet maxLines="1">The very basics of simplekml.</Snippet>
                 <description>&lt;i&gt;The very basics of simplekml.&lt;/i&gt;&lt;/br&gt;&lt;/br&gt;&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td&gt;&lt;div class=&quot;linenodiv&quot; style=&quot;background-color: #f0f0f0; padding-right: 10px&quot;&gt;&lt;pre style=&quot;line-height: 125%&quot;&gt; 1
  2
  3
@@ -214,14 +210,14 @@ kml&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;save(os&lt;span st
 &lt;span style=&quot;color: #408080; font-style: italic&quot;&gt;#kml.savekmz(os.path.splitext(__file__)[0] + &amp;quot;.kmz&amp;quot;) # uncomment to save to kmz&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</description>
+                <Snippet maxLines="1">The very basics of simplekml.</Snippet>
+                <Link id="link_1">
+                    <href>http://simplekml.googlecode.com/hg/samples/examples/E01%20Basics.kml</href>
+                </Link>
             </NetworkLink>
             <NetworkLink id="feat_6">
-                <Link id="link_2">
-                    <href>http://simplekml.googlecode.com/hg/samples/examples/E02%20Styling.kml</href>
-                </Link>
                 <name>E02 Styling</name>
                 <visibility>0</visibility>
-                <Snippet maxLines="1">Styling points, linestrings, polygons and TOC items.</Snippet>
                 <description>&lt;i&gt;Styling points, linestrings, polygons and TOC items.&lt;/i&gt;&lt;/br&gt;&lt;/br&gt;&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td&gt;&lt;div class=&quot;linenodiv&quot; style=&quot;background-color: #f0f0f0; padding-right: 10px&quot;&gt;&lt;pre style=&quot;line-height: 125%&quot;&gt; 1
  2
  3
@@ -315,14 +311,14 @@ pnt&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;balloonstyle&lt;sp
 kml&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;save(os&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;path&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;splitext(__file__)[&lt;span style=&quot;color: #666666&quot;&gt;0&lt;/span&gt;] &lt;span style=&quot;color: #666666&quot;&gt;+&lt;/span&gt; &lt;span style=&quot;color: #BA2121&quot;&gt;&amp;quot;.kml&amp;quot;&lt;/span&gt;)
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</description>
+                <Snippet maxLines="1">Styling points, linestrings, polygons and TOC items.</Snippet>
+                <Link id="link_2">
+                    <href>http://simplekml.googlecode.com/hg/samples/examples/E02%20Styling.kml</href>
+                </Link>
             </NetworkLink>
             <NetworkLink id="feat_7">
-                <Link id="link_3">
-                    <href>http://simplekml.googlecode.com/hg/samples/examples/E03%20Various.kml</href>
-                </Link>
                 <name>E03 Various</name>
                 <visibility>0</visibility>
-                <Snippet maxLines="1">A collection of various features and stylings.</Snippet>
                 <description>&lt;i&gt;A collection of various features and stylings.&lt;/i&gt;&lt;/br&gt;&lt;/br&gt;&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td&gt;&lt;div class=&quot;linenodiv&quot; style=&quot;background-color: #f0f0f0; padding-right: 10px&quot;&gt;&lt;pre style=&quot;line-height: 125%&quot;&gt; 1
  2
  3
@@ -434,6 +430,10 @@ model&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;location&lt;span
 kml&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;save(os&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;path&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;splitext(__file__)[&lt;span style=&quot;color: #666666&quot;&gt;0&lt;/span&gt;] &lt;span style=&quot;color: #666666&quot;&gt;+&lt;/span&gt; &lt;span style=&quot;color: #BA2121&quot;&gt;&amp;quot;.kml&amp;quot;&lt;/span&gt;)
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</description>
+                <Snippet maxLines="1">A collection of various features and stylings.</Snippet>
+                <Link id="link_3">
+                    <href>http://simplekml.googlecode.com/hg/samples/examples/E03%20Various.kml</href>
+                </Link>
             </NetworkLink>
         </Folder>
         <Folder id="feat_8">
@@ -445,12 +445,8 @@ kml&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;save(os&lt;span st
             <name>Tutorials</name>
             <styleUrl>#stylesel_1</styleUrl>
             <NetworkLink id="feat_9">
-                <Link id="link_4">
-                    <href>http://simplekml.googlecode.com/hg/samples/tutorials/T00%20Point.kml</href>
-                </Link>
                 <name>T00 Point</name>
                 <visibility>0</visibility>
-                <Snippet maxLines="1">Demonstrates how to create points and change some of the properties of points.</Snippet>
                 <description>&lt;i&gt;Demonstrates how to create points and change some of the properties of points.&lt;/i&gt;&lt;/br&gt;&lt;/br&gt;&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td&gt;&lt;div class=&quot;linenodiv&quot; style=&quot;background-color: #f0f0f0; padding-right: 10px&quot;&gt;&lt;pre style=&quot;line-height: 125%&quot;&gt;  1
   2
   3
@@ -740,14 +736,14 @@ single_point &lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt; kml&lt;
 kml&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;save(os&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;path&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;splitext(__file__)[&lt;span style=&quot;color: #666666&quot;&gt;0&lt;/span&gt;] &lt;span style=&quot;color: #666666&quot;&gt;+&lt;/span&gt; &lt;span style=&quot;color: #BA2121&quot;&gt;&amp;quot;.kml&amp;quot;&lt;/span&gt;)
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</description>
+                <Snippet maxLines="1">Demonstrates how to create points and change some of the properties of points.</Snippet>
+                <Link id="link_4">
+                    <href>http://simplekml.googlecode.com/hg/samples/tutorials/T00%20Point.kml</href>
+                </Link>
             </NetworkLink>
             <NetworkLink id="feat_10">
-                <Link id="link_5">
-                    <href>http://simplekml.googlecode.com/hg/samples/tutorials/T01%20LineString.kml</href>
-                </Link>
                 <name>T01 LineString</name>
                 <visibility>0</visibility>
-                <Snippet maxLines="1">Demonstrates how to create a linestring focusing on the extrude and altitudemode properties.</Snippet>
                 <description>&lt;i&gt;Demonstrates how to create a linestring focusing on the extrude and altitudemode properties.&lt;/i&gt;&lt;/br&gt;&lt;/br&gt;&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td&gt;&lt;div class=&quot;linenodiv&quot; style=&quot;background-color: #f0f0f0; padding-right: 10px&quot;&gt;&lt;pre style=&quot;line-height: 125%&quot;&gt; 1
  2
  3
@@ -807,14 +803,14 @@ linestring&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;extrude &lt
 kml&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;save(os&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;path&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;splitext(__file__)[&lt;span style=&quot;color: #666666&quot;&gt;0&lt;/span&gt;] &lt;span style=&quot;color: #666666&quot;&gt;+&lt;/span&gt; &lt;span style=&quot;color: #BA2121&quot;&gt;&amp;quot;.kml&amp;quot;&lt;/span&gt;)
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</description>
+                <Snippet maxLines="1">Demonstrates how to create a linestring focusing on the extrude and altitudemode properties.</Snippet>
+                <Link id="link_5">
+                    <href>http://simplekml.googlecode.com/hg/samples/tutorials/T01%20LineString.kml</href>
+                </Link>
             </NetworkLink>
             <NetworkLink id="feat_11">
-                <Link id="link_6">
-                    <href>http://simplekml.googlecode.com/hg/samples/tutorials/T03%20MultiGeometry.kml</href>
-                </Link>
                 <name>T03 MultiGeometry</name>
                 <visibility>0</visibility>
-                <Snippet maxLines="1">Demonstrates three types of MultiGeometry (point, linestring and polygon) using the South Africa coordinate system as a basis.</Snippet>
                 <description>&lt;i&gt;Demonstrates three types of MultiGeometry (point, linestring and polygon) using the South Africa coordinate system as a basis.&lt;/i&gt;&lt;/br&gt;&lt;/br&gt;&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td&gt;&lt;div class=&quot;linenodiv&quot; style=&quot;background-color: #f0f0f0; padding-right: 10px&quot;&gt;&lt;pre style=&quot;line-height: 125%&quot;&gt; 1
  2
  3
@@ -886,7 +882,7 @@ firstrun &lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt; &lt;span st
     linecoords &lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt; []
     &lt;span style=&quot;color: #008000; font-weight: bold&quot;&gt;if&lt;/span&gt; x &lt;span style=&quot;color: #666666&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span style=&quot;color: #666666&quot;&gt;34&lt;/span&gt;: &lt;span style=&quot;color: #408080; font-style: italic&quot;&gt;# Label region&lt;/span&gt;
         lo &lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt; lolabels&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;newpoint(name&lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;str&lt;/span&gt;(x&lt;span style=&quot;color: #666666&quot;&gt;+1&lt;/span&gt;), coords&lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt;[(x&lt;span style=&quot;color: #666666&quot;&gt;+1&lt;/span&gt;, &lt;span style=&quot;color: #666666&quot;&gt;-29&lt;/span&gt;)])
-        lo&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;iconstyle&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;icon &lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt; &lt;span style=&quot;color: #BA2121&quot;&gt;&amp;quot;&amp;quot;&lt;/span&gt; &lt;span style=&quot;color: #408080; font-style: italic&quot;&gt;# Remove the icons&lt;/span&gt;
+        lo&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;iconstyle&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;icon&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;href &lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt; &lt;span style=&quot;color: #BA2121&quot;&gt;&amp;quot;&amp;quot;&lt;/span&gt; &lt;span style=&quot;color: #408080; font-style: italic&quot;&gt;# Remove the icons&lt;/span&gt;
     &lt;span style=&quot;color: #008000; font-weight: bold&quot;&gt;for&lt;/span&gt; y &lt;span style=&quot;color: #AA22FF; font-weight: bold&quot;&gt;in&lt;/span&gt; &lt;span style=&quot;color: #008000&quot;&gt;range&lt;/span&gt;(&lt;span style=&quot;color: #666666&quot;&gt;-35&lt;/span&gt;, &lt;span style=&quot;color: #666666&quot;&gt;-19&lt;/span&gt;, &lt;span style=&quot;color: #666666&quot;&gt;2&lt;/span&gt;):
         multipnt&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;newpoint(coords&lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt;[(x, y)])
         linecoords&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;append((x,y))
@@ -920,14 +916,14 @@ multipolodd&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;linestyle&
 kml&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;save(os&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;path&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;splitext(__file__)[&lt;span style=&quot;color: #666666&quot;&gt;0&lt;/span&gt;] &lt;span style=&quot;color: #666666&quot;&gt;+&lt;/span&gt; &lt;span style=&quot;color: #BA2121&quot;&gt;&amp;quot;.kml&amp;quot;&lt;/span&gt;)
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</description>
+                <Snippet maxLines="1">Demonstrates three types of MultiGeometry (point, linestring and polygon) using the South Africa coordinate system as a basis.</Snippet>
+                <Link id="link_6">
+                    <href>http://simplekml.googlecode.com/hg/samples/tutorials/T03%20MultiGeometry.kml</href>
+                </Link>
             </NetworkLink>
             <NetworkLink id="feat_12">
-                <Link id="link_7">
-                    <href>http://simplekml.googlecode.com/hg/samples/tutorials/T04%20Overlays.kml</href>
-                </Link>
                 <name>T04 Overlays</name>
                 <visibility>0</visibility>
-                <Snippet maxLines="1">Demonstrates the basics of overlays (ground screen and photo overlay).</Snippet>
                 <description>&lt;i&gt;Demonstrates the basics of overlays (ground screen and photo overlay).&lt;/i&gt;&lt;/br&gt;&lt;/br&gt;&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td&gt;&lt;div class=&quot;linenodiv&quot; style=&quot;background-color: #f0f0f0; padding-right: 10px&quot;&gt;&lt;pre style=&quot;line-height: 125%&quot;&gt; 1
  2
  3
@@ -999,14 +995,14 @@ photo&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;viewvolume &lt;s
 kml&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;save(os&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;path&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;splitext(__file__)[&lt;span style=&quot;color: #666666&quot;&gt;0&lt;/span&gt;] &lt;span style=&quot;color: #666666&quot;&gt;+&lt;/span&gt; &lt;span style=&quot;color: #BA2121&quot;&gt;&amp;quot;.kml&amp;quot;&lt;/span&gt;)
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</description>
+                <Snippet maxLines="1">Demonstrates the basics of overlays (ground screen and photo overlay).</Snippet>
+                <Link id="link_7">
+                    <href>http://simplekml.googlecode.com/hg/samples/tutorials/T04%20Overlays.kml</href>
+                </Link>
             </NetworkLink>
             <NetworkLink id="feat_13">
-                <Link id="link_8">
-                    <href>http://simplekml.googlecode.com/hg/samples/tutorials/T05_ExtendedData.kml</href>
-                </Link>
                 <name>T05_ExtendedData</name>
                 <visibility>0</visibility>
-                <Snippet maxLines="1">This shows the use of the 3 different types of extended data: Data, Simple Data and Simple Array Data, as well as prettying up the data.</Snippet>
                 <description>&lt;i&gt;This shows the use of the 3 different types of extended data: Data, Simple Data and Simple Array Data, as well as prettying up the data.&lt;/i&gt;&lt;/br&gt;&lt;/br&gt;&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td&gt;&lt;div class=&quot;linenodiv&quot; style=&quot;background-color: #f0f0f0; padding-right: 10px&quot;&gt;&lt;pre style=&quot;line-height: 125%&quot;&gt; 1
  2
  3
@@ -1162,14 +1158,14 @@ trk&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;extendeddata&lt;sp
 kml&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;save(os&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;path&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;splitext(__file__)[&lt;span style=&quot;color: #666666&quot;&gt;0&lt;/span&gt;] &lt;span style=&quot;color: #666666&quot;&gt;+&lt;/span&gt; &lt;span style=&quot;color: #BA2121&quot;&gt;&amp;quot;.kml&amp;quot;&lt;/span&gt;)
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</description>
+                <Snippet maxLines="1">This shows the use of the 3 different types of extended data: Data, Simple Data and Simple Array Data, as well as prettying up the data.</Snippet>
+                <Link id="link_8">
+                    <href>http://simplekml.googlecode.com/hg/samples/tutorials/T05_ExtendedData.kml</href>
+                </Link>
             </NetworkLink>
             <NetworkLink id="feat_14">
-                <Link id="link_9">
-                    <href>http://simplekml.googlecode.com/hg/samples/tutorials/T06_Tracks.kml</href>
-                </Link>
                 <name>T06_Tracks</name>
                 <visibility>0</visibility>
-                <Snippet maxLines="1">This is a recreation of the example found in the KML Reference: http://code.google.com/apis/kml/documentation/kmlreference.html#gxtrack The unnecessary styling has not been implemented, but if you compare the KML References example in Google Earth to this example you should see no difference whatsoever (except for id values).</Snippet>
                 <description>&lt;i&gt;This is a recreation of the example found in the KML Reference: http://code.google.com/apis/kml/documentation/kmlreference.html#gxtrack The unnecessary styling has not been implemented, but if you compare the KML References example in Google Earth to this example you should see no difference whatsoever (except for id values).&lt;/i&gt;&lt;/br&gt;&lt;/br&gt;&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td&gt;&lt;div class=&quot;linenodiv&quot; style=&quot;background-color: #f0f0f0; padding-right: 10px&quot;&gt;&lt;pre style=&quot;line-height: 125%&quot;&gt; 1
  2
  3
@@ -1303,15 +1299,15 @@ trk&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;stylemap&lt;span s
 kml&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;save(os&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;path&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;splitext(__file__)[&lt;span style=&quot;color: #666666&quot;&gt;0&lt;/span&gt;] &lt;span style=&quot;color: #666666&quot;&gt;+&lt;/span&gt; &lt;span style=&quot;color: #BA2121&quot;&gt;&amp;quot;.kml&amp;quot;&lt;/span&gt;)
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</description>
+                <Snippet maxLines="1">This is a recreation of the example found in the KML Reference: http://code.google.com/apis/kml/documentation/kmlreference.html#gxtrack The unnecessary styling has not been implemented, but if you compare the KML References example in Google Earth to this example you should see no difference whatsoever (except for id values).</Snippet>
+                <Link id="link_9">
+                    <href>http://simplekml.googlecode.com/hg/samples/tutorials/T06_Tracks.kml</href>
+                </Link>
             </NetworkLink>
             <NetworkLink id="feat_15">
-                <Link id="link_10">
-                    <href>http://simplekml.googlecode.com/hg/samples/tutorials/T07_Tours.kml</href>
-                </Link>
                 <name>T07_Tours</name>
                 <visibility>0</visibility>
-                <Snippet maxLines="1">Demonstrates touring with the reproductionof the tour sample in the KML Reference https://developers.google.com/kml/documentation/kmlreference#gxtour with the edition of GxSoundCue</Snippet>
-                <description>&lt;i&gt;Demonstrates touring with the reproductionof the tour sample in the KML Reference https://developers.google.com/kml/documentation/kmlreference#gxtour with the edition of GxSoundCue&lt;/i&gt;&lt;/br&gt;&lt;/br&gt;&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td&gt;&lt;div class=&quot;linenodiv&quot; style=&quot;background-color: #f0f0f0; padding-right: 10px&quot;&gt;&lt;pre style=&quot;line-height: 125%&quot;&gt; 1
+                <description>&lt;i&gt;Demonstrates touring with the reproduction of the tour sample in the KML Reference https://developers.google.com/kml/documentation/kmlreference#gxtour with the addition of GxSoundCue&lt;/i&gt;&lt;/br&gt;&lt;/br&gt;&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td&gt;&lt;div class=&quot;linenodiv&quot; style=&quot;background-color: #f0f0f0; padding-right: 10px&quot;&gt;&lt;pre style=&quot;line-height: 125%&quot;&gt; 1
  2
  3
  4
@@ -1386,6 +1382,10 @@ wait &lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt; playlist&lt;spa
 kml&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;save(os&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;path&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;splitext(__file__)[&lt;span style=&quot;color: #666666&quot;&gt;0&lt;/span&gt;] &lt;span style=&quot;color: #666666&quot;&gt;+&lt;/span&gt; &lt;span style=&quot;color: #BA2121&quot;&gt;&amp;quot;.kml&amp;quot;&lt;/span&gt;)
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</description>
+                <Snippet maxLines="1">Demonstrates touring with the reproduction of the tour sample in the KML Reference https://developers.google.com/kml/documentation/kmlreference#gxtour with the addition of GxSoundCue</Snippet>
+                <Link id="link_10">
+                    <href>http://simplekml.googlecode.com/hg/samples/tutorials/T07_Tours.kml</href>
+                </Link>
             </NetworkLink>
         </Folder>
     </Folder>

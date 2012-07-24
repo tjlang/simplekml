@@ -22,8 +22,8 @@ import zipfile
 import codecs
 import os
 
-from simplekml.base import Kmlable, KmlElement
-from simplekml.featgeom import Document
+from simplekml.base import Kmlable, KmlElement, check
+from simplekml.featgeom import Document, Container
 from simplekml.makeunicode import u
 
 
@@ -39,15 +39,14 @@ class Kml(object):
     arguments mean see the KML reference documentation published by Google:
     http://code.google.com/apis/kml/documentation/kmlreference.html
 
-    Usage::
+    Simple Example::
 
         from simplekml import Kml
-
         kml = Kml(name='KmlUsage')
         kml.newpoint(name="Kirstenbosch", coords=[(18.432314,-33.988862)])  # A simple Point
         kml.save("KmlClass.kml")  # Saving
         kml.savekmz("KmlClass.kmz", format=False)  # Saving as KMZ
-        
+        print kml.kml()  # Printing out the kml to screen
     """
 
     def __init__(self, **kwargs):
@@ -61,10 +60,18 @@ class Kml(object):
         A top level document is required for a kml document, the default is an
         instance of :class:`simplekml.Document`. This property can be set to an
         instance of :class:`simplekml.Document` or :class:`simplekml.Folder`
+
+        Example::
+
+            import simplekml
+            kml = simplekml.Kml()
+            kml.document = simplekml.Folder(name = "Top Level Folder")
+            kml.save('Document Replacement.kml')
         """
         return self._feature
 
     @document.setter
+    @check(Container, True)
     def document(self, doc):
         self._feature = doc
 
@@ -91,7 +98,47 @@ class Kml(object):
         Kmlable._parsetext(parse)
 
     def kml(self, format=True):
-        """Returns the kml as a string or "prettyprinted" if `format = True`, see :func:`simplekml.Kml.save` for an example."""
+        """Returns the kml as a string or "prettyprinted" if `format = True`.
+
+        PrettyPrinted Example (default)::
+
+            import simplekml
+            kml = simplekml.Kml()
+            pnt = kml.newpoint(name='A Point')
+            pnt.coords = [(1.0, 2.0)]
+            print kml.kml()
+
+        PrettyPrinted Result:
+
+        .. code-block:: xml
+
+            <?xml version="1.0" encoding="UTF-8"?>
+            <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
+                <Document id="feat_1">
+                    <Placemark id="feat_2">
+                        <name>A Point</name>
+                        <Point id="geom_0">
+                            <coordinates>1.0,2.0,0.0</coordinates>
+                        </Point>
+                    </Placemark>
+                </Document>
+            </kml>
+
+        Single Line Example::
+
+            import simplekml
+            kml = simplekml.Kml()
+            pnt = kml.newpoint(name='A Point')
+            pnt.coords = [(1.0, 2.0)]
+            print kml.kml(False)
+
+        Single Line Result:
+
+        .. code-block:: xml
+
+            <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2"><Document id="feat_1"><Placemark id="feat_2"><name>A Point</name><Point id="geom_0"><coordinates>1.0,2.0,0.0</coordinates></Point></Placemark></Document></kml>
+
+        """
         Kmlable._setkmz(False)
         return self._genkml(format)
 
@@ -99,31 +146,14 @@ class Kml(object):
         """Save the kml to the given file supplied by `path`.
 
         The KML is saved to a file in one long string if `format=False` else it
-        gets saved "prettyprinted" (as formatted xml) as shown below:
+        gets saved "prettyprinted" (as formatted xml). This works the same as :func:`simplekml.Kml.kml`
 
-        format=False:
+        Usage::
 
-        .. code-block:: xml
-
-            <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:xal="urn:oasis:names:tc:ciq:xsdschema:xAL:2.0"><Document id="feat_1"><name>KmlUsage</name><Placemark id="feat_2"><name>Kirstenbosch</name><Point id="geom_0"><coordinates>18.432314,-33.988862,0.0</coordinates></Point></Placemark></Document></kml>
-
-        format=True:
-        
-        .. code-block:: xml
-
-            <?xml version="1.0" encoding="UTF-8"?>
-            <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:xal="urn:oasis:names:tc:ciq:xsdschema:xAL:2.0">
-                <Document id="feat_1">
-                    <name>KmlUsage</name>
-                    <Placemark id="feat_2">
-                        <name>Kirstenbosch</name>
-                        <Point id="geom_0">
-                            <coordinates>18.432314,-33.988862,0.0</coordinates>
-                        </Point>
-                    </Placemark>
-                </Document>
-            </kml>
-
+            import simplekml
+            kml = simplekml.Kml()
+            kml.save("Saving.kml")
+            #kml.save("Saving.kml", False)  # or this
         """
         Kmlable._setkmz(False)
         out = self._genkml(format)
@@ -137,8 +167,14 @@ class Kml(object):
         """Save the kml as a kmz to the given file supplied by `path`.
 
         The KML is saved to a file in a long string if `format=False` else it
-        gets saved "prettyprinted" (as formatted xml), see
-        :func:`simplekml.Kml.save` for an example.
+        gets saved "prettyprinted". This works the same as :func:`simplekml.Kml.kml`
+
+        Usage::
+
+            import simplekml
+            kml = simplekml.Kml()
+            kml.savekmz("Saving.kml")
+            #kml.savekmz("Saving.kml", False)  # or this
         """
         Kmlable._setkmz()
         out = self._genkml(format).encode('utf-8')
@@ -153,8 +189,8 @@ class Kml(object):
         """
         Creates a new :class:`simplekml.Document`.
 
-        The document is attached to this KML document. The arguments are the
-        same as those for :class:`simplekml.Document`
+        The document is attached to this KML document. The arguments are the same as for :class:`simplekml.Document`.
+        See :class:`simplekml.Document` for usage.
         """
         return self.document.newdocument(**kwargs)
 
@@ -162,8 +198,8 @@ class Kml(object):
         """
         Creates a new :class:`simplekml.Folder`.
 
-        The document is attached to this KML document. The arguments are the
-        same as those for :class:`simplekml.Folder`
+        The folder is attached to this KML document. The arguments are the same as those for :class:`simplekml.Folder`
+        See :class:`simplekml.Folder` for usage.
         """
         return self.document.newfolder(**kwargs)
 
@@ -171,8 +207,8 @@ class Kml(object):
         """
         Creates a new :class:`simplekml.Point`.
 
-        The document is attached to this KML document. The arguments are the
-        same as those for :class:`simplekml.Point`
+        The point is attached to this KML document. The arguments are the same as those for :class:`simplekml.Point`
+        See :class:`simplekml.Point` for usage.
         """
         return self.document.newpoint(**kwargs)
 
@@ -180,8 +216,8 @@ class Kml(object):
         """
         Creates a new :class:`simplekml.LineString`.
 
-        The document is attached to this KML document. The arguments are the
-        same as those for :class:`simplekml.LineString`
+        The linestring is attached to this KML document. The arguments are the same as for :class:`simplekml.LineString`
+        See :class:`simplekml.LineString` for usage.
         """
         return self.document.newlinestring(**kwargs)
 
@@ -189,8 +225,8 @@ class Kml(object):
         """
         Creates a new :class:`simplekml.Polygon`.
 
-        The document is attached to this KML document. The arguments are the
-        same as those for :class:`simplekml.Polygon`
+        The polygon is attached to this KML document. The arguments are the same as those for :class:`simplekml.Polygon`
+        See :class:`simplekml.Polygon` for usage.
         """
         return self.document.newpolygon(**kwargs)
 
@@ -198,8 +234,8 @@ class Kml(object):
         """
         Creates a new :class:`simplekml.MultiGeometry`.
 
-        The document is attached to this KML document. The arguments are the
-        same as those for :class:`simplekml.MultiGeometry`
+        The multigeometry is attached to this KML document. The arguments are the same as
+        for :class:`simplekml.MultiGeometry`. See :class:`simplekml.MultiGeometry` for usage.
         """
         return self.document.newmultigeometry(**kwargs)
 
@@ -207,8 +243,8 @@ class Kml(object):
         """
         Creates a new :class:`simplekml.GroundOverlay`.
 
-        The document is attached to this KML document. The arguments are the
-        same as those for :class:`simplekml.GroundOverlay`
+        The groundoverlay is attached to this KML document. The arguments are the same as those
+        for :class:`simplekml.GroundOverlay`. See :class:`simplekml.GroundOverlay` for usage.
         """
         return self.document.newgroundoverlay(**kwargs)
 
@@ -216,8 +252,8 @@ class Kml(object):
         """
         Creates a new :class:`simplekml.ScreenOverlay`.
 
-        The document is attached to this KML document. The arguments are the
-        same as those for :class:`simplekml.ScreenOverlay`
+        The screenoverlay is attached to this KML document. The arguments are the same as those
+        for :class:`simplekml.ScreenOverlay`. See :class:`simplekml.ScreenOverlay` for usage.
         """
         return self.document.newscreenoverlay(**kwargs)
 
@@ -225,8 +261,8 @@ class Kml(object):
         """
         Creates a new :class:`simplekml.PhotoOverlay`.
 
-        The document is attached to this KML document. The arguments are the
-        same as those for :class:`simplekml.PhotoOverlay`
+        The photooverlay is attached to this KML document. The arguments are the same as those
+        for :class:`simplekml.PhotoOverlay`. See :class:`simplekml.PhotoOverlay` for usage.
         """
         return self.document.newphotooverlay(**kwargs)
 
@@ -234,8 +270,8 @@ class Kml(object):
         """
         Creates a new :class:`simplekml.NetworkLink`.
 
-        The document is attached to this KML document. The arguments are the
-        same as those for :class:`simplekml.NetworkLink`
+        The networklink is attached to this KML document. The arguments are the same as those
+        for :class:`simplekml.NetworkLink`. See :class:`simplekml.NetworkLink` for usage.
         """
         return self.document.newnetworklink(**kwargs)
 
@@ -243,7 +279,7 @@ class Kml(object):
         """
         Creates a new :class:`simplekml.Model`.
 
-        The document is attached to this KML document. The arguments are the
+        The model is attached to this KML document. The arguments are the
         same as those for :class:`simplekml.Model`
         """
         return self.document.newmodel(**kwargs)
@@ -252,7 +288,7 @@ class Kml(object):
         """
         Creates a new :class:`simplekml.Schema`.
 
-        The document is attached to this KML document. The arguments are the
+        The schem is attached to this KML document. The arguments are the
         same as those for :class:`simplekml.Schema`
         """
         return self.document.newschema(**kwargs)
@@ -261,8 +297,8 @@ class Kml(object):
         """
         Creates a new :class:`simplekml.GxTrack`.
 
-        The document is attached to this KML document. The arguments are the
-        same as those for :class:`simplekml.GxTrack`
+        The gxtrack is attached to this KML document. The arguments are the same as those for :class:`simplekml.GxTrack`
+        See :class:`simplekml.GxTrack` for usage.
         """
         return self.document.newgxtrack(**kwargs)
 
@@ -270,8 +306,8 @@ class Kml(object):
         """
         Creates a new :class:`simplekml.GxMultiTrack`.
 
-        The document is attached to this KML document. The arguments are the
-        same as those for :class:`simplekml.GxMultiTrack`
+        The gxmultitrack is attached to this KML document. The arguments are the same as those
+        for :class:`simplekml.GxMultiTrack`. See :class:`simplekml.GxMultiTrack` for usage.
         """
         return self.document.newgxmultitrack(**kwargs)
 
@@ -279,7 +315,7 @@ class Kml(object):
         """
         Creates a new :class:`simplekml.GxTour`.
 
-        The tour is attached to this KML document. The arguments are the
-        same as those for :class:`simplekml.GxTour`
+        The tour is attached to this KML document. The arguments are the same as those for :class:`simplekml.GxTour`
+        See :class:`simplekml.GxTour` for usage.
         """
         return self.document.newgxtour(**kwargs)

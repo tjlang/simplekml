@@ -1,13 +1,6 @@
 AbstractViews
 =============
 
-AbstractView
-------------
-
-.. autoclass:: simplekml.AbstractView
-    :members:
-    :inherited-members:
-
 Camera
 ------
 

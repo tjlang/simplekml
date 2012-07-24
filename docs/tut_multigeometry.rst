@@ -32,7 +32,7 @@ A lot is happening in the next section. There are 2 for loops that are generatin
         linecoords = []
         if x < 34: # Label region
             lo = lolabels.newpoint(name=str(x+1), coords=[(x+1, -29)])
-            lo.style.iconstyle.icon = "" # Remove the icons
+            lo.style.iconstyle.icon.href = "" # Remove the icons
         for y in range(-35, -19, 2):
             multipnt.newpoint(coords=[(x, y)])
             linecoords.append((x,y))
@@ -53,11 +53,11 @@ A lot is happening in the next section. There are 2 for loops that are generatin
                 multipoleven.newpolygon(outerboundaryis=polycoordseven[0]+end)
                 polycoordseven = []
 
-This following section creates the points that are being used as labels for the regions. The points are added to the folder we created above (lolabels). You might be wondering why a MultiGeometry feature is not created to contain all the labels, this is because in KML all points in a MultiGeometry inherit the !MultiGeometries name for the name of the label. So, all the labels would end up being called "Lo. Regions", which is not what is wanted. The icon style of the points is also being made to equal "". This removes the icon completely and allows the name of the label to be centered on the origin of the point::
+This following section creates the points that are being used as labels for the regions. The points are added to the folder we created above (lolabels). You might be wondering why a MultiGeometry feature is not created to contain all the labels, this is because in KML all points in a MultiGeometry inherit the !MultiGeometries name for the name of the label. So, all the labels would end up being called "Lo. Regions", which is not what is wanted. The icon style's href of the points is also being made to equal "". This removes the icon completely and allows the name of the label to be centered on the origin of the point::
 
     if x < 34: # Label region
         lo = lolabels.newpoint(name=str(x+1), coords=[(x+1, -29)])
-        lo.style.iconstyle.icon = "" # Remove the icons
+        lo.style.iconstyle.icon.href = "" # Remove the icons
 
 
 Here the longitude coordinates are generated. Now each of the intersections of the longitudes and latitudes can be drawn as a point in a MultiGeometry (multipnt). This is done by calling `newpoint` on the multipnt variable, and supplying the coordinates. After the loop finishes a new LineString is created from all the coordinates generated. this is done by calling `newlinestring` on the multilin variable::
@@ -83,7 +83,14 @@ What the next step does is basically creates a polygon in multipolodd and multip
             end.reverse()
 
 
-Finally all the MultiGeometry features get styled. There a few things to note here. The labels of the point collection is set to `0.0`. This is done to make all the labels disappear. The icon of the points is changed from the default pin to a circle by setting the icon styles href to the path of the circle image. Next, color is applied to the !LineString (thick black). Lastly, color is applied to the MultiGeometry Polgon feature. Here we see the [Color] class being utilized. The [Color] class contains a list of named colors (from CSS and HTML). Here the orange and lightblue colors are used. The problem that occurs is that these colors are completely opaque, and makes the reference grid we are creating completely pointless, because we cannot see South Africa below the polygons. To remedy this, `changealpha` of the [Color] class is used. What this does is accept an Google Earth HEX string and an alpha value and returns the HEX string with the alpha value modified. It is a quick and convenient way of assigning any alpha value to the standard colors::
+Finally all the MultiGeometry features get styled. There a few things to note here.
+
+  * The labels' scale of the point collection is set to `0.0`. This is done to make all the labels disappear.
+  * The icon of the points is changed from the default pin to a circle by setting the icon styles href to the path of the circle image.
+  * Color is applied to the LineString (thick black).
+  * Color is applied to the MultiGeometry Polgon feature. Here we see the :class:`simplekml.Color` class being utilized. The :class:`simplekml.Color` class contains a list of named colors (from CSS and HTML). Here the orange and lightblue colors are used. The problem that occurs is that these colors are completely opaque, and makes the reference grid we are creating completely pointless, because we cannot see South Africa below the polygons. To remedy this, :func:`simplekml.Color.changealpha` of the :class:`simplekml.Color` class is used. What this does is accept a Google Earth HEX string and an alpha value and returns the HEX string with the alpha value modified. It is a quick and convenient way of assigning any alpha value to the standard colors
+
+::
 
     multipnt.style.labelstyle.scale = 0.0 # Hide the labels of the points
     multipnt.style.iconstyle.icon.href = "http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png"
@@ -120,7 +127,7 @@ Here is the complete code::
         linecoords = []
         if x < 34: # Label region
             lo = lolabels.newpoint(name=str(x+1), coords=[(x+1, -29)])
-            lo.style.iconstyle.icon = "" # Remove the icons
+            lo.style.iconstyle.icon.href = "" # Remove the icons
         for y in range(-35, -19, 2):
             multipnt.newpoint(coords=[(x, y)])
             linecoords.append((x,y))
