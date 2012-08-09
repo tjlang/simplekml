@@ -51,6 +51,117 @@ class Kml(object):
 
     def __init__(self, **kwargs):
         self._feature = Document(**kwargs)
+        self._hint = None
+
+    @property
+    def features(self):
+        """Returns a list of all the features that have been attached to the top level document."""
+        return self.document.features
+
+    @property
+    def allfeatures(self):
+        """Returns a list of all the features that have been attached to the top level document, and all sub features.
+
+        *New in version 1.1.0*
+        """
+        return self.document.allfeatures
+
+    @property
+    def geometries(self):
+        """Returns a list of all the geometries that have been attached to the top level document.
+
+        *New in version 1.1.0*
+        """
+        return self.document.geometries
+
+    @property
+    def allgeometries(self):
+        """Returns a list of all the geometries that have been attached to the top level document, and all sub geometries.
+
+        *New in version 1.1.0*
+        """
+        return self.document.allgeometries
+
+    @property
+    def containers(self):
+        """Returns a list of all the containers that have been attached to to the top level document.
+
+        *New in version 1.1.0*
+        """
+        return self.document.containers
+
+    @property
+    def allcontainers(self):
+        """Returns a list of all the containers that have been attached to the top level document, and all sub containers.
+
+        *New in version 1.1.0*
+        """
+        return self.document.allcontainers
+
+    @property
+    def styles(self):
+        """Returns a list of all the styles that have been attached to the top level document.
+
+        *New in version 1.1.0*
+        """
+        return self.document.styles
+
+    @property
+    def allstyles(self):
+        """Returns a list of all the styles that have been attached to the top level document, and all sub styles.
+
+        *New in version 1.1.0*
+        """
+        return self.document.allstyles
+
+    @property
+    def stylemaps(self):
+        """Returns a list of all the stylemaps that have been attached to the top level document.
+
+        *New in version 1.1.0*
+        """
+        return self.document.stylemaps
+
+    @property
+    def allstylemaps(self):
+        """Returns a list of all the stylemaps that have been attached to the top level document, and all sub stylemaps.
+
+        *New in version 1.1.0*
+        """
+        return self.document.allstylemaps
+        
+    @property
+    def hint(self):
+        """Assign a hint attribute to the KML tag.
+
+        Possible values to use are:
+          * target=moon
+          * target=sky
+          * target=mars
+
+        Usage::
+
+            from simplekml import Kml
+            kml = Kml()
+            kml.hint = 'target=moon'
+            print kml.kml()
+
+        Result:
+
+        .. code-block:: xml
+
+            <?xml version="1.0" encoding="UTF-8"?>
+            <kml hint="target=moon" xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
+                <Document id="feat_1"/>
+            </kml>
+
+        *New in version 1.1.0*
+        """
+        return self._hint
+        
+    @hint.setter
+    def hint(self, hint):
+        self._hint = hint
 
     @property
     def document(self):
@@ -78,7 +189,11 @@ class Kml(object):
     def _genkml(self, format=True):
         """Returns the kml as a string or "prettyprinted" if format = True."""
         kml_str = self._feature.__str__()
-        xml_str = u("<kml {0}>{1}</kml>").format(Kmlable._getnamespaces(), kml_str)
+        if self._hint is not None:
+            hint = ' hint="{0}"'.format(self._hint)
+        else:
+            hint = ''
+        xml_str = u("<kml {0}{2}>{1}</kml>").format(Kmlable._getnamespaces(), kml_str, hint)
         if format:
            KmlElement.patch()
            kml_str = xml.dom.minidom.parseString(xml_str.encode("utf-8"))
@@ -92,8 +207,9 @@ class Kml(object):
 
         If True the values of the text tags (<name>, <description> and <text>)
         are escaped, so that the values are rendered properly. If False, the
-        values are left as is. If the CDATA element is being used to escape
-        the text strings, them set this to False.
+        values are left as is. In both cases the CDATA element is left unchanged.
+
+        *Changed in version 1.1.0*
         """
         Kmlable._parsetext(parse)
 

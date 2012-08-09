@@ -144,11 +144,14 @@ class GxFlyTo(GxTourPrimitive):
         super(GxFlyTo, self).__init__()
         self._kml['gx:duration'] = gxduration
         self._kml['gx:flyToMode'] = gxflytomode
-        self._abstractview = None
+        self._kml['Camera'] = None
+        self._kml['LookAt'] = None
         if camera is not None:
-            self._abstractview = camera
+            self._kml['Camera'] = camera
+            self._kml['LookAt'] = None
         else:
-            self._abstractview = lookat
+            self._kml['Camera'] = None
+            self._kml['LookAt'] = lookat
 
     @property
     def gxduration(self):
@@ -171,26 +174,30 @@ class GxFlyTo(GxTourPrimitive):
     @property
     def camera(self):
         """Camera that views the scene, accepts :class:`simplekml.Camera`"""
-        if self._abstractview is None or type(self._abstractview) == LookAt:
-            self._abstractview = Camera()
-        return self._abstractview
+        if self._kml['Camera'] is None:
+            self._kml['Camera'] = Camera()
+            self._kml['LookAt'] = None
+        return self._kml['Camera']
 
     @camera.setter
     @check(Camera)
     def camera(self, camera):
-        self._abstractview = camera
+        self._kml['Camera'] = camera
+        self._kml['LookAt'] = None
 
     @property
     def lookat(self):
         """Camera relative to the feature, accepts :class:`simplekml.LookAt`"""
-        if self._abstractview is None or type(self._abstractview) == Camera:
-            self._abstractview = LookAt()
-        return self._abstractview
+        if self._kml['LookAt'] is None:
+            self._kml['LookAt'] = LookAt()
+            self._kml['Camera'] = None
+        return self._kml['LookAt']
 
     @lookat.setter
     @check(LookAt)
     def lookat(self, lookat):
-        self._abstractview = lookat
+        self._kml['Camera'] = None
+        self._kml['LookAt'] = lookat
 
     def __str__(self):
         buf = ['<gx:FlyTo id="{0}">'.format(self._id),

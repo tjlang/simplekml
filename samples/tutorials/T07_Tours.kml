@@ -40,6 +40,14 @@
                 </gx:AnimatedUpdate>
                 <gx:FlyTo id="tour_2">
                     <gx:duration>4.1</gx:duration>
+                    <Camera>
+                        <longitude>170.157</longitude>
+                        <latitude>-43.671</latitude>
+                        <altitude>9700</altitude>
+                        <heading>-6.333</heading>
+                        <tilt>33.5</tilt>
+                        <roll>0</roll>
+                    </Camera>
                 </gx:FlyTo>
                 <gx:Wait id="tour_3">
                     <gx:duration>2.4</gx:duration>

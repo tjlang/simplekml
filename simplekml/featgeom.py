@@ -416,6 +416,102 @@ class Container(Feature):
     def __init__(self, **kwargs):
         super(Container, self).__init__(**kwargs)
 
+    @property
+    def features(self):
+        """Returns a list of all the features that have been attached to this container.
+
+        *New in version 1.1.0*
+        """
+        feats = []
+        for feat in self._features:
+            if isinstance(feat, Placemark):
+                feats.append(feat.geometry)
+            else:
+                feats.append(feat)
+        return feats
+
+    @property
+    def allfeatures(self):
+        """Returns a list of all the features that have been attached to this container, and all sub features.
+
+        *New in version 1.1.0*
+        """
+        feats = []
+        for feat in self.features:
+            if isinstance(feat, Container):
+                feats += feat.allfeatures
+            feats.append(feat)
+        return feats
+
+    @property
+    def geometries(self):
+        """Returns a list of all the geometries that have been attached to this container.
+
+        *New in version 1.1.0*
+        """
+        return [i for i in self.features if isinstance(i, Geometry)]
+
+    @property
+    def allgeometries(self):
+        """Returns a list of all the geometries that have been attached to this container, and all sub geometries.
+
+        *New in version 1.1.0*
+        """
+        return [i for i in self.allfeatures if isinstance(i, Geometry)]
+
+    @property
+    def containers(self):
+        """Returns a list of all the containers that have been attached to this container.
+
+        *New in version 1.1.0*
+        """
+        return [i for i in self.features if isinstance(i, Container)]
+
+    @property
+    def allcontainers(self):
+        """Returns a list of all the containers that have been attached to this container, and all sub containers.
+
+        *New in version 1.1.0*
+        """
+        feats = []
+        for feat in self.containers:
+            if isinstance(feat, Container):
+                feats += feat.allcontainers
+            feats.append(feat)
+        return feats
+
+    @property
+    def styles(self):
+        """Returns a list of all the styles that have been attached to this container.
+
+        *New in version 1.1.0*
+        """
+        return self._styles
+
+    @property
+    def allstyles(self):
+        """Returns a list of all the styles that have been attached to this container, and all sub styles.
+
+        *New in version 1.1.0*
+        """
+        return [style for container in self.allcontainers for style in container.styles]
+
+    @property
+    def stylemaps(self):
+        """Returns a list of all the stylemaps that have been attached to this container.
+
+        *New in version 1.1.0*
+        """
+        return self._stylemaps
+
+    @property
+    def allstylemaps(self):
+        """Returns a list of all the stylemaps that have been attached to this container, and all sub stylemaps.
+
+        *New in version 1.1.0*
+        """
+        return [stylemap for container in self.allcontainers for stylemap in container.stylemaps]
+
     def _newfeature(self, cls, **kwargs):
         """Creates a new feature from the given class and attaches it to this
         feature.

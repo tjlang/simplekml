@@ -39,6 +39,7 @@ Table of Contents
    styling
    reference    
    tutorials
+   releasehistory
 
 
 

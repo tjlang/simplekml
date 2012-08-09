@@ -66,7 +66,20 @@ class Kmlable(object):
 
     @classmethod
     def _chrconvert(cls, text):
-        return cgi.escape(text)
+        cdatastart = '<![CDATA['
+        cdataend = ']]>'
+        starttext = text
+        endtext = ''
+        count = text.count(cdatastart)
+        if count > 0:
+            for i in range(count):
+                endtext += cgi.escape(starttext[0:starttext.find(cdatastart)])
+                endtext += starttext[starttext.find(cdatastart):starttext.find(cdataend)+len(cdataend)]
+                starttext = starttext[starttext.find(cdataend)+len(cdataend):]
+            endtext += starttext
+        else:
+            endtext = cgi.escape(text)
+        return endtext
 
     @classmethod
     def _addimage(cls, image):
