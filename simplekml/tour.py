@@ -227,7 +227,7 @@ class Update(Kmlable):
 
     @property
     def targethref(self):
-        """A string reference to a sound file to play."""
+        """The target url."""
         return self._kml['targetHref']
 
     @targethref.setter

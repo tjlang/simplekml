@@ -288,6 +288,7 @@ class KmlElement(xml.dom.minidom.Element):
 
 
 def check(classtype, subclass=False):
+    """Type checking."""
     def _second(f):
         def _inner(self, value):
             if value is not None:

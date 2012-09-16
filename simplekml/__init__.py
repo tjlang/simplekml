@@ -33,3 +33,4 @@ from simplekml.styleselector import Style,StyleMap
 from simplekml.substyle import BalloonStyle,IconStyle,LabelStyle,LineStyle,ListStyle,PolyStyle
 from simplekml.timeprimitive import GxTimeSpan,GxTimeStamp,TimeSpan,TimeStamp
 from simplekml.tour import GxAnimatedUpdate,GxFlyTo,GxPlaylist,GxSoundCue,GxTour,GxTourControl,GxWait,Update
+from simplekml.networklinkcontrol import LinkSnippet, NetworkLinkControl

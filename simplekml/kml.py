@@ -25,6 +25,7 @@ import os
 from simplekml.base import Kmlable, KmlElement, check
 from simplekml.featgeom import Document, Container
 from simplekml.makeunicode import u
+from simplekml.networklinkcontrol import NetworkLinkControl
 
 
 class Kml(object):
@@ -51,6 +52,7 @@ class Kml(object):
 
     def __init__(self, **kwargs):
         self._feature = Document(**kwargs)
+        self._networklinkcontrol = None
         self._hint = None
 
     @property
@@ -168,9 +170,10 @@ class Kml(object):
         """
         The top level item in the kml document.
 
-        A top level document is required for a kml document, the default is an
+        0 or 1 top level document is required for a kml document, the default is an
         instance of :class:`simplekml.Document`. This property can be set to an
-        instance of :class:`simplekml.Document` or :class:`simplekml.Folder`
+        instance of :class:`simplekml.Document` or :class:`simplekml.Folder` or to
+        remove it completely set it to None
 
         Example::
 
@@ -179,6 +182,8 @@ class Kml(object):
             kml.document = simplekml.Folder(name = "Top Level Folder")
             kml.save('Document Replacement.kml')
         """
+        if self._feature is None:
+            self._feature = Document()
         return self._feature
 
     @document.setter
@@ -188,12 +193,17 @@ class Kml(object):
 
     def _genkml(self, format=True):
         """Returns the kml as a string or "prettyprinted" if format = True."""
-        kml_str = self._feature.__str__()
+        kml_str = ""
+        if self._feature is not None:
+            kml_str = self._feature.__str__()
+        networklinkcontrol_str = ""
+        if self._networklinkcontrol is not None:
+            networklinkcontrol_str = self._networklinkcontrol.__str__()
         if self._hint is not None:
             hint = ' hint="{0}"'.format(self._hint)
         else:
             hint = ''
-        xml_str = u("<kml {0}{2}>{1}</kml>").format(Kmlable._getnamespaces(), kml_str, hint)
+        xml_str = u("<kml {0}{2}>{1}{3}</kml>").format(Kmlable._getnamespaces(), kml_str, hint, networklinkcontrol_str)
         if format:
            KmlElement.patch()
            kml_str = xml.dom.minidom.parseString(xml_str.encode("utf-8"))
@@ -435,3 +445,19 @@ class Kml(object):
         See :class:`simplekml.GxTour` for usage.
         """
         return self.document.newgxtour(**kwargs)
+
+    @property
+    def networklinkcontrol(self):
+        """Accesses/Creates the :class:`simplekml.NetworkLinkControl`.
+
+        See :class:`simplekml.NetworkLinkControl` for usage example.
+
+        *New in version 1.1.1*
+        """
+        if self._networklinkcontrol is None:
+            self._networklinkcontrol = NetworkLinkControl()
+        return self._networklinkcontrol
+
+    @networklinkcontrol.setter
+    def networklinkcontrol(self, networklinkcontrol):
+        self._networklinkcontrol = networklinkcontrol

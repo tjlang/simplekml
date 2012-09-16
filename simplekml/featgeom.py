@@ -57,7 +57,8 @@ class Feature(Kmlable):
                  timestamp=None,
                  timespan=None,
                  region=None,
-                 extendeddata=None):
+                 extendeddata=None,
+                 gxballoonvisibility=None):
         Feature._id += 1
         super(Feature, self).__init__()
         self._kml['name'] = name
@@ -77,6 +78,7 @@ class Feature(Kmlable):
         self._kml['Region'] = region
         self._kml['styleUrl'] = None
         self._kml['ExtendedData'] = extendeddata
+        self._kml['gx:balloonVisibility'] = gxballoonvisibility
         self._id = "feat_{0}".format(Feature._id)
         self._style = None
         self._stylemap = None
@@ -177,6 +179,19 @@ class Feature(Kmlable):
     @description.setter
     def description(self, description):
         self._kml['description'] = description
+
+    @property
+    def gxballoonvisibility(self):
+        """
+        Toggles visibility of a description balloon, accepts int 0 or 1
+
+        *New in version 1.1.1*
+        """
+        return self._kml['gx:balloonVisibility']
+
+    @gxballoonvisibility.setter
+    def gxballoonvisibility(self, gxballoonvisibility):
+        self._kml['gx:balloonVisibility'] = gxballoonvisibility
 
     @property
     def camera(self):
@@ -810,6 +825,19 @@ class Geometry(Kmlable):
     @description.setter
     def description(self, description):
         self._placemark.description = description
+
+    @property
+    def gxballoonvisibility(self):
+        """
+        Toggles visibility of a description balloon, accepts int 0 or 1
+
+        *New in version 1.1.1*
+        """
+        return self._placemark.gxballoonvisibility
+
+    @gxballoonvisibility.setter
+    def gxballoonvisibility(self, gxballoonvisibility):
+        self._placemark.gxballoonvisibility = gxballoonvisibility
 
     @property
     def camera(self):
