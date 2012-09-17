@@ -1,6 +1,11 @@
 Release History
 ===============
 
+simplekml 1.1.2 - 17 September 2012
+-----------------------------------
+**Fixes**
+  * Fixed the import error regarding networklinkcontrol
+
 simplekml 1.1.1 - 16 September 2012
 -----------------------------------
 **New Features**
