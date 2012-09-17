@@ -17,3 +17,4 @@ simplekml\styleselector.py
 simplekml\substyle.py
 simplekml\timeprimitive.py
 simplekml\tour.py
+simplekml\networklinkcontrol.py
