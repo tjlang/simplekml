@@ -50,7 +50,7 @@ class Kmlable(object):
                     elif (var == 'href' and os.path.exists(val) and Kmlable._kmz == True)\
                             or (var == 'targetHref' and os.path.exists(val) and Kmlable._kmz == True): # Check for images
                         Kmlable._addimage(val)
-                        val = os.path.join('files', os.path.split(val)[1])
+                        val = os.path.join('files', os.path.split(val)[1]).replace('\\', '/')
                     buf.append(u("<{0}>{1}</{0}>").format(var, val))  # Enclose the variable's __str__ with its name
                     # Add namespaces
                     if var.startswith("atom:") and 'xmlns:atom="http://www.w3.org/2005/Atom"' not in Kmlable._namespaces:

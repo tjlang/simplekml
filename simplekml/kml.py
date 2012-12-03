@@ -461,3 +461,22 @@ class Kml(object):
     @networklinkcontrol.setter
     def networklinkcontrol(self, networklinkcontrol):
         self._networklinkcontrol = networklinkcontrol
+
+    def addfile(self, path):
+        """Adds an file to a KMZ and returns the path contained inside of the KMZ (files/...)
+
+        This is useful for including images in a KMZ that are referenced from description balloons, as these files
+        are not automatically included in a KMZ.
+
+        Usage::
+
+            import simplekml
+            kml = simplekml.Kml()
+            path = kml.addfile("a/path/to/somefile.file")
+            pnt = pnt.newpoint()
+            pnt.description = '<img src="' + path +'" alt="picture" width="400" height="300" align="left" />'
+
+        *New in version 1.2.0*
+        """
+        Kmlable._addimage(path)
+        return os.path.join('files', os.path.split(path)[1]).replace("\\", "/")
