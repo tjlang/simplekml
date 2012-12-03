@@ -1,6 +1,17 @@
 Release History
 ===============
 
+simplekml 1.2.0 - 03 December 2012
+----------------------------------
+**New Features**
+  * Added a method :func:`simplekml.Kml.addfile`. This method adds additional files to a KMZ. Usefule for adding
+    images to the KMZ that you want to display in a description balloon.
+
+**Fixes**
+  * Fixed documentation of coordinates where it incorrectly showed a coordinate being first latitude, then longitude,
+    when it should have been the other way around
+  * Fixed paths included in a KMZ, changed backslashes to forward slashes
+
 simplekml 1.1.2 - 17 September 2012
 -----------------------------------
 **Fixes**
