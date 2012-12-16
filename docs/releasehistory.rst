@@ -1,6 +1,11 @@
 Release History
 ===============
 
+simplekml 1.2.1 - 16 December 2012
+-----------------------------------
+**Fixes**
+  * Changed newangle in :class:`simplekml.GxTrack` to :func:`simplekml.GxTrack.newgxangle`
+
 simplekml 1.2.0 - 03 December 2012
 ----------------------------------
 **New Features**

@@ -2206,7 +2206,7 @@ class GxTrack(Geometry):
         self._kml['ExtendedData'] = None
         self.whens = []
         self.gxcoords = []
-        self.angles = []
+        self.gxangles = []
 
     @property
     def extrude(self):
@@ -2280,16 +2280,16 @@ class GxTrack(Geometry):
             coords.addcoordinates(list(coord))
             self.gxcoords.append(coords)
 
-    def newangle(self, angle):
-        """Creates a new angle, accepts float or list of floats.
+    def newgxangle(self, angle):
+        """Creates a new gx:angle, accepts float or list of floats.
 
         If one float is given a single angle entry is created, but if a list of
         floats is given, a angle entry is created for each float in the list.
         """
         if type(angle) == list:
-            self.angles += angle
+            self.gxangles += angle
         else:
-            self.angles.append(angle)
+            self.gxangles.append(angle)
 
     @property
     def extendeddata(self):
@@ -2307,8 +2307,8 @@ class GxTrack(Geometry):
         buf = ['<gx:Track>']
         for when in self.whens:
             buf.append("<when>{0}</when>".format(when))
-        for angle in self.angles:
-            buf.append("<angle>{0}</angle>".format(angle))
+        for angle in self.gxangles:
+            buf.append("<gx:angle>{0}</gx:angle>".format(angle))
         for gxcoord in self.gxcoords:
             buf.append("<gx:coord>{0}</gx:coord>".format(gxcoord.__str__().replace(',', ' ')))
         buf.append(super(GxTrack, self).__str__())
