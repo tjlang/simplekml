@@ -2198,12 +2198,14 @@ class GxTrack(Geometry):
                  extrude=None,
                  altitudemode=None,
                  gxaltitudemode=None,
+                 model=None,
                  **kwargs):
         super(GxTrack, self).__init__(**kwargs)
         self._kml['extrude'] = extrude
         self._kml['altitudeMode'] = altitudemode
         self._kml['gx:altitudeMode'] = gxaltitudemode
         self._kml['ExtendedData'] = None
+        self._kml['Model_'] = model
         self.whens = []
         self.gxcoords = []
         self.gxangles = []
@@ -2302,6 +2304,21 @@ class GxTrack(Geometry):
     @check(ExtendedData)
     def extendeddata(self, extendeddata):
         self._kml['ExtendedData'] = extendeddata
+
+    @property
+    def model(self):
+        """A model to use on the track, accepts :class:`simplekml.Model`
+
+        *New in version 1.2.1*
+        """
+        if self._kml['Model_'] is None:
+            self._kml['Model_'] = Model()
+        return self._kml['Model_']
+
+    @model.setter
+    @check(Model)
+    def model(self, model):
+        self._kml['Model_'] = model
 
     def __str__(self):
         buf = ['<gx:Track>']

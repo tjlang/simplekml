@@ -1,6 +1,12 @@
 Release History
 ===============
 
+simplekml 1.2.2 - 07 June 2013
+------------------------------
+**Fixes**
+  * Changed added model to :class:`simplekml.GxTrack`
+  * Added __version__ property
+
 simplekml 1.2.1 - 16 December 2012
 -----------------------------------
 **Fixes**
