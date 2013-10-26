@@ -36,9 +36,9 @@ class LinkSnippet(Snippet):
 
     def __str__(self):
         if self._kml['maxlines'] is not None:
-            return '<linkSnippet maxLines="{0}">{1}</linkSnippet>'.format(self._kml['maxlines'],self._kml['content'])
+            return u'<linkSnippet maxLines="{0}">{1}</linkSnippet>'.format(self._kml['maxlines'],Kmlable._chrconvert(self._kml['content']))
         else:
-            return '<linkSnippet>{0}</linkSnippet>'.format(self._kml['content'])
+            return u'<linkSnippet>{0}</linkSnippet>'.format(Kmlable._chrconvert(self._kml['content']))
 
 
 

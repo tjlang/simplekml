@@ -59,9 +59,9 @@ class SimpleField(Kmlable):
         self._kml['displayName'] = displayname
 
     def __str__(self):
-        buf = ['<SimpleField type="{0}" name="{1}">'.format(self.type, self.name)]
+        buf = [u'<SimpleField type="{0}" name="{1}">'.format(self.type, Kmlable._chrconvert(self.name))]
         if self.displayname is not None:
-            buf.append('<displayName>{0}</displayName>'.format(self.displayname))
+            buf.append(u'<displayName>{0}</displayName>'.format(Kmlable._chrconvert(self.displayname)))
         buf.append('</SimpleField>')
         return "".join(buf)
 
@@ -116,7 +116,7 @@ class SimpleData(Kmlable):
         self._kml['value'] = value
 
     def __str__(self):
-        return '<SimpleData name="{0}">{1}</SimpleData>'.format(self.name, self.value)
+        return u'<SimpleData name="{0}">{1}</SimpleData>'.format(Kmlable._chrconvert(self.name), self.value)
 
 
 class GxSimpleArrayData(Kmlable):
@@ -146,7 +146,7 @@ class GxSimpleArrayData(Kmlable):
         self.values.append(value)
 
     def __str__(self):
-        buf = ['<gx:SimpleArrayData name="{0}">'.format(self.name)]
+        buf = [u'<gx:SimpleArrayData name="{0}">'.format(Kmlable._chrconvert(self.name))]
         for value in self.values:
             buf.append("<gx:value>{0}</gx:value>".format(value))
         buf.append("</gx:SimpleArrayData>")
@@ -212,7 +212,7 @@ class Schema(Kmlable):
     def __str__(self):
         buf = []
         if self.name is not None:
-            buf.append('<Schema name="{0}" id="{1}">'.format(self.name, self._id))
+            buf.append(u'<Schema name="{0}" id="{1}">'.format(Kmlable._chrconvert(self.name), self._id))
         else:
             buf.append('<Schema id="{0}">'.format(self._id))
         for field in self.simplefields:
@@ -264,11 +264,11 @@ class Data(Kmlable):
         self._kml['displayName'] = displayname
 
     def __str__(self):
-        buf = ['<Data name="{0}">'.format(self.name)]
+        buf = [u'<Data name="{0}">'.format(Kmlable._chrconvert(self.name))]
         if self._kml['value'] is not None:
             buf.append("<value>{0}</value>".format(self._kml['value']))
         if self._kml['displayName'] is not None:
-            buf.append("<displayName>{0}</displayName>".format(self._kml['displayName']))
+            buf.append(u"<displayName>{0}</displayName>".format(Kmlable._chrconvert(self._kml['displayName'])))
         buf.append('</Data>')
         return "".join(buf)
 

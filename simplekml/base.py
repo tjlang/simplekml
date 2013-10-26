@@ -43,9 +43,9 @@ class Kmlable(object):
         for var, val in self._kml.items():
             if val is not None:  # Exclude all variables that are None
                 if var.endswith("_"):
-                    buf.append("{0}".format(val))  # Use the variable's __str__ as is
+                    buf.append(u"{0}".format(val))  # Use the variable's __str__ as is
                 else:
-                    if var in ['name', 'description', 'text'] and Kmlable._parse: # Parse value for HTML and convert
+                    if var in ['name', 'description', 'text', 'linkname', 'linkdescription', 'message', 'change', 'create', 'delete'] and Kmlable._parse: # Parse value for HTML and convert
                         val = Kmlable._chrconvert(val)
                     elif (var == 'href' and os.path.exists(val) and Kmlable._kmz == True)\
                             or (var == 'targetHref' and os.path.exists(val) and Kmlable._kmz == True): # Check for images
@@ -254,9 +254,9 @@ class Snippet(object):
         
     def __str__(self):
         if self._kml['maxlines'] is not None:
-            return '<Snippet maxLines="{0}">{1}</Snippet>'.format(self._kml['maxlines'],self._kml['content'])
+            return u'<Snippet maxLines="{0}">{1}</Snippet>'.format(self._kml['maxlines'],Kmlable._chrconvert(self._kml['content']))
         else:
-            return '<Snippet>{0}</Snippet>'.format(self._kml['content'])
+            return u'<Snippet>{0}</Snippet>'.format(Kmlable._chrconvert(self._kml['content']))
 
 
 

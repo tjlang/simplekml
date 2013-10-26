@@ -1,6 +1,11 @@
 Release History
 ===============
 
+simplekml 1.2.3 - 26 October 2013
+------------------------------
+**Fixes**
+  * Fixed unicode errors where some KML elements were causing an error when using unicode.
+
 simplekml 1.2.2 - 07 June 2013
 ------------------------------
 **Fixes**
@@ -15,7 +20,7 @@ simplekml 1.2.1 - 16 December 2012
 simplekml 1.2.0 - 03 December 2012
 ----------------------------------
 **New Features**
-  * Added a method :func:`simplekml.Kml.addfile`. This method adds additional files to a KMZ. Usefule for adding
+  * Added a method :func:`simplekml.Kml.addfile`. This method adds additional files to a KMZ. Useful for adding
     images to the KMZ that you want to display in a description balloon.
 
 **Fixes**
