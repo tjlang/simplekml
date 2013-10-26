@@ -59,7 +59,7 @@ model_car = Model(altitudemode=AltitudeMode.clamptoground,
                             scale=Scale(x=car_scale, y=car_scale, z=car_scale))
 
 # Create the track
-trk = kml.newgxtrack(name="Tumbler", altitudemode=AltitudeMode.clamptoground,
+trk = kml.newgxtrack(name="Car Track", altitudemode=AltitudeMode.clamptoground,
                      description="Model from: http://sketchup.google.com/3dwarehouse/details?mid=88a57c5396d3703dec0b522a48034ff2")
 
 # Attach the model to the track
