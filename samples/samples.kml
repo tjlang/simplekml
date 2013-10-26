@@ -435,8 +435,171 @@ kml&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;save(os&lt;span st
                     <href>http://simplekml.googlecode.com/hg/samples/examples/E03%20Various.kml</href>
                 </Link>
             </NetworkLink>
+            <NetworkLink id="feat_8">
+                <name>E04 Track</name>
+                <visibility>0</visibility>
+                <description>&lt;i&gt;Example demonstrating how to use gx:Track with a model.&lt;/i&gt;&lt;/br&gt;&lt;/br&gt;&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td&gt;&lt;div class=&quot;linenodiv&quot; style=&quot;background-color: #f0f0f0; padding-right: 10px&quot;&gt;&lt;pre style=&quot;line-height: 125%&quot;&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot; style=&quot;background: #f8f8f8&quot;&gt;&lt;pre style=&quot;line-height: 125%&quot;&gt;&lt;span style=&quot;color: #008000; font-weight: bold&quot;&gt;import&lt;/span&gt; &lt;span style=&quot;color: #0000FF; font-weight: bold&quot;&gt;os&lt;/span&gt;
+&lt;span style=&quot;color: #008000; font-weight: bold&quot;&gt;from&lt;/span&gt; &lt;span style=&quot;color: #0000FF; font-weight: bold&quot;&gt;simplekml&lt;/span&gt; &lt;span style=&quot;color: #008000; font-weight: bold&quot;&gt;import&lt;/span&gt; Kml, Model, AltitudeMode, Orientation, Scale
+
+&lt;span style=&quot;color: #408080; font-style: italic&quot;&gt;# Coordinates and timestamps to be used to locate the car model in time and space&lt;/span&gt;
+car_info &lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt; {&lt;span style=&quot;color: #BA2121&quot;&gt;&amp;quot;coord&amp;quot;&lt;/span&gt; : [
+                       (&lt;span style=&quot;color: #666666&quot;&gt;-1.205638094515976&lt;/span&gt;,&lt;span style=&quot;color: #666666&quot;&gt;52.86427051097027&lt;/span&gt;,&lt;span style=&quot;color: #666666&quot;&gt;0&lt;/span&gt;), 
+                       (&lt;span style=&quot;color: #666666&quot;&gt;-1.205381150785744&lt;/span&gt;,&lt;span style=&quot;color: #666666&quot;&gt;52.86520449509131&lt;/span&gt;,&lt;span style=&quot;color: #666666&quot;&gt;0&lt;/span&gt;), 
+                       (&lt;span style=&quot;color: #666666&quot;&gt;-1.205070556273065&lt;/span&gt;,&lt;span style=&quot;color: #666666&quot;&gt;52.8658866187436&lt;/span&gt;,&lt;span style=&quot;color: #666666&quot;&gt;0&lt;/span&gt;), 
+                       (&lt;span style=&quot;color: #666666&quot;&gt;-1.20506114704183&lt;/span&gt;,&lt;span style=&quot;color: #666666&quot;&gt;52.86601843957955&lt;/span&gt;,&lt;span style=&quot;color: #666666&quot;&gt;0&lt;/span&gt;), 
+                       (&lt;span style=&quot;color: #666666&quot;&gt;-1.20512625833175&lt;/span&gt;,&lt;span style=&quot;color: #666666&quot;&gt;52.86623139261676&lt;/span&gt;,&lt;span style=&quot;color: #666666&quot;&gt;0&lt;/span&gt;), 
+                       (&lt;span style=&quot;color: #666666&quot;&gt;-1.205294145395112&lt;/span&gt;,&lt;span style=&quot;color: #666666&quot;&gt;52.86643197457281&lt;/span&gt;,&lt;span style=&quot;color: #666666&quot;&gt;0&lt;/span&gt;), 
+                       (&lt;span style=&quot;color: #666666&quot;&gt;-1.205676706574317&lt;/span&gt;,&lt;span style=&quot;color: #666666&quot;&gt;52.86711097792102&lt;/span&gt;,&lt;span style=&quot;color: #666666&quot;&gt;0&lt;/span&gt;), 
+                       (&lt;span style=&quot;color: #666666&quot;&gt;-1.205866919720511&lt;/span&gt;,&lt;span style=&quot;color: #666666&quot;&gt;52.86749802242012&lt;/span&gt;,&lt;span style=&quot;color: #666666&quot;&gt;0&lt;/span&gt;), 
+                       (&lt;span style=&quot;color: #666666&quot;&gt;-1.205978077903859&lt;/span&gt;,&lt;span style=&quot;color: #666666&quot;&gt;52.86792708892633&lt;/span&gt;,&lt;span style=&quot;color: #666666&quot;&gt;0&lt;/span&gt;), 
+                       (&lt;span style=&quot;color: #666666&quot;&gt;-1.2060237987725&lt;/span&gt;,&lt;span style=&quot;color: #666666&quot;&gt;52.86819270231999&lt;/span&gt;,&lt;span style=&quot;color: #666666&quot;&gt;0&lt;/span&gt;), 
+                       (&lt;span style=&quot;color: #666666&quot;&gt;-1.205983883148774&lt;/span&gt;,&lt;span style=&quot;color: #666666&quot;&gt;52.86826739196837&lt;/span&gt;,&lt;span style=&quot;color: #666666&quot;&gt;0&lt;/span&gt;), 
+                       (&lt;span style=&quot;color: #666666&quot;&gt;-1.205580187462454&lt;/span&gt;,&lt;span style=&quot;color: #666666&quot;&gt;52.86858138867128&lt;/span&gt;,&lt;span style=&quot;color: #666666&quot;&gt;0&lt;/span&gt;), 
+                       (&lt;span style=&quot;color: #666666&quot;&gt;-1.204746927391411&lt;/span&gt;,&lt;span style=&quot;color: #666666&quot;&gt;52.8692086964254&lt;/span&gt;,&lt;span style=&quot;color: #666666&quot;&gt;0&lt;/span&gt;), 
+                       (&lt;span style=&quot;color: #666666&quot;&gt;-1.204087156570155&lt;/span&gt;,&lt;span style=&quot;color: #666666&quot;&gt;52.86976390388508&lt;/span&gt;,&lt;span style=&quot;color: #666666&quot;&gt;0&lt;/span&gt;), 
+                       (&lt;span style=&quot;color: #666666&quot;&gt;-1.20376709054747&lt;/span&gt;,&lt;span style=&quot;color: #666666&quot;&gt;52.87001624614373&lt;/span&gt;,&lt;span style=&quot;color: #666666&quot;&gt;0&lt;/span&gt;), 
+                       (&lt;span style=&quot;color: #666666&quot;&gt;-1.203122645607228&lt;/span&gt;,&lt;span style=&quot;color: #666666&quot;&gt;52.87034182188007&lt;/span&gt;,&lt;span style=&quot;color: #666666&quot;&gt;0&lt;/span&gt;), 
+                       (&lt;span style=&quot;color: #666666&quot;&gt;-1.202747641987371&lt;/span&gt;,&lt;span style=&quot;color: #666666&quot;&gt;52.8705296795463&lt;/span&gt;,&lt;span style=&quot;color: #666666&quot;&gt;0&lt;/span&gt;)
+                    ] ,
+                &lt;span style=&quot;color: #BA2121&quot;&gt;&amp;quot;when&amp;quot;&lt;/span&gt; :  [
+                    &lt;span style=&quot;color: #BA2121&quot;&gt;&amp;quot;2008-07-14T00:00:00Z&amp;quot;&lt;/span&gt;,
+                    &lt;span style=&quot;color: #BA2121&quot;&gt;&amp;quot;2008-07-14T00:00:30Z&amp;quot;&lt;/span&gt;,
+                    &lt;span style=&quot;color: #BA2121&quot;&gt;&amp;quot;2008-07-14T00:01:00Z&amp;quot;&lt;/span&gt;,
+                    &lt;span style=&quot;color: #BA2121&quot;&gt;&amp;quot;2008-07-14T00:01:30Z&amp;quot;&lt;/span&gt;,
+                    &lt;span style=&quot;color: #BA2121&quot;&gt;&amp;quot;2008-07-14T00:02:00Z&amp;quot;&lt;/span&gt;,
+                    &lt;span style=&quot;color: #BA2121&quot;&gt;&amp;quot;2008-07-14T00:02:30Z&amp;quot;&lt;/span&gt;,
+                    &lt;span style=&quot;color: #BA2121&quot;&gt;&amp;quot;2008-07-14T00:03:00Z&amp;quot;&lt;/span&gt;,
+                    &lt;span style=&quot;color: #BA2121&quot;&gt;&amp;quot;2008-07-14T00:03:30Z&amp;quot;&lt;/span&gt;,
+                    &lt;span style=&quot;color: #BA2121&quot;&gt;&amp;quot;2008-07-14T00:04:00Z&amp;quot;&lt;/span&gt;,
+                    &lt;span style=&quot;color: #BA2121&quot;&gt;&amp;quot;2008-07-14T00:04:30Z&amp;quot;&lt;/span&gt;,
+                    &lt;span style=&quot;color: #BA2121&quot;&gt;&amp;quot;2008-07-14T00:05:00Z&amp;quot;&lt;/span&gt;,
+                    &lt;span style=&quot;color: #BA2121&quot;&gt;&amp;quot;2008-07-14T00:05:30Z&amp;quot;&lt;/span&gt;,
+                    &lt;span style=&quot;color: #BA2121&quot;&gt;&amp;quot;2008-07-14T00:06:00Z&amp;quot;&lt;/span&gt;,
+                    &lt;span style=&quot;color: #BA2121&quot;&gt;&amp;quot;2008-07-14T00:06:30Z&amp;quot;&lt;/span&gt;,
+                    &lt;span style=&quot;color: #BA2121&quot;&gt;&amp;quot;2008-07-14T00:07:00Z&amp;quot;&lt;/span&gt;,
+                    &lt;span style=&quot;color: #BA2121&quot;&gt;&amp;quot;2008-07-14T00:07:30Z&amp;quot;&lt;/span&gt;,
+                    &lt;span style=&quot;color: #BA2121&quot;&gt;&amp;quot;2008-07-14T00:08:00Z&amp;quot;&lt;/span&gt;,
+                    ]
+} 
+
+&lt;span style=&quot;color: #408080; font-style: italic&quot;&gt;# The model path and scale variables&lt;/span&gt;
+car_dae &lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt; &lt;span style=&quot;color: #BA2121&quot;&gt;r&amp;#39;http://simplekml.googlecode.com/hg/samples/resources/car-model.dae&amp;#39;&lt;/span&gt;
+car_scale &lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt; &lt;span style=&quot;color: #666666&quot;&gt;1.0&lt;/span&gt;
+
+&lt;span style=&quot;color: #408080; font-style: italic&quot;&gt;# Create the KML document&lt;/span&gt;
+kml &lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt; Kml(name&lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt;&lt;span style=&quot;color: #BA2121&quot;&gt;&amp;quot;Car&amp;quot;&lt;/span&gt;, &lt;span style=&quot;color: #008000&quot;&gt;open&lt;/span&gt;&lt;span style=&quot;color: #666666&quot;&gt;=1&lt;/span&gt;)
+
+&lt;span style=&quot;color: #408080; font-style: italic&quot;&gt;# Create the model&lt;/span&gt;
+model_car &lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt; Model(altitudemode&lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt;AltitudeMode&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;clamptoground,
+                            orientation&lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt;Orientation(heading&lt;span style=&quot;color: #666666&quot;&gt;=75.0&lt;/span&gt;),
+                            scale&lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt;Scale(x&lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt;car_scale, y&lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt;car_scale, z&lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt;car_scale))
+
+&lt;span style=&quot;color: #408080; font-style: italic&quot;&gt;# Create the track&lt;/span&gt;
+trk &lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt; kml&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;newgxtrack(name&lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt;&lt;span style=&quot;color: #BA2121&quot;&gt;&amp;quot;Tumbler&amp;quot;&lt;/span&gt;, altitudemode&lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt;AltitudeMode&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;clamptoground,
+                     description&lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt;&lt;span style=&quot;color: #BA2121&quot;&gt;&amp;quot;Model from: http://sketchup.google.com/3dwarehouse/details?mid=88a57c5396d3703dec0b522a48034ff2&amp;quot;&lt;/span&gt;)
+
+&lt;span style=&quot;color: #408080; font-style: italic&quot;&gt;# Attach the model to the track&lt;/span&gt;
+trk&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;model &lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt; model_car
+trk&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;model&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;link&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;href &lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt; car_dae
+
+&lt;span style=&quot;color: #408080; font-style: italic&quot;&gt;# Add all the information to the track&lt;/span&gt;
+trk&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;newwhen(car_info[&lt;span style=&quot;color: #BA2121&quot;&gt;&amp;quot;when&amp;quot;&lt;/span&gt;])
+trk&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;newgxcoord(car_info[&lt;span style=&quot;color: #BA2121&quot;&gt;&amp;quot;coord&amp;quot;&lt;/span&gt;])
+
+&lt;span style=&quot;color: #408080; font-style: italic&quot;&gt;# Turn-off default icon and text and hide the linestring&lt;/span&gt;
+trk&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;iconstyle&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;icon&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;href &lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt; &lt;span style=&quot;color: #BA2121&quot;&gt;&amp;quot;&amp;quot;&lt;/span&gt;
+trk&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;labelstyle&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;scale &lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt; &lt;span style=&quot;color: #666666&quot;&gt;0&lt;/span&gt;
+trk&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;linestyle&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;width &lt;span style=&quot;color: #666666&quot;&gt;=&lt;/span&gt; &lt;span style=&quot;color: #666666&quot;&gt;0&lt;/span&gt;
+
+&lt;span style=&quot;color: #408080; font-style: italic&quot;&gt;# Saving&lt;/span&gt;
+kml&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;save(os&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;path&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;splitext(__file__)[&lt;span style=&quot;color: #666666&quot;&gt;0&lt;/span&gt;] &lt;span style=&quot;color: #666666&quot;&gt;+&lt;/span&gt; &lt;span style=&quot;color: #BA2121&quot;&gt;&amp;quot;.kml&amp;quot;&lt;/span&gt;)
+&lt;span style=&quot;color: #408080; font-style: italic&quot;&gt;#kml.savekmz(os.path.splitext(__file__)[0] + &amp;quot;.kmz&amp;quot;) # uncomment to save to kmz&lt;/span&gt;
+&lt;span style=&quot;color: #408080; font-style: italic&quot;&gt;#print kml.kml() # uncomment to see the kml printed to screen&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</description>
+                <Snippet maxLines="1">Example demonstrating how to use gx:Track with a model.</Snippet>
+                <Link id="link_4">
+                    <href>http://simplekml.googlecode.com/hg/samples/examples/E04%20Track.kml</href>
+                </Link>
+            </NetworkLink>
         </Folder>
-        <Folder id="feat_8">
+        <Folder id="feat_9">
             <Style id="stylesel_1">
                 <ListStyle>
                     <listItemType>checkOffOnly</listItemType>
@@ -444,7 +607,7 @@ kml&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;save(os&lt;span st
             </Style>
             <name>Tutorials</name>
             <styleUrl>#stylesel_1</styleUrl>
-            <NetworkLink id="feat_9">
+            <NetworkLink id="feat_10">
                 <name>T00 Point</name>
                 <visibility>0</visibility>
                 <description>&lt;i&gt;Demonstrates how to create points and change some of the properties of points.&lt;/i&gt;&lt;/br&gt;&lt;/br&gt;&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td&gt;&lt;div class=&quot;linenodiv&quot; style=&quot;background-color: #f0f0f0; padding-right: 10px&quot;&gt;&lt;pre style=&quot;line-height: 125%&quot;&gt;  1
@@ -737,11 +900,11 @@ kml&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;save(os&lt;span st
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</description>
                 <Snippet maxLines="1">Demonstrates how to create points and change some of the properties of points.</Snippet>
-                <Link id="link_4">
+                <Link id="link_5">
                     <href>http://simplekml.googlecode.com/hg/samples/tutorials/T00%20Point.kml</href>
                 </Link>
             </NetworkLink>
-            <NetworkLink id="feat_10">
+            <NetworkLink id="feat_11">
                 <name>T01 LineString</name>
                 <visibility>0</visibility>
                 <description>&lt;i&gt;Demonstrates how to create a linestring focusing on the extrude and altitudemode properties.&lt;/i&gt;&lt;/br&gt;&lt;/br&gt;&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td&gt;&lt;div class=&quot;linenodiv&quot; style=&quot;background-color: #f0f0f0; padding-right: 10px&quot;&gt;&lt;pre style=&quot;line-height: 125%&quot;&gt; 1
@@ -804,11 +967,11 @@ kml&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;save(os&lt;span st
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</description>
                 <Snippet maxLines="1">Demonstrates how to create a linestring focusing on the extrude and altitudemode properties.</Snippet>
-                <Link id="link_5">
+                <Link id="link_6">
                     <href>http://simplekml.googlecode.com/hg/samples/tutorials/T01%20LineString.kml</href>
                 </Link>
             </NetworkLink>
-            <NetworkLink id="feat_11">
+            <NetworkLink id="feat_12">
                 <name>T03 MultiGeometry</name>
                 <visibility>0</visibility>
                 <description>&lt;i&gt;Demonstrates three types of MultiGeometry (point, linestring and polygon) using the South Africa coordinate system as a basis.&lt;/i&gt;&lt;/br&gt;&lt;/br&gt;&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td&gt;&lt;div class=&quot;linenodiv&quot; style=&quot;background-color: #f0f0f0; padding-right: 10px&quot;&gt;&lt;pre style=&quot;line-height: 125%&quot;&gt; 1
@@ -917,11 +1080,11 @@ kml&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;save(os&lt;span st
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</description>
                 <Snippet maxLines="1">Demonstrates three types of MultiGeometry (point, linestring and polygon) using the South Africa coordinate system as a basis.</Snippet>
-                <Link id="link_6">
+                <Link id="link_7">
                     <href>http://simplekml.googlecode.com/hg/samples/tutorials/T03%20MultiGeometry.kml</href>
                 </Link>
             </NetworkLink>
-            <NetworkLink id="feat_12">
+            <NetworkLink id="feat_13">
                 <name>T04 Overlays</name>
                 <visibility>0</visibility>
                 <description>&lt;i&gt;Demonstrates the basics of overlays (ground screen and photo overlay).&lt;/i&gt;&lt;/br&gt;&lt;/br&gt;&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td&gt;&lt;div class=&quot;linenodiv&quot; style=&quot;background-color: #f0f0f0; padding-right: 10px&quot;&gt;&lt;pre style=&quot;line-height: 125%&quot;&gt; 1
@@ -996,11 +1159,11 @@ kml&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;save(os&lt;span st
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</description>
                 <Snippet maxLines="1">Demonstrates the basics of overlays (ground screen and photo overlay).</Snippet>
-                <Link id="link_7">
+                <Link id="link_8">
                     <href>http://simplekml.googlecode.com/hg/samples/tutorials/T04%20Overlays.kml</href>
                 </Link>
             </NetworkLink>
-            <NetworkLink id="feat_13">
+            <NetworkLink id="feat_14">
                 <name>T05_ExtendedData</name>
                 <visibility>0</visibility>
                 <description>&lt;i&gt;This shows the use of the 3 different types of extended data: Data, Simple Data and Simple Array Data, as well as prettying up the data.&lt;/i&gt;&lt;/br&gt;&lt;/br&gt;&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td&gt;&lt;div class=&quot;linenodiv&quot; style=&quot;background-color: #f0f0f0; padding-right: 10px&quot;&gt;&lt;pre style=&quot;line-height: 125%&quot;&gt; 1
@@ -1159,11 +1322,11 @@ kml&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;save(os&lt;span st
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</description>
                 <Snippet maxLines="1">This shows the use of the 3 different types of extended data: Data, Simple Data and Simple Array Data, as well as prettying up the data.</Snippet>
-                <Link id="link_8">
+                <Link id="link_9">
                     <href>http://simplekml.googlecode.com/hg/samples/tutorials/T05_ExtendedData.kml</href>
                 </Link>
             </NetworkLink>
-            <NetworkLink id="feat_14">
+            <NetworkLink id="feat_15">
                 <name>T06_Tracks</name>
                 <visibility>0</visibility>
                 <description>&lt;i&gt;This is a recreation of the example found in the KML Reference: http://code.google.com/apis/kml/documentation/kmlreference.html#gxtrack The unnecessary styling has not been implemented, but if you compare the KML References example in Google Earth to this example you should see no difference whatsoever (except for id values).&lt;/i&gt;&lt;/br&gt;&lt;/br&gt;&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td&gt;&lt;div class=&quot;linenodiv&quot; style=&quot;background-color: #f0f0f0; padding-right: 10px&quot;&gt;&lt;pre style=&quot;line-height: 125%&quot;&gt; 1
@@ -1300,11 +1463,11 @@ kml&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;save(os&lt;span st
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</description>
                 <Snippet maxLines="1">This is a recreation of the example found in the KML Reference: http://code.google.com/apis/kml/documentation/kmlreference.html#gxtrack The unnecessary styling has not been implemented, but if you compare the KML References example in Google Earth to this example you should see no difference whatsoever (except for id values).</Snippet>
-                <Link id="link_9">
+                <Link id="link_10">
                     <href>http://simplekml.googlecode.com/hg/samples/tutorials/T06_Tracks.kml</href>
                 </Link>
             </NetworkLink>
-            <NetworkLink id="feat_15">
+            <NetworkLink id="feat_16">
                 <name>T07_Tours</name>
                 <visibility>0</visibility>
                 <description>&lt;i&gt;Demonstrates touring with the reproduction of the tour sample in the KML Reference https://developers.google.com/kml/documentation/kmlreference#gxtour with the addition of GxSoundCue&lt;/i&gt;&lt;/br&gt;&lt;/br&gt;&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td&gt;&lt;div class=&quot;linenodiv&quot; style=&quot;background-color: #f0f0f0; padding-right: 10px&quot;&gt;&lt;pre style=&quot;line-height: 125%&quot;&gt; 1
@@ -1383,7 +1546,7 @@ kml&lt;span style=&quot;color: #666666&quot;&gt;.&lt;/span&gt;save(os&lt;span st
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</description>
                 <Snippet maxLines="1">Demonstrates touring with the reproduction of the tour sample in the KML Reference https://developers.google.com/kml/documentation/kmlreference#gxtour with the addition of GxSoundCue</Snippet>
-                <Link id="link_10">
+                <Link id="link_11">
                     <href>http://simplekml.googlecode.com/hg/samples/tutorials/T07_Tours.kml</href>
                 </Link>
             </NetworkLink>
