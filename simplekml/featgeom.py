@@ -720,7 +720,7 @@ class Folder(Container):
 
         import simplekml
         kml = simplekml.Kml()
-        pnt = fol = kml.newfolder(name='A Folder')
+        fol = kml.newfolder(name='A Folder')
         pnt = fol.newpoint()
         kml.save("Folder.kml")
     """
@@ -1176,7 +1176,7 @@ class Point(PointGeometry):
         pnt.coords = [(1.0, 2.0)]
         kml.save("Point.kml")
 
-    Styling a Single Point:
+    Styling a Single Point::
 
         import simplekml
         kml = simplekml.Kml()

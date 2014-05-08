@@ -10,6 +10,7 @@ simplekml\icon.py
 simplekml\kml.py
 simplekml\makeunicode.py
 simplekml\model.py
+simplekml\networklinkcontrol.py
 simplekml\overlay.py
 simplekml\region.py
 simplekml\schema.py
@@ -17,4 +18,3 @@ simplekml\styleselector.py
 simplekml\substyle.py
 simplekml\timeprimitive.py
 simplekml\tour.py
-simplekml\networklinkcontrol.py
