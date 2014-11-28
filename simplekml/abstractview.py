@@ -1,5 +1,5 @@
 """
-Copyright 2011-2012 Kyle Lancaster
+Copyright 2011-2014-2012 Kyle Lancaster
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -19,6 +19,30 @@ Contact me at kyle.lan@gmail.com
 
 from simplekml.base import Kmlable, check
 from simplekml.timeprimitive import GxTimeStamp, GxTimeSpan
+
+
+class GxViewerOptions(Kmlable):
+    """Enables special viewer modes.
+
+    The arguments are the same as the properties.
+    """
+    def __init__(self, gxoptions=None):
+        super(GxViewerOptions, self).__init__()
+        self.gxoptions = []
+        if gxoptions is not None:
+            self.gxoptions += gxoptions
+
+    def newgxoption(self, name, enabled=True):
+        """Creates a :class:`simplekml.GxOption` with name `name` and sets it to `enabled`."""
+        self.gxoptions.append(GxOption(name, enabled))
+
+    def __str__(self):
+        buf = ['<gx:ViewerOptions>']
+        for gxoption in self.gxoptions:
+            buf.append(gxoption.__str__())
+        buf.append("</gx:ViewerOptions>")
+        print "".join(buf)
+        return "".join(buf)
 
 
 class AbstractView(Kmlable):
@@ -41,7 +65,8 @@ class AbstractView(Kmlable):
                  gxaltitudemode=None,
                  gxtimespan=None,
                  gxtimestamp=None,
-                 gxhorizfov=None):
+                 gxhorizfov=None,
+                 gxvieweroptions=None):
         super(AbstractView, self).__init__()
         self._kml["longitude"] = longitude
         self._kml["latitude"] = latitude
@@ -53,6 +78,7 @@ class AbstractView(Kmlable):
         self._kml["gx:TimeSpan_"] = gxtimespan
         self._kml["gx:TimeStamp_"] = gxtimestamp
         self._kml['gx:horizFov'] = gxhorizfov
+        self._kml['gx:ViewerOptions_'] = gxvieweroptions
 
     @property
     def longitude(self):
@@ -158,6 +184,18 @@ class AbstractView(Kmlable):
     @gxhorizfov.setter
     def gxhorizfov(self, gxhorizfov):
         self._kml['gx:horizFov'] = gxhorizfov
+        
+    @property
+    def gxvieweroptions(self):
+        """Enables special viewing modes , accepts :class:`simplekml.GxViewerOptions`"""
+        if self._kml['gx:ViewerOptions_'] is None:
+            self._kml['gx:ViewerOptions_'] = GxViewerOptions()
+        return self._kml['gx:ViewerOptions_']
+
+    @gxvieweroptions.setter
+    @check(GxViewerOptions)
+    def gxvieweroptions(self, gxvieweroptions):
+        self._kml['gx:ViewerOptions_'] = gxvieweroptions
 
 
 class Camera(AbstractView):
@@ -278,28 +316,11 @@ class GxOption(Kmlable):
         self._kml['enabled'] = enabled
 
     def __str__(self):
-        return '<gx:option name="{0}" enabled={1}></gx:option>'.format(self._kml['name'], self._kml['enabled'])
+        enabledText = '0'
+        if self._kml['enabled']:
+            enabledText = '1'
+        return '<gx:option name="{0}" enabled="{1}"></gx:option>'.format(self._kml['name'], enabledText)
 
 
-class GxViewerOptions(Kmlable):
-    """Enables special viewer modes.
 
-    The arguments are the same as the properties.
-    """
-    def __init__(self, gxoptions=None):
-        super(GxViewerOptions, self).__init__()
-        self.gxoptions = []
-        if gxoptions is not None:
-            self.gxoptions += gxoptions
-
-    def newgxoption(self, name, enabled=True):
-        """Creates a :class:`simplekml.GxOption` with name `name` and sets it to `enabled`."""
-        self.gxoptions.append(GxOption(name, enabled))
-
-    def __str__(self):
-        buf = ['<gx:ViewerOptions>']
-        for gxoption in self.gxoptions:
-            buf.append(gxoption.__str__())
-        buf.append("</gx:ViewerOptions>")
-        return "".join(buf)
 
