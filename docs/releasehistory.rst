@@ -1,6 +1,11 @@
 Release History
 ===============
 
+simplekml 1.2.4 - 28 November 2014
+------------------------------
+**Fixes**
+  * Fixed missing gxvieweroptions property from :class:`simplekml.Camera` and :class:`simplekml.LookAt`.
+
 simplekml 1.2.3 - 26 October 2013
 ------------------------------
 **Fixes**
