@@ -41,7 +41,6 @@ class GxViewerOptions(Kmlable):
         for gxoption in self.gxoptions:
             buf.append(gxoption.__str__())
         buf.append("</gx:ViewerOptions>")
-        print "".join(buf)
         return "".join(buf)
 
 

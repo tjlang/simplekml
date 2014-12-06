@@ -35,4 +35,4 @@ from simplekml.timeprimitive import GxTimeSpan,GxTimeStamp,TimeSpan,TimeStamp
 from simplekml.tour import GxAnimatedUpdate,GxFlyTo,GxPlaylist,GxSoundCue,GxTour,GxTourControl,GxWait,Update
 from simplekml.networklinkcontrol import LinkSnippet, NetworkLinkControl
 
-__version__ = "1.2.4"
+__version__ = "1.2.5"

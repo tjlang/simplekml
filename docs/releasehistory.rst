@@ -1,6 +1,11 @@
 Release History
 ===============
 
+simplekml 1.2.5 - 07 December 2014
+------------------------------
+**Fixes**
+  * Fixed syntax error for Python 3
+
 simplekml 1.2.4 - 28 November 2014
 ------------------------------
 **Fixes**
