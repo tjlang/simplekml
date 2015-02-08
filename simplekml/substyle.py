@@ -1,5 +1,5 @@
 """
-Copyright 2011-2014-2012 Kyle Lancaster
+Copyright 2011-2015 Kyle Lancaster
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -92,13 +92,15 @@ class LineStyle(ColorStyle):
                  width=None,
                  gxoutercolor=None,
                  gxouterwidth=None,
-                 gxphysicalwidth=None,
+                 gxphysicalwidth=None, 
+                 gxlabelvisibility=0,
                  **kwargs):
         super(LineStyle, self).__init__(**kwargs)
         self._kml["width"] = width
         self._kml["gx:outerColor"] = gxoutercolor
         self._kml["gx:outerWidth"] = gxouterwidth
         self._kml["gx:physicalWidth"] = gxphysicalwidth
+        self._kml["gx:labelVisibility"] = gxlabelvisibility
 
     @property
     def width(self):
@@ -135,6 +137,15 @@ class LineStyle(ColorStyle):
     @gxphysicalwidth.setter
     def gxphysicalwidth(self, gxphysicalwidth):
         self._kml["gx:physicalWidth"] = gxphysicalwidth
+        
+    @property
+    def gxlabelvisibility(self):
+        """Whether or not to display a text label."""
+        return self._kml['scale']
+
+    @gxlabelvisibility.setter
+    def gxlabelvisibility(self, gxlabelvisibility):
+        self._kml['gx:labelVisibility'] = gxlabelvisibility
 
 
 class PolyStyle(ColorStyle):
@@ -263,7 +274,9 @@ class LabelStyle(ColorStyle):
         kml.save("LabelStyle.kml")
     """
 
-    def __init__(self, scale=1, **kwargs):
+    def __init__(self, 
+                 scale=1,
+                 **kwargs):
         super(LabelStyle, self).__init__(**kwargs)
         self._kml["scale"] = scale
 
