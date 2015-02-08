@@ -1,6 +1,11 @@
 Release History
 ===============
 
+simplekml 1.2.7 - 08 February 2015
+----------------------------------
+**Fixes**
+  * Fixed adding unnecessary tag (gxlabelvisibility) when it is not being used.
+  
 simplekml 1.2.6 - 08 February 2015
 ----------------------------------
 **Fixes**

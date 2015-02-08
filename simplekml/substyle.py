@@ -93,7 +93,7 @@ class LineStyle(ColorStyle):
                  gxoutercolor=None,
                  gxouterwidth=None,
                  gxphysicalwidth=None, 
-                 gxlabelvisibility=0,
+                 gxlabelvisibility=None,
                  **kwargs):
         super(LineStyle, self).__init__(**kwargs)
         self._kml["width"] = width
