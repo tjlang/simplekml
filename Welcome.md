@@ -1,0 +1,1 @@
+The documentation and reference have moved to [simplekml.readthedocs.org](http://simplekml.readthedocs.org).
