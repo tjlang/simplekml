@@ -19,6 +19,7 @@ Contact me at kyle.lan@gmail.com
 
 import os
 import cgi
+from xml.sax.saxutils import escape, unescape
 import xml.dom.minidom
 from simplekml.makeunicode import u
 
@@ -73,12 +74,12 @@ class Kmlable(object):
         count = text.count(cdatastart)
         if count > 0:
             for i in range(count):
-                endtext += cgi.escape(starttext[0:starttext.find(cdatastart)])
+                endtext += escape(starttext[0:starttext.find(cdatastart)])
                 endtext += starttext[starttext.find(cdatastart):starttext.find(cdataend)+len(cdataend)]
                 starttext = starttext[starttext.find(cdataend)+len(cdataend):]
             endtext += starttext
         else:
-            endtext = cgi.escape(text)
+            endtext = escape(text)
         return endtext
 
     @classmethod
