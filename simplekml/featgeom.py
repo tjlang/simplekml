@@ -407,10 +407,11 @@ class Feature(Kmlable):
             self._addstyle(stylemap.highlightstyle)
         str = '<{0} id="{1}">'.format(self.__class__.__name__, self._id)
         buf.append(str)
-        for style in self._styles:
-            buf.append(style.__str__())
-        for stylemap in self._stylemaps:
-            buf.append(stylemap.__str__())
+        if isinstance(self, Document):
+            for style in self._styles:
+                buf.append(style.__str__())
+            for stylemap in self._stylemaps:
+                buf.append(stylemap.__str__())
         buf.append(super(Feature, self).__str__())
         for folder in self._folders:
             buf.append(folder.__str__())
@@ -710,7 +711,12 @@ class Document(Container):
         """
         return self._newfeature(Schema, **kwargs)
 
+    def add_styles(self, style):
+        self._styles.append(style)
 
+
+    def remove_style(self, style_tr):
+            self._styles.remove(style_tr)
 class Folder(Container):
     """A container for features that act like a folder.
 
