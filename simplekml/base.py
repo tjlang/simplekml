@@ -19,6 +19,7 @@ Contact me at kyle.lan@gmail.com
 
 import os
 import cgi
+from xml.sax.saxutils import escape, unescape
 import xml.dom.minidom
 from simplekml.makeunicode import u
 
@@ -50,7 +51,7 @@ class Kmlable(object):
                     elif (var == 'href' and os.path.exists(val) and Kmlable._kmz == True)\
                             or (var == 'targetHref' and os.path.exists(val) and Kmlable._kmz == True): # Check for images
                         Kmlable._addimage(val)
-                        val = os.path.join('files', os.path.split(val)[1]).replace('\\', '/')
+                        val =os.path.split(val)[1]
                     buf.append(u("<{0}>{1}</{0}>").format(var, val))  # Enclose the variable's __str__ with its name
                     # Add namespaces
                     if var.startswith("atom:") and 'xmlns:atom="http://www.w3.org/2005/Atom"' not in Kmlable._namespaces:
@@ -73,12 +74,12 @@ class Kmlable(object):
         count = text.count(cdatastart)
         if count > 0:
             for i in range(count):
-                endtext += cgi.escape(starttext[0:starttext.find(cdatastart)])
+                endtext += escape(starttext[0:starttext.find(cdatastart)])
                 endtext += starttext[starttext.find(cdatastart):starttext.find(cdataend)+len(cdataend)]
                 starttext = starttext[starttext.find(cdataend)+len(cdataend):]
             endtext += starttext
         else:
-            endtext = cgi.escape(text)
+            endtext = escape(text)
         return endtext
 
     @classmethod

@@ -21,6 +21,7 @@ import xml.dom.minidom
 import zipfile
 import codecs
 import os
+import time
 
 from simplekml.base import Kmlable, KmlElement, check
 from simplekml.featgeom import Document, Container
@@ -304,11 +305,13 @@ class Kml(object):
         """
         Kmlable._setkmz()
         out = self._genkml(format).encode('utf-8')
-        kmz = zipfile.ZipFile(path, 'w', zipfile.ZIP_DEFLATED)
-        kmz.writestr("doc.kml", out)
-        for image in Kmlable._getimages():
-            kmz.write(image, os.path.join('files', os.path.split(image)[1]))
-        kmz.close()
+        with zipfile.ZipFile(path, 'w', zipfile.ZIP_DEFLATED) as kmz:
+            kmz.writestr("doc.kml", out)
+            for image in Kmlable._getimages():
+                os_stats = os.stat(image)
+                if not 0 < os_stats.st_mtime < 1704470400:
+                    os.utime(image, (time.time(), time.time()))
+                kmz.write(image, os.path.split(image)[1])
         Kmlable._clearimages()
 
     def newdocument(self, **kwargs):
@@ -479,4 +482,4 @@ class Kml(object):
         *New in version 1.2.0*
         """
         Kmlable._addimage(path)
-        return os.path.join('files', os.path.split(path)[1]).replace("\\", "/")
+        return os.path.split(path)[1]
